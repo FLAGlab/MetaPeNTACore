@@ -1,0 +1,1189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <model>
+        <listOfSpecies>
+            <species chemicalFormula="C3H4O10P2" compartment="c" id="M_13dpg_c" name="3-Phospho-D-glyceroyl phosphate"/>
+            <species chemicalFormula="C3H4O7P" compartment="c" id="M_2pg_c" name="D-Glycerate 2-phosphate"/>
+            <species chemicalFormula="C3H4O7P" compartment="c" id="M_3pg_c" name="3-Phospho-D-glycerate"/>
+            <species chemicalFormula="C6H10O10P" compartment="c" id="M_6pgc_c" name="6-Phospho-D-gluconate"/>
+            <species chemicalFormula="C6H9O9P" compartment="c" id="M_6pgl_c" name="6-phospho-D-glucono-1,5-lactone"/>
+            <species chemicalFormula="C2H3O2" compartment="c" id="M_ac_c" name="Acetate"/>
+            <species chemicalFormula="C2H3O2" compartment="e" id="M_ac_e" name="Acetate"/>
+            <species chemicalFormula="C2H4O" compartment="c" id="M_acald_c" name="Acetaldehyde"/>
+            <species chemicalFormula="C2H4O" compartment="e" id="M_acald_e" name="Acetaldehyde"/>
+            <species chemicalFormula="C23H34N7O17P3S" compartment="c" id="M_accoa_c" name="Acetyl-CoA"/>
+            <species chemicalFormula="C6H3O6" compartment="c" id="M_acon_C_c" name="Cis-Aconitate"/>
+            <species chemicalFormula="C2H3O5P" compartment="c" id="M_actp_c" name="Acetyl phosphate"/>
+            <species chemicalFormula="C10H12N5O10P2" compartment="c" id="M_adp_c" name="ADP C10H12N5O10P2"/>
+            <species chemicalFormula="C5H4O5" compartment="c" id="M_akg_c" name="2-Oxoglutarate"/>
+            <species chemicalFormula="C5H4O5" compartment="e" id="M_akg_e" name="2-Oxoglutarate"/>
+            <species chemicalFormula="C10H12N5O7P" compartment="c" id="M_amp_c" name="AMP C10H12N5O7P"/>
+            <species chemicalFormula="C10H12N5O13P3" compartment="c" id="M_atp_c" name="ATP C10H12N5O13P3"/>
+            <species chemicalFormula="C6H5O7" compartment="c" id="M_cit_c" name="Citrate"/>
+            <species chemicalFormula="CO2" compartment="c" id="M_co2_c" name="CO2 CO2"/>
+            <species chemicalFormula="CO2" compartment="e" id="M_co2_e" name="CO2 CO2"/>
+            <species chemicalFormula="C21H32N7O16P3S" compartment="c" id="M_coa_c" name="Coenzyme A"/>
+            <species chemicalFormula="C3H5O6P" compartment="c" id="M_dhap_c" name="Dihydroxyacetone phosphate"/>
+            <species chemicalFormula="C4H7O7P" compartment="c" id="M_e4p_c" name="D-Erythrose 4-phosphate"/>
+            <species chemicalFormula="C2H6O" compartment="c" id="M_etoh_c" name="Ethanol"/>
+            <species chemicalFormula="C2H6O" compartment="e" id="M_etoh_e" name="Ethanol"/>
+            <species chemicalFormula="C6H11O9P" compartment="c" id="M_f6p_c" name="D-Fructose 6-phosphate"/>
+            <species chemicalFormula="C6H10O12P2" compartment="c" id="M_fdp_c" name="D-Fructose 1,6-bisphosphate"/>
+            <species chemicalFormula="CH1O2" compartment="c" id="M_for_c" name="Formate"/>
+            <species chemicalFormula="CH1O2" compartment="e" id="M_for_e" name="Formate"/>
+            <species chemicalFormula="C6H12O6" compartment="e" id="M_fru_e" name="D-Fructose"/>
+            <species chemicalFormula="C4H2O4" compartment="c" id="M_fum_c" name="Fumarate"/>
+            <species chemicalFormula="C4H2O4" compartment="e" id="M_fum_e" name="Fumarate"/>
+            <species chemicalFormula="C3H5O6P" compartment="c" id="M_g3p_c" name="Glyceraldehyde 3-phosphate"/>
+            <species chemicalFormula="C6H11O9P" compartment="c" id="M_g6p_c" name="D-Glucose 6-phosphate"/>
+            <species chemicalFormula="C6H12O6" compartment="e" id="M_glc__D_e" name="D-Glucose"/>
+            <species chemicalFormula="C5H10N2O3" compartment="c" id="M_gln__L_c" name="L-Glutamine"/>
+            <species chemicalFormula="C5H10N2O3" compartment="e" id="M_gln__L_e" name="L-Glutamine"/>
+            <species chemicalFormula="C5H8NO4" compartment="c" id="M_glu__L_c" name="L-Glutamate"/>
+            <species chemicalFormula="C5H8NO4" compartment="e" id="M_glu__L_e" name="L-Glutamate"/>
+            <species chemicalFormula="C2H1O3" compartment="c" id="M_glx_c" name="Glyoxylate"/>
+            <species chemicalFormula="H2O" compartment="c" id="M_h2o_c" name="H2O H2O"/>
+            <species chemicalFormula="H2O" compartment="e" id="M_h2o_e" name="H2O H2O"/>
+            <species chemicalFormula="H" compartment="c" id="M_h_c" name="H+"/>
+            <species chemicalFormula="H" compartment="e" id="M_h_e" name="H+"/>
+            <species chemicalFormula="C6H5O7" compartment="c" id="M_icit_c" name="Isocitrate"/>
+            <species chemicalFormula="C3H5O3" compartment="c" id="M_lac__D_c" name="D-Lactate"/>
+            <species chemicalFormula="C3H5O3" compartment="e" id="M_lac__D_e" name="D-Lactate"/>
+            <species chemicalFormula="C4H4O5" compartment="c" id="M_mal__L_c" name="L-Malate"/>
+            <species chemicalFormula="C4H4O5" compartment="e" id="M_mal__L_e" name="L-Malate"/>
+            <species chemicalFormula="C21H26N7O14P2" compartment="c" id="M_nad_c" name="Nicotinamide adenine dinucleotide"/>
+            <species chemicalFormula="C21H27N7O14P2" compartment="c" id="M_nadh_c" name="Nicotinamide adenine dinucleotide - reduced"/>
+            <species chemicalFormula="C21H25N7O17P3" compartment="c" id="M_nadp_c" name="Nicotinamide adenine dinucleotide phosphate"/>
+            <species chemicalFormula="C21H26N7O17P3" compartment="c" id="M_nadph_c" name="Nicotinamide adenine dinucleotide phosphate - reduced"/>
+            <species chemicalFormula="H4N" compartment="c" id="M_nh4_c" name="Ammonium"/>
+            <species chemicalFormula="H4N" compartment="e" id="M_nh4_e" name="Ammonium"/>
+            <species chemicalFormula="O2" compartment="c" id="M_o2_c" name="O2 O2"/>
+            <species chemicalFormula="O2" compartment="e" id="M_o2_e" name="O2 O2"/>
+            <species chemicalFormula="C4H2O5" compartment="c" id="M_oaa_c" name="Oxaloacetate"/>
+            <species chemicalFormula="C3H2O6P" compartment="c" id="M_pep_c" name="Phosphoenolpyruvate"/>
+            <species chemicalFormula="HO4P" compartment="c" id="M_pi_c" name="Phosphate"/>
+            <species chemicalFormula="HO4P" compartment="e" id="M_pi_e" name="Phosphate"/>
+            <species chemicalFormula="C3H3O3" compartment="c" id="M_pyr_c" name="Pyruvate"/>
+            <species chemicalFormula="C3H3O3" compartment="e" id="M_pyr_e" name="Pyruvate"/>
+            <species chemicalFormula="C49H74O4" compartment="c" id="M_q8_c" name="Ubiquinone-8"/>
+            <species chemicalFormula="C49H76O4" compartment="c" id="M_q8h2_c" name="Ubiquinol-8"/>
+            <species chemicalFormula="C5H9O8P" compartment="c" id="M_r5p_c" name="Alpha-D-Ribose 5-phosphate"/>
+            <species chemicalFormula="C5H9O8P" compartment="c" id="M_ru5p__D_c" name="D-Ribulose 5-phosphate"/>
+            <species chemicalFormula="C7H13O10P" compartment="c" id="M_s7p_c" name="Sedoheptulose 7-phosphate"/>
+            <species chemicalFormula="C4H4O4" compartment="c" id="M_succ_c" name="Succinate"/>
+            <species chemicalFormula="C4H4O4" compartment="e" id="M_succ_e" name="Succinate"/>
+            <species chemicalFormula="C25H35N7O19P3S" compartment="c" id="M_succoa_c" name="Succinyl-CoA"/>
+            <species chemicalFormula="C5H9O8P" compartment="c" id="M_xu5p__D_c" name="D-Xylulose 5-phosphate"/>
+        </listOfSpecies>
+        <listOfReactions>
+            <reaction id="R_ACALD" name="Acetaldehyde dehydrogenase (acetylating)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0351"/>
+                    <geneProductRef geneProduct="G_b1241"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_acald_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_accoa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ACALDt" name="Acetaldehyde reversible transport" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_s0001"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_acald_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_acald_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ACKr" name="Acetate kinase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2296"/>
+                    <geneProductRef geneProduct="G_b3115"/>
+                    <geneProductRef geneProduct="G_b1849"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_ac_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_actp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ACONTa" name="Aconitase (half-reaction A, Citrate hydro-lyase)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0118"/>
+                    <geneProductRef geneProduct="G_b1276"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_cit_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_acon_C_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ACONTb" name="Aconitase (half-reaction B, Isocitrate hydro-lyase)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0118"/>
+                    <geneProductRef geneProduct="G_b1276"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_acon_C_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_icit_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ACt2r" name="Acetate reversible transport via proton symport" reversible="true">
+                <geneProductAssociation/>
+                <listOfReactants>
+                    <speciesReference species="M_ac_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_ac_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ADK1" name="Adenylate kinase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0474"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_amp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="2.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_AKGDH" name="2-Oxogluterate dehydrogenase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0726"/>
+                    <geneProductRef geneProduct="G_b0116"/>
+                    <geneProductRef geneProduct="G_b0727"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_akg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succoa_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_AKGt2r" name="2 oxoglutarate reversible transport via symport" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2587"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_akg_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_akg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ALCD2x" name="Alcohol dehydrogenase (ethanol)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1478"/>
+                    <geneProductRef geneProduct="G_b0356"/>
+                    <geneProductRef geneProduct="G_b1241"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_etoh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_acald_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ATPM" name="ATP maintenance requirement">
+                <geneProductAssociation/>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ATPS4r" name="ATP synthase (four protons for one ATP)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3738"/>
+                    <geneProductRef geneProduct="G_b3736"/>
+                    <geneProductRef geneProduct="G_b3737"/>
+                    <geneProductRef geneProduct="G_b3735"/>
+                    <geneProductRef geneProduct="G_b3733"/>
+                    <geneProductRef geneProduct="G_b3731"/>
+                    <geneProductRef geneProduct="G_b3732"/>
+                    <geneProductRef geneProduct="G_b3734"/>
+                    <geneProductRef geneProduct="G_b3734"/>
+                    <geneProductRef geneProduct="G_b3732"/>
+                    <geneProductRef geneProduct="G_b3731"/>
+                    <geneProductRef geneProduct="G_b3733"/>
+                    <geneProductRef geneProduct="G_b3735"/>
+                    <geneProductRef geneProduct="G_b3737"/>
+                    <geneProductRef geneProduct="G_b3736"/>
+                    <geneProductRef geneProduct="G_b3738"/>
+                    <geneProductRef geneProduct="G_b3739"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="4.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="3.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_BIOMASS_Ecoli_core_w_GAM" name="Biomass Objective Function with GAM">
+                <geneProductAssociation/>
+                <listOfReactants>
+                    <speciesReference species="M_3pg_c" stoichiometry="1.496"/>
+                    <speciesReference species="M_accoa_c" stoichiometry="3.7478"/>
+                    <speciesReference species="M_atp_c" stoichiometry="59.81"/>
+                    <speciesReference species="M_e4p_c" stoichiometry="0.361"/>
+                    <speciesReference species="M_f6p_c" stoichiometry="0.0709"/>
+                    <speciesReference species="M_g3p_c" stoichiometry="0.129"/>
+                    <speciesReference species="M_g6p_c" stoichiometry="0.205"/>
+                    <speciesReference species="M_gln__L_c" stoichiometry="0.2557"/>
+                    <speciesReference species="M_glu__L_c" stoichiometry="4.9414"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="59.81"/>
+                    <speciesReference species="M_nad_c" stoichiometry="3.547"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="13.0279"/>
+                    <speciesReference species="M_oaa_c" stoichiometry="1.7867"/>
+                    <speciesReference species="M_pep_c" stoichiometry="0.5191"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="2.8328"/>
+                    <speciesReference species="M_r5p_c" stoichiometry="0.8977"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="59.81"/>
+                    <speciesReference species="M_akg_c" stoichiometry="4.1182"/>
+                    <speciesReference species="M_coa_c" stoichiometry="3.7478"/>
+                    <speciesReference species="M_h_c" stoichiometry="59.81"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="3.547"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="13.0279"/>
+                    <speciesReference species="M_pi_c" stoichiometry="59.81"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_CO2t" name="CO2 transporter via diffusion" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_s0001"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_co2_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_CS" name="Citrate synthase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0720"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_accoa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_oaa_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_cit_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_CYTBD" name="Cytochrome oxidase bd (ubiquinol-8: 2 protons)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0978"/>
+                    <geneProductRef geneProduct="G_b0979"/>
+                    <geneProductRef geneProduct="G_b0733"/>
+                    <geneProductRef geneProduct="G_b0734"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_c" stoichiometry="2.0"/>
+                    <speciesReference species="M_o2_c" stoichiometry="0.5"/>
+                    <speciesReference species="M_q8h2_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="2.0"/>
+                    <speciesReference species="M_q8_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_D_LACt2" name="D lactate transport via proton symport" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2975"/>
+                    <geneProductRef geneProduct="G_b3603"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_lac__D_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_lac__D_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ENO" name="Enolase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2779"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_2pg_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ETOHt2r" name="Ethanol reversible transport via proton symport" reversible="true">
+                <geneProductAssociation/>
+                <listOfReactants>
+                    <speciesReference species="M_etoh_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_etoh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FBA" name="Fructose-bisphosphate aldolase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1773"/>
+                    <geneProductRef geneProduct="G_b2097"/>
+                    <geneProductRef geneProduct="G_b2925"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_fdp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_dhap_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_g3p_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FBP" name="Fructose-bisphosphatase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3925"/>
+                    <geneProductRef geneProduct="G_b4232"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_fdp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_f6p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FORt" name="Formate transport via diffusion" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0904"/>
+                    <geneProductRef geneProduct="G_b2492"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_for_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_for_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FORt2" name="Formate transport in via proton symport">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0904"/>
+                    <geneProductRef geneProduct="G_b2492"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_for_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_for_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FRD7" name="Fumarate reductase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4153"/>
+                    <geneProductRef geneProduct="G_b4151"/>
+                    <geneProductRef geneProduct="G_b4152"/>
+                    <geneProductRef geneProduct="G_b4154"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_fum_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_q8h2_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_q8_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succ_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FRUpts2" name="Fructose transport via PEP:Pyr PTS (f6p generating)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2415"/>
+                    <geneProductRef geneProduct="G_b1818"/>
+                    <geneProductRef geneProduct="G_b1817"/>
+                    <geneProductRef geneProduct="G_b1819"/>
+                    <geneProductRef geneProduct="G_b2416"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_fru_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_f6p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FUM" name="Fumarase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4122"/>
+                    <geneProductRef geneProduct="G_b1612"/>
+                    <geneProductRef geneProduct="G_b1611"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_fum_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_mal__L_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_FUMt2_2" name="Fumarate transport via proton symport (2 H)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3528"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_fum_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="2.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_fum_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="2.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_G6PDH2r" name="Glucose 6-phosphate dehydrogenase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1852"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_g6p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_6pgl_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GAPD" name="Glyceraldehyde-3-phosphate dehydrogenase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1779"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_g3p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_13dpg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLCpts" name="D-glucose transport via PEP:Pyr PTS">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2415"/>
+                    <geneProductRef geneProduct="G_b1818"/>
+                    <geneProductRef geneProduct="G_b1817"/>
+                    <geneProductRef geneProduct="G_b1819"/>
+                    <geneProductRef geneProduct="G_b2416"/>
+                    <geneProductRef geneProduct="G_b2415"/>
+                    <geneProductRef geneProduct="G_b2417"/>
+                    <geneProductRef geneProduct="G_b1101"/>
+                    <geneProductRef geneProduct="G_b2416"/>
+                    <geneProductRef geneProduct="G_b2415"/>
+                    <geneProductRef geneProduct="G_b2417"/>
+                    <geneProductRef geneProduct="G_b1621"/>
+                    <geneProductRef geneProduct="G_b2416"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_glc__D_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_g6p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLNS" name="Glutamine synthetase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3870"/>
+                    <geneProductRef geneProduct="G_b1297"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_glu__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nh4_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_gln__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLNabc" name="L-glutamine transport via ABC system">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0810"/>
+                    <geneProductRef geneProduct="G_b0811"/>
+                    <geneProductRef geneProduct="G_b0809"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_gln__L_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_gln__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLUDy" name="Glutamate dehydrogenase (NADP)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1761"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_glu__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_akg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nh4_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLUN" name="Glutaminase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0485"/>
+                    <geneProductRef geneProduct="G_b1812"/>
+                    <geneProductRef geneProduct="G_b1524"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_gln__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_glu__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nh4_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLUSy" name="Glutamate synthase (NADPH)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3212"/>
+                    <geneProductRef geneProduct="G_b3213"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_akg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_gln__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_glu__L_c" stoichiometry="2.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GLUt2r" name="L glutamate transport via proton symport  reversible" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4077"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_glu__L_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_glu__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_GND" name="Phosphogluconate dehydrogenase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2029"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_6pgc_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_ru5p__D_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_H2Ot" name="H2O transport via diffusion" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0875"/>
+                    <geneProductRef geneProduct="G_s0001"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h2o_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ICDHyr" name="Isocitrate dehydrogenase (NADP)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1136"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_icit_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_akg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ICL" name="Isocitrate lyase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4015"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_icit_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_glx_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succ_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_LDH_D" name="D-lactate dehydrogenase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2133"/>
+                    <geneProductRef geneProduct="G_b1380"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_lac__D_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_MALS" name="Malate synthase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4014"/>
+                    <geneProductRef geneProduct="G_b2976"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_accoa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_glx_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_mal__L_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_MALt2_2" name="Malate transport via proton symport (2 H)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3528"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="2.0"/>
+                    <speciesReference species="M_mal__L_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="2.0"/>
+                    <speciesReference species="M_mal__L_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_MDH" name="Malate dehydrogenase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3236"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_mal__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_oaa_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ME1" name="Malic enzyme (NAD)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1479"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_mal__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_ME2" name="Malic enzyme (NADP)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2463"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_mal__L_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_NADH16" name="NADH dehydrogenase (ubiquinone-8 &amp; 3 protons)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2287"/>
+                    <geneProductRef geneProduct="G_b2285"/>
+                    <geneProductRef geneProduct="G_b2283"/>
+                    <geneProductRef geneProduct="G_b2281"/>
+                    <geneProductRef geneProduct="G_b2279"/>
+                    <geneProductRef geneProduct="G_b2277"/>
+                    <geneProductRef geneProduct="G_b2276"/>
+                    <geneProductRef geneProduct="G_b2278"/>
+                    <geneProductRef geneProduct="G_b2280"/>
+                    <geneProductRef geneProduct="G_b2282"/>
+                    <geneProductRef geneProduct="G_b2284"/>
+                    <geneProductRef geneProduct="G_b2286"/>
+                    <geneProductRef geneProduct="G_b2288"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_c" stoichiometry="4.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_q8_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_e" stoichiometry="3.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_q8h2_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_NADTRHD" name="NAD transhydrogenase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3962"/>
+                    <geneProductRef geneProduct="G_b1602"/>
+                    <geneProductRef geneProduct="G_b1603"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_NH4t" name="Ammonia reversible transport" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_s0001"/>
+                    <geneProductRef geneProduct="G_b0451"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_nh4_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_nh4_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_O2t" name="O2 transport  diffusion " reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_s0001"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_o2_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_o2_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PDH" name="Pyruvate dehydrogenase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0115"/>
+                    <geneProductRef geneProduct="G_b0114"/>
+                    <geneProductRef geneProduct="G_b0116"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_accoa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PFK" name="Phosphofructokinase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3916"/>
+                    <geneProductRef geneProduct="G_b1723"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_f6p_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_fdp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PFL" name="Pyruvate formate lyase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0902"/>
+                    <geneProductRef geneProduct="G_b3114"/>
+                    <geneProductRef geneProduct="G_b0903"/>
+                    <geneProductRef geneProduct="G_b0902"/>
+                    <geneProductRef geneProduct="G_b2579"/>
+                    <geneProductRef geneProduct="G_b0902"/>
+                    <geneProductRef geneProduct="G_b0903"/>
+                    <geneProductRef geneProduct="G_b3951"/>
+                    <geneProductRef geneProduct="G_b3952"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_accoa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_for_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PGI" name="Glucose-6-phosphate isomerase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4025"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_g6p_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_f6p_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PGK" name="Phosphoglycerate kinase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2926"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_3pg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_13dpg_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PGL" name="6-phosphogluconolactonase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0767"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_6pgl_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_6pgc_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PGM" name="Phosphoglycerate mutase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b4395"/>
+                    <geneProductRef geneProduct="G_b3612"/>
+                    <geneProductRef geneProduct="G_b0755"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_2pg_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_3pg_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PIt2r" name="Phosphate reversible transport via symport" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2987"/>
+                    <geneProductRef geneProduct="G_b3493"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PPC" name="Phosphoenolpyruvate carboxylase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3956"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_oaa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PPCK" name="Phosphoenolpyruvate carboxykinase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3403"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_oaa_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_co2_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PPS" name="Phosphoenolpyruvate synthase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1702"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h2o_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_amp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="2.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PTAr" name="Phosphotransacetylase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2297"/>
+                    <geneProductRef geneProduct="G_b2458"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_accoa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_actp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PYK" name="Pyruvate kinase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1854"/>
+                    <geneProductRef geneProduct="G_b1676"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pep_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_PYRt2" name="Pyruvate transport in via proton symport" reversible="true">
+                <geneProductAssociation/>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pyr_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_RPE" name="Ribulose 5-phosphate 3-epimerase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3386"/>
+                    <geneProductRef geneProduct="G_b4301"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_ru5p__D_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_xu5p__D_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_RPI" name="Ribose-5-phosphate isomerase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2914"/>
+                    <geneProductRef geneProduct="G_b4090"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_r5p_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_ru5p__D_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_SUCCt2_2" name="Succinate transport via proton symport (2 H)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3528"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="2.0"/>
+                    <speciesReference species="M_succ_e" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="2.0"/>
+                    <speciesReference species="M_succ_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_SUCCt3" name="Succinate transport out via proton antiport">
+                <geneProductAssociation/>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="1.0"/>
+                    <speciesReference species="M_succ_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succ_e" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_SUCDi" name="Succinate dehydrogenase (irreversible)">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0723"/>
+                    <geneProductRef geneProduct="G_b0721"/>
+                    <geneProductRef geneProduct="G_b0722"/>
+                    <geneProductRef geneProduct="G_b0724"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_q8_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succ_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_fum_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_q8h2_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_SUCOAS" name="Succinyl-CoA synthetase (ADP-forming)" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b0728"/>
+                    <geneProductRef geneProduct="G_b0729"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_atp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_coa_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succ_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_adp_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_pi_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_succoa_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_TALA" name="Transaldolase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2464"/>
+                    <geneProductRef geneProduct="G_b0008"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_g3p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_s7p_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_e4p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_f6p_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_THD2" name="NAD(P) transhydrogenase">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b1602"/>
+                    <geneProductRef geneProduct="G_b1603"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_h_e" stoichiometry="2.0"/>
+                    <speciesReference species="M_nadh_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadp_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_h_c" stoichiometry="2.0"/>
+                    <speciesReference species="M_nad_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_nadph_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_TKT1" name="Transketolase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2935"/>
+                    <geneProductRef geneProduct="G_b2465"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_r5p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_xu5p__D_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_g3p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_s7p_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_TKT2" name="Transketolase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b2935"/>
+                    <geneProductRef geneProduct="G_b2465"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_e4p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_xu5p__D_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_f6p_c" stoichiometry="1.0"/>
+                    <speciesReference species="M_g3p_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+            <reaction id="R_TPI" name="Triose-phosphate isomerase" reversible="true">
+                <geneProductAssociation>
+                    <geneProductRef geneProduct="G_b3919"/>
+                </geneProductAssociation>
+                <listOfReactants>
+                    <speciesReference species="M_dhap_c" stoichiometry="1.0"/>
+                </listOfReactants>
+                <listOfProducts>
+                    <speciesReference species="M_g3p_c" stoichiometry="1.0"/>
+                </listOfProducts>
+            </reaction>
+        </listOfReactions>
+    </model>
+</root>

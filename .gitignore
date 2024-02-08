@@ -1,0 +1,9 @@
+/.metadata/
+/MetabolicNetworks/bin
+/bin/
+.idea
+MetaPeNTA.iml
+/classes
+*.class
+/target/*
+
