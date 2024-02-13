@@ -102,21 +102,33 @@ public class MetabolicNetworkXMLLoader {
 	
 	private MetabolicNetwork loadModel(Element modelElem) throws Exception {
 		MetabolicNetwork answer = new MetabolicNetwork();
+		
+		Element products = getElementByID(modelElem, ELEMENT_LISTPRODUCTS);
+		loadGeneProducts (products, answer);
+		
+		Element metabolites = getElementByID(modelElem, ELEMENT_LISTMETABOLITES);
+		loadMetabolites (metabolites, answer);
+		
+		Element reactions = getElementByID(modelElem, ELEMENT_LISTREACTIONS);
+		loadReactions (reactions, answer);
+		
+		return answer;
+	}
+	
+	
+	private Element getElementByID(Element modelElem, String nodeName) {
 		NodeList offspring = modelElem.getChildNodes(); 
-		for(int i=0;i<offspring.getLength();i++){  
+		for(int i=0; i < offspring.getLength(); i++){
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
-				Element elem = (Element)node;
-				if(ELEMENT_LISTPRODUCTS.equals(elem.getNodeName())) {
-					loadGeneProducts (elem, answer);
-				} else if(ELEMENT_LISTMETABOLITES.equals(elem.getNodeName())) {
-					loadMetabolites (elem, answer);
-				} else if(ELEMENT_LISTREACTIONS.equals(elem.getNodeName())) {
-					loadReactions (elem, answer);
+				Element elem = (Element) node;
+				if(nodeName.equals(elem.getNodeName())) {
+					return elem;
 				}
 			}
 		}
-		return answer;
+		
+		return null;
 	}
 
 	private void loadGeneProducts(Element listElem, MetabolicNetwork network) throws IOException {

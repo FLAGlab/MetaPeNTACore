@@ -1,1 +1,0 @@
-./data/e_coli_core.xml M_ac_c Reactions_M_ac_c
