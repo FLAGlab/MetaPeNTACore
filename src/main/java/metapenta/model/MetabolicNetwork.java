@@ -117,7 +117,7 @@ public class MetabolicNetwork {
 		GeneProduct geneProduct = geneProducts.get(geneProductId);
 
 		if (geneProduct == null){
-			throw new GeneProductDoesNotExitsException();
+			throw new GeneProductDoesNotExitsException(geneProductId);
 		}
 
 		return geneProduct;
