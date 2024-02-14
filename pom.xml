@@ -6,7 +6,7 @@
 
 
     <groupId>uniandes.flag.metapenta.edu.co</groupId>
-    <artifactId>core-metapenta</artifactId>
+    <artifactId>metapentacore</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
