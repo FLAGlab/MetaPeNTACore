@@ -6,7 +6,7 @@
 
     <groupId>uniandes.flag.edu.co.metapenta</groupId>
     <artifactId>metapentacore</artifactId>
-    <version>5.0-SNAPSHOT</version>
+    <version>4.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,11 +18,6 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
