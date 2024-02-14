@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>uniandes.flag.edu.co</groupId>
-    <artifactId>metacore</artifactId>
-    <version>6.0-SNAPSHOT</version>
+    <groupId>uniandes.flag.metapenta.edu.co</groupId>
+    <artifactId>core-metapenta</artifactId>
+    <version>7.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
