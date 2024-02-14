@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>uniandes.edu.co</groupId>
+    <groupId>uniandes.flag.metapenta.edu.co</groupId>
     <artifactId>metapentacore</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -39,7 +39,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://github.com/FLAGlab/MetaPeNTACore</url>
+            <url>https://maven.pkg.github.com/FLAGlab/MetaPeNTACore</url>
         </repository>
     </distributionManagement>
 
