@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uniandes.flag.edu.co.metapenta</groupId>
-    <artifactId>metapentacore</artifactId>
+    <artifactId>libmetapentacore</artifactId>
     <version>5.0-SNAPSHOT</version>
 
     <properties>
