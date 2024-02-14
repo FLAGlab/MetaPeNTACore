@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>metapenta.uniandes.flag.edu.co</groupId>
-    <artifactId>metapentacore</artifactId>
+    <groupId>uniandes.flag.edu.co</groupId>
+    <artifactId>metacore</artifactId>
     <version>5.0-SNAPSHOT</version>
 
     <properties>
@@ -43,19 +43,5 @@
             <url>https://github.com/FLAGlab/MetaPeNTACore</url>
         </repository>
     </distributionManagement>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.maven.plugin.version}</version>
-                <configuration>
-                    <mainClass>metapenta.commands.ConnectedComponents</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
