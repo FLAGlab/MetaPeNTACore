@@ -13,9 +13,9 @@ import metapenta.tools.io.writers.FindAllPathsWriter;
  */
 public class FindAllPaths {
     public static void main(String[] args) throws Exception {
-        FindAllPathsParams findAllPathsParams = new FindAllPathsParams(args[1], args[2]);
-
         MetaPenta network = new MetaPenta(args[0]);
+
+        FindAllPathsParams findAllPathsParams = new FindAllPathsParams(args[1], args[2]);
         PathsDTO paths = network.getAllPaths(findAllPathsParams);
 
         FindAllPathsWriter findAllPathsWriter = new FindAllPathsWriter(args[3], paths);

@@ -10,17 +10,22 @@ import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class AllPathsService {
-    private int[] placesVisited;
+    private int[] transitionVisited;
     private Place<Metabolite> currentSourcePlace;
 
     private ArrayList<Transition> currentPath = new ArrayList<>();
 
+
     private PathsDTO paths = new PathsDTO();
 
     private MetabolicPetriNet metabolicPetriNet;
+
+    private HashMap<String, Collection<Collection<Transition>>> memoizedRoutes = new HashMap<>();
 
     private Place target;
     private List<String> initPlaces;
@@ -36,15 +41,14 @@ public class AllPathsService {
             Place place = metabolicPetriNet.getPlace(placeId);
 
             setCurrentSourcePlace(place);
-            resetPlacesVisited();
+            resetTransitionsVisited();
             findPathsFromPlace(place);
         }
 
         return paths;
     }
-
-    private void resetPlacesVisited() {
-        placesVisited = new int[metabolicPetriNet.getPlaces().size()];
+    private void resetTransitionsVisited() {
+        transitionVisited = new int[metabolicPetriNet.getTransitions().size()];
     }
 
     private void setCurrentSourcePlace(Place<Metabolite> place){
@@ -56,12 +60,10 @@ public class AllPathsService {
         visitPlace(source);
     }
 
-    private void visitPlace(Place<Metabolite> place){
-        markPlaceAsVisited(place);
-
+    private void visitPlace(Place<Metabolite> place) {
         if (isCurrentPlaceTargetPlace(place)) {
-            savePath();
-            return;
+            memoizeSubPaths();
+            savePath(this.currentPath);
         }
 
         visitTransitions(place.getTransitionsByCriteria(Place.DOWN_CRITERIA));
@@ -71,10 +73,32 @@ public class AllPathsService {
         return place.equals(target);
     }
 
-    private void savePath() {
-        paths.addPath(currentSourcePlace, (ArrayList<Transition>) currentPath.clone());
+    private void savePath(ArrayList<Transition> path) {
+        paths.addPath(currentSourcePlace, (ArrayList<Transition>) path.clone());
+    }
+
+    private void calculateAndSaveAllRoutes(Transition transition) {
+        Collection<Collection<Transition>> subPaths = memoizedRoutes.get(transition.getID());
+        if (subPaths != null && !subPaths.isEmpty()) {
+            for(Collection<Transition> sp: subPaths) {
+                ArrayList<Transition> transitionPath = new ArrayList<>();
+                transitionPath.addAll(currentPath);
+                transitionPath.addAll(sp);
+                savePath(transitionPath);
+            }
+        }
+    }
 
 
+    private void memoizeSubPaths(){
+        for (int i = 0; i < currentPath.size(); i++){
+            System.out.println(memoizedRoutes.keySet().size());
+            List<Transition> subPath =  currentPath.subList(i, currentPath.size());
+            String originTransitionID = subPath.get(0).getID();
+
+            Collection reactionList = memoizedRoutes.computeIfAbsent(originTransitionID, k -> new ArrayList<>());
+            reactionList.add(subPath.stream().toList());
+        }
     }
 
     private void visitTransitions(List<Transition> transitions) {
@@ -84,24 +108,35 @@ public class AllPathsService {
     }
 
     private void visitTransition(Transition<Reaction> transition) {
+        if(transition.getObject().getId().equals("R_GAPD")){
+           System.out.println("GHJ");
+        }
+        if(transition.getObject().getId().equals("R_NADH16")){
+           System.out.println("GHJ");
+        }
+
+        if(transitionWasVisited(transition)){
+            calculateAndSaveAllRoutes(transition);
+            return;
+        }
+
+        markTransitionAsVisited(transition);
         currentPath.add(transition);
 
         List<Place> downPlaces = transition.getPlacesByCriteria(Transition.DOWN_CRITERIA);
         for (Place nextPlace: downPlaces) {
-            if (placeHasNotBeenVisited(nextPlace)){
                 visitPlace(nextPlace);
-            }
         }
 
         currentPath.remove(currentPath.size() - 1);
     }
 
-
-    private boolean placeHasNotBeenVisited(Place<Metabolite> place){
-        return placesVisited[place.getObject().getNid()] == 0;
+    private boolean transitionWasVisited(Transition<Reaction> transition){
+        return transitionVisited[transition.getObject().getNid()] == 1;
     }
-    private void markPlaceAsVisited(Place<Metabolite> place){
-        placesVisited[place.getObject().getNid()] = 1;
+
+    private void markTransitionAsVisited(Transition<Reaction> transition){
+        transitionVisited[transition.getObject().getNid()]++;
     }
 
     private void checkSourceAndTargetPlace(Place<Metabolite> source) throws SourceAndTargetPlacesAreEqualException {

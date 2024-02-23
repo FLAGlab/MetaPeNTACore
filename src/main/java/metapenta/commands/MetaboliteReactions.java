@@ -4,7 +4,7 @@ import metapenta.model.MetaPenta;
 import metapenta.model.dto.MetaboliteReactionsDTO;
 import metapenta.tools.io.writers.MetaboliteReactionsWriter;
 
-public class ReactionsOfMetabolite {
+public class MetaboliteReactions {
 	/**
 	 * The main method of class
 	 * args[0] the path of the XML file

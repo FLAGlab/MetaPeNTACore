@@ -108,6 +108,10 @@ public class MetabolicNetwork {
 
 	public GeneProductReactionsDTO getGeneProductReactions(String geneProductId) throws GeneProductDoesNotExitsException {
 		GeneProduct geneProduct = geneProducts.get(geneProductId);
+		if (geneProduct == null) {
+			throw new GeneProductDoesNotExitsException(geneProductId);
+		}
+
 		List<Reaction> reactions = getReactionsCatalyzedBy(geneProductId);
 
 		return new GeneProductReactionsDTO(reactions, geneProduct);
