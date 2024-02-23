@@ -9,7 +9,7 @@ import metapenta.tools.io.writers.Writer;
  * args[0]: First metabolic network in XML format
  * args[1]: Second metabolic network in XML format
  */
-public class GetMetabolicNetworkInterception {
+public class MetabolicNetworkInterception {
 
     public static void main(String[] args) throws Exception {
         MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
