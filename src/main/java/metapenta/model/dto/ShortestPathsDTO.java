@@ -1,6 +1,7 @@
 package metapenta.model.dto;
 
-import metapenta.model.MetabolicPetriNet;
+import metapenta.model.errors.MetaboliteDoesNotExistsException;
+import metapenta.model.networks.MetabolicNetwork;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
@@ -15,11 +16,11 @@ public class ShortestPathsDTO {
 
     private int[] distances;
 
-    private MetabolicPetriNet petriNet;
+    private MetabolicNetwork petriNet;
 
     private HashMap<String, String[]> paths = new HashMap<>();
 
-    public ShortestPathsDTO(int[] distances, Transition[] lastTransitions, Place[] lastPlaces, MetabolicPetriNet petriNet){
+    public ShortestPathsDTO(int[] distances, Transition[] lastTransitions, Place[] lastPlaces, MetabolicNetwork petriNet) throws MetaboliteDoesNotExistsException {
         this.distances = distances;
         this.lastTransitions = lastTransitions;
         this.lastPlaces = lastPlaces;
@@ -28,7 +29,7 @@ public class ShortestPathsDTO {
         calculatePaths();
     }
 
-    private void calculatePaths() {
+    private void calculatePaths() throws MetaboliteDoesNotExistsException {
         for (int i = 0; i < distances.length; i++){
             if (distances[i] != ShortestPathByTransitionNumberService.INFINITE) {
                 String[] path = calculatePath(i);

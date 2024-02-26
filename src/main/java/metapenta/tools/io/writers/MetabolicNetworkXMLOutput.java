@@ -1,4 +1,4 @@
-package metapenta.model;
+package metapenta.tools.io.writers;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +14,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import metapenta.model.networks.MetabolicNetwork;
+import metapenta.model.networks.MetabolicNetworkElements;
 import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;

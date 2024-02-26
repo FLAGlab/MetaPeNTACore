@@ -1,6 +1,7 @@
 package metapenta.services;
 
-import metapenta.model.MetabolicPetriNet;
+import metapenta.model.errors.MetaboliteDoesNotExistsException;
+import metapenta.model.networks.MetabolicNetwork;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.dto.PathsDTO;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AllPathsService {
     private int[] transitionVisited;
@@ -20,23 +22,22 @@ public class AllPathsService {
 
     private ArrayList<Transition> currentPath = new ArrayList<>();
 
-
     private PathsDTO paths = new PathsDTO();
 
-    private MetabolicPetriNet metabolicPetriNet;
+    private MetabolicNetwork metabolicPetriNet;
 
     private HashMap<String, Collection<Collection<Transition>>> memoizedRoutes = new HashMap<>();
 
     private Place target;
     private List<String> initPlaces;
 
-    public AllPathsService(MetabolicPetriNet metabolicPetriNet, FindAllPathsParams params) {
+    public AllPathsService(MetabolicNetwork metabolicPetriNet, FindAllPathsParams params) throws MetaboliteDoesNotExistsException {
         this.metabolicPetriNet = metabolicPetriNet;
         this.initPlaces = params.getInitMetaboliteIds();
         this.target = metabolicPetriNet.getPlace(params.getTarget());
     }
 
-    public PathsDTO getAllPaths() throws SourceAndTargetPlacesAreEqualException {
+    public PathsDTO getAllPaths() throws SourceAndTargetPlacesAreEqualException, MetaboliteDoesNotExistsException {
         for(String placeId: initPlaces) {
             Place place = metabolicPetriNet.getPlace(placeId);
 
@@ -92,12 +93,11 @@ public class AllPathsService {
 
     private void memoizeSubPaths(){
         for (int i = 0; i < currentPath.size(); i++){
-            System.out.println(memoizedRoutes.keySet().size());
             List<Transition> subPath =  currentPath.subList(i, currentPath.size());
             String originTransitionID = subPath.get(0).getID();
 
             Collection reactionList = memoizedRoutes.computeIfAbsent(originTransitionID, k -> new ArrayList<>());
-            reactionList.add(subPath.stream().toList());
+            reactionList.add(new ArrayList<>(subPath));
         }
     }
 
@@ -108,12 +108,6 @@ public class AllPathsService {
     }
 
     private void visitTransition(Transition<Reaction> transition) {
-        if(transition.getObject().getId().equals("R_GAPD")){
-           System.out.println("GHJ");
-        }
-        if(transition.getObject().getId().equals("R_NADH16")){
-           System.out.println("GHJ");
-        }
 
         if(transitionWasVisited(transition)){
             calculateAndSaveAllRoutes(transition);
