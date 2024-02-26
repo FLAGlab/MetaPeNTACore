@@ -1,10 +1,10 @@
 package metapenta.services;
 
+import metapenta.model.networks.MetabolicNetwork;
 import metapenta.model.dto.ConnectedComponentsDTO;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.petrinet.Edge;
-import metapenta.model.petrinet.PetriNet;
 import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
@@ -24,7 +24,7 @@ public class ConnectedComponentsService {
     private int connectedComponentCurrentId = 0;
 
 
-    public ConnectedComponentsService(PetriNet petriNet){
+    public ConnectedComponentsService(MetabolicNetwork petriNet){
         this.transitions = petriNet.getTransitions();
         this.transitionsVisited = new int[transitions.size()];
     }

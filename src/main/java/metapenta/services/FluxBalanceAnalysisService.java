@@ -1,11 +1,12 @@
 package metapenta.services;
 
+import metapenta.model.errors.MetaboliteDoesNotExistsException;
+import metapenta.model.networks.MetabolicNetwork;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
 import metapenta.model.petrinet.Edge;
 import metapenta.model.petrinet.Transition;
-import metapenta.model.petrinet.PetriNet;
 import metapenta.model.petrinet.Place;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -21,14 +22,14 @@ public class FluxBalanceAnalysisService {
     private Map<String, Integer> rowsMetabolites = new HashMap<>();
     private Map<String, Integer> columnReactions = new HashMap<>();
     private ArrayList<double[]> reactionsBounds = new ArrayList();
-    private PetriNet petriNet;
+    private MetabolicNetwork petriNet;
 
     private int growthReactionIndex;
     private static final double LOWER_LIMIT_NO_REVERSIBLE_RXN = 0;
     private static final double UPPER_LIMIT_RXN = 1000;
     private static final double LOWER_LIMIT_REVERSIBLE_RXN = -1000;
 
-    FluxBalanceAnalysisService(PetriNet petriNet, String growthReactionID) {
+    FluxBalanceAnalysisService(MetabolicNetwork petriNet, String growthReactionID) throws MetaboliteDoesNotExistsException {
         int actualColum = 0;
         Set<String> reactionsKeySet = petriNet.getTransitions().keySet();
         for (String reaction : reactionsKeySet) {
@@ -155,7 +156,7 @@ public class FluxBalanceAnalysisService {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MetaboliteDoesNotExistsException {
         Metabolite a = new Metabolite("a", "a", "e", 0);
         Metabolite b = new Metabolite("b", "b", "e", 1);
         Metabolite c = new Metabolite("c", "c", "e", 2);
@@ -240,7 +241,7 @@ public class FluxBalanceAnalysisService {
         r7.setReversible(true);
 
         // Create and load PetriNet
-        PetriNet pn = new PetriNet();
+        MetabolicNetwork pn = new MetabolicNetwork();
 
         pn.addPlace("a", new Place("a", "a", a));
         pn.addPlace("b", new Place("b", "b", b));

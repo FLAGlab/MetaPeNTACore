@@ -1,6 +1,8 @@
 package metapenta.commands;
 
-import metapenta.model.MetabolicNetwork;
+import metapenta.model.networks.MetabolicNetwork;
+import metapenta.model.networks.MetabolicNetworkElements;
+import metapenta.services.MetabolicNetworkService;
 import metapenta.tools.io.loaders.MetabolicNetworkXMLLoader;
 import metapenta.tools.io.writers.MetabolicNetworkJSONWriter;
 import metapenta.tools.io.writers.Writer;
@@ -14,10 +16,10 @@ public class MetabolicNetworkInterception {
     public static void main(String[] args) throws Exception {
         MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
 
-        MetabolicNetwork firstNetwork = loader.loadNetwork(args[0]);
+        MetabolicNetworkService service = new MetabolicNetworkService(args[0]);
         MetabolicNetwork secondNetwork = loader.loadNetwork(args[1]);
 
-        MetabolicNetwork resultNetwork = firstNetwork.interception(secondNetwork);
+        MetabolicNetwork resultNetwork = service.intercept(secondNetwork);
 
         Writer metabolicNetworkWriter = new MetabolicNetworkJSONWriter(resultNetwork, args[2]);
         metabolicNetworkWriter.write();

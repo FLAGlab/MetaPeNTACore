@@ -1,6 +1,8 @@
 package metapenta.commands;
 
-import metapenta.model.*;
+import metapenta.model.networks.MetabolicNetwork;
+import metapenta.services.IMetabolicNetworkService;
+import metapenta.services.MetabolicNetworkService;
 import metapenta.tools.io.writers.DescribeNetworkWriter;
 
 /**
@@ -9,9 +11,9 @@ import metapenta.tools.io.writers.DescribeNetworkWriter;
  */
 public class DescribeMetabolicNetwork {
     public static void main(String[] args) throws Exception {
-        MetaPenta network = new MetaPenta(args[0]);
+        IMetabolicNetworkService network = new MetabolicNetworkService(args[0]);
 
-        DescribeNetworkWriter networkWriter = new DescribeNetworkWriter(network.getPetriNet(), args[1]);
+        DescribeNetworkWriter networkWriter = new DescribeNetworkWriter(network.getNetwork(), args[1]);
         networkWriter.write();
     }
 }
