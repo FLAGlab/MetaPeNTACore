@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:fbc="http://www.sbml.org/sbml/level3/version1/fbc/version2" xmlns:groups="http://www.sbml.org/sbml/level3/version1/groups/version1" level="3" version="1" fbc:required="false" groups:required="false">
-  <model metaid="pvulModel_light2.0.xml" id="M_submodel" name="Model Exported from COBRA Toolbox" fbc:strict="true">
+  <model metaid="pvul_model_Flavonoid_biosynthesis_until_dihydroflavonols.xml" id="M_submodel" name="Model Exported from COBRA Toolbox" fbc:strict="true">
     <listOfUnitDefinitions>
       <unitDefinition id="mmol_per_gDW_per_hr">
         <listOfUnits>
@@ -136,6 +136,32 @@
                   <rdf:li rdf:resource="http://identifiers.org/cas/8002-43-5"/>
                   <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:PHOSPHATIDYLCHOLINE"/>
                   <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C00157"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="COUMARATE__91__c__93__" sboTerm="SBO:0000247" id="COUMARATE__91__c__93__" name="4-coumarate" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="-1" fbc:chemicalFormula="C9H7O3">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#COUMARATE__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/7400-08-0"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/4450678"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/NGSWKAQJJWESNS-ZZXKWVIFSA-M"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC12876"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:COUMARATE"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:12876"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB02035"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C00811"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/54708745"/>
                 </rdf:Bag>
               </bqbiol:is>
               <bqbiol:hasProperty>
@@ -5742,6 +5768,33 @@
                   <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB12234"/>
                   <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C01929"/>
                   <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/57339283"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__20012__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__20012__91__c__93__" name="naringenin chalcone" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__20012__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/73692-50-9"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/4444447"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/YQHMWTPYORBCMF-ZZXKWVIFSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC15413"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-20012"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:15413"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB29631"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C06561"/>
+                  <rdf:li rdf:resource="http://identifiers.org/lipidmaps/LMPK12120264"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/5280960"/>
                 </rdf:Bag>
               </bqbiol:is>
               <bqbiol:hasProperty>
@@ -11757,6 +11810,29 @@
           </rdf:RDF>
         </annotation>
       </species>
+      <species metaid="P__45__COUMAROYL__45__COA__91__c__93__" sboTerm="SBO:0000247" id="P__45__COUMAROYL__45__COA__91__c__93__" name="(E)-4-coumaroyl-CoA" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="-4" fbc:chemicalFormula="C30H38N7O18P3S">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#P__45__COUMAROYL__45__COA__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/DMZOKBALNZWDKI-MATMFAIHSA-J"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:P-COUMAROYL-COA"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:15499"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB60153"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C00223"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/45266584"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
       <species metaid="THZ__45__P__91__c__93__" sboTerm="SBO:0000247" id="THZ__45__P__91__c__93__" name="4-methyl-5-(2-phosphooxyethyl)thiazole" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="-2" fbc:chemicalFormula="C6H8NO4PS">
         <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -16296,6 +16372,502 @@
         <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#Plastocyanin__45__Reduced__91__e__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__3041__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__3041__91__c__93__" name="isoliquiritigenin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O4">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__3041__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/553829"/>
+                  <rdf:li rdf:resource="http://identifiers.org/drugbank/DB03285"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/DXDRHHKMWQZJHT-FPYGCLRLSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC310312"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-3041"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:310312"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB37316"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C08650"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/638278"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="NARINGENIN__45__CMPD__91__c__93__" sboTerm="SBO:0000247" id="NARINGENIN__45__CMPD__91__c__93__" name="(2S)-naringenin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#NARINGENIN__45__CMPD__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/480-41-1"/>
+                  <rdf:li rdf:resource="http://identifiers.org/drugbank/DB03467"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/FTVWIRXFELQLPI-ZDUSSCGKSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC17846"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:NARINGENIN-CMPD"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:17846"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB02670"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C00509"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/439246"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__83__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__83__91__c__93__" name="trans-resveratrol" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C14H12O3">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__83__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/501-36-0"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/392875"/>
+                  <rdf:li rdf:resource="http://identifiers.org/drugbank/DB02709"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/LUKBXSAWLPMMSZ-OWOJBTEDSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/knapsack/C00002903"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC45713"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-83"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:45713"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB03747"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C03582"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/445154"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__3061__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__3061__91__c__93__" name="(2S)-liquiritigenin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O4">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__3061__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/102790"/>
+                  <rdf:li rdf:resource="http://identifiers.org/drugbank/DB03601"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/FURUXTVZLHCCNA-AWEZNQCLSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC28777"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-3061"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:28777"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB29519"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C09762"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/114829"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="DIHYDROKAEMPFEROL__45__CMPD__91__c__93__" sboTerm="SBO:0000247" id="DIHYDROKAEMPFEROL__45__CMPD__91__c__93__" name="(+)-dihydrokaempferol" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O6">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#DIHYDROKAEMPFEROL__45__CMPD__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/480-20-6"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/PADQINQHPQKXNL-LSDHHAIUSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC15401"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:DIHYDROKAEMPFEROL-CMPD"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:15401"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C00974"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/122850"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__431__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__431__91__c__93__" name="apigenin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="-1" fbc:chemicalFormula="C15H9O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__431__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/520-36-5"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/KZNIFHPLKGYRTM-UHFFFAOYSA-M"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-431"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:58470"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB02124"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C01477"/>
+                  <rdf:li rdf:resource="http://identifiers.org/lipidmaps/LMPK12110005"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/25200950"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__8062__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__8062__91__c__93__" name="chalcone 2&apos;-O-glucoside" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C21H22O10">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__8062__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__6959__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__6959__91__c__93__" name="pterostilbene" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C16H16O3">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__6959__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__8632__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__8632__91__c__93__" name="2&apos;,4,4&apos;,6&apos;-tetrahydroxychalcone 4&apos;-O-β-D-glucoside" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C21H22O10">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__8632__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__8634__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__8634__91__c__93__" name="aureusidin 6-O-glucoside" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C21H20O11">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__8634__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__6994__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__6994__91__c__93__" name="(2S)-eriodictyol" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H11O6">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__6994__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__474__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__474__91__c__93__" name="(+)-taxifolin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="-1" fbc:chemicalFormula="C15H11O7">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__474__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/cas/480-18-2"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/CXQWRCVTCMQVQX-LSDHHAIUSA-M"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-474"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:58329"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C01617"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/25244891"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__21293__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__21293__91__c__93__" name="2-hydroxyliquiritigenin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__21293__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/FONFCQIMWXVKJQ-UHFFFAOYSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-21293"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/129661461"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="_2__45__HYDROXYISOFLAVANONE__91__c__93__" sboTerm="SBO:0000247" id="_2__45__HYDROXYISOFLAVANONE__91__c__93__" name="2,4&apos;,7-trihydroxyisoflavanone" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#_2__45__HYDROXYISOFLAVANONE__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/10128503"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/YACUBWOKTPOMNW-UKRRQHHQSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC63325"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:2-HYDROXYISOFLAVANONE"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:63325"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C15567"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/11459958"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="DAIDZEIN__91__c__93__" sboTerm="SBO:0000247" id="DAIDZEIN__91__c__93__" name="daidzein" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H10O4">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#DAIDZEIN__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/4445025"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/ZQSIJRDFPHDXIC-UHFFFAOYSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC28197"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:DAIDZEIN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:28197"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB03312"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C10208"/>
+                  <rdf:li rdf:resource="http://identifiers.org/lipidmaps/LMPK12050038"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/5281708"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__3141__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__3141__91__c__93__" name="genistein" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="-1" fbc:chemicalFormula="C15H9O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__3141__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/TZBJGXHYKVUXJN-UHFFFAOYSA-M"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-3141"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:74224"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB03217"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C06563"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/25201420"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__3161__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__3161__91__c__93__" name="2,4&apos;,5,7-tetrahydroxyisoflavanone" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O6">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__3161__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/UQOJAGBSKPHQOG-UHFFFAOYSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC31080"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-3161"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:31080"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C12631"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/443902"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__6996__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__6996__91__c__93__" name="6,7,4&apos;-trihydroxyflavanone" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__6996__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/UABMFOBSIHSWFQ-UHFFFAOYSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-6996"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:78026"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C16232"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/23724670"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__7214__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__7214__91__c__93__" name="(2S)-dihydrotricetin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H11O7">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__7214__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="_5734__45__TETRAHYDROXYFLAVONE__91__c__93__" sboTerm="SBO:0000247" id="_5734__45__TETRAHYDROXYFLAVONE__91__c__93__" name="luteolin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H9O6">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#_5734__45__TETRAHYDROXYFLAVONE__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__6997__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__6997__91__c__93__" name="2,6,7,4&apos;-tetrahydroxyisoflavanone" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H12O6">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__6997__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__11940__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__11940__91__c__93__" name="apiforol" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H14O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__11940__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/161511"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/RPKUCYSGAXIESU-ABLWVSNPSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC74812"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-11940"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:74812"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB37232"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C12124"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/443638"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__11941__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__11941__91__c__93__" name="luteoforol" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H14O6">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__11941__91__c__93__">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/chemspider/102562"/>
+                  <rdf:li rdf:resource="http://identifiers.org/inchikey/FSYDWKPCKNCRDI-ABLWVSNPSA-N"/>
+                  <rdf:li rdf:resource="http://identifiers.org/metabolights/MTBLC27686"/>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:CPD-11941"/>
+                  <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:27686"/>
+                  <rdf:li rdf:resource="http://identifiers.org/hmdb/HMDB41310"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.compound/C05907"/>
+                  <rdf:li rdf:resource="http://identifiers.org/pubchem.compound/440834"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__6998__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__6998__91__c__93__" name="6,7,4&apos;-trihydroxyisoflavone" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H10O5">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__6998__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species metaid="CPD__45__7087__91__c__93__" sboTerm="SBO:0000247" id="CPD__45__7087__91__c__93__" name="(+)-dihydromyricetin" compartment="c" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false" fbc:charge="0" fbc:chemicalFormula="C15H11O8">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#CPD__45__7087__91__c__93__">
               <bqbiol:hasProperty>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000247"/>
@@ -21904,6 +22476,122 @@
           <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G189800"/>
         </fbc:geneProductAssociation>
       </reaction>
+      <reaction metaid="PHENYLALANINE__45__AMMONIA__45__LYASE__45__RXN" sboTerm="SBO:0000176" id="PHENYLALANINE__45__AMMONIA__45__LYASE__45__RXN" name="PHENYLALANINE-AMMONIA-LYASE-RXN" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#PHENYLALANINE__45__AMMONIA__45__LYASE__45__RXN">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:PHENYLALANINE-AMMONIA-LYASE-RXN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/4.3.1.24"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/4.3.1.25"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R00697"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/21385"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="PHE__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AMMONIUM__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__674__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G289500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G096300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G096100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G150500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G177800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G177700"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="TRANS__45__CINNAMATE__45__4__45__MONOOXYGENASE__45__RXN" sboTerm="SBO:0000176" id="TRANS__45__CINNAMATE__45__4__45__MONOOXYGENASE__45__RXN" name="TRANS-CINNAMATE-4-MONOOXYGENASE-RXN" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#TRANS__45__CINNAMATE__45__4__45__MONOOXYGENASE__45__RXN">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:TRANS-CINNAMATE-4-MONOOXYGENASE-RXN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.91"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R02253"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/10609"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__674__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="COUMARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G247400"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G026000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G079700"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="_4__45__COUMARATE__45____45__COA__45__LIGASE__45__RXN" sboTerm="SBO:0000176" id="_4__45__COUMARATE__45____45__COA__45__LIGASE__45__RXN" name="4-COUMARATE--COA-LIGASE-RXN" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#_4__45__COUMARATE__45____45__COA__45__LIGASE__45__RXN">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:4-COUMARATE--COA-LIGASE-RXN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/6.2.1.12"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R01616"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/19642"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="COUMARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="ATP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CO__45__A__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="AMP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="PPI__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="P__45__COUMAROYL__45__COA__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G147000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G146900"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__005G184500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__011G020200"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G086100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G040100"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
       <reaction metaid="RXN__45__9542" sboTerm="SBO:0000176" id="RXN__45__9542" name="RXN-9542" reversible="true" fast="false" fbc:lowerFluxBound="FB1N1000" fbc:upperFluxBound="FB3N1000">
         <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
@@ -22609,6 +23297,55 @@
             <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G060300"/>
             <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__005G069200"/>
             <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G004400"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="NARINGENIN__45__CHALCONE__45__SYNTHASE__45__RXN" sboTerm="SBO:0000176" id="NARINGENIN__45__CHALCONE__45__SYNTHASE__45__RXN" name="NARINGENIN-CHALCONE-SYNTHASE-RXN" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#NARINGENIN__45__CHALCONE__45__SYNTHASE__45__RXN">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:NARINGENIN-CHALCONE-SYNTHASE-RXN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/2.3.1.74"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R01613"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/11129"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="MALONYL__45__COA__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="P__45__COUMAROYL__45__COA__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CO__45__A__91__c__93__" stoichiometry="4" constant="true"/>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="CPD__45__20012__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G131000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G067950"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G067800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G083000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G038900"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G039000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G039166"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G039100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G038800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G039232"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G039300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G184300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G038600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G038700"/>
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
@@ -51555,21 +52292,65 @@
         </listOfProducts>
       </reaction>
       <reaction metaid="sink_linamarin_e" sboTerm="SBO:0000176" id="sink_linamarin_e" name="sink_linamarin" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_linamarin_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="LINAMARIN__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
       </reaction>
       <reaction metaid="sink_lotaustralin_e" sboTerm="SBO:0000176" id="sink_lotaustralin_e" name="sink_lotaustralin" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_lotaustralin_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="lotaustralin__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
       </reaction>
       <reaction metaid="sink_Jasmonoyl__45__Isoleucines_e" sboTerm="SBO:0000176" id="sink_Jasmonoyl__45__Isoleucines_e" name="sink_Jasmonoyl-isoleuicines" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_Jasmonoyl__45__Isoleucines_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="Jasmonoyl__45__Isoleucines__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
       </reaction>
       <reaction metaid="sink_Jasmonoyl__45__Valines_e" sboTerm="SBO:0000176" id="sink_Jasmonoyl__45__Valines_e" name="sink_Jasmonoyl-Valines" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_Jasmonoyl__45__Valines_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="Jasmonoyl__45__Valines__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -51591,6 +52372,17 @@
         </listOfReactants>
       </reaction>
       <reaction metaid="sink_HYDROXY__45__BUTYRATE_e" sboTerm="SBO:0000176" id="sink_HYDROXY__45__BUTYRATE_e" name="sink_hydroxy_butyrate" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_HYDROXY__45__BUTYRATE_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="_4__45__HYDROXY__45__BUTYRATE__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -51611,21 +52403,932 @@
           <speciesReference species="CPD__45__11259__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
       </reaction>
-      <reaction metaid="sink_CPD__45__19812_e" sboTerm="SBO:0000176" id="sink_CPD__45__19812_e" name="sink_COOH-JA-Ile " reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+      <reaction metaid="sink_CPD__45__19812_e" sboTerm="SBO:0000176" id="sink_CPD__45__19812_e" name="sink_COOH-JA-Ile" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_CPD__45__19812_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="CPD__45__19812__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
       </reaction>
-      <reaction metaid="sink_CPD__45__19813_e" sboTerm="SBO:0000176" id="sink_CPD__45__19813_e" name="sink_cis-12-hydroxyjasmonate 12-O-β-D-glucoside " reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+      <reaction metaid="sink_CPD__45__19813_e" sboTerm="SBO:0000176" id="sink_CPD__45__19813_e" name="sink_cis-12-hydroxyjasmonate 12-O-β-D-glucoside" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#sink_CPD__45__19813_e">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
         <listOfReactants>
           <speciesReference species="CPD__45__19813__91__c__93__" stoichiometry="1" constant="true"/>
         </listOfReactants>
+      </reaction>
+      <reaction metaid="SK_CPD__45__674__91__c__93__" sboTerm="SBO:0000632" id="SK_CPD__45__674__91__c__93__" name="cinnamate sink" reversible="true" fast="false" fbc:lowerFluxBound="FB1N1000" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#SK_CPD__45__674__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000632"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__674__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+      </reaction>
+      <reaction metaid="SK_COUMARATE__91__c__93__" sboTerm="SBO:0000632" id="SK_COUMARATE__91__c__93__" name="4-coumarate sink" reversible="true" fast="false" fbc:lowerFluxBound="FB1N1000" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#SK_COUMARATE__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000632"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="COUMARATE__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+      </reaction>
+      <reaction metaid="RXN__45__3142" sboTerm="SBO:0000176" id="RXN__45__3142" name="RXN-3142" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__3142">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-3142"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/2.3.1.170"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R06568"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/10584"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="4" constant="true"/>
+          <speciesReference species="NADPH__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="MALONYL__45__COA__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="P__45__COUMAROYL__45__COA__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CO__45__A__91__c__93__" stoichiometry="4" constant="true"/>
+          <speciesReference species="NADP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="CPD__45__3041__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G207701"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G207800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G015800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G287300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G287200"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G253700"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="APIGNAR__45__RXN" sboTerm="SBO:0000176" id="APIGNAR__45__RXN" name="APIGNAR-RXN" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#APIGNAR__45__RXN">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:APIGNAR-RXN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/5.5.1.6"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R02446"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__20012__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NARINGENIN__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G276500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G152000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G037700"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G008500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G008600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__005G064600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__005G064500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G143100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G216600"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__87" sboTerm="SBO:0000176" id="RXN__45__87" name="RXN-87" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__87">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-87"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/2.3.1.95"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R01614"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/11937"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="MALONYL__45__COA__91__c__93__" stoichiometry="3" constant="true"/>
+          <speciesReference species="P__45__COUMAROYL__45__COA__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CO__45__A__91__c__93__" stoichiometry="4" constant="true"/>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="4" constant="true"/>
+          <speciesReference species="CPD__45__83__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__7686" sboTerm="SBO:0000176" id="RXN__45__7686" name="RXN-7686" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7686">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-7686"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.20.5"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R02445"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/32758"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_2__45__KETOGLUTARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="NARINGENIN__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="SUC__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__431__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__3221" sboTerm="SBO:0000176" id="RXN__45__3221" name="RXN-3221" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__3221">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-3221"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/5.5.1.6"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R06556"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__3041__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CPD__45__3061__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G276500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G152000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G037700"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G008500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G008600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__005G064600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__005G064500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G143100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G216600"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="SK_CPD__45__20012__91__c__93__" sboTerm="SBO:0000632" id="SK_CPD__45__20012__91__c__93__" name="naringenin chalcone sink" reversible="true" fast="false" fbc:lowerFluxBound="FB1N1000" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#SK_CPD__45__20012__91__c__93__">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000632"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__20012__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+      </reaction>
+      <reaction metaid="RXN__45__8283" sboTerm="SBO:0000176" id="RXN__45__8283" name="RXN-8283" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__8283">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__12575__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__20012__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="UDP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__8062__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G046900"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__19660" sboTerm="SBO:0000176" id="RXN__45__19660" name="RXN-19660" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__19660">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-19660"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.162"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__3061__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__21293__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__3283" sboTerm="SBO:0000176" id="RXN__45__3283" name="RXN-3283" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__3283">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-3283"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.87"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R07777"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/31726"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__3061__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_2__45__HYDROXYISOFLAVANONE__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G074000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051801"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051700"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__12805" sboTerm="SBO:0000176" id="RXN__45__12805" name="RXN-12805" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__12805">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="S__45__ADENOSYLMETHIONINE__91__c__93__" stoichiometry="2" constant="true"/>
+          <speciesReference species="CPD__45__83__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ADENOSYL__45__HOMO__45__CYS__91__c__93__" stoichiometry="2" constant="true"/>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="2" constant="true"/>
+          <speciesReference species="CPD__45__6959__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__011G122200"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__8453" sboTerm="SBO:0000176" id="RXN__45__8453" name="RXN-8453" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__8453">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__12575__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__20012__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="UDP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__8632__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__004G104100"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__8454" sboTerm="SBO:0000176" id="RXN__45__8454" name="RXN-8454" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__8454">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__8632__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__8634__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G188500"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__7652" sboTerm="SBO:0000176" id="RXN__45__7652" name="RXN-7652" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7652">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="NARINGENIN__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6994__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G185500"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__7921" sboTerm="SBO:0000176" id="RXN__45__7921" name="RXN-7921" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7921">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6994__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__7214__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G015400"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__7687" sboTerm="SBO:0000176" id="RXN__45__7687" name="RXN-7687" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7687">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_2__45__KETOGLUTARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6994__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="SUC__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_5734__45__TETRAHYDROXYFLAVONE__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G261900"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__3284" sboTerm="SBO:0000176" id="RXN__45__3284" name="RXN-3284" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__3284">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-3284"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/4.2.1.105"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R07317"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/16446"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="_2__45__HYDROXYISOFLAVANONE__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="DAIDZEIN__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G295000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G054400"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G054300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G054200"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G047500"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__3303" sboTerm="SBO:0000176" id="RXN__45__3303" name="RXN-3303" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__3303">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-3303"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/4.2.1.105"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R06793"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/36804"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__3161__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__3141__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G295000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G054400"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G054300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G054200"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G047500"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__7654" sboTerm="SBO:0000176" id="RXN__45__7654" name="RXN-7654" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7654">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-7654"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.-"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R07711"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__3061__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6996__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G009400"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G009300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G009500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G009200"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G277532"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G052100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G055000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054900"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G055101"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054700"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G028100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054850"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__006G054200"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__14422" sboTerm="SBO:0000176" id="RXN__45__14422" name="RXN-14422" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__14422">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-14422"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.1.1.234"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R04901"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="2" constant="true"/>
+          <speciesReference species="NADPH__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6994__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NADP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__11941__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__1541" sboTerm="SBO:0000176" id="RXN__45__1541" name="RXN-1541" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__1541">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-1541"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.87"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R07778"/>
+                  <rdf:li rdf:resource="http://identifiers.org/rhea/35488"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="NARINGENIN__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__3161__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G074000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051800"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051801"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051700"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__14425" sboTerm="SBO:0000176" id="RXN__45__14425" name="RXN-14425" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__14425">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-14425"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.1.1.234"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R06610"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="NADPH__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="NARINGENIN__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NADP__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__11940__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="NARINGENIN__45__3__45__DIOXYGENASE__45__RXN" sboTerm="SBO:0000176" id="NARINGENIN__45__3__45__DIOXYGENASE__45__RXN" name="NARINGENIN-3-DIOXYGENASE-RXN" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#NARINGENIN__45__3__45__DIOXYGENASE__45__RXN">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:NARINGENIN-3-DIOXYGENASE-RXN"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.11.9"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R02444"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_2__45__KETOGLUTARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="NARINGENIN__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="SUC__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="DIHYDROKAEMPFEROL__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:or>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G211500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G065300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__001G183300"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G194000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__007G226400"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G047500"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G178000"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G177900"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__008G178100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G053100"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__009G044600"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G261900"/>
+            <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__010G120300"/>
+          </fbc:or>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__525" sboTerm="SBO:0000176" id="RXN__45__525" name="RXN-525" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__525">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-525"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.82"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R03124"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="DIHYDROKAEMPFEROL__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__474__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__7775" sboTerm="SBO:0000176" id="RXN__45__7775" name="RXN-7775" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7775">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-7775"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.11.9"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R03640"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_2__45__KETOGLUTARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6994__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="SUC__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__474__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__7655" sboTerm="SBO:0000176" id="RXN__45__7655" name="RXN-7655" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7655">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6996__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6997__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G051700"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__7782" sboTerm="SBO:0000176" id="RXN__45__7782" name="RXN-7782" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7782">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/biocyc/COMMONBEAN:RXN-7782"/>
+                  <rdf:li rdf:resource="http://identifiers.org/ec-code/1.14.14.81"/>
+                  <rdf:li rdf:resource="http://identifiers.org/kegg.reaction/R03125"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="2" constant="true"/>
+          <speciesReference species="DIHYDROKAEMPFEROL__45__CMPD__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PROTON__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="2" constant="true"/>
+          <speciesReference species="CPD__45__7087__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+      </reaction>
+      <reaction metaid="RXN__45__7656" sboTerm="SBO:0000176" id="RXN__45__7656" name="RXN-7656" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7656">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="CPD__45__6997__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="WATER__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__6998__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__002G047500"/>
+        </fbc:geneProductAssociation>
+      </reaction>
+      <reaction metaid="RXN__45__7922" sboTerm="SBO:0000176" id="RXN__45__7922" name="RXN-7922" reversible="false" fast="false" fbc:lowerFluxBound="FB2N0" fbc:upperFluxBound="FB3N1000">
+        <annotation xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#RXN__45__7922">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/sbo/SBO:0000176"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+        <listOfReactants>
+          <speciesReference species="OXYGEN__45__MOLECULE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="_2__45__KETOGLUTARATE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__7214__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="CARBON__45__DIOXIDE__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="SUC__91__c__93__" stoichiometry="1" constant="true"/>
+          <speciesReference species="CPD__45__7087__91__c__93__" stoichiometry="1" constant="true"/>
+        </listOfProducts>
+        <fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_PHVUL__46__003G261900"/>
+        </fbc:geneProductAssociation>
       </reaction>
     </listOfReactions>
     <fbc:listOfObjectives fbc:activeObjective="obj">
       <fbc:objective fbc:id="obj" fbc:type="maximize">
         <fbc:listOfFluxObjectives>
-          <fbc:fluxObjective fbc:reaction="sink_lotaustralin_e" fbc:coefficient="1"/>
+          <fbc:fluxObjective fbc:reaction="NARINGENIN__45__CHALCONE__45__SYNTHASE__45__RXN" fbc:coefficient="1"/>
         </fbc:listOfFluxObjectives>
       </fbc:objective>
     </fbc:listOfObjectives>
@@ -53774,9 +55477,86 @@
       <fbc:geneProduct metaid="G_PHVUL__46__009G099600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G099600" fbc:name="G_PHVUL.009G099600" fbc:label="G_PHVUL__46__009G099600"/>
       <fbc:geneProduct metaid="G_PHVUL__46__008G052300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G052300" fbc:name="G_PHVUL.008G052300" fbc:label="G_PHVUL__46__008G052300"/>
       <fbc:geneProduct metaid="G_PHVUL__46__006G123300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G123300" fbc:name="G_PHVUL.006G123300" fbc:label="G_PHVUL__46__006G123300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G289500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G289500" fbc:name="G_PHVUL.008G289500" fbc:label="G_PHVUL__46__008G289500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G150500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G150500" fbc:name="G_PHVUL.007G150500" fbc:label="G_PHVUL__46__007G150500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G177700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G177700" fbc:name="G_PHVUL.001G177700" fbc:label="G_PHVUL__46__001G177700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G096100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G096100" fbc:name="G_PHVUL.007G096100" fbc:label="G_PHVUL__46__007G096100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G177800" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G177800" fbc:name="G_PHVUL.001G177800" fbc:label="G_PHVUL__46__001G177800"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G096300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G096300" fbc:name="G_PHVUL.007G096300" fbc:label="G_PHVUL__46__007G096300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G247400" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G247400" fbc:name="G_PHVUL.008G247400" fbc:label="G_PHVUL__46__008G247400"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G079700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G079700" fbc:name="G_PHVUL.006G079700" fbc:label="G_PHVUL__46__006G079700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G026000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G026000" fbc:name="G_PHVUL.007G026000" fbc:label="G_PHVUL__46__007G026000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__005G184500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__005G184500" fbc:name="G_PHVUL.005G184500" fbc:label="G_PHVUL__46__005G184500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G040100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G040100" fbc:name="G_PHVUL.002G040100" fbc:label="G_PHVUL__46__002G040100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G146900" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G146900" fbc:name="G_PHVUL.003G146900" fbc:label="G_PHVUL__46__003G146900"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G147000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G147000" fbc:name="G_PHVUL.003G147000" fbc:label="G_PHVUL__46__003G147000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G039000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G039000" fbc:name="G_PHVUL.002G039000" fbc:label="G_PHVUL__46__002G039000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G083000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G083000" fbc:name="G_PHVUL.001G083000" fbc:label="G_PHVUL__46__001G083000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G038900" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G038900" fbc:name="G_PHVUL.002G038900" fbc:label="G_PHVUL__46__002G038900"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G039166" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G039166" fbc:name="G_PHVUL.002G039166" fbc:label="G_PHVUL__46__002G039166"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G039100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G039100" fbc:name="G_PHVUL.002G039100" fbc:label="G_PHVUL__46__002G039100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G038800" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G038800" fbc:name="G_PHVUL.002G038800" fbc:label="G_PHVUL__46__002G038800"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__009G131000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G131000" fbc:name="G_PHVUL.009G131000" fbc:label="G_PHVUL__46__009G131000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G184300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G184300" fbc:name="G_PHVUL.002G184300" fbc:label="G_PHVUL__46__002G184300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G038700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G038700" fbc:name="G_PHVUL.002G038700" fbc:label="G_PHVUL__46__002G038700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G038600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G038600" fbc:name="G_PHVUL.002G038600" fbc:label="G_PHVUL__46__002G038600"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G067950" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G067950" fbc:name="G_PHVUL.001G067950" fbc:label="G_PHVUL__46__001G067950"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G039232" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G039232" fbc:name="G_PHVUL.002G039232" fbc:label="G_PHVUL__46__002G039232"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G067800" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G067800" fbc:name="G_PHVUL.001G067800" fbc:label="G_PHVUL__46__001G067800"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G039300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G039300" fbc:name="G_PHVUL.002G039300" fbc:label="G_PHVUL__46__002G039300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G015800" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G015800" fbc:name="G_PHVUL.008G015800" fbc:label="G_PHVUL__46__008G015800"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G287200" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G287200" fbc:name="G_PHVUL.008G287200" fbc:label="G_PHVUL__46__008G287200"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__009G207800" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G207800" fbc:name="G_PHVUL.009G207800" fbc:label="G_PHVUL__46__009G207800"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G253700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G253700" fbc:name="G_PHVUL.007G253700" fbc:label="G_PHVUL__46__007G253700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G287300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G287300" fbc:name="G_PHVUL.008G287300" fbc:label="G_PHVUL__46__008G287300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__009G207701" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G207701" fbc:name="G_PHVUL.009G207701" fbc:label="G_PHVUL__46__009G207701"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G276500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G276500" fbc:name="G_PHVUL.002G276500" fbc:label="G_PHVUL__46__002G276500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__009G143100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G143100" fbc:name="G_PHVUL.009G143100" fbc:label="G_PHVUL__46__009G143100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G152000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G152000" fbc:name="G_PHVUL.001G152000" fbc:label="G_PHVUL__46__001G152000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G008600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G008600" fbc:name="G_PHVUL.007G008600" fbc:label="G_PHVUL__46__007G008600"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G037700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G037700" fbc:name="G_PHVUL.001G037700" fbc:label="G_PHVUL__46__001G037700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G008500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G008500" fbc:name="G_PHVUL.007G008500" fbc:label="G_PHVUL__46__007G008500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__005G064600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__005G064600" fbc:name="G_PHVUL.005G064600" fbc:label="G_PHVUL__46__005G064600"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__005G064500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__005G064500" fbc:name="G_PHVUL.005G064500" fbc:label="G_PHVUL__46__005G064500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G216600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G216600" fbc:name="G_PHVUL.003G216600" fbc:label="G_PHVUL__46__003G216600"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__011G122200" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__011G122200" fbc:name="G_PHVUL.011G122200" fbc:label="G_PHVUL__46__011G122200"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G188500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G188500" fbc:name="G_PHVUL.006G188500" fbc:label="G_PHVUL__46__006G188500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G185500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G185500" fbc:name="G_PHVUL.003G185500" fbc:label="G_PHVUL__46__003G185500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G015400" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G015400" fbc:name="G_PHVUL.006G015400" fbc:label="G_PHVUL__46__006G015400"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G261900" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G261900" fbc:name="G_PHVUL.003G261900" fbc:label="G_PHVUL__46__003G261900"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G051801" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G051801" fbc:name="G_PHVUL.003G051801" fbc:label="G_PHVUL__46__003G051801"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G051700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G051700" fbc:name="G_PHVUL.003G051700" fbc:label="G_PHVUL__46__003G051700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G051800" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G051800" fbc:name="G_PHVUL.003G051800" fbc:label="G_PHVUL__46__003G051800"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G074000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G074000" fbc:name="G_PHVUL.003G074000" fbc:label="G_PHVUL__46__003G074000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G009300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G009300" fbc:name="G_PHVUL.003G009300" fbc:label="G_PHVUL__46__003G009300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G009500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G009500" fbc:name="G_PHVUL.003G009500" fbc:label="G_PHVUL__46__003G009500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G009400" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G009400" fbc:name="G_PHVUL.003G009400" fbc:label="G_PHVUL__46__003G009400"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054600" fbc:name="G_PHVUL.006G054600" fbc:label="G_PHVUL__46__006G054600"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__003G009200" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__003G009200" fbc:name="G_PHVUL.003G009200" fbc:label="G_PHVUL__46__003G009200"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G277532" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G277532" fbc:name="G_PHVUL.008G277532" fbc:label="G_PHVUL__46__008G277532"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054500" fbc:name="G_PHVUL.006G054500" fbc:label="G_PHVUL__46__006G054500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G055101" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G055101" fbc:name="G_PHVUL.006G055101" fbc:label="G_PHVUL__46__006G055101"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G055000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G055000" fbc:name="G_PHVUL.006G055000" fbc:label="G_PHVUL__46__006G055000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054100" fbc:name="G_PHVUL.006G054100" fbc:label="G_PHVUL__46__006G054100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054300" fbc:name="G_PHVUL.006G054300" fbc:label="G_PHVUL__46__006G054300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054700" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054700" fbc:name="G_PHVUL.006G054700" fbc:label="G_PHVUL__46__006G054700"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G052100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G052100" fbc:name="G_PHVUL.001G052100" fbc:label="G_PHVUL__46__001G052100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054200" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054200" fbc:name="G_PHVUL.006G054200" fbc:label="G_PHVUL__46__006G054200"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054900" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054900" fbc:name="G_PHVUL.006G054900" fbc:label="G_PHVUL__46__006G054900"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G054850" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G054850" fbc:name="G_PHVUL.006G054850" fbc:label="G_PHVUL__46__006G054850"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__006G028100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__006G028100" fbc:name="G_PHVUL.006G028100" fbc:label="G_PHVUL__46__006G028100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G183300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G183300" fbc:name="G_PHVUL.001G183300" fbc:label="G_PHVUL__46__001G183300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G178000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G178000" fbc:name="G_PHVUL.008G178000" fbc:label="G_PHVUL__46__008G178000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__010G120300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__010G120300" fbc:name="G_PHVUL.010G120300" fbc:label="G_PHVUL__46__010G120300"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G194000" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G194000" fbc:name="G_PHVUL.007G194000" fbc:label="G_PHVUL__46__007G194000"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__007G226400" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__007G226400" fbc:name="G_PHVUL.007G226400" fbc:label="G_PHVUL__46__007G226400"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G178100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G178100" fbc:name="G_PHVUL.008G178100" fbc:label="G_PHVUL__46__008G178100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__009G053100" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G053100" fbc:name="G_PHVUL.009G053100" fbc:label="G_PHVUL__46__009G053100"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__002G211500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__002G211500" fbc:name="G_PHVUL.002G211500" fbc:label="G_PHVUL__46__002G211500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G177900" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G177900" fbc:name="G_PHVUL.008G177900" fbc:label="G_PHVUL__46__008G177900"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__008G047500" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__008G047500" fbc:name="G_PHVUL.008G047500" fbc:label="G_PHVUL__46__008G047500"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__009G044600" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__009G044600" fbc:name="G_PHVUL.009G044600" fbc:label="G_PHVUL__46__009G044600"/>
+      <fbc:geneProduct metaid="G_PHVUL__46__001G065300" sboTerm="SBO:0000243" fbc:id="G_PHVUL__46__001G065300" fbc:name="G_PHVUL.001G065300" fbc:label="G_PHVUL__46__001G065300"/>
     </fbc:listOfGeneProducts>
-    <groups:listOfGroups>
-      <groups:group sboTerm="SBO:0000633" groups:id="group1" groups:kind="partonomy"/>
-    </groups:listOfGroups>
   </model>
 </sbml>
