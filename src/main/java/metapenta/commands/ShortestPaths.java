@@ -1,6 +1,6 @@
 package metapenta.commands;
 
-import metapenta.services.MetabolicNetworkService;
+import metapenta.model.MetaPenta;
 import metapenta.model.dto.ShortestPathsDTO;
 import metapenta.tools.io.writers.ShortestPathWriter;
 
@@ -13,7 +13,7 @@ import metapenta.tools.io.writers.ShortestPathWriter;
 public class ShortestPaths {
     public static void main(String[] args) throws Exception {
 
-        MetabolicNetworkService network = new MetabolicNetworkService(args[0]);
+        MetaPenta network = new MetaPenta(args[0]);
         ShortestPathsDTO paths = network.getShortestPaths(args[1]);
 
         ShortestPathWriter shortestPathWriter = new ShortestPathWriter(paths, args[2]);

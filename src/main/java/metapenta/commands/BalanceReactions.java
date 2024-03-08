@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import metapenta.model.networks.MetabolicNetwork;
-import metapenta.tools.io.writers.MetabolicNetworkXMLOutput;
-import metapenta.model.networks.MetabolicNetworkElements;
+import metapenta.model.MetabolicNetworkXMLOutput;
+import metapenta.model.MetabolicNetwork;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.tools.io.loaders.MetabolicNetworkXMLLoader;
 
@@ -31,6 +30,7 @@ public class BalanceReactions {
 		List<Reaction> reactionsUnbalanced = network.getReactionsUnbalanced();
 		Map<Reaction, Map<String, String>> reactionsUnbalancedReason = network.reactionsUnbalancedReason(reactionsUnbalanced);
 		String reportFile = outPrefix+"_report.tsv";
+		//network.testBalanceo();
 		try (PrintStream out = new PrintStream(reportFile)) {
 			out.print("Reaction id \t Name \t Reason why it is unbalance \t Sum of reactants coefficients \t Sum of products coefficients \t Difference between reactants and products \t It was balanced \t What was modified \t Sum of reactants coefficients \t Sum of products coefficients \t Difference between reactants and products \n ");
 
@@ -83,7 +83,11 @@ public class BalanceReactions {
 						break;
 					}
 				}
+				
+			
 			}
+
+			
 		}
 		
 		MetabolicNetworkXMLOutput output = new MetabolicNetworkXMLOutput();

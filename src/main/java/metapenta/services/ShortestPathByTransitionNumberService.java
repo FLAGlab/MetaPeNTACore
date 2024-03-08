@@ -1,7 +1,6 @@
 package metapenta.services;
 
-import metapenta.model.errors.MetaboliteDoesNotExistsException;
-import metapenta.model.networks.MetabolicNetwork;
+import metapenta.model.MetabolicPetriNet;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.petrinet.PlaceComparable;
 import metapenta.model.metabolic.network.Reaction;
@@ -14,7 +13,7 @@ import java.util.*;
 public class ShortestPathByTransitionNumberService {
     public static final int INFINITE = 100000;
 
-    private MetabolicNetwork metabolicPetriNet;
+    private MetabolicPetriNet metabolicPetriNet;
 
     private Place<Metabolite> origin;
 
@@ -29,7 +28,7 @@ public class ShortestPathByTransitionNumberService {
     private Set<String> settled = new HashSet<>();
 
 
-    public ShortestPathByTransitionNumberService(MetabolicNetwork metabolicPetriNet, Place origin){
+    public ShortestPathByTransitionNumberService(MetabolicPetriNet metabolicPetriNet, Place origin){
         this.metabolicPetriNet = metabolicPetriNet;
         this.origin = origin;
         lastTransitions = new Transition[metabolicPetriNet.getPlaces().size()];
@@ -37,7 +36,7 @@ public class ShortestPathByTransitionNumberService {
     }
 
 
-    public ShortestPathsDTO getShortestPath() throws MetaboliteDoesNotExistsException {
+    public ShortestPathsDTO getShortestPath() {
         this.calculateShortestPath();
 
         return new ShortestPathsDTO(distances, lastTransitions, lastPlaces, metabolicPetriNet);

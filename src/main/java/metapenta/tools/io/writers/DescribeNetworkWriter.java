@@ -1,6 +1,6 @@
 package metapenta.tools.io.writers;
 
-import metapenta.model.networks.MetabolicNetwork;
+import metapenta.model.MetabolicPetriNet;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
@@ -15,7 +15,7 @@ import java.util.*;
 public class DescribeNetworkWriter implements Writer {
 
     private static final String COMPARTMENT_FILE_SUFFIX = "_metabolites.txt";
-    private MetabolicNetwork network;
+    private MetabolicPetriNet network;
 
     private StringBuilder metabolitesBuilder = new StringBuilder();
 
@@ -51,7 +51,7 @@ public class DescribeNetworkWriter implements Writer {
 
     private String filesPrefix;
 
-    public DescribeNetworkWriter(MetabolicNetwork network, String prefix){
+    public DescribeNetworkWriter(MetabolicPetriNet network, String prefix){
         this.network = network;
         initFilePrefixes(prefix);
     }

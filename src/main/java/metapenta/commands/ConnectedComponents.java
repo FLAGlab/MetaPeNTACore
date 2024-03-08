@@ -1,8 +1,7 @@
 package metapenta.commands;
 
-import metapenta.services.IMetabolicNetworkService;
 import metapenta.model.dto.ConnectedComponentsDTO;
-import metapenta.services.MetabolicNetworkService;
+import metapenta.model.MetaPenta;
 import metapenta.tools.io.writers.ConnectedComponentsWriter;
 
 /**
@@ -11,7 +10,7 @@ import metapenta.tools.io.writers.ConnectedComponentsWriter;
  */
 public class ConnectedComponents {
 	public static void main(String[] args) throws Exception {
-		IMetabolicNetworkService network = new MetabolicNetworkService(args[0]);
+		MetaPenta network = new MetaPenta(args[0]);
 
 		ConnectedComponentsDTO connectedComponents = network.connectedComponents();
 

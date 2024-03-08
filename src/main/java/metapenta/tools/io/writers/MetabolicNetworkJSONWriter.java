@@ -1,7 +1,6 @@
 package metapenta.tools.io.writers;
 
-import metapenta.model.networks.MetabolicNetwork;
-import metapenta.model.networks.MetabolicNetworkElements;
+import metapenta.model.MetabolicNetwork;
 import metapenta.tools.io.utils.MetabolicNetworkJSONUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,10 +27,10 @@ public class MetabolicNetworkJSONWriter implements Writer {
     public void write() throws IOException {
         JSONObject reactionsObject = new JSONObject();
 
-        JSONArray reactions = MetabolicNetworkJSONUtils.getReactionsJsonArray(metabolicNetwork.getReactionsAsList());
+        JSONArray reactions = MetabolicNetworkJSONUtils.getReactionsJsonArray(metabolicNetwork.getReactions().values());
         reactionsObject.put(REACTIONS, reactions);
 
-        JSONArray metabolites = MetabolicNetworkJSONUtils.getMetabolitesJsonArray(metabolicNetwork.getMetabolitesAsList());
+        JSONArray metabolites = MetabolicNetworkJSONUtils.getMetabolitesJsonArray(metabolicNetwork.getMetabolites().values());
         reactionsObject.put(METABOLITES, metabolites);
 
         Files.write(Paths.get(this.fileName), reactionsObject.toJSONString().getBytes());

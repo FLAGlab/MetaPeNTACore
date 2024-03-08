@@ -1,5 +1,6 @@
-package metapenta.model.networks;
+package metapenta.tools.io.loaders;
 
+import metapenta.model.*;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
@@ -7,46 +8,33 @@ import metapenta.model.petrinet.Edge;
 import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-public class PetriNetElements {
-    private final Map<String, Place<Metabolite>> places = new TreeMap<>();
-    private final Map<String, Transition<Reaction>> transitions = new TreeMap<>();
+public class MetabolicPetriNetLoader {
+    private MetabolicPetriNet petriNet = new MetabolicPetriNet();
+    private MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
 
-    public Map<String, Transition<Reaction>> getTransitions() {
-        return transitions;
-    }
-    public Transition<Reaction> getTransition(String id) {
-        return transitions.get(id);
-    }
-    public Map<String, Place<Metabolite>> getPlaces() {
-        return places;
-    }
-    public void addTransition(String id, Transition<Reaction> transition){
-        this.transitions.put(id, transition);
+    public MetabolicPetriNet load(String networkFile) throws Exception {
+        try {
+            MetabolicNetwork network = loader.loadNetwork(networkFile);
+            loadPetriNet(network);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return petriNet;
     }
 
-    public void addPlace(String id, Place<Metabolite> place){
-        places.put(id, place);
+    private void loadPetriNet(MetabolicNetwork network){
+        List<String> keysReaction = network.getReactionIds();
+        for (String key : keysReaction) {
+            loadReactionToPetriNet(network.getReaction(key));
+        }
     }
 
-    public Place<Metabolite> getPlace(String id){
-        return places.get(id);
-    }
-
-    public List<String> getPlacesIDs() {
-        return new ArrayList<>(places.keySet());
-    }
-
-    public List<String> getTransitionsIDs(){
-        return new ArrayList<>(transitions.keySet());
-    }
-
-
-    public void loadReactionToPetriNet(Reaction reaction) {
+    private void loadReactionToPetriNet(Reaction reaction) {
         Transition transition = this.createAndLoadTransitionToPetriNet(reaction);
 
         List<Edge> edgesIn = this.loadMetabolitesAndCreateEdgeList(reaction.getReactants());
@@ -60,12 +48,23 @@ public class PetriNetElements {
         loadInEdgesInPlacesOfTransition(transition);
     }
 
+    private Transition createAndLoadTransitionToPetriNet(Reaction reaction){
+        Transition transition = petriNet.getTransition(reaction.getId());
+
+        if ( transition == null ){
+            transition = new Transition(reaction.getId(), reaction.getName(), reaction);
+            petriNet.AddTransition(reaction.getId(), transition);
+        }
+
+        return transition;
+    }
+
     private List<Edge> loadMetabolitesAndCreateEdgeList(List<ReactionComponent> reactionComponents){
         List<Edge> edges = new ArrayList<>();
         for (ReactionComponent reactionComponent : reactionComponents) {
             Metabolite metabolite = reactionComponent.getMetabolite();
 
-            Place<Metabolite> place = getPlace(metabolite.getId());
+            Place<Metabolite> place = petriNet.getPlace(metabolite.getId());
             if (place == null){
                 place = createAndAddPlaceToNet(metabolite);
             }
@@ -79,19 +78,9 @@ public class PetriNetElements {
 
     private Place createAndAddPlaceToNet(Metabolite metabolite){
         Place<Metabolite> place = new Place<>(metabolite.getId(), metabolite.getName(), metabolite);
-        addPlace(metabolite.getId(), place);
+        petriNet.addPlace(metabolite.getId(), place);
 
         return place;
-    }
-    private Transition createAndLoadTransitionToPetriNet(Reaction reaction){
-        Transition transition = getTransition(reaction.getId());
-
-        if ( transition == null ){
-            transition = new Transition(reaction.getId(), reaction.getName(), reaction);
-            addTransition(reaction.getId(), transition);
-        }
-
-        return transition;
     }
 
     private void loadOutEdgesInPlacesOfTransition(Transition transition) {
@@ -113,4 +102,5 @@ public class PetriNetElements {
             place.addEdgeIn(placeEdge);
         }
     }
+
 }

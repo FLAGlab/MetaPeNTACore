@@ -8,14 +8,12 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
+import metapenta.model.*;
 import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
-import metapenta.model.networks.MetabolicNetwork;
-import metapenta.model.networks.MetabolicNetworkElements;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,29 +25,70 @@ import org.xml.sax.InputSource;
  * @author Jorge Duitama
  */
 public class MetabolicNetworkXMLLoader {
+	private static final String ELEMENT_NOTES = "notes";
+	private static final String ELEMENT_MODEL = "model";
+	private static final String ELEMENT_LISTPRODUCTS = "fbc:listOfGeneProducts";
+	private static final String ELEMENT_LISTMETABOLITES = "listOfSpecies";
+	private static final String ELEMENT_LISTREACTIONS = "listOfReactions";
+	private static final String ELEMENT_GENEPRODUCT = "fbc:geneProduct";
+	private static final String ATTRIBUTE_FBCID = "fbc:id";
+	private static final String ATTRIBUTE_FBCNAME = "fbc:name";
+	private static final String ATTRIBUTE_FBCLABEL = "fbc:label";
+	private static final String ELEMENT_METABOLITE = "species";
+	private static final String ATTRIBUTE_ID = "id";
+	private static final String ATTRIBUTE_NAME = "name";
+	private static final String ATTRIBUTE_COMPARTMENT = "compartment";
+	private static final String ATTRIBUTE_FBCFORMULA = "fbc:chemicalFormula";
+	private static final String ELEMENT_REACTION = "reaction";
+	private static final String ATTRIBUTE_REVERSIBLE = "reversible";
+	private static final String ELEMENT_GENEASSOC = "fbc:geneProductAssociation";
+	private static final String ELEMENT_LISTREACTANTS = "listOfReactants";
+	private static final String ELEMENT_LISTMETABPRODUCTS = "listOfProducts";
+	private static final String ELEMENT_METABREF = "speciesReference";
+	private static final String ATTRIBUTE_STOICHIOMETRY = "stoichiometry";
+	private static final String ELEMENT_GENEPRODUCTREF = "fbc:geneProductRef";
+	private static final String ATTRIBUTE_FBC_LOWERBOUND = "fbc:lowerFluxBound";
+	private static final String ATTRIBUTE_FBC_UPPERBOUND = "fbc:upperFluxBound";
+
 	private int metaboliteNumber = 0;
 	private int reactionNumber = 0;
 
-	public MetabolicNetwork loadNetwork(String filename) throws Exception {
-		InputStream is = new FileInputStream(filename);
-
-		return loadNetwork(is);
-	}
-
-	public MetabolicNetwork loadNetwork (InputStream is) throws Exception {
+	/**
+	 * Loads a network from the file with the given name
+	 * @param filename Name of the file to load
+	 * @return MetabolicNetwork Network stored in the given file
+	 * @throws IOException If there is an error loading the file
+	 */
+	public MetabolicNetwork loadNetwork (String filename) throws Exception {
+		InputStream is = null;
 		MetabolicNetwork mn = null;
-
-		DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = documentBuilder.parse(new InputSource(is));
-
+		Document doc;
+		try {
+			is = new FileInputStream(filename);
+			DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			doc = documentBuilder.parse(new InputSource(is));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			if(is!=null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
 		Element rootElement = doc.getDocumentElement();
 		NodeList offspring = rootElement.getChildNodes(); 
-
+		Element sbl = null;
 		for(int i=0;i<offspring.getLength();i++){  
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
-				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_MODEL.equals(elem.getNodeName())) {
+				Element elem = (Element)node;					
+				if(ELEMENT_NOTES.equals(elem.getNodeName())) {
+					sbl = elem;
+				}
+				if(ELEMENT_MODEL.equals(elem.getNodeName())) {
 					mn = loadModel(elem);
 				}
 			}
@@ -57,22 +96,20 @@ public class MetabolicNetworkXMLLoader {
 		if(mn != null) {
 			return mn;
 		}
-
-		is.close();
-
-		throw new IOException("Malformed XML file. The element "+XMLAttributes.ELEMENT_MODEL+" could not be found");
+		
+		throw new IOException("Malformed XML file. The element "+ELEMENT_MODEL+" could not be found");
 	}
 	
 	private MetabolicNetwork loadModel(Element modelElem) throws Exception {
 		MetabolicNetwork answer = new MetabolicNetwork();
 		
-		Element products = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTPRODUCTS);
+		Element products = getElementByID(modelElem, ELEMENT_LISTPRODUCTS);
 		loadGeneProducts (products, answer);
 		
-		Element metabolites = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTMETABOLITES);
+		Element metabolites = getElementByID(modelElem, ELEMENT_LISTMETABOLITES);
 		loadMetabolites (metabolites, answer);
 		
-		Element reactions = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTREACTIONS);
+		Element reactions = getElementByID(modelElem, ELEMENT_LISTREACTIONS);
 		loadReactions (reactions, answer);
 		
 		return answer;
@@ -100,12 +137,12 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_GENEPRODUCT.equals(elem.getNodeName())) {
-					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCID);
+				if(ELEMENT_GENEPRODUCT.equals(elem.getNodeName())) {
+					String id = elem.getAttribute(ATTRIBUTE_FBCID);
 					if(id==null || id.length()==0) throw new IOException("Every gene product should have an id");
-					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCNAME);
+					String name = elem.getAttribute(ATTRIBUTE_FBCNAME);
 					if(name==null || name.length()==0) name = id;
-					String label = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCLABEL);
+					String label = elem.getAttribute(ATTRIBUTE_FBCLABEL);
 					
 					
 					GeneProduct product = new GeneProduct(id, name);
@@ -122,14 +159,14 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_METABOLITE.equals(elem.getNodeName())) {
-					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_ID);
+				if(ELEMENT_METABOLITE.equals(elem.getNodeName())) {
+					String id = elem.getAttribute(ATTRIBUTE_ID);
 					if(id==null || id.length()==0) throw new IOException("Every metabolite should have an id");
-					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_NAME);
+					String name = elem.getAttribute(ATTRIBUTE_NAME);
 					if(name==null || name.length()==0) throw new IOException("Invalid name for metabolite with id "+id);
-					String compartment = elem.getAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT);
+					String compartment = elem.getAttribute(ATTRIBUTE_COMPARTMENT);
 					if(compartment==null || compartment.length()==0) throw new IOException("Invalid compartment for metabolite with id "+id);
-					String formula = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCFORMULA);
+					String formula = elem.getAttribute(ATTRIBUTE_FBCFORMULA);
 					Metabolite metabolite = new Metabolite(id, name, compartment, metaboliteNumber);
 					metaboliteNumber ++;
 					if(formula!=null) metabolite.setChemicalFormula(formula);
@@ -147,18 +184,18 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);			
 			if (node instanceof Element){				
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_REACTION.equals(elem.getNodeName())) {
-					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_ID);
+				if(ELEMENT_REACTION.equals(elem.getNodeName())) {					
+					String id = elem.getAttribute(ATTRIBUTE_ID);
 					if(id==null || id.length()==0) throw new IOException("Every reaction should have an id");
-					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_NAME);
+					String name = elem.getAttribute(ATTRIBUTE_NAME);
 
 					if(name==null || name.length()==0) throw new IOException("Invalid name for reaction with id "+id);
-					String reversibleStr = elem.getAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE);
+					String reversibleStr = elem.getAttribute(ATTRIBUTE_REVERSIBLE);
 					List<GeneProduct> enzymes = new ArrayList<GeneProduct>();
 					List<ReactionComponent> reactants = new ArrayList<ReactionComponent>();
 					List<ReactionComponent> products = new ArrayList<ReactionComponent>();
-					String lbCode = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND);
-					String ubCode = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND);
+					String lbCode = elem.getAttribute(ATTRIBUTE_FBC_LOWERBOUND);
+					String ubCode = elem.getAttribute(ATTRIBUTE_FBC_UPPERBOUND);
 					
 					NodeList offspring2 = elem.getChildNodes(); 
 					for(int j=0;j<offspring2.getLength();j++) {
@@ -166,18 +203,18 @@ public class MetabolicNetworkXMLLoader {
 						if (node2 instanceof Element){ 
 							Element elem2 = (Element) node2;
 							
-							if(XMLAttributes.ELEMENT_GENEASSOC.equals(elem2.getNodeName())) {
-								enzymes = loadEnzymes(id, elem2, network);
+							if(ELEMENT_GENEASSOC.equals(elem2.getNodeName())) {
+								enzymes = loadEnzymes(id, elem2,network);
 							}
-							if(XMLAttributes.ELEMENT_LISTREACTANTS.equals(elem2.getNodeName())) {
-								reactants = loadReactionComponents(id, elem2, network);
+							if(ELEMENT_LISTREACTANTS.equals(elem2.getNodeName())) {
+								reactants = loadReactionComponents(id, elem2,network);
 							}
-							if(XMLAttributes.ELEMENT_LISTMETABPRODUCTS.equals(elem2.getNodeName())) {
-								products = loadReactionComponents(id, elem2, network);
+							if(ELEMENT_LISTMETABPRODUCTS.equals(elem2.getNodeName())) {
+								products = loadReactionComponents(id, elem2,network);
 							}
 						}
 					}
-					if(reactants.isEmpty()) {
+					if(reactants.size()==0) {
 						System.err.println("No reactants found for reaction "+id);
 						continue;
 					}
@@ -207,10 +244,11 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_GENEPRODUCTREF.equals(elem.getNodeName())) {
-					String enzymeId = elem.getAttribute(XMLAttributes.ELEMENT_GENEPRODUCT);
-					if(enzymeId==null || enzymeId.isEmpty()) throw new IOException("Invalid enzyme for reaction "+reactionId);
+				if(ELEMENT_GENEPRODUCTREF.equals(elem.getNodeName())) {
+					String enzymeId = elem.getAttribute(ELEMENT_GENEPRODUCT);
+					if(enzymeId==null || enzymeId.length()==0) throw new IOException("Invalid enzyme for reaction "+reactionId);
 					GeneProduct enzyme = network.getGeneProduct(enzymeId);
+					//if(enzyme==null) throw new IOException("Enzyme "+enzymeId+" not found for reaction "+reactionId);
 					answer.add(enzyme);
 				} else {
 					answer.addAll(loadEnzymes(reactionId, elem, network));
@@ -229,13 +267,13 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_METABREF.equals(elem.getNodeName())) {
-					String metabId = elem.getAttribute(XMLAttributes.ELEMENT_METABOLITE);
+				if(ELEMENT_METABREF.equals(elem.getNodeName())) {
+					String metabId = elem.getAttribute(ELEMENT_METABOLITE);
 					if(metabId==null || metabId.length()==0) throw new IOException("Invalid metabolite association for reaction "+reactionId);
 					Metabolite m = network.getMetabolite(metabId);
 					if(m==null) throw new IOException("Metabolite "+metabId+" not found for reaction "+reactionId);
 					
-					String stchmStr = elem.getAttribute(XMLAttributes.ATTRIBUTE_STOICHIOMETRY);
+					String stchmStr = elem.getAttribute(ATTRIBUTE_STOICHIOMETRY);
 					if(stchmStr==null || stchmStr.length()==0) throw new IOException("Absent stoichiometry for metabolite "+metabId+" in reaction "+reactionId);
 					double stoichiometry;
 					try {

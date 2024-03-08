@@ -1,10 +1,10 @@
 package metapenta.services;
 
-import metapenta.model.networks.MetabolicNetwork;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.dto.MetaboliteReactionsDTO;
 import metapenta.model.petrinet.Edge;
+import metapenta.model.petrinet.PetriNet;
 import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
@@ -17,11 +17,11 @@ public class MetaboliteReactionsService {
 
     private static final String IS_SUBSTRATE = "is_substrate";
 
-    private MetabolicNetwork petriNet;
+    private PetriNet petriNet;
 
     private Metabolite metabolite;
 
-    public MetaboliteReactionsService(MetabolicNetwork petriNet, Metabolite metabolite) {
+    public MetaboliteReactionsService(PetriNet petriNet, Metabolite metabolite) {
         this.petriNet = petriNet;
         this.metabolite = metabolite;
     }
