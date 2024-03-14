@@ -92,6 +92,34 @@ public class MetabolicNetworkElements {
 		return new ArrayList<>(geneProducts.values());
 	}
 	
+	public void removeMetabolites(Set<String> metaboliteIds) {
+		for(String id:metaboliteIds) removeMetabolite(id);
+		
+	}
+
+	private void removeMetabolite(String id) {
+		Metabolite m = metabolites.get(id);
+		if(m == null) {
+			System.err.println("WARN. Metabolite not found with id "+id);
+			return;
+		}
+		String compartmentId = m.getCompartmentId();
+		List<Metabolite> metabolitesByComp = metabolitesByCompartment.get(compartmentId);
+		if(metabolitesByComp!=null) metabolitesByComp.remove(m);
+		else System.err.println("WARN. Metabolite with id "+id+" weird compartment: "+compartmentId); 
+		metabolites.remove(id);
+	}
+
+	public void removeReactions(Set<String> reactionIds) {
+		for(String id:reactionIds) removeReaction(id);
+		
+	}
+	
+	private void removeReaction(String id) {
+		reactions.remove(id);
+		
+	}
+
 	public List<Reaction> getReactionsUnbalanced() {
 		List<Reaction> reactionsUnBalanced = new ArrayList<>();
 
@@ -194,4 +222,6 @@ public class MetabolicNetworkElements {
 		System.out.println("Total reactions with metabolites without formula: "+answer.size());
 		return answer;
 	}
+
+	
 }

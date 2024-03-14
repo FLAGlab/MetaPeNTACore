@@ -40,10 +40,14 @@ public class MetabolicNetworkXMLOutput {
 
 	    
 	    Document doc = docBuilder.newDocument();
-	    Element rootElement = doc.createElement("root");  
+	    Element rootElement = doc.createElement("sbml");  
 	    doc.appendChild(rootElement);
-
+	    rootElement.setAttribute("xmlns", "http://www.sbml.org/sbml/level3/version1/core");
+	    rootElement.setAttribute("xmlns:fbc", "http://www.sbml.org/sbml/level3/version1/fbc/version2");
+	    rootElement.setAttribute("fbc:required", "false");
+	    
 	    Element modelElement = doc.createElement(XMLAttributes.ELEMENT_MODEL);
+	    
 	    rootElement.appendChild(modelElement);
 
 	    Element model= saveModel(network, doc, modelElement);
@@ -111,7 +115,7 @@ public class MetabolicNetworkXMLOutput {
 
 	        ChemicalFormula formula = metabolite.getChemicalFormula();
 	        if(formula!=null) {
-	        	metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBCFORMULA, formula.getChemicalFormula());
+	        	metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_FORMULA, formula.getChemicalFormula());
 	        }
 	        listMetabolitesElement.appendChild(metaboliteElement);
 	    }
@@ -133,7 +137,7 @@ public class MetabolicNetworkXMLOutput {
 	        reactionElement.appendChild(listReactanstElement);
 	        Element listproductsElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
 	        reactionElement.appendChild(listproductsElement);
-	        Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_GENEASSOC, reaction.getEnzymes(), doc);
+	        Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
 	        reactionElement.appendChild(listEnzymesElement);
 	        listReactionsElement.appendChild(reactionElement);
 	    }
@@ -145,8 +149,8 @@ public class MetabolicNetworkXMLOutput {
 	    Element listEnzymesElement = doc.createElement(name);
 
 	    for (GeneProduct enzyme : enzymes) {
-	        Element enzymeRefElement = doc.createElement(XMLAttributes.ELEMENT_GENEPRODUCTREF);
-	        enzymeRefElement.setAttribute(XMLAttributes.ELEMENT_GENEPRODUCT, enzyme.getId());
+	        Element enzymeRefElement = doc.createElement(XMLAttributes.ELEMENT_FBC_GENEPRODUCTREF);
+	        enzymeRefElement.setAttribute(XMLAttributes.ELEMENT_FBC_GENEPRODUCT, enzyme.getId());
 
 	        listEnzymesElement.appendChild(enzymeRefElement);
 	    }
@@ -169,12 +173,12 @@ public class MetabolicNetworkXMLOutput {
 	}
 	
 	private Node saveGeneProducts(MetabolicNetwork network, Document doc) {
-		Element listGeneProductsElement = doc.createElement(XMLAttributes.ELEMENT_LISTGENEPRODUCTS);
+		Element listGeneProductsElement = doc.createElement(XMLAttributes.ELEMENT_FBC_LISTGENEPRODUCTS);
 
 	    for (GeneProduct product : network.getGeneProductsAsList()) {
-	        Element geneProductElement = doc.createElement(XMLAttributes.ELEMENT_GENEPRODUCT);
-	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBCID, product.getId());
-	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBCNAME, product.getName());
+	        Element geneProductElement = doc.createElement(XMLAttributes.ELEMENT_FBC_GENEPRODUCT);
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_ID, product.getId());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_NAME, product.getName());
 	        listGeneProductsElement.appendChild(geneProductElement);
 	    }
 		return listGeneProductsElement;

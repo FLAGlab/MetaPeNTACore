@@ -68,7 +68,7 @@ public class MetabolicNetworkXMLLoader {
 		Element compartments = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTCOMPARTMENTS);
 		loadCompartments (compartments, answer);
 		
-		Element products = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTGENEPRODUCTS);
+		Element products = getElementByID(modelElem, XMLAttributes.ELEMENT_FBC_LISTGENEPRODUCTS);
 		loadGeneProducts (products, answer);
 		
 		Element metabolites = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTMETABOLITES);
@@ -145,12 +145,12 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_GENEPRODUCT.equals(elem.getNodeName())) {
-					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCID);
+				if(XMLAttributes.ELEMENT_FBC_GENEPRODUCT.equals(elem.getNodeName())) {
+					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_ID);
 					if(id==null || id.length()==0) throw new IOException("Every gene product should have an id");
-					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCNAME);
+					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_NAME);
 					if(name==null || name.length()==0) name = id;
-					String label = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCLABEL);
+					String label = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LABEL);
 					String sboTerm = elem.getAttribute(XMLAttributes.ATTRIBUTE_SBOTERM);
 					String metaId = elem.getAttribute(XMLAttributes.ATTRIBUTE_METAID);
 					if(!id.equals(metaId)) System.err.println("Meta id: "+metaId+" different than id of gene product: "+id);
@@ -178,7 +178,7 @@ public class MetabolicNetworkXMLLoader {
 					if(name==null || name.length()==0) throw new IOException("Invalid name for metabolite with id "+id);
 					String compartment = elem.getAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT);
 					if(compartment==null || compartment.length()==0) throw new IOException("Invalid compartment for metabolite with id "+id);
-					String formula = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBCFORMULA);
+					String formula = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_FORMULA);
 					String metaid = elem.getAttribute(XMLAttributes.ATTRIBUTE_METAID);
 					if(!metaid.equals(id)) System.err.println("WARN. Metaid: "+metaid+" different than id: "+id);
 					String unitsS = elem.getAttribute(XMLAttributes.ATTRIBUTE_HASONLYSUBSTANCEUNITS);
@@ -230,7 +230,7 @@ public class MetabolicNetworkXMLLoader {
 						if (node2 instanceof Element){ 
 							Element elem2 = (Element) node2;
 							//TODO: Load annotations
-							if(XMLAttributes.ELEMENT_GENEASSOC.equals(elem2.getNodeName())) {
+							if(XMLAttributes.ELEMENT_FBC_GENEASSOC.equals(elem2.getNodeName())) {
 								enzymes = loadEnzymes(id, elem2, network);
 							}
 							if(XMLAttributes.ELEMENT_LISTREACTANTS.equals(elem2.getNodeName())) {
@@ -280,8 +280,8 @@ public class MetabolicNetworkXMLLoader {
 			Node node = offspring.item(i);
 			if (node instanceof Element){ 
 				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_GENEPRODUCTREF.equals(elem.getNodeName())) {
-					String enzymeId = elem.getAttribute(XMLAttributes.ELEMENT_GENEPRODUCT);
+				if(XMLAttributes.ELEMENT_FBC_GENEPRODUCTREF.equals(elem.getNodeName())) {
+					String enzymeId = elem.getAttribute(XMLAttributes.ELEMENT_FBC_GENEPRODUCT);
 					if(enzymeId==null || enzymeId.isEmpty()) throw new IOException("Invalid enzyme for reaction "+reactionId);
 					GeneProduct enzyme = network.getGeneProduct(enzymeId);
 					answer.add(enzyme);

@@ -53,11 +53,20 @@ public class MetabolicNetwork {
     public List<GeneProduct> getGeneProductsAsList() {
 		return metabolicNetworkElements.getGeneProductsAsList();
 	}
-
 	
     public List<Reaction> getReactionsMetabolitesWithoutFormula() {
     	return metabolicNetworkElements.getReactionsMetabolitesWithoutFormula();
     }
+    
+    public void removeMetabolites(Set<String> metaboliteIds) {
+		metabolicNetworkElements.removeMetabolites(metaboliteIds);
+		
+	}
+
+	public void removeReactions(Set<String> reactionIds) {
+		metabolicNetworkElements.removeReactions(reactionIds);
+		
+	}
 
     public Map<String, Transition<Reaction>> getTransitions() {
         return petriNetElements.getTransitions();
@@ -196,6 +205,8 @@ public class MetabolicNetwork {
     public Map<Reaction, Map<String, String>> reactionsUnbalancedReason(List<Reaction> reactionsUnbalanced){
         return metabolicNetworkElements.reactionsUnbalancedReason(reactionsUnbalanced);
     }
+
+	
 
 	
 
