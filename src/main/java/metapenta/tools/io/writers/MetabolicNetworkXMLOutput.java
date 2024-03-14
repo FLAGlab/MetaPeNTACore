@@ -3,6 +3,7 @@ package metapenta.tools.io.writers;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,39 +16,18 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import metapenta.model.networks.MetabolicNetwork;
-import metapenta.model.networks.MetabolicNetworkElements;
+import metapenta.tools.io.loaders.XMLAttributes;
+import metapenta.model.metabolic.network.ChemicalFormula;
+import metapenta.model.metabolic.network.Compartment;
 import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class MetabolicNetworkXMLOutput {
-	private static final String ELEMENT_NOTES = "notes";
-	private static final String ELEMENT_MODEL = "model";
-	private static final String ELEMENT_LISTPRODUCTS = "listOfGeneProducts";
-	private static final String ELEMENT_LISTMETABOLITES = "listOfSpecies";
-	private static final String ELEMENT_LISTREACTIONS = "listOfReactions";
-	private static final String ELEMENT_GENEPRODUCT = "geneProduct";
-	private static final String ATTRIBUTE_FBCID = "fbc\\:id";
-	private static final String ATTRIBUTE_FBCNAME = "name";
-	private static final String ATTRIBUTE_FBCLABEL = "label";
-	private static final String ELEMENT_METABOLITE = "species";
-	private static final String ATTRIBUTE_ID = "id";
-	private static final String ATTRIBUTE_NAME = "name";
-	private static final String ATTRIBUTE_COMPARTMENT = "compartment";
-	private static final String ATTRIBUTE_FBCFORMULA = "chemicalFormula";
-	private static final String ELEMENT_REACTION = "reaction";
-	private static final String ATTRIBUTE_REVERSIBLE = "reversible";
-	private static final String ELEMENT_GENEASSOC = "geneProductAssociation";
-	private static final String ELEMENT_LISTREACTANTS = "listOfReactants";
-	private static final String ELEMENT_LISTMETABPRODUCTS = "listOfProducts";
-	private static final String ELEMENT_METABREF = "speciesReference";
-	private static final String ATTRIBUTE_STOICHIOMETRY = "stoichiometry";
-	private static final String ELEMENT_GENEPRODUCTREF = "geneProductRef";
-	private static final String ATTRIBUTE_FBC_LOWERBOUND = "lowerFluxBound";
-	private static final String ATTRIBUTE_FBC_UPPERBOUND = "upperFluxBound";
 	
 	public void saveNetwork(MetabolicNetwork network, String filename) throws IOException {
 	    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -63,7 +43,7 @@ public class MetabolicNetworkXMLOutput {
 	    Element rootElement = doc.createElement("root");  
 	    doc.appendChild(rootElement);
 
-	    Element modelElement = doc.createElement(ELEMENT_MODEL);
+	    Element modelElement = doc.createElement(XMLAttributes.ELEMENT_MODEL);
 	    rootElement.appendChild(modelElement);
 
 	    Element model= saveModel(network, doc, modelElement);
@@ -84,60 +64,89 @@ public class MetabolicNetworkXMLOutput {
 	
 	private Element saveModel(MetabolicNetwork network, Document doc, Element modelElement) {
 
+		modelElement.appendChild(saveCompartments(network, doc));
 	    modelElement.appendChild(saveMetabolites(network, doc));
-
+	    modelElement.appendChild(saveParameters(network, doc));
 	    modelElement.appendChild(saveReactions(network, doc));
+	    modelElement.appendChild(saveGeneProducts(network, doc));
 
 	    return modelElement;
 	}
 	
+	private Node saveCompartments(MetabolicNetwork network, Document doc) {
+		Element listCompartmentsElement = doc.createElement(XMLAttributes.ELEMENT_LISTCOMPARTMENTS);
+
+	    for (Compartment compartment : network.getCompartmentsAsList()) {
+	        Element compartmentElement = doc.createElement(XMLAttributes.ATTRIBUTE_COMPARTMENT);
+	        compartmentElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, compartment.getId());
+	        compartmentElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, compartment.getName());
+	        listCompartmentsElement.appendChild(compartmentElement);
+	    }
+		return listCompartmentsElement;
+	}
+
+	private Node saveParameters(MetabolicNetwork network, Document doc) {
+		Element listParametersElement = doc.createElement(XMLAttributes.ELEMENT_LISTPARAMETERS);
+
+	    for (Map.Entry<String, String> entry : network.getParameters().entrySet()) {
+	        Element parameterElement = doc.createElement(XMLAttributes.ELEMENT_PARAMETER);
+	        parameterElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, entry.getKey());
+	        parameterElement.setAttribute(XMLAttributes.ATTRIBUTE_VALUE, entry.getValue());
+	        listParametersElement.appendChild(parameterElement);
+	    }
+		return listParametersElement;
+	}
+
 	private Element saveMetabolites(MetabolicNetwork network, Document doc) {
-	    Element listMetabolitesElement = doc.createElement(ELEMENT_LISTMETABOLITES);
+	    Element listMetabolitesElement = doc.createElement(XMLAttributes.ELEMENT_LISTMETABOLITES);
 
 	    for (Metabolite metabolite : network.getMetabolitesAsList()) {
-	        Element metaboliteElement = doc.createElement(ELEMENT_METABOLITE);
-	        metaboliteElement.setAttribute(ATTRIBUTE_ID, metabolite.getId());
-	        metaboliteElement.setAttribute(ATTRIBUTE_NAME, metabolite.getName());
-	        metaboliteElement.setAttribute(ATTRIBUTE_COMPARTMENT, metabolite.getCompartment());
+	        Element metaboliteElement = doc.createElement(XMLAttributes.ELEMENT_METABOLITE);
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, metabolite.getId());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, metabolite.getName());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT, metabolite.getCompartmentId());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_HASONLYSUBSTANCEUNITS, ""+metabolite.isHasOnlySubstanceUnits());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_BOUNDARYCOND, ""+metabolite.isBoundaryCondition());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_CHARGE, ""+metabolite.getCharge());
 
-	        String formula = metabolite.getChemicalFormula().getChemicalFormula();
-	        metaboliteElement.setAttribute(ATTRIBUTE_FBCFORMULA, formula);
-
+	        ChemicalFormula formula = metabolite.getChemicalFormula();
+	        if(formula!=null) {
+	        	metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBCFORMULA, formula.getChemicalFormula());
+	        }
 	        listMetabolitesElement.appendChild(metaboliteElement);
 	    }
 
 	    return listMetabolitesElement;
 	}
 	private Element saveReactions(MetabolicNetwork network, Document doc) {
-	    Element listReactionsElement = doc.createElement(ELEMENT_LISTREACTIONS);
+	    Element listReactionsElement = doc.createElement(XMLAttributes.ELEMENT_LISTREACTIONS);
 
 	    for (Reaction reaction : network.getReactionsAsList()) {
-	        Element reactionElement = doc.createElement(ELEMENT_REACTION);
-	        reactionElement.setAttribute(ATTRIBUTE_ID, reaction.getId());
-	        reactionElement.setAttribute(ATTRIBUTE_NAME, reaction.getName());
-
-	        if (reaction.isReversible()) {
-	            reactionElement.setAttribute(ATTRIBUTE_REVERSIBLE, "true");
-	        }
-	        Element listEnzymesElement = saveEnzymes(ELEMENT_GENEASSOC, reaction.getEnzymes(), doc);
-	        reactionElement.appendChild(listEnzymesElement);
-	        Element listReactanstElement = saveReactionComponents(ELEMENT_LISTREACTANTS, reaction.getReactants(), doc);
+	        Element reactionElement = doc.createElement(XMLAttributes.ELEMENT_REACTION);
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, reaction.getId());
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, reaction.getName());
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE, ""+reaction.isReversible());
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND, ""+reaction.getLowerBoundFluxParameterId());
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND, ""+reaction.getUpperBoundFluxParameterId());
+	        
+	        Element listReactanstElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTREACTANTS, reaction.getReactants(), doc);
 	        reactionElement.appendChild(listReactanstElement);
-	        Element listproductsElement = saveReactionComponents(ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
+	        Element listproductsElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
 	        reactionElement.appendChild(listproductsElement);
-
+	        Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_GENEASSOC, reaction.getEnzymes(), doc);
+	        reactionElement.appendChild(listEnzymesElement);
 	        listReactionsElement.appendChild(reactionElement);
 	    }
 
 	    return listReactionsElement;
 	}
 	
-	private Element saveEnzymes(String name, List<GeneProduct> enzymes, Document doc) {
+	private Element saveEnzymeRefs(String name, List<GeneProduct> enzymes, Document doc) {
 	    Element listEnzymesElement = doc.createElement(name);
 
 	    for (GeneProduct enzyme : enzymes) {
-	        Element enzymeRefElement = doc.createElement(ELEMENT_GENEPRODUCTREF);
-	        enzymeRefElement.setAttribute(ELEMENT_GENEPRODUCT, enzyme.getId());
+	        Element enzymeRefElement = doc.createElement(XMLAttributes.ELEMENT_GENEPRODUCTREF);
+	        enzymeRefElement.setAttribute(XMLAttributes.ELEMENT_GENEPRODUCT, enzyme.getId());
 
 	        listEnzymesElement.appendChild(enzymeRefElement);
 	    }
@@ -149,14 +158,26 @@ public class MetabolicNetworkXMLOutput {
 	    Element listComponentsElement = doc.createElement(name);
 
 	    for (ReactionComponent component : components) {
-	        Element componentElement = doc.createElement(ELEMENT_METABREF);
-	        componentElement.setAttribute(ELEMENT_METABOLITE, component.getMetabolite().getId());
-	        componentElement.setAttribute(ATTRIBUTE_STOICHIOMETRY, Double.toString(component.getStoichiometry()));
+	        Element componentElement = doc.createElement(XMLAttributes.ELEMENT_METABREF);
+	        componentElement.setAttribute(XMLAttributes.ELEMENT_METABOLITE, component.getMetabolite().getId());
+	        componentElement.setAttribute(XMLAttributes.ATTRIBUTE_STOICHIOMETRY, Double.toString(component.getStoichiometry()));
 
 	        listComponentsElement.appendChild(componentElement);
 	    }
 
 	    return listComponentsElement;
+	}
+	
+	private Node saveGeneProducts(MetabolicNetwork network, Document doc) {
+		Element listGeneProductsElement = doc.createElement(XMLAttributes.ELEMENT_LISTGENEPRODUCTS);
+
+	    for (GeneProduct product : network.getGeneProductsAsList()) {
+	        Element geneProductElement = doc.createElement(XMLAttributes.ELEMENT_GENEPRODUCT);
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBCID, product.getId());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBCNAME, product.getName());
+	        listGeneProductsElement.appendChild(geneProductElement);
+	    }
+		return listGeneProductsElement;
 	}
 
 

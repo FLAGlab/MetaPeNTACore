@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -21,13 +22,24 @@ public class ConnectedComponentsWriter implements Writer {
         this.connectedComponents = connectedComponents;
         this.filename = filename;
     }
+    
+    @Override
+	public void write() throws IOException {
+		writeJson();
+	}
 
-    public void write() throws IOException {
+	public void writeJson() throws IOException {
         JSONObject connectedComponentsJson = new JSONObject();
         Map<Integer, List<Metabolite>>  metabolitesConnected = connectedComponents.getConnectedMetabolites();
+        System.out.println("Number of connected components: "+metabolitesConnected.size());
         Set<Integer> keySet = metabolitesConnected.keySet();
         for (Integer key: keySet) {
-            JSONArray metabolitesJson = createMetaboliteJsonArray(metabolitesConnected.get(key));
+        	List<Metabolite> group = metabolitesConnected.get(key);
+            JSONArray metabolitesJson = createMetaboliteJsonArray(group);
+            System.out.println("Next component Size: "+group.size());
+            if(group.size()<10) {
+            	for(Metabolite m:group) System.out.println("Next metabolite: "+m.getId()+" "+m.getName()+" "+m.getChemicalFormula().getChemicalFormula());
+            }
             connectedComponentsJson.put(key, metabolitesJson);
         }
 
@@ -42,4 +54,8 @@ public class ConnectedComponentsWriter implements Writer {
 
         return metabolitesJson;
     }
+
+
+
+	
 }

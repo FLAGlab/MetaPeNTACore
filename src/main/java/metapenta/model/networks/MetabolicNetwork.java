@@ -2,6 +2,7 @@ package metapenta.model.networks;
 
 import metapenta.model.errors.GeneProductDoesNotExitsException;
 import metapenta.model.errors.MetaboliteDoesNotExistsException;
+import metapenta.model.metabolic.network.Compartment;
 import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
@@ -9,6 +10,7 @@ import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 public class MetabolicNetwork {
     private MetabolicNetworkElements metabolicNetworkElements;
@@ -23,13 +25,38 @@ public class MetabolicNetwork {
     public void addGeneProduct(GeneProduct product){
         metabolicNetworkElements.addGeneProduct(product);
     }
+    
+    public void addCompartment(Compartment compartment) {
+		metabolicNetworkElements.addCompartment(compartment);
+	}
+    public List<Compartment> getCompartmentsAsList() {
+		return metabolicNetworkElements.getCompartmentsAsList();
+	}
 
     public void addMetabolite(Metabolite metabolite) {
         metabolicNetworkElements.addMetabolite(metabolite);
     }
-
+    
+    public void addParameter(String id, String value) {
+		metabolicNetworkElements.addParameter(id, value);
+	}
+    public String getValueParameter(String parameterId) {
+    	return metabolicNetworkElements.getValueParameter(parameterId);
+    }
+    public Map<String, String> getParameters() {
+		return metabolicNetworkElements.getParameters();
+	}
+   
     public GeneProduct getGeneProduct(String id) throws GeneProductDoesNotExitsException {
         return metabolicNetworkElements.getGeneProduct(id);
+    }
+    public List<GeneProduct> getGeneProductsAsList() {
+		return metabolicNetworkElements.getGeneProductsAsList();
+	}
+
+	
+    public List<Reaction> getReactionsMetabolitesWithoutFormula() {
+    	return metabolicNetworkElements.getReactionsMetabolitesWithoutFormula();
     }
 
     public Map<String, Transition<Reaction>> getTransitions() {
@@ -169,4 +196,8 @@ public class MetabolicNetwork {
     public Map<Reaction, Map<String, String>> reactionsUnbalancedReason(List<Reaction> reactionsUnbalanced){
         return metabolicNetworkElements.reactionsUnbalancedReason(reactionsUnbalanced);
     }
+
+	
+
+	
 }

@@ -16,11 +16,13 @@ public class Reaction {
 	private List<ReactionComponent> reactants;
 	private List<ReactionComponent> products;
 	private boolean reversible = false;
+	private String lowerBoundFluxParameterId;
+	private String upperBoundFluxParameterId;
 	private double lowerBoundFlux = -1000;
 	private double upperBoundFlux = 1000;
 	private List<GeneProduct> enzymes;
 	private Map<String, Integer> stoichiometryDifference;
-	private boolean isBalanced = false;
+	private boolean balanced = false;
 	/**
 	 * Creates a new reaction with the given information
 	 * @param id of the reaction
@@ -34,10 +36,8 @@ public class Reaction {
 		this.name = name;
 		this.reactants = reactants;
 		this.products = products;
-		if (isBalanced()) {
-			this.isBalanced = true;
-		}
 		this.nid = nid;
+		updateBalanced();
 	}
 	/**
 	 * @return true if the reaction is reversible, false otherwise
@@ -115,13 +115,24 @@ public class Reaction {
 	public void setUpperBoundFlux(double upperBound) {
 		this.upperBoundFlux = upperBound;
 	}
-
-
-	public boolean getIsBalanced() {
-		return isBalanced;
+	
+	public String getLowerBoundFluxParameterId() {
+		return lowerBoundFluxParameterId;
 	}
-	public void setIsBalanced(boolean isBalanced) {
-		this.isBalanced = isBalanced;
+	public void setLowerBoundFluxParameterId(String lowerBoundFluxParameterId) {
+		this.lowerBoundFluxParameterId = lowerBoundFluxParameterId;
+	}
+	public String getUpperBoundFluxParameterId() {
+		return upperBoundFluxParameterId;
+	}
+	public void setUpperBoundFluxParameterId(String upperBoundFluxParameterId) {
+		this.upperBoundFluxParameterId = upperBoundFluxParameterId;
+	}
+	public boolean isBalanced() {
+		return balanced;
+	}
+	private void setBalanced(boolean balanced) {
+		this.balanced = balanced;
 	}
 
 	public void addProduct(ReactionComponent product) {
@@ -150,7 +161,7 @@ public class Reaction {
 		List<Map<String, Integer>> listElements = new ArrayList<>();
 		for(ReactionComponent reaction: reactionsComponent) {
 			Map<String, Integer> elements = reaction.getFormulaReactionComponent();
-			listElements.add(elements);
+			if(elements!=null) listElements.add(elements);
 		}
 			return listElements;
 	}
@@ -166,12 +177,12 @@ public class Reaction {
 		return sum;
 	}
 
-	public boolean isBalanced() {
+	private void updateBalanced() {
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
 
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
 
-		return sumlistElemReactants.equals(sumlistElemProducts);
+		balanced = sumlistElemReactants.equals(sumlistElemProducts);
 
 	}
 
@@ -386,19 +397,19 @@ public class Reaction {
 
 		for(Map<String, Integer> elementReactants: listElemReactants) {
 			if(elementReactants == null) {
-				setIsBalanced(false);
+				setBalanced(false);
 				result.put(false, "");
 			}
 		}
 		for(Map<String, Integer> elementProducts: listElemProducts) {
 			if(elementProducts == null) {
-				setIsBalanced(false);
+				setBalanced(false);
 				result.put(false, "");
 			}
 		}
 
 		if(sumlistElemReactants.size() != sumlistElemProducts.size()) {
-			setIsBalanced(false);
+			setBalanced(false);
 			result.put(false, "");
 		}
 		else if (reactants.size() == 1 && products.size()==1) {
@@ -436,7 +447,7 @@ public class Reaction {
 		                	contIgual++;
 		                }else {
 		                	if(mcmReactProduct != mcm) {
-		                		setIsBalanced(false);
+		                		setBalanced(false);
 		                		result.put(false, "");
 		                		break;
 		                	}else {
@@ -449,7 +460,7 @@ public class Reaction {
 						if(mayor.equals("reactant")) {
 							reactant.setStoichiometry(mcm);
 							if(isBalanced()) {
-								setIsBalanced(true);
+								setBalanced(true);
 								reactionsBalanced.add(this);
 								result.put(true, "Modify stochiometry by MCM");
 								//changedToBalanced = true;
@@ -478,8 +489,7 @@ public class Reaction {
 										Integer newStoich = (int) (Math.abs(differenceNum) + react.getStoichiometry());
 										react.setStoichiometry(Math.abs(newStoich));
 										react.setStoichiometry(differenceNum);
-										Metabolite m = react.getMetabolite();
-										react.setFormulaReactionComponent(m);
+										react.updateFormulaReactionComponent();
 										reactionsBalanced.add(this);
 										result.put(true, "Adding atoms of one element in reactans");
 										break outerLoop1;
@@ -504,9 +514,8 @@ public class Reaction {
 								Integer newStoich = (int) (differenceNum + product.getStoichiometry());
 								product.setStoichiometry(Math.abs(newStoich));
 
-								Metabolite m = product.getMetabolite();
 								//System.out.println(m.getName());
-								product.setFormulaReactionComponent(m);
+								product.updateFormulaReactionComponent();
 								Map<String, Integer> formulacambiada = product.getFormulaReactionComponent();
 								for (Map.Entry<String, Integer> formul : formulacambiada.entrySet()) {
 									System.out.println("FORMULA CAMBIADA");

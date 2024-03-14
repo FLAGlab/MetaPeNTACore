@@ -22,6 +22,7 @@ public class ReactionComponent {
 		super();
 		this.metabolite = metabolite;
 		this.stoichiometry = stoichiometry;
+		updateFormulaReactionComponent();
 	}
 	/**
 	 * @return Metabolite that participates in the reaction
@@ -44,8 +45,12 @@ public class ReactionComponent {
 	public Map<String, Integer> getFormulaReactionComponent() {
 		return formulaReactionComponent;
 	}
-	public void setFormulaReactionComponent(Metabolite metabolite) {
+	public void updateFormulaReactionComponent() {
 		ChemicalFormula formula = metabolite.getChemicalFormula();
+		if(formula==null) {
+			System.err.println("WARN. Problem updating formula for metabolite "+metabolite.getId());
+			return;
+		}
 		Map<String, Integer> elements = formula.getElements();
 		
 		Map<String, Integer> new_elements = new HashMap<>();

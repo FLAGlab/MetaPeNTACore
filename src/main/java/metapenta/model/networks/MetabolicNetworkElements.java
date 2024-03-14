@@ -2,6 +2,7 @@ package metapenta.model.networks;
 import java.util.*;
 
 import metapenta.model.errors.GeneProductDoesNotExitsException;
+import metapenta.model.metabolic.network.Compartment;
 import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
@@ -13,18 +14,33 @@ import metapenta.model.metabolic.network.ReactionComponent;
  */
 public class MetabolicNetworkElements {
 	private Map<String, List<Metabolite>> metabolitesByCompartment = new HashMap<>();
+	private Map<String,String> parameters = new HashMap<>();
+	private Map<String, Compartment> compartments = new TreeMap<>();
 	private Map<String, GeneProduct> geneProducts = new TreeMap<>();
 	private Map<String, Metabolite> metabolites = new TreeMap<>();
-	private Set<String> compartments = new TreeSet<>();
 	private Map<String, Reaction> reactions = new TreeMap<>();
+	
 
 	public void addGeneProduct(GeneProduct product) {
 		geneProducts.put(product.getId(), product);
 	}
 
+	public void addCompartment(Compartment compartment) {
+		compartments.put(compartment.getId(), compartment);
+	}
+
+	public List<Compartment> getCompartmentsAsList() {
+		return new ArrayList<>(compartments.values());
+	}
+	public void addParameter(String id, String value) {
+		parameters.put(id, value);
+	}
+	public Map<String, String> getParameters() {
+		return parameters;
+	}
+	
 	public void addMetabolite(Metabolite metabolite) {
 		metabolites.put(metabolite.getId(), metabolite);
-		compartments.add(metabolite.getCompartment());
 	}
 
 
@@ -52,6 +68,9 @@ public class MetabolicNetworkElements {
 		}
 	}
 
+	public String getValueParameter(String parameterId) {
+		return parameters.get(parameterId);
+	}
 	public Metabolite getMetabolite (String id) {
 		return metabolites.get(id);
 	}
@@ -69,15 +88,19 @@ public class MetabolicNetworkElements {
 		return reactions;
 	}
 
+	public List<GeneProduct> getGeneProductsAsList() {
+		return new ArrayList<>(geneProducts.values());
+	}
+	
 	public List<Reaction> getReactionsUnbalanced() {
 		List<Reaction> reactionsUnBalanced = new ArrayList<>();
 
 		Set<String> keys=reactions.keySet();
 		for (String key : keys) {
 			Reaction reaction = reactions.get(key);
-			boolean isBalance = reaction.getIsBalanced();
+			boolean balanced = reaction.isBalanced();
 
-			if(!isBalance) {
+			if(!balanced) {
 				reactionsUnBalanced.add(reaction);
 			}
 		}
@@ -109,7 +132,7 @@ public class MetabolicNetworkElements {
 	}
 
 	public List<String> getReactionIds(){
-		List<String> reactionIds = new ArrayList();
+		List<String> reactionIds = new ArrayList<String>();
 		Set<String> keys = reactions.keySet();
 		reactionIds.addAll(keys);
 
@@ -141,5 +164,34 @@ public class MetabolicNetworkElements {
 
 	public Map<String, List<Metabolite>> getReactionsByCompartments() {
 		return metabolitesByCompartment;
+	}
+	public List<Reaction> getReactionsMetabolitesWithoutFormula() {
+		Set<String> metaboliteIds = new HashSet<>();
+		for(Metabolite m:metabolites.values()) {
+			if("_2__45__Hydroxy__45__carboxylates__91__c__93__".equals(m.getId())) System.out.println("Formula: "+m.getChemicalFormula());
+			if(m.getChemicalFormula()==null) {
+				metaboliteIds.add(m.getId());
+				System.out.println("Next metabolite without formula: "+m.getId());
+			}
+		}
+		System.out.println("Total metabolites without formula: "+metaboliteIds.size());
+		return getReactionsByMetaboliteIds(metaboliteIds);
+	}
+
+	private List<Reaction> getReactionsByMetaboliteIds(Set<String> metaboliteIds) {
+		List<Reaction> answer = new ArrayList<>();
+		for(Reaction r:reactions.values()) {
+			List<ReactionComponent> allMetabolites = new ArrayList<>();
+			allMetabolites.addAll(r.getReactants());
+			allMetabolites.addAll(r.getProducts());
+			for(ReactionComponent comp:allMetabolites) {
+				if(metaboliteIds.contains(comp.getMetabolite().getId())) {
+					answer.add(r);
+					break;
+				}
+			}
+		}
+		System.out.println("Total reactions with metabolites without formula: "+answer.size());
+		return answer;
 	}
 }

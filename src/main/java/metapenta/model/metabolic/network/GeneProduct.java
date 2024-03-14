@@ -8,6 +8,7 @@ public class GeneProduct implements Comparable<GeneProduct>{
 	private String id;
 	private String name;
 	private String label;
+	private String sboTerm;
 	
 	/**
 	 * Builds a new gene product
@@ -43,6 +44,14 @@ public class GeneProduct implements Comparable<GeneProduct>{
 	 */
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	
+	public String getSboTerm() {
+		return sboTerm;
+	}
+	public void setSboTerm(String sboTerm) {
+		this.sboTerm = sboTerm;
 	}
 	@Override
 	public int compareTo(GeneProduct o) {	
