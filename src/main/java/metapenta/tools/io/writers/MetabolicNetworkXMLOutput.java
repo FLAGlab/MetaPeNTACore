@@ -149,8 +149,10 @@ public class MetabolicNetworkXMLOutput {
 	        reactionElement.appendChild(listReactanstElement);
 	        Element listproductsElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
 	        reactionElement.appendChild(listproductsElement);
-	        //Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
-	        //reactionElement.appendChild(listEnzymesElement);
+	        if(reaction.getEnzymes().size()>0) {
+	        	Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
+		        reactionElement.appendChild(listEnzymesElement);
+	        }
 	        listReactionsElement.appendChild(reactionElement);
 	    }
 
