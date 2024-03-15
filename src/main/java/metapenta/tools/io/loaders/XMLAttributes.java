@@ -7,6 +7,7 @@ public class XMLAttributes {
     public static final String ATTRIBUTE_VALUE = "value";
     public static final String ATTRIBUTE_METAID = "metaid";
     public static final String ATTRIBUTE_COMPARTMENT = "compartment";
+    public static final String ATTRIBUTE_CONSTANT = "constant";
 	
     public static final String ELEMENT_ROOT = "sbml";
     public static final String ELEMENT_NOTES = "notes";
@@ -44,20 +45,7 @@ public class XMLAttributes {
     public static final String ELEMENT_METABREF = "speciesReference";
     
     public static final String ELEMENT_FBC_GENEPRODUCTREF = "fbc:geneProductRef";
-    
-    //FBC for writing
-    /*public static final String ELEMENT_FBC_LISTGENEPRODUCTSW = "listOfGeneProducts";
-    public static final String ELEMENT_FBC_GENEPRODUCTW = "geneProduct";
-    public static final String ELEMENT_FBC_GENEASSOCW = "geneProductAssociation";
-    public static final String ELEMENT_FBC_GENEPRODUCTREFW = "geneProductRef";
-    
-    public static final String ATTRIBUTE_FBC_IDW = "id";
-    public static final String ATTRIBUTE_FBC_NAMEW = "name";
-    public static final String ATTRIBUTE_FBC_LABELW = "label";
-    public static final String ATTRIBUTE_FBC_CHARGEW = "charge";
-    public static final String ATTRIBUTE_FBC_FORMULAW = "chemicalFormula";
-    public static final String ATTRIBUTE_FBC_LOWERBOUNDW = "lowerFluxBound";
-    public static final String ATTRIBUTE_FBC_UPPERBOUNDW = "upperFluxBound";*/
+	public static final String ATTRIBUTE_FAST = "fast";
     
 
 }

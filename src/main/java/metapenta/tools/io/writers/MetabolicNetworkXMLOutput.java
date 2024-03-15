@@ -44,7 +44,11 @@ public class MetabolicNetworkXMLOutput {
 	    doc.appendChild(rootElement);
 	    rootElement.setAttribute("xmlns", "http://www.sbml.org/sbml/level3/version1/core");
 	    rootElement.setAttribute("xmlns:fbc", "http://www.sbml.org/sbml/level3/version1/fbc/version2");
+	    rootElement.setAttribute("xmlns:groups","http://www.sbml.org/sbml/level3/version1/groups/version1");
+	    rootElement.setAttribute("level","3");
+	    rootElement.setAttribute("version","1");
 	    rootElement.setAttribute("fbc:required", "false");
+	    rootElement.setAttribute("groups:required","false");
 	    
 	    Element modelElement = doc.createElement(XMLAttributes.ELEMENT_MODEL);
 	    
@@ -67,7 +71,10 @@ public class MetabolicNetworkXMLOutput {
 	}
 	
 	private Element saveModel(MetabolicNetwork network, Document doc, Element modelElement) {
-
+		//TODO: make dynamic
+		modelElement.setAttribute("id", "MetaPentaNet");
+		modelElement.setAttribute("name", "Metapenta model");
+		modelElement.setAttribute("fbc:strict", "true");
 		modelElement.appendChild(saveCompartments(network, doc));
 	    modelElement.appendChild(saveMetabolites(network, doc));
 	    modelElement.appendChild(saveParameters(network, doc));
@@ -84,6 +91,8 @@ public class MetabolicNetworkXMLOutput {
 	        Element compartmentElement = doc.createElement(XMLAttributes.ATTRIBUTE_COMPARTMENT);
 	        compartmentElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, compartment.getId());
 	        compartmentElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, compartment.getName());
+	        //TODO: revise meaning of constant
+	        compartmentElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "false");
 	        listCompartmentsElement.appendChild(compartmentElement);
 	    }
 		return listCompartmentsElement;
@@ -96,6 +105,7 @@ public class MetabolicNetworkXMLOutput {
 	        Element parameterElement = doc.createElement(XMLAttributes.ELEMENT_PARAMETER);
 	        parameterElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, entry.getKey());
 	        parameterElement.setAttribute(XMLAttributes.ATTRIBUTE_VALUE, entry.getValue());
+	        parameterElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "true");
 	        listParametersElement.appendChild(parameterElement);
 	    }
 		return listParametersElement;
@@ -109,6 +119,7 @@ public class MetabolicNetworkXMLOutput {
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, metabolite.getId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, metabolite.getName());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT, metabolite.getCompartmentId());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "false");
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_HASONLYSUBSTANCEUNITS, ""+metabolite.isHasOnlySubstanceUnits());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_BOUNDARYCOND, ""+metabolite.isBoundaryCondition());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_CHARGE, ""+metabolite.getCharge());
@@ -130,6 +141,7 @@ public class MetabolicNetworkXMLOutput {
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, reaction.getId());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, reaction.getName());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE, ""+reaction.isReversible());
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FAST, "false");
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND, ""+reaction.getLowerBoundFluxParameterId());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND, ""+reaction.getUpperBoundFluxParameterId());
 	        
@@ -137,8 +149,8 @@ public class MetabolicNetworkXMLOutput {
 	        reactionElement.appendChild(listReactanstElement);
 	        Element listproductsElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
 	        reactionElement.appendChild(listproductsElement);
-	        Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
-	        reactionElement.appendChild(listEnzymesElement);
+	        //Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
+	        //reactionElement.appendChild(listEnzymesElement);
 	        listReactionsElement.appendChild(reactionElement);
 	    }
 
@@ -147,14 +159,19 @@ public class MetabolicNetworkXMLOutput {
 	
 	private Element saveEnzymeRefs(String name, List<GeneProduct> enzymes, Document doc) {
 	    Element listEnzymesElement = doc.createElement(name);
+	    //TODO: Write propositional logic
+	    Element orElement= null;
+	    if(enzymes.size()>1) {
+	    	orElement = doc.createElement("fbc:or");
+	    	listEnzymesElement.appendChild(orElement);
+	    }
 
 	    for (GeneProduct enzyme : enzymes) {
 	        Element enzymeRefElement = doc.createElement(XMLAttributes.ELEMENT_FBC_GENEPRODUCTREF);
 	        enzymeRefElement.setAttribute(XMLAttributes.ELEMENT_FBC_GENEPRODUCT, enzyme.getId());
-
-	        listEnzymesElement.appendChild(enzymeRefElement);
+	        if(orElement!=null) orElement.appendChild(enzymeRefElement);
+	        else listEnzymesElement.appendChild(enzymeRefElement);
 	    }
-
 	    return listEnzymesElement;
 	}
 	
@@ -165,7 +182,7 @@ public class MetabolicNetworkXMLOutput {
 	        Element componentElement = doc.createElement(XMLAttributes.ELEMENT_METABREF);
 	        componentElement.setAttribute(XMLAttributes.ELEMENT_METABOLITE, component.getMetabolite().getId());
 	        componentElement.setAttribute(XMLAttributes.ATTRIBUTE_STOICHIOMETRY, Double.toString(component.getStoichiometry()));
-
+	        componentElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "true");
 	        listComponentsElement.appendChild(componentElement);
 	    }
 
@@ -179,6 +196,10 @@ public class MetabolicNetworkXMLOutput {
 	        Element geneProductElement = doc.createElement(XMLAttributes.ELEMENT_FBC_GENEPRODUCT);
 	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_ID, product.getId());
 	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_NAME, product.getName());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_LABEL, product.getLabel());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_SBOTERM, product.getSboTerm());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, product.getId());
+	        
 	        listGeneProductsElement.appendChild(geneProductElement);
 	    }
 		return listGeneProductsElement;
