@@ -118,6 +118,7 @@ public class MetabolicNetworkXMLOutput {
 	        Element metaboliteElement = doc.createElement(XMLAttributes.ELEMENT_METABOLITE);
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, metabolite.getId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, metabolite.getName());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, metabolite.getId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT, metabolite.getCompartmentId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "false");
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_HASONLYSUBSTANCEUNITS, ""+metabolite.isHasOnlySubstanceUnits());
