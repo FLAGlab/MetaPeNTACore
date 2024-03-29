@@ -38,6 +38,7 @@ public class MetaboliteReactionsService {
 
         List<Edge<Transition<Reaction>>> edges = getEgeByCriteria(placeOfMetabolite, criteria);
         for(Edge<Transition<Reaction>> edge: edges) {
+        	System.out.println("Next as "+criteria+" "+edge.getTarget().getObject().getId());
             reactions.add(edge.getTarget().getObject());
         }
 

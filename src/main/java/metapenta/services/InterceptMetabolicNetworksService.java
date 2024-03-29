@@ -26,6 +26,12 @@ public class InterceptMetabolicNetworksService {
                 compareCommonReactions(reaction,targetReaction);
             }
         }
+        List<Reaction> reactionsT = targetMetabolicNetwork.getReactionsAsList();
+        for (Reaction reaction : reactionsT) {
+        	if(originMetabolicNetwork.getReaction(reaction.getId())==null) {
+        		System.out.println("Target reaction: "+reaction.getId()+" not found in origin");
+        	}
+        }
         return reactions;
     }
 
