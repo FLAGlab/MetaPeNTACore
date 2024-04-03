@@ -19,7 +19,10 @@ public class MetabolicNetworkElements {
 	private Map<String, GeneProduct> geneProducts = new TreeMap<>();
 	private Map<String, Metabolite> metabolites = new TreeMap<>();
 	private Map<String, Reaction> reactions = new TreeMap<>();
-	
+
+	public boolean existsMetabolite(String metaboliteID){
+		return metabolites.containsKey(metaboliteID);
+	}
 
 	public void addGeneProduct(GeneProduct product) {
 		geneProducts.put(product.getId(), product);

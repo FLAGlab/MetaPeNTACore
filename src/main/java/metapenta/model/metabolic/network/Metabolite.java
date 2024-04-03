@@ -14,7 +14,10 @@ public class Metabolite {
 	private boolean hasOnlySubstanceUnits = false;
 	private boolean boundaryCondition = false;
 	private int charge = 0;
-	
+
+	public Metabolite(String id) {
+		this.id = id;
+	}
 
 	public Metabolite(String id, String name, String compartmentId, int nid) {
 		super();
@@ -23,6 +26,12 @@ public class Metabolite {
 		this.nid = nid;
 		this.compartmentId = compartmentId;
 	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * @return String chemical formula of this metabolite 
 	 */

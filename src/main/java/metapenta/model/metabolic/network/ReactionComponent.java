@@ -61,7 +61,11 @@ public class ReactionComponent {
 		
 		this.formulaReactionComponent = new_elements;
 	}
-	
+
+	public void setMetabolite(Metabolite metabolite) {
+		this.metabolite = metabolite;
+	}
+
 	@Override
 	public String toString() {
 		String JsonReactionComponent="{";

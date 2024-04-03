@@ -22,6 +22,10 @@ public class MetabolicNetwork {
         this.petriNetElements = new PetriNetElements();
     }
 
+    public boolean existsMetabolite(String id) {
+            return metabolicNetworkElements.existsMetabolite(id);
+    }
+
     public void addGeneProduct(GeneProduct product){
         metabolicNetworkElements.addGeneProduct(product);
     }

@@ -39,6 +39,20 @@ public class Reaction {
 		this.nid = nid;
 		updateBalanced();
 	}
+
+	public Reaction(String id, String name, List<ReactionComponent> reactants, List<ReactionComponent> products) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.reactants = reactants;
+		this.products = products;
+		updateBalanced();
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	/**
 	 * @return true if the reaction is reversible, false otherwise
 	 */
