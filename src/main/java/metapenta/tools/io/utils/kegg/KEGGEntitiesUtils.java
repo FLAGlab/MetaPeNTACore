@@ -90,8 +90,12 @@ public class KEGGEntitiesUtils {
     public void enrichReactionComponent(ReactionComponent r, String body){
         Map<String, List<String>> attributesMap = parser.parseGetResponse(body);
 
+        String name = r.getMetabolite().getId();
         List<String> properties = attributesMap.get(NAME);
-        r.getMetabolite().setName(properties.get(0));
+        if (properties != null) {
+            r.getMetabolite().setName(properties.get(0));
+        }
+
 
         properties = attributesMap.get(COMPOUND_FORMULA);
         if (properties == null || properties.isEmpty() || properties.get(0).isEmpty()) {

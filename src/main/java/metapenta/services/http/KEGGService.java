@@ -23,6 +23,7 @@ public class KEGGService {
     private MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
 
     public Set<String> getReactions(String genID) throws Exception {
+        System.out.println("Processing gene: " + genID);
         List<String> enzymeIDs = getEnzymesIDs(genID);
         processEnzymesIDs(enzymeIDs);
 
@@ -32,6 +33,7 @@ public class KEGGService {
     private Set<String> processEnzymesIDs(List<String> enzymeIDs ) throws Exception {
         Set<String> reactions = new TreeSet<>();
         for (String enzymeID : enzymeIDs) {
+            System.out.println("Processing enzyme: " + enzymeID);
             List<String> reactionIDs = getReactionIDs(enzymeID);
             List<String> enzymeReaction = processReactionsIDs(reactionIDs);
 
@@ -44,7 +46,15 @@ public class KEGGService {
     private List<String> processReactionsIDs(List<String> reactionIDs) throws Exception {
         List<String> reactions = new ArrayList<>();
         for (String reactionID : reactionIDs) {
-            createReaction(reactionID);
+            if (metabolicNetwork.existsReaction(reactionID)){
+                continue;
+            }
+
+            Reaction reaction = createReaction(reactionID);
+            if (reaction == null) {
+                continue;
+            }
+            metabolicNetwork.addReaction(reaction);
             reactions.add(reactionID);
         }
 
@@ -54,6 +64,9 @@ public class KEGGService {
     private Reaction createReaction(String reactionID) throws Exception {
         String reactionLink = utlUtils.getEntryLink(reactionID);
         HttpResponse<String> reactionResponse = sendGetRequest(reactionLink);
+        if (reactionResponse == null) {
+            return null;
+        }
 
         Reaction reaction = keggEntitiesUtils.createBareBoneReaction(reactionResponse.body());
         enrichReaction(reaction);
@@ -84,6 +97,10 @@ public class KEGGService {
     private void enrichFromKEGGAPI(ReactionComponent reactant) throws Exception {
         String compoundLink = utlUtils.getCompoundEntry(reactant.getMetabolite().getId());
         HttpResponse<String> compoundResponse = sendGetRequest(compoundLink);
+        if (compoundResponse == null) {
+            return;
+        }
+
         keggEntitiesUtils.enrichReactionComponent(reactant, compoundResponse.body());
     }
 
@@ -97,6 +114,9 @@ public class KEGGService {
     private List<String> getReactionIDs(String enzymeID) throws Exception {
         String reactionLink = utlUtils.getReactionLink(enzymeID);
         HttpResponse<String> reactionsResponse = sendGetRequest(reactionLink);
+        if (reactionsResponse == null) {
+            return new ArrayList<>();
+        }
 
         return keggEntitiesUtils.getLinksIDs(reactionsResponse.body());
     }
@@ -104,6 +124,9 @@ public class KEGGService {
     private List<String> getEnzymesIDs(String genID) throws Exception {
         String enzymeLink = utlUtils.getEnzymeLink(genID);
         HttpResponse<String> enzymeResponse = sendGetRequest(enzymeLink);
+        if (enzymeResponse == null) {
+            return new ArrayList<>();
+        }
 
         return keggEntitiesUtils.getLinksIDs(enzymeResponse.body());
     }
@@ -118,15 +141,15 @@ public class KEGGService {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if ( response.statusCode() != 200 ) {
-            throw new Exception("Error getting response from KEGG");
-
+            System.out.println("There was an error processing the request: " + response.statusCode() + " " + response.body());
+            return null;
         }
 
 
         return response;
     }
 
-    private MetabolicNetwork getMetabolicNetwork() {
+    public MetabolicNetwork getMetabolicNetwork(){
         return metabolicNetwork;
     }
 }

@@ -65,13 +65,13 @@ public class ClusterReactionsService {
 
     private ClusterReactionsDTO getClusterReactions() throws Exception {
         Map<Integer, Set<String>> clusterReactions = calculateReactionsByCluster();
-        MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
+        MetabolicNetwork metabolicNetwork = service.getMetabolicNetwork();
 
         return new ClusterReactionsDTO(metabolicNetwork, clusterReactions);
     }
 
     public static void main(String[] args) throws Exception {
-        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations.txt");
+        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt");
         ClusterReactionsDTO clusterReactionsDTO = service.getClusterReactions();
 
         ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/clusterReactionsExample.json");

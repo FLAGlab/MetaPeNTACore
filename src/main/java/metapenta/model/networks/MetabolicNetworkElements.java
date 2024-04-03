@@ -24,6 +24,10 @@ public class MetabolicNetworkElements {
 		return metabolites.containsKey(metaboliteID);
 	}
 
+	public boolean existsReaction(String id){
+		return reactions.containsKey(id);
+	}
+
 	public void addGeneProduct(GeneProduct product) {
 		geneProducts.put(product.getId(), product);
 	}

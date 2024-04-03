@@ -25,7 +25,9 @@ public class ClusterReactionsWriter implements Writer {
         JSONObject clusterReactionsObject = new JSONObject();
         for(Integer key: clusterReactionsDTO.getClusterReactions().keySet()) {
             JSONArray clusterReactions = MetabolicNetworkJSONUtils.getCollectionsJsonArray(clusterReactionsDTO.getClusterReactions().get(key));
-            clusterReactionsObject.put(key, clusterReactions);
+            if(!clusterReactions.isEmpty()) {
+                clusterReactionsObject.put(key, clusterReactions);
+            }
         }
 
         return clusterReactionsObject;

@@ -26,6 +26,10 @@ public class MetabolicNetwork {
             return metabolicNetworkElements.existsMetabolite(id);
     }
 
+    public boolean existsReaction(String id) {
+        return metabolicNetworkElements.existsMetabolite(id);
+    }
+
     public void addGeneProduct(GeneProduct product){
         metabolicNetworkElements.addGeneProduct(product);
     }
