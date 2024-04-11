@@ -206,9 +206,4 @@ public class MetabolicNetworkXMLOutput {
 	    }
 		return listGeneProductsElement;
 	}
-
-
-	
-	
-
 }

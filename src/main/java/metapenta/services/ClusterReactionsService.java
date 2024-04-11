@@ -1,7 +1,6 @@
 package metapenta.services;
 
 import metapenta.model.dto.ClusterReactionsDTO;
-import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.networks.MetabolicNetwork;
 import metapenta.services.http.KEGGService;
 import metapenta.tools.io.writers.ClusterReactionsWriter;
@@ -74,7 +73,7 @@ public class ClusterReactionsService {
         ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt");
         ClusterReactionsDTO clusterReactionsDTO = service.getClusterReactions();
 
-        ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/clusterReactionsExample.json");
+        ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/cluster-reactions/clusterReactionsExample_");
         writer.write();
     }
 }

@@ -1,5 +1,7 @@
 package metapenta.services.http;
 
+import metapenta.model.errors.GeneProductDoesNotExitsException;
+import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
@@ -62,7 +64,7 @@ public class KEGGService {
     }
 
     private Reaction createReaction(String reactionID) throws Exception {
-        String reactionLink = utlUtils.getEntryLink(reactionID);
+        String reactionLink = utlUtils.getEntry(reactionID);
         HttpResponse<String> reactionResponse = sendGetRequest(reactionLink);
         if (reactionResponse == null) {
             return null;
@@ -75,14 +77,39 @@ public class KEGGService {
     }
 
     private void enrichReaction(Reaction reaction) throws Exception {
+        enrichProductsAndReactants(reaction);
+        enrichEnzymes(reaction);
+
+        metabolicNetwork.addReaction(reaction);
+    }
+
+    private void enrichEnzymes(Reaction reaction) throws Exception {
+        for(GeneProduct gp: reaction.getEnzymes()){
+            String geneID = gp.getId();
+            if (metabolicNetwork.existsGeneProduct(geneID)) {
+                enrichGeneProductFromMetabolicNetwork(gp);
+            } else {
+                enrichEnzymeFromKEGGAPI(gp);
+            }
+        }
+    }
+
+    private void enrichGeneProductFromMetabolicNetwork(GeneProduct geneProduct) throws GeneProductDoesNotExitsException {
+        GeneProduct geneProductFromNetwork = metabolicNetwork.getGeneProduct(geneProduct.getId());
+        if (geneProductFromNetwork != null) {
+            geneProduct.setName(geneProductFromNetwork.getName());
+        }
+    }
+
+    private void enrichProductsAndReactants(Reaction reaction) throws Exception {
         List<ReactionComponent> reactants = reaction.getReactants();
         enrichReactionComponents(reactants);
 
         List<ReactionComponent> products = reaction.getProducts();
         enrichReactionComponents(products);
-
-        metabolicNetwork.addReaction(reaction);
     }
+
+
 
     private void enrichReactionComponents(List<ReactionComponent> compounds ) throws Exception {
         for (ReactionComponent reactant : compounds) {
@@ -90,12 +117,24 @@ public class KEGGService {
             if (metabolicNetwork.existsMetabolite(metaboliteID)) {
                 enrichFromMetabolicNetwork(reactant);
             } else {
-                enrichFromKEGGAPI(reactant);
+                enrichCompoundFromKEGGAPI(reactant);
             }
         }
     }
-    private void enrichFromKEGGAPI(ReactionComponent reactant) throws Exception {
-        String compoundLink = utlUtils.getCompoundEntry(reactant.getMetabolite().getId());
+
+    private void enrichEnzymeFromKEGGAPI(GeneProduct geneProduct) throws Exception {
+        String enzymePath = utlUtils.getEntry(geneProduct.getId());
+        HttpResponse<String> enzymeResponse = sendGetRequest(enzymePath);
+        if (enzymeResponse == null) {
+            return;
+        }
+
+        keggEntitiesUtils.enrichGeneProduct(geneProduct, enzymeResponse.body());
+
+    }
+
+    private void enrichCompoundFromKEGGAPI(ReactionComponent reactant) throws Exception {
+        String compoundLink = utlUtils.getEntry(reactant.getMetabolite().getId());
         HttpResponse<String> compoundResponse = sendGetRequest(compoundLink);
         if (compoundResponse == null) {
             return;

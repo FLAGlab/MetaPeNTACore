@@ -45,8 +45,11 @@ public class GeneProduct implements Comparable<GeneProduct>{
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getSboTerm() {
 		return sboTerm;
 	}

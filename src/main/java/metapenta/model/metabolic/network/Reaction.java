@@ -20,9 +20,11 @@ public class Reaction {
 	private String upperBoundFluxParameterId;
 	private double lowerBoundFlux = -1000;
 	private double upperBoundFlux = 1000;
-	private List<GeneProduct> enzymes;
+	private List<GeneProduct> enzymes = new ArrayList<>();
 	private Map<String, Integer> stoichiometryDifference;
 	private boolean balanced = false;
+
+	public Reaction(){}
 	/**
 	 * Creates a new reaction with the given information
 	 * @param id of the reaction
@@ -47,6 +49,18 @@ public class Reaction {
 		this.reactants = reactants;
 		this.products = products;
 		updateBalanced();
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProducts(List<ReactionComponent> products) {
+		this.products = products;
+	}
+
+	public void setReactants(List<ReactionComponent> reactants) {
+		this.reactants = reactants;
 	}
 
 	public void setId(String id) {
@@ -689,6 +703,5 @@ public class Reaction {
 	public Reaction clone() {
 		return new Reaction(id, name, reactants, products, nid);
 	}
-
 
 }

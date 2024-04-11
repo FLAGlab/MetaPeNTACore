@@ -10,15 +10,26 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ClusterReactionsWriter implements Writer {
-
-    private static final String CLUSTER_REACTIONS = "clusterReactions";
     private ClusterReactionsDTO clusterReactionsDTO;
 
-    private String fileName;
+    private String clusterFile;
 
-    public ClusterReactionsWriter(ClusterReactionsDTO clusterReactionsDTO, String fileName) {
+    private String metabolicNetworkFile;
+
+    private  JSONObject clusterObject;
+
+    private MetabolicNetworkXMLOutput metabolicNetworkXMLOutput = new MetabolicNetworkXMLOutput();
+
+    public ClusterReactionsWriter(ClusterReactionsDTO clusterReactionsDTO, String prefix) {
         this.clusterReactionsDTO = clusterReactionsDTO;
-        this.fileName = fileName;
+        this.clusterFile = prefix + "_cluster_reactions.json" ;
+        this.metabolicNetworkFile = prefix + "_metabolic_network.xml";
+
+        prepareWriters();
+    }
+
+    private void prepareWriters() {
+        clusterObject = clusterReactionObjects();
     }
 
     private JSONObject clusterReactionObjects() {
@@ -29,15 +40,11 @@ public class ClusterReactionsWriter implements Writer {
                 clusterReactionsObject.put(key, clusterReactions);
             }
         }
-
         return clusterReactionsObject;
     }
 
     public void write() throws IOException {
-        JSONObject reactionsObject = MetabolicNetworkJSONUtils.getMetabolicNetworkAsJSON(this.clusterReactionsDTO.getMetabolicNetwork());
-        JSONObject clusterObject = clusterReactionObjects();
-        reactionsObject.put(CLUSTER_REACTIONS, clusterObject);
-
-        Files.write(Paths.get(this.fileName), reactionsObject.toJSONString().getBytes());
+        metabolicNetworkXMLOutput.saveNetwork(clusterReactionsDTO.getMetabolicNetwork(), metabolicNetworkFile);
+        Files.write(Paths.get(this.clusterFile), clusterObject.toJSONString().getBytes());
     }
 }
