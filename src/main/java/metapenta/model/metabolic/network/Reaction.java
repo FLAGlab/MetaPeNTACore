@@ -50,6 +50,29 @@ public class Reaction {
 		updateBalanced();
 	}
 
+	public Reaction(
+			String id,
+			String name,
+			List<ReactionComponent> reactants,
+			List<ReactionComponent> products,
+			List<GeneProduct> enzymes,
+			boolean reversible,
+			double lowerBoundFlux,
+			double upperBoundFlux
+			) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.reactants = reactants;
+		this.products = products;
+		this.enzymes = enzymes;
+		this.reversible = reversible;
+		this.lowerBoundFlux = lowerBoundFlux;
+		this.upperBoundFlux = upperBoundFlux;
+
+		updateBalanced();
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}

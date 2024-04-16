@@ -211,7 +211,7 @@
                     <fbc:geneProductRef fbc:geneProduct="6.3.5.3"/>
                 </fbc:geneProductAssociation>
             </reaction>
-            <reaction fast="false" fbc:lowerFluxBound="null" fbc:upperFluxBound="null" id="R06081" name="R06081" reversible="true">
+            <reaction fast="false" fbc:lowerFluxBound="null" fbc:upperFluxBound="null" id="R06081" name="" reversible="true">
                 <listOfReactants>
                     <speciesReference constant="true" species="G10483" stoichiometry="1.0"/>
                     <speciesReference constant="true" species="C00001" stoichiometry="1.0"/>
@@ -224,7 +224,7 @@
                     <fbc:geneProductRef fbc:geneProduct="3.2.1.14"/>
                 </fbc:geneProductAssociation>
             </reaction>
-            <reaction fast="false" fbc:lowerFluxBound="null" fbc:upperFluxBound="null" id="R06082" name="R06082" reversible="true">
+            <reaction fast="false" fbc:lowerFluxBound="null" fbc:upperFluxBound="null" id="R06082" name="" reversible="true">
                 <listOfReactants>
                     <speciesReference constant="true" species="G10483" stoichiometry="1.0"/>
                     <speciesReference constant="true" species="C00001" stoichiometry="1.0"/>

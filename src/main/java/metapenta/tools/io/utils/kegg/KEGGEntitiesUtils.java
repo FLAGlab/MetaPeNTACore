@@ -1,5 +1,6 @@
 package metapenta.tools.io.utils.kegg;
 
+import metapenta.model.dto.ProductAndReactantData;
 import metapenta.model.metabolic.network.GeneProduct;
 import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
@@ -29,31 +30,38 @@ public class KEGGEntitiesUtils {
      */
     public Reaction createBareBoneReaction(String body) {
         Map<String, List<String>> attributesMap = parser.parseGETResponse(body);
-
-        Reaction reaction = new Reaction();
-
-        setReactionID(reaction, attributesMap);
-        setReactionName(reaction, attributesMap);
-        setProductsAndReactants(reaction, attributesMap);
-        setFlowAndAttributesProperties(reaction);
-
-        setEnzymes(reaction, attributesMap);
+        Reaction reaction = createReactionFromMap(attributesMap);
 
         return reaction;
     }
 
-    private void setEnzymes(Reaction reaction, Map<String, List<String>> attributesMap) {
-        List<String> enzymes = attributesMap.get(ENZYME);
-        reaction.setEnzymes(createBareBoneGeneProducts(enzymes));
+    private Reaction createReactionFromMap(Map<String, List<String>> attributesMap) {
+        String reactionID = getReactionIDFromMap(attributesMap);
+        String reactionName = getReactionNameFromMap(attributesMap);
+        ProductAndReactantData productAndReactantData = getProductsAndReactantsFormMap(attributesMap);
+        List<GeneProduct> enzymes = getEnzymesFromMap(attributesMap);
+
+        Reaction reaction = new Reaction(
+            reactionID,
+            reactionName,
+            productAndReactantData.getReactantsList(),
+            productAndReactantData.getProductsList(),
+            enzymes,
+            true,
+            -10000.0,
+            10000.0
+        );
+
+        return reaction;
     }
 
-    private void setFlowAndAttributesProperties(Reaction reaction) {
-        reaction.setReversible(true);
-        reaction.setLowerBoundFlux(-10000.0);
-        reaction.setUpperBoundFlux(10000.0);
+    private List<GeneProduct> getEnzymesFromMap(Map<String, List<String>> attributesMap) {
+        List<String> enzymes = attributesMap.getOrDefault(ENZYME, new ArrayList<>());
+
+        return createBareBoneGeneProducts(enzymes);
     }
 
-    private void setProductsAndReactants(Reaction reaction, Map<String, List<String>> attributesMap){
+    private ProductAndReactantData getProductsAndReactantsFormMap(Map<String, List<String>> attributesMap){
         String equation = removeParentheses(attributesMap.get(REACTION_EQUATION).get(0));
 
         String[] equationComponents = equation.split("<=>");
@@ -63,34 +71,41 @@ public class KEGGEntitiesUtils {
         List<ReactionComponent> reactantsList = createBareBoneReactionComponent(reactants);
         List<ReactionComponent> productsList = createBareBoneReactionComponent(products);
 
-        reaction.setProducts(productsList);
-        reaction.setReactants(reactantsList);
+        ProductAndReactantData productAndReactantData = new ProductAndReactantData(reactantsList, productsList);
+
+        return productAndReactantData;
     }
 
-    private void setReactionID(Reaction reaction, Map<String, List<String>> attributesMap) {
+    private String getReactionIDFromMap(Map<String, List<String>> attributesMap) {
         String reactionID = getReactionIDFromEntry(attributesMap.get(REACTION_ENTRY));
-        reaction.setId(reactionID);
+
+        return reactionID;
     }
-   private void setReactionName(Reaction reaction,  Map<String, List<String>> attributesMap ) {
-       String reactionName = reaction.getId();
+   private String getReactionNameFromMap(Map<String, List<String>> attributesMap ) {
+       String reactionName = "";
        if (attributesMap.get(NAME) != null) {
            reactionName = cleanMetaboliteName(attributesMap.get(NAME).get(0));
        }
 
-       reaction.setName(reactionName);
+       return reactionName;
    }
-
 
     private List<GeneProduct> createBareBoneGeneProducts(List<String> enzymes) {
         List<GeneProduct> geneProducts = new ArrayList<>();
-        if (enzymes != null) {
-            for (String enzyme : enzymes) {
-                String[] enzymesIds = enzyme.split("\s+");
-                for(String enzymeId: enzymesIds){
-                    GeneProduct geneProduct = new GeneProduct(enzymeId, enzymeId);
-                    geneProducts.add(geneProduct);
-                }
-            }
+        for (String enzyme : enzymes) {
+            List<GeneProduct> geneProductsCurrentEnzyme = createGeneProductFromEnzymeIDsLine(enzyme);
+            geneProducts.addAll(geneProductsCurrentEnzyme);
+        }
+
+        return geneProducts;
+    }
+    private List<GeneProduct> createGeneProductFromEnzymeIDsLine(String enzymeIDsLine) {
+        List<GeneProduct> geneProducts = new ArrayList<>();
+
+        String[] enzymesIds = enzymeIDsLine.split("\s+");
+        for(String enzymeId: enzymesIds){
+            GeneProduct geneProduct = new GeneProduct(enzymeId, enzymeId);
+            geneProducts.add(geneProduct);
         }
 
         return geneProducts;
@@ -178,8 +193,6 @@ public class KEGGEntitiesUtils {
         }
         return name;
     }
-
-
 
     public List<String> getLinksIDs(String body) {
         return parser.parseLINKResponse(body);
