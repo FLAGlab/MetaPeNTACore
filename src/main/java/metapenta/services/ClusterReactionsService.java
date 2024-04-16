@@ -73,7 +73,7 @@ public class ClusterReactionsService {
         ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt");
         ClusterReactionsDTO clusterReactionsDTO = service.getClusterReactions();
 
-        ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/cluster-reactions/clusterReactionsExample_");
+        ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/cluster-reactions/clusterReactionsExample_complete");
         writer.write();
     }
 }

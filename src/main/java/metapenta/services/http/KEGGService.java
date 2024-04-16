@@ -25,7 +25,6 @@ public class KEGGService {
     private MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
 
     public Set<String> getReactions(String genID) throws Exception {
-        System.out.println("Processing gene: " + genID);
         List<String> enzymeIDs = getEnzymesIDs(genID);
         processEnzymesIDs(enzymeIDs);
 
@@ -35,7 +34,6 @@ public class KEGGService {
     private Set<String> processEnzymesIDs(List<String> enzymeIDs ) throws Exception {
         Set<String> reactions = new TreeSet<>();
         for (String enzymeID : enzymeIDs) {
-            System.out.println("Processing enzyme: " + enzymeID);
             List<String> reactionIDs = getReactionIDs(enzymeID);
             List<String> enzymeReaction = processReactionsIDs(reactionIDs);
 
@@ -123,6 +121,10 @@ public class KEGGService {
     }
 
     private void enrichEnzymeFromKEGGAPI(GeneProduct geneProduct) throws Exception {
+        if (!shouldEnrichGeneProduct(geneProduct)) {
+            return;
+        }
+
         String enzymePath = utlUtils.getEntry(geneProduct.getId());
         HttpResponse<String> enzymeResponse = sendGetRequest(enzymePath);
         if (enzymeResponse == null) {
@@ -131,6 +133,14 @@ public class KEGGService {
 
         keggEntitiesUtils.enrichGeneProduct(geneProduct, enzymeResponse.body());
 
+    }
+
+    private boolean shouldEnrichGeneProduct(GeneProduct geneProduct) {
+        // Proteín families are not considered to be enriched
+        if (geneProduct.getId().contains("-")) {
+            return false;
+        }
+        return true;
     }
 
     private void enrichCompoundFromKEGGAPI(ReactionComponent reactant) throws Exception {

@@ -28,7 +28,7 @@ public class KEGGEntitiesUtils {
      * @return Bare-bone reaction
      */
     public Reaction createBareBoneReaction(String body) {
-        Map<String, List<String>> attributesMap = parser.parseGetResponse(body);
+        Map<String, List<String>> attributesMap = parser.parseGETResponse(body);
 
         Reaction reaction = new Reaction();
 
@@ -36,6 +36,7 @@ public class KEGGEntitiesUtils {
         setReactionName(reaction, attributesMap);
         setProductsAndReactants(reaction, attributesMap);
         setFlowAndAttributesProperties(reaction);
+
         setEnzymes(reaction, attributesMap);
 
         return reaction;
@@ -84,8 +85,11 @@ public class KEGGEntitiesUtils {
         List<GeneProduct> geneProducts = new ArrayList<>();
         if (enzymes != null) {
             for (String enzyme : enzymes) {
-                GeneProduct geneProduct = new GeneProduct(enzyme, "");
-                geneProducts.add(geneProduct);
+                String[] enzymesIds = enzyme.split("\s+");
+                for(String enzymeId: enzymesIds){
+                    GeneProduct geneProduct = new GeneProduct(enzymeId, enzymeId);
+                    geneProducts.add(geneProduct);
+                }
             }
         }
 
@@ -140,7 +144,7 @@ public class KEGGEntitiesUtils {
     }
 
     public void enrichGeneProduct(GeneProduct geneProduct, String body) {
-        Map<String, List<String>> attributesMap = parser.parseGetResponse(body);
+        Map<String, List<String>> attributesMap = parser.parseGETResponse(body);
 
         String name = geneProduct.getId();
         List<String> properties = attributesMap.get(NAME);
@@ -151,7 +155,7 @@ public class KEGGEntitiesUtils {
     }
 
     public void enrichReactionComponent(ReactionComponent r, String body){
-        Map<String, List<String>> attributesMap = parser.parseGetResponse(body);
+        Map<String, List<String>> attributesMap = parser.parseGETResponse(body);
 
         String name = r.getMetabolite().getId();
         List<String> properties = attributesMap.get(NAME);
@@ -178,7 +182,7 @@ public class KEGGEntitiesUtils {
 
 
     public List<String> getLinksIDs(String body) {
-        return parser.parseLinkResponse(body);
+        return parser.parseLINKResponse(body);
     }
 
     public static String removeParentheses(String input) {

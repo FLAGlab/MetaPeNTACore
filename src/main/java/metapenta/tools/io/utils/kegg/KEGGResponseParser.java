@@ -1,5 +1,7 @@
 package metapenta.tools.io.utils.kegg;
 
+import metapenta.model.dto.KEGGGetMap;
+
 import java.util.*;
 
 public class KEGGResponseParser {
@@ -7,39 +9,54 @@ public class KEGGResponseParser {
     private static final String GET_END_OF_RESPONSE = "///";
     private static final String EMPTY_STRING = "";
 
-    public Map<String, List<String>> parseGetResponse(String body) {
+    public Map<String, List<String>> parseGETResponse(String body) {
        String[] lines = body.split("\n");
 
        return processGetBodyLines(lines);
     }
 
+    public List<String> parseLINKResponse(String body) {
+        String[] lines = body.split("\n");
+
+        return processLinkBodyLines(lines);
+    }
+
     private Map<String, List<String>> processGetBodyLines(String[] lines ) {
         Map<String, List<String>> bodyMap = new TreeMap<>();
-
         String lastKey = "";
 
         for (String line : lines) {
-            if (!line.equals(GET_END_OF_RESPONSE)) {
-                String[] keyValues = line.split("\s+");
-                    if (keyValues[0].equals(EMPTY_STRING)) {
-                       bodyMap.get(lastKey).add(line.trim());
-                    } else {
-                        String [] value = line.trim().split(keyValues[0]);
+            if (line.equals(GET_END_OF_RESPONSE)) {
+                break;
+            } else {
+                KEGGGetMap keggGetMap = createKEGGGetMap(line, lastKey);
+                bodyMap.computeIfAbsent(keggGetMap.getKey(), k -> new ArrayList<>()).addAll(keggGetMap.getValue());
 
-                        List<String> values = new ArrayList<>();
-                        values.add(value[1].trim());
-                        bodyMap.put(keyValues[0], values);
-                        lastKey = keyValues[0];
-                    }
+                lastKey = keggGetMap.getKey();
             }
         }
         return bodyMap;
     }
 
-    public List<String> parseLinkResponse(String body) {
-        String[] lines = body.split("\n");
+    private KEGGGetMap createKEGGGetMap(String line, String lastKey) {
+        String[] keyValues = line.split("\s+");
+        KEGGGetMap keggGetMap = new KEGGGetMap(lastKey, createValueArray(line.trim()));
 
-        return processLinkBodyLines(lines);
+        if (!keyValues[0].equals(EMPTY_STRING)) {
+            keggGetMap.setKey(keyValues[0]);
+            String[] value = line.split(keyValues[0]);
+
+            keggGetMap.setValue(createValueArray(value[1].trim()));
+        }
+
+        return keggGetMap;
+    }
+
+    private List<String> createValueArray(String value) {
+        List<String> values = new ArrayList<>();
+        values.add(value.trim());
+
+        return values;
     }
 
     private List<String> processLinkBodyLines(String[] lines) {

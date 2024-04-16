@@ -21,7 +21,6 @@ public class Reaction {
 	private double lowerBoundFlux = -1000;
 	private double upperBoundFlux = 1000;
 	private List<GeneProduct> enzymes = new ArrayList<>();
-	private Map<String, Integer> stoichiometryDifference;
 	private boolean balanced = false;
 
 	public Reaction(){}
@@ -207,19 +206,13 @@ public class Reaction {
 
 	private void updateBalanced() {
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
-
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
 
 		balanced = sumlistElemReactants.equals(sumlistElemProducts);
 
 	}
 
-
-
-
 	public Map<String, Integer> getDifference() {
-
-
         Map<String, Integer> sumlistElemReactants = getSumReactants();
 
         Map<String, Integer> sumlistElemProducts = getSumProducts();
@@ -255,16 +248,10 @@ public class Reaction {
 		String reason = "";
 		String sumreactions = "";
 		Map<String, String> reasonSum = new HashMap<>();
-
 		List<Map<String, Integer>> listElemReactants = getListElements(reactants);
-
 		List<Map<String, Integer>> listElemProducts = getListElements(products);
-
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
-
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
-
-
 
 		//sumreactions = "Sum of stoichiometric coefficients(reactants): ";
         for (Map.Entry<String, Integer> entry : sumlistElemReactants.entrySet()) {
@@ -304,11 +291,7 @@ public class Reaction {
 
 		}
 
-
-
         reasonSum.put(reason, sumreactions);
-
-
 
 		return reasonSum;
 
@@ -346,7 +329,6 @@ public class Reaction {
 							Integer coeff = elems.get(element);
 							lineaElem[i] = -coeff;
 						}
-
 					}
 				}
 
@@ -355,14 +337,7 @@ public class Reaction {
 			for (int i = 0; i < lineaElem.length; i++) {
 				ecuaciones[e][i] =lineaElem[i];
 			}
-
-
-
-
 		}
-
-
-
 		return ecuaciones;
 
 	}
@@ -386,31 +361,21 @@ public class Reaction {
 			for (int i = 0; i < getSumReactants().size(); i++) {
 				solution_coeff[i] =solution.getEntry(i);
 			}
-	    }
-
-
-
-		} catch (Exception e) {
+	    } } catch (Exception e) {
 	        // Manejar otras excepciones si es necesario
 	        e.printStackTrace();
 	    }
 
 		return solution_coeff;
-
 	}
 
 	public Map<Boolean, String> balanceReaction() {
 
 		List<Map<String, Integer>> listElemReactants = getListElements(reactants);
-
 		List<Map<String, Integer>> listElemProducts = getListElements(products);
-
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
-
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
-
 		Map<String, Integer> diference = getDifference();
-
 		List<Reaction> reactionsBalanced = new ArrayList<>();
 
 		//boolean changedToBalanced = false;
@@ -418,11 +383,6 @@ public class Reaction {
 		int mcm = 0;
 
 		Map<Boolean, String> result = new HashMap<>();
-
-
-
-
-
 		for(Map<String, Integer> elementReactants: listElemReactants) {
 			if(elementReactants == null) {
 				setBalanced(false);
@@ -496,9 +456,6 @@ public class Reaction {
 						}
 
 					}
-
-
-
 				}
 			}
 		}
@@ -633,8 +590,6 @@ public class Reaction {
         }
 
 		return result;
-
-
 	}
 
 	public static int changeDoubleIntResult(double[] numeros) {
