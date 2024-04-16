@@ -17,11 +17,13 @@ public class RemoveMetabolitesReactions {
 	public static void main(String[] args) throws Exception {
 		IMetabolicNetworkService networkService = new MetabolicNetworkService(args[0]);
 
-		MetabolicNetwork network = networkService.getNetwork(); 
+		MetabolicNetwork network = networkService.getNetwork();
+		System.out.println("Loaded reactions: "+network.getReactionsAsList().size());
 		Set<String> metaboliteIds = loadIds(args[1]);
 		Set<String> reactionIds = loadIds(args[2]);
 		network.removeReactions(reactionIds);
 		network.removeMetabolites(metaboliteIds);
+		System.out.println("Remaining reactions: "+network.getReactionsAsList().size());
 		MetabolicNetworkXMLOutput writer = new MetabolicNetworkXMLOutput();
 		writer.saveNetwork(network, args[3]);
 	}

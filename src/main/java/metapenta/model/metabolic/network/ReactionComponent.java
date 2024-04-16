@@ -48,7 +48,8 @@ public class ReactionComponent {
 	public void updateFormulaReactionComponent() {
 		ChemicalFormula formula = metabolite.getChemicalFormula();
 		if(formula==null) {
-			System.err.println("WARN. Problem updating formula for metabolite "+metabolite.getId());
+			//TODO: Decide if an empty map should be created
+			//System.err.println("WARN. Problem updating formula for metabolite "+metabolite.getId());
 			return;
 		}
 		Map<String, Integer> elements = formula.getElements();

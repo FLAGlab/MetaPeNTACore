@@ -242,12 +242,12 @@ public class MetabolicNetworkXMLLoader {
 						}
 					}
 					if(reactants.isEmpty()) {
-						System.err.println("No reactants found for reaction "+id);
-						continue;
+						System.err.println("WARN. No reactants found for reaction "+id);
+						//continue;
 					}
 					if(products.size()==0) {						
-						//System.err.println("No products found for reaction "+id);
-						continue;
+						System.err.println("WARN. No products found for reaction "+id);
+						//continue;
 					}
 					
 					Reaction r = new Reaction(id, name, reactants, products, reactionNumber);

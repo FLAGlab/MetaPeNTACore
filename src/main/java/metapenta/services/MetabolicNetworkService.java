@@ -17,12 +17,12 @@ import java.util.Map;
 public class MetabolicNetworkService implements IMetabolicNetworkService {
     private final MetabolicNetwork metabolicNetwork;
     public MetabolicNetworkService(String networkFile) throws Exception{
-        MetabolicNetworkXMLLoader petriNetLoader = new MetabolicNetworkXMLLoader();
-        metabolicNetwork = petriNetLoader.loadNetwork(networkFile);
+        MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
+        metabolicNetwork = networkLoader.loadNetwork(networkFile);
     }
     public MetabolicNetworkService(InputStream is) throws Exception{
-        MetabolicNetworkXMLLoader petriNetLoader = new MetabolicNetworkXMLLoader();
-        metabolicNetwork = petriNetLoader.loadNetwork(is);
+        MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
+        metabolicNetwork = networkLoader.loadNetwork(is);
     }
     public ConnectedComponentsDTO connectedComponents() {
         ConnectedComponentsService connectedComponentsService = new ConnectedComponentsService(this.metabolicNetwork);

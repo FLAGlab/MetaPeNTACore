@@ -118,6 +118,7 @@ public class MetabolicNetworkXMLOutput {
 	        Element metaboliteElement = doc.createElement(XMLAttributes.ELEMENT_METABOLITE);
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, metabolite.getId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, metabolite.getName());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, metabolite.getId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT, metabolite.getCompartmentId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "false");
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_HASONLYSUBSTANCEUNITS, ""+metabolite.isHasOnlySubstanceUnits());
@@ -144,11 +145,14 @@ public class MetabolicNetworkXMLOutput {
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FAST, "false");
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND, ""+reaction.getLowerBoundFluxParameterId());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND, ""+reaction.getUpperBoundFluxParameterId());
-	        
-	        Element listReactanstElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTREACTANTS, reaction.getReactants(), doc);
-	        reactionElement.appendChild(listReactanstElement);
-	        Element listproductsElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
-	        reactionElement.appendChild(listproductsElement);
+	        if(reaction.getReactants().size()>0) {
+	        	Element listReactanstElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTREACTANTS, reaction.getReactants(), doc);
+		        reactionElement.appendChild(listReactanstElement);
+	        }
+	        if(reaction.getProducts().size()>0) {
+	        	Element listproductsElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTMETABPRODUCTS, reaction.getProducts(), doc);
+		        reactionElement.appendChild(listproductsElement);
+	        }
 	        if(reaction.getEnzymes().size()>0) {
 	        	Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
 		        reactionElement.appendChild(listEnzymesElement);
