@@ -11,16 +11,18 @@ import java.util.List;
 import java.util.Map;
 
 public class KEGGEntitiesUtils {
-    private static final String NAME = "NAME";
+    public static final String NAME = "NAME";
     private static final String REACTION_EQUATION = "EQUATION";
     private static final String REACTION_ENTRY = "ENTRY";
 
-    private static final String COMPOUND_FORMULA = "FORMULA";
+    public static final String COMPOUND_FORMULA = "FORMULA";
 
     private static final String ENZYME = "ENZYME";
 
     private String metaboliteID = "";
     private KEGGResponseParser parser = new KEGGResponseParser();
+
+    private MetabolicNetworkElementsEnricher enricher = new MetabolicNetworkElementsEnricher();
 
     /**
      * This method create the based reaction object with the information from the KEGG response
@@ -116,18 +118,23 @@ public class KEGGEntitiesUtils {
 
         String[] products = equation.split("\\+");
         for (String product : products) {
-            String[] productParts = getProductParts(product.trim());
-
-            String metaboliteID = productParts[1];
-            this.metaboliteID = metaboliteID;
-            double stoichiometry = metaboliteStoichiometry(productParts);
-
-            Metabolite metabolite = new Metabolite(metaboliteID);
-            ReactionComponent reactionComponent = new ReactionComponent(metabolite, stoichiometry);
+            ReactionComponent reactionComponent = createMetaboliteFromID(product);
             reactionComponents.add(reactionComponent);
         }
 
         return reactionComponents;
+    }
+
+    private ReactionComponent createMetaboliteFromID(String reactionComponentParams) {
+        String[] productParts = getProductParts(reactionComponentParams.trim());
+        String metaboliteID = productParts[1];
+        this.metaboliteID = metaboliteID;
+        double stoichiometry = metaboliteStoichiometry(productParts);
+
+        Metabolite metabolite = new Metabolite(metaboliteID);
+        ReactionComponent reactionComponent = new ReactionComponent(metabolite, stoichiometry);
+
+        return reactionComponent;
     }
 
     private double metaboliteStoichiometry(String[] productParts) {
@@ -159,32 +166,11 @@ public class KEGGEntitiesUtils {
     }
 
     public void enrichGeneProduct(GeneProduct geneProduct, String body) {
-        Map<String, List<String>> attributesMap = parser.parseGETResponse(body);
-
-        String name = geneProduct.getId();
-        List<String> properties = attributesMap.get(NAME);
-        if (properties != null) {
-            name = properties.get(0);
-        }
-        geneProduct.setName(name);
+        enricher.enrichGeneProduct(geneProduct, body);
     }
 
     public void enrichReactionComponent(ReactionComponent r, String body){
-        Map<String, List<String>> attributesMap = parser.parseGETResponse(body);
-
-        String name = r.getMetabolite().getId();
-        List<String> properties = attributesMap.get(NAME);
-        if (properties != null) {
-            name = properties.get(0);
-        }
-        r.getMetabolite().setName(name);
-
-        properties = attributesMap.get(COMPOUND_FORMULA);
-        if (properties == null || properties.isEmpty() || properties.get(0).isEmpty()) {
-            System.out.println("Compound formula not found for component ID: " +  attributesMap.get(NAME));
-        } else {
-            r.getMetabolite().setChemicalFormula(properties.get(0));
-        }
+        enricher.enrichReactionComponent(r, body);
     }
 
     private String cleanMetaboliteName(String name) {
