@@ -3,14 +3,12 @@ package metapenta.commands;
 import java.io.PrintStream;
 import java.util.List;
 
-import metapenta.model.dto.ConnectedComponentsDTO;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.networks.MetabolicNetwork;
 import metapenta.services.IMetabolicNetworkService;
 import metapenta.services.MetabolicNetworkService;
-import metapenta.tools.io.writers.ConnectedComponentsWriter;
 
-public class FindProblematicMetabolites {
+public class FindMetabolitesWithoutFormula {
 
 	public static void main(String[] args) throws Exception {
 		IMetabolicNetworkService networkService = new MetabolicNetworkService(args[0]);
