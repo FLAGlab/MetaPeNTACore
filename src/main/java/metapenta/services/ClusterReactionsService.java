@@ -70,7 +70,7 @@ public class ClusterReactionsService {
     }
 
     public static void main(String[] args) throws Exception {
-        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt");
+        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations.txt");
         ClusterReactionsDTO clusterReactionsDTO = service.getClusterReactions();
 
         ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/cluster-reactions/clusterReactionsExample_complete");

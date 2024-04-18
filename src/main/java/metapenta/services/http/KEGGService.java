@@ -19,15 +19,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class KEGGService {
-
-    private KEGGUrlUtils utlUtils = new KEGGUrlUtils();
     private KEGGEntitiesUtils keggEntitiesUtils = new KEGGEntitiesUtils();
     private MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
 
     public Set<String> getReactions(String genID) throws Exception {
+        System.out.println("Processing gene: " + genID);
         List<String> enzymeIDs = getEnzymesIDs(genID);
-        processEnzymesIDs(enzymeIDs);
-
         return processEnzymesIDs(enzymeIDs);
     }
 
@@ -62,7 +59,7 @@ public class KEGGService {
     }
 
     private Reaction createReaction(String reactionID) throws Exception {
-        String reactionLink = utlUtils.getEntry(reactionID);
+        String reactionLink = KEGGUrlUtils.getEntry(reactionID);
         HttpResponse<String> reactionResponse = sendGetRequest(reactionLink);
         if (reactionResponse == null) {
             return null;
@@ -125,7 +122,7 @@ public class KEGGService {
             return;
         }
 
-        String enzymePath = utlUtils.getEntry(geneProduct.getId());
+        String enzymePath = KEGGUrlUtils.getEntry(geneProduct.getId());
         HttpResponse<String> enzymeResponse = sendGetRequest(enzymePath);
         if (enzymeResponse == null) {
             return;
@@ -144,7 +141,7 @@ public class KEGGService {
     }
 
     private void enrichCompoundFromKEGGAPI(ReactionComponent reactant) throws Exception {
-        String compoundLink = utlUtils.getEntry(reactant.getMetabolite().getId());
+        String compoundLink = KEGGUrlUtils.getEntry(reactant.getMetabolite().getId());
         HttpResponse<String> compoundResponse = sendGetRequest(compoundLink);
         if (compoundResponse == null) {
             return;
@@ -161,7 +158,7 @@ public class KEGGService {
     }
 
     private List<String> getReactionIDs(String enzymeID) throws Exception {
-        String reactionLink = utlUtils.getReactionLink(enzymeID);
+        String reactionLink = KEGGUrlUtils.getReactionLink(enzymeID);
         HttpResponse<String> reactionsResponse = sendGetRequest(reactionLink);
         if (reactionsResponse == null) {
             return new ArrayList<>();
@@ -171,7 +168,7 @@ public class KEGGService {
     }
 
     private List<String> getEnzymesIDs(String genID) throws Exception {
-        String enzymeLink = utlUtils.getEnzymeLink(genID);
+        String enzymeLink = KEGGUrlUtils.getEnzymeLink(genID);
         HttpResponse<String> enzymeResponse = sendGetRequest(enzymeLink);
         if (enzymeResponse == null) {
             return new ArrayList<>();
