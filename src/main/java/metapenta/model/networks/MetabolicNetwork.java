@@ -128,7 +128,7 @@ public class MetabolicNetwork {
         List<String> placesIDs = petriNetElements.getPlacesIDs();
         for(String placeID: placesIDs) {
             Place<Metabolite> place = petriNetElements.getPlace(placeID);
-            if (place.isSource()){
+            if (place.isSink()){
                 sinkPlaces.add(place);
             }
         }
