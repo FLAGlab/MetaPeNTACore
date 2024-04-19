@@ -8,6 +8,7 @@ import metapenta.model.metabolic.network.ReactionComponent;
 import metapenta.model.networks.MetabolicNetwork;
 import metapenta.tools.io.utils.kegg.KEGGEntitiesUtils;
 import metapenta.tools.io.utils.kegg.KEGGUrlUtils;
+import metapenta.tools.io.utils.kegg.MetabolicNetworkElementsEnricher;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -21,6 +22,8 @@ import java.util.TreeSet;
 public class KEGGService {
     private KEGGEntitiesUtils keggEntitiesUtils = new KEGGEntitiesUtils();
     private MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
+
+    private MetabolicNetworkElementsEnricher enricher = new MetabolicNetworkElementsEnricher();
 
     public Set<String> getReactions(String genID) throws Exception {
         System.out.println("Processing gene: " + genID);
@@ -128,7 +131,7 @@ public class KEGGService {
             return;
         }
 
-        keggEntitiesUtils.enrichGeneProduct(geneProduct, enzymeResponse.body());
+        enricher.enrichGeneProduct(geneProduct, enzymeResponse.body());
 
     }
 
@@ -147,7 +150,7 @@ public class KEGGService {
             return;
         }
 
-        keggEntitiesUtils.enrichReactionComponent(reactant, compoundResponse.body());
+        enricher.enrichReactionComponent(reactant, compoundResponse.body());
     }
 
     private void enrichFromMetabolicNetwork(ReactionComponent reactionComponent) {

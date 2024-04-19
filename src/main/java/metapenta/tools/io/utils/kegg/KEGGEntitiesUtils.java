@@ -22,7 +22,6 @@ public class KEGGEntitiesUtils {
     private String metaboliteID = "";
     private KEGGResponseParser parser = new KEGGResponseParser();
 
-    private MetabolicNetworkElementsEnricher enricher = new MetabolicNetworkElementsEnricher();
 
     /**
      * This method create the based reaction object with the information from the KEGG response
@@ -163,14 +162,6 @@ public class KEGGEntitiesUtils {
 
 
        return entryParts[0];
-    }
-
-    public void enrichGeneProduct(GeneProduct geneProduct, String body) {
-        enricher.enrichGeneProduct(geneProduct, body);
-    }
-
-    public void enrichReactionComponent(ReactionComponent r, String body){
-        enricher.enrichReactionComponent(r, body);
     }
 
     private String cleanMetaboliteName(String name) {
