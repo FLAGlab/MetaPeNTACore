@@ -6,6 +6,7 @@ import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
 import metapenta.model.networks.MetabolicNetwork;
+import metapenta.tools.io.loaders.ClusterReactionsFileLoader;
 import metapenta.tools.io.utils.kegg.KEGGEntitiesUtils;
 import metapenta.tools.io.utils.kegg.KEGGUrlUtils;
 import metapenta.tools.io.utils.kegg.MetabolicNetworkElementsEnricher;
@@ -26,7 +27,6 @@ public class KEGGService {
     private MetabolicNetworkElementsEnricher enricher = new MetabolicNetworkElementsEnricher();
 
     public Set<String> getReactions(String genID) throws Exception {
-        System.out.println("Processing gene: " + genID);
         List<String> enzymeIDs = getEnzymesIDs(genID);
         return processEnzymesIDs(enzymeIDs);
     }
