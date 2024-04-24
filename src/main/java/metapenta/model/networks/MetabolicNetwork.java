@@ -10,7 +10,6 @@ import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 public class MetabolicNetwork {
     private MetabolicNetworkElements metabolicNetworkElements;
@@ -154,7 +153,7 @@ public class MetabolicNetwork {
         for(String ID: IDs) {
             Reaction reaction = petriNetElements.getTransition(ID).getObject();
             if(reaction.isReversible()){
-                reactionIds.add(reaction.getId());
+                reactionIds.add(reaction.ID());
             }
         }
 
@@ -168,7 +167,7 @@ public class MetabolicNetwork {
         for(String ID: IDs) {
             Reaction reaction = petriNetElements.getTransition(ID).getObject();
             if(!reaction.isReversible()){
-                reactionIds.add(reaction.getId());
+                reactionIds.add(reaction.ID());
             }
         }
 

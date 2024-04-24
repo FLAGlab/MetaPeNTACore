@@ -67,17 +67,17 @@ public class ReactionComponent {
 		this.metabolite = metabolite;
 	}
 
+	public String getMetaboliteID() {
+		return metabolite.ID();
+	}
 	@Override
 	public String toString() {
 		String JsonReactionComponent="{";
-		JsonReactionComponent+="\"metaboliteId\":"+"\""+metabolite.getId()+"\", ";
+		JsonReactionComponent+="\"metaboliteId\":"+"\""+metabolite.ID()+"\", ";
 		JsonReactionComponent+="\"metaboliteName\":"+"\""+metabolite.getName()+"\", ";
 		JsonReactionComponent+="\"stoichiometry\":"+"\""+stoichiometry+"\" ";
-//		JsonReactionComponent+="\"detailFormula\":"+"\""+detailFormula+"\" ";
-//		JsonReactionComponent+="\"formulaReactionComponent\":"+"\""+formulaReactionComponent+"\" ";
 		JsonReactionComponent+="}";
 		return JsonReactionComponent;
 	}
-	
-	
+
 }

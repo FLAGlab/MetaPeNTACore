@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * Represents a reaction between metabolites
  * @author Jorge Duitama
  */
-public class Reaction {
+public class Reaction implements ID{
 	private int nid;
 	private String id;
 	private String name;
@@ -24,6 +24,9 @@ public class Reaction {
 	private boolean balanced = false;
 
 	public Reaction(){}
+	public Reaction(String id){
+		this.id = id;
+	}
 	/**
 	 * Creates a new reaction with the given information
 	 * @param id of the reaction
@@ -105,7 +108,7 @@ public class Reaction {
 	/**
 	 * @return id of the reaction
 	 */
-	public String getId() {
+	public String ID() {
 		return id;
 	}
 	/**
@@ -548,7 +551,7 @@ public class Reaction {
 		}
 		else if((reactants.size()+ products.size()) <= sumlistElemReactants.size()) {
 
-			System.out.println(getId());
+			System.out.println(ID());
 
 			double[][] ecuaciones = linarSystem();
 			for (double[] filaEcuacion : ecuaciones) {
@@ -680,6 +683,17 @@ public class Reaction {
 	
 	public Reaction clone() {
 		return new Reaction(id, name, reactants, products, nid);
+	}
+
+	public Set<String> getAllComponentsIDs() {
+		Set<String> componentsIDs = new HashSet<>();
+		for(ReactionComponent reactant: reactants) {
+			componentsIDs.add(reactant.getMetabolite().ID());
+		}
+		for(ReactionComponent product: products) {
+			componentsIDs.add(product.getMetabolite().ID());
+		}
+		return componentsIDs;
 	}
 
 }

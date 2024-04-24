@@ -34,11 +34,11 @@ public class MetaboliteReactionsService {
 
     private List<Reaction> getReactionsByCriteria(String criteria){
         List<Reaction> reactions = new ArrayList<>();
-        Place placeOfMetabolite = petriNet.getPlaces().get(metabolite.getId());
+        Place placeOfMetabolite = petriNet.getPlaces().get(metabolite.ID());
 
         List<Edge<Transition<Reaction>>> edges = getEgeByCriteria(placeOfMetabolite, criteria);
         for(Edge<Transition<Reaction>> edge: edges) {
-        	System.out.println("Next as "+criteria+" "+edge.getTarget().getObject().getId());
+        	System.out.println("Next as "+criteria+" "+edge.getTarget().getObject().ID());
             reactions.add(edge.getTarget().getObject());
         }
 

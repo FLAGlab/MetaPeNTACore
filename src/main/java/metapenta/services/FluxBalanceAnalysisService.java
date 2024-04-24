@@ -34,9 +34,9 @@ public class FluxBalanceAnalysisService {
         Set<String> reactionsKeySet = petriNet.getTransitions().keySet();
         for (String reaction : reactionsKeySet) {
             Reaction r = (Reaction) petriNet.getTransition(reaction).getObject();
-            columnReactions.put(r.getId(), actualColum);
+            columnReactions.put(r.ID(), actualColum);
 
-            if (r.getId().equals(growthReactionID)) {
+            if (r.ID().equals(growthReactionID)) {
                 growthReactionIndex = actualColum;
             }
 
@@ -69,7 +69,7 @@ public class FluxBalanceAnalysisService {
             List<ReactionComponent> reactants = r.getReactants();
 
             for (ReactionComponent reactant : reactants) {
-                String metaboliteId = reactant.getMetabolite().getId();
+                String metaboliteId = reactant.getMetabolite().ID();
                 Integer rowMetabolite = rowsMetabolites.get(metaboliteId);
                 data[rowMetabolite][columnReaction] = -reactant.getStoichiometry();
             }
@@ -77,7 +77,7 @@ public class FluxBalanceAnalysisService {
             List<ReactionComponent> products = r.getProducts();
 
             for (ReactionComponent product : products) {
-                String metaboliteId = product.getMetabolite().getId();
+                String metaboliteId = product.getMetabolite().ID();
                 int rowMetabolite = rowsMetabolites.get(metaboliteId);
                 data[rowMetabolite][columnReaction] = product.getStoichiometry();
             }
@@ -258,12 +258,12 @@ public class FluxBalanceAnalysisService {
         reactions.add(r7);
 
         for (Reaction r: reactions) {
-            Transition t = new Transition(r.getId(), r.getName(), r);
+            Transition t = new Transition(r.ID(), r.getName(), r);
 
             for (ReactionComponent reactant: r.getReactants()) {
                 Metabolite metabolite = reactant.getMetabolite();
 
-                Place<Metabolite> place = pn.getPlace(metabolite.getId());
+                Place<Metabolite> place = pn.getPlace(metabolite.ID());
                 Edge<Place> edge = new Edge<>(place, reactant.getStoichiometry());
 
                 t.AddEdgeIn(edge);
@@ -272,7 +272,7 @@ public class FluxBalanceAnalysisService {
             for (ReactionComponent reactant: r.getProducts()) {
                 Metabolite metabolite = reactant.getMetabolite();
 
-                Place<Metabolite> place = pn.getPlace(metabolite.getId());
+                Place<Metabolite> place = pn.getPlace(metabolite.ID());
                 Edge<Place> edge = new Edge<>(place, reactant.getStoichiometry());
 
                 t.AddEdgeOut(edge);

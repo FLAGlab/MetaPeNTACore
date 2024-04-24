@@ -1,54 +1,68 @@
 package metapenta.services;
 
 import metapenta.commands.OrthogroupDTO;
-import metapenta.model.dto.ClusterReactionsDTO;
-import metapenta.model.networks.MetabolicNetwork;
-import metapenta.services.http.KEGGService;
 import metapenta.tools.io.loaders.ClusterReactionsFileLoader;
-import metapenta.tools.io.writers.ClusterReactionsWriter;
+import metapenta.tools.io.utils.kegg.KEGGEntities;
+import metapenta.tools.io.utils.kegg.entitiescreator.listcreator.EntityList;
+import metapenta.tools.io.writers.ClusterReactionServiceWriter;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ClusterReactionsService {
-    OrthogroupDTO otrhogroups;
+    OrthogroupDTO orthogroups;
     ClusterReactionsFileLoader clusterReactionsFileLoader = new ClusterReactionsFileLoader();
-    KEGGService service = new KEGGService();
+
+    KEGGEntities keggEntities = new KEGGEntities();
     String NGSEP_file;
+    ClusterReactionServiceWriter writer;
 
-    public ClusterReactionsService(String NGSEP_file) throws FileNotFoundException {
+    List<EntityList> genEnzymes = new ArrayList<>();
+
+
+    public ClusterReactionsService(String NGSEP_file, String prefix) throws FileNotFoundException {
         this.NGSEP_file = NGSEP_file;
-        this.otrhogroups = clusterReactionsFileLoader.load(NGSEP_file);
+        this.orthogroups = clusterReactionsFileLoader.load(NGSEP_file);
+        this.writer = new ClusterReactionServiceWriter(prefix);
     }
-    private ClusterReactionsDTO getClusterReactions() throws Exception {
-        Map<Integer, Set<String>> clusterReactions = calculateReactionsByCluster();
-        MetabolicNetwork metabolicNetwork = service.getMetabolicNetwork();
 
-        return new ClusterReactionsDTO(metabolicNetwork, clusterReactions);
+
+    private void getGenesEnzymes() {
+        Set<String> enzymes = orthogroups.getAllGenesIDs();
+        Map<String, EntityList> enzymeList = keggEntities.getEnzymesFromGeneIDs(enzymes);
+
+        setGenEnzymeListAndLog(List.copyOf(enzymeList.values()));
     }
-    private Map<Integer, Set<String>> calculateReactionsByCluster() throws Exception {
-        Map<Integer, Set<String>> clusterReactions = new HashMap<>();
 
-        for(Integer clusterID: otrhogroups.getClusterKEGGGenesIds().keySet()){
-            List<String> geneIds = otrhogroups.getClusterKEGGGenesIds().get(clusterID);
-            Set<String> currentClusterReactions = new HashSet<>();
-            for (String geneId : geneIds) {
-                System.out.println("geneId: " + geneId);
-                Set<String> reactions = service.getReactions(geneId);
-                currentClusterReactions.addAll(reactions);
-            }
+    private void getEnzymeReactions() {
 
-            clusterReactions.put(clusterID, currentClusterReactions);
-        }
-
-        return clusterReactions;
     }
+
+
+    public void generateNetwork() {
+        getGenesEnzymes();
+
+    }
+
+    private void setGenEnzymeListAndLog(List<EntityList> enzymeReactionLists) {
+        this.genEnzymes = enzymeReactionLists;
+        this.orthogroups.calculateEnzymeClusters(this.genEnzymes);
+        System.out.printf("Found %s reactions, processing%n", enzymeReactionLists.size());
+
+        writer.setAndWriteEnzymeReaction(enzymeReactionLists);
+        writer.setAndWriteClusterReactions(this.orthogroups);
+
+    }
+
 
     public static void main(String[] args) throws Exception {
-        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations.txt");
-        ClusterReactionsDTO clusterReactionsDTO = service.getClusterReactions();
+        String prefix = "/home/jose/Documents/Valerie/Repositories/FLAG/MetaPeNTACore/out-examples/cluster-reactions/cluster_reaction";
+        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt", prefix);
 
-        ClusterReactionsWriter writer = new ClusterReactionsWriter(clusterReactionsDTO, "out-examples/cluster-reactions/clusterReactionsExample_complete");
-        writer.write();
+        service.generateNetwork();
     }
+
 }

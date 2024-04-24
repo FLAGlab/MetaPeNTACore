@@ -256,13 +256,13 @@ public class MetabolicNetworkXMLLoader {
 					r.setEnzymes(enzymes);
 					if(lbCode!=null && lbCode.trim().length()>0) {
 						String valueS = network.getValueParameter(lbCode);
-						if(valueS ==null) throw new IOException("Lower bound parameter id not found for reaction: "+r.getId());
+						if(valueS ==null) throw new IOException("Lower bound parameter id not found for reaction: "+r.ID());
 						r.setLowerBoundFluxParameterId(lbCode);
 						r.setLowerBoundFlux(Double.parseDouble(valueS));
 					}
 					if(ubCode!=null && ubCode.trim().length()>0) {
 						String valueS = network.getValueParameter(ubCode);
-						if(valueS ==null) throw new IOException("Upper bound parameter id not found for reaction: "+r.getId());
+						if(valueS ==null) throw new IOException("Upper bound parameter id not found for reaction: "+r.ID());
 						r.setUpperBoundFluxParameterId(ubCode);
 						r.setUpperBoundFlux(Double.parseDouble(valueS));					
 					}

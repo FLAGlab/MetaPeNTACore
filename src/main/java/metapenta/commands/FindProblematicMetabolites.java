@@ -3,12 +3,10 @@ package metapenta.commands;
 import java.io.PrintStream;
 import java.util.List;
 
-import metapenta.model.dto.ConnectedComponentsDTO;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.networks.MetabolicNetwork;
 import metapenta.services.IMetabolicNetworkService;
 import metapenta.services.MetabolicNetworkService;
-import metapenta.tools.io.writers.ConnectedComponentsWriter;
 
 public class FindProblematicMetabolites {
 
@@ -26,7 +24,7 @@ public class FindProblematicMetabolites {
 	}
 
 	public static void printReactions(List<Reaction> reactions,  PrintStream  out) {
-		for(Reaction r: reactions) out.println(r.getId());
+		for(Reaction r: reactions) out.println(r.ID());
 		
 	}
 

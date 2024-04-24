@@ -124,7 +124,7 @@ public class DescribeNetworkWriter implements Writer {
     private void writeReactionComponentList(List<ReactionComponent> reactionComponents, double stoichiometryMultiplier) {
         for (ReactionComponent product: reactionComponents){
             Metabolite productMetabolite = product.getMetabolite();
-            writeInSMatrix(productMetabolite.getId(), stoichiometryMultiplier * product.getStoichiometry());
+            writeInSMatrix(productMetabolite.ID(), stoichiometryMultiplier * product.getStoichiometry());
         }
     }
 
@@ -261,7 +261,7 @@ public class DescribeNetworkWriter implements Writer {
             for(Metabolite metabolite: metabolites) {
                 StringBuilder compartmentBuilder = getCompartmentBuilder(compartment);
 
-                writeMetaboliteInCompartmentBuilder(metabolite.getId(), compartmentBuilder);
+                writeMetaboliteInCompartmentBuilder(metabolite.ID(), compartmentBuilder);
             }
         }
     }

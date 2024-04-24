@@ -19,7 +19,7 @@ public class KEGGResponseParserTest {
         String body = clustersFile.lines().collect(Collectors.joining("\n"));
 
         KEGGResponseParser parser = new KEGGResponseParser();
-        Map<String, List<String>> map = parser.parseGETResponse(body);
+        Map<String, List<String>> map = parser.parseGET(body);
         Assert.assertEquals(13, map.size());
 
         List<String> sysnameProperty = map.get("SYSNAME");

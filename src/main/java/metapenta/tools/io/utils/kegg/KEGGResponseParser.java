@@ -9,10 +9,10 @@ public class KEGGResponseParser {
     private static final String GET_END_OF_RESPONSE = "///";
     private static final String EMPTY_STRING = "";
 
-    public Map<String, List<String>> parseGETResponse(String body) {
+    public Map<String, List<String>> parseGET(String body) {
        String[] lines = body.split("\n");
 
-       return processGetBodyLines(lines);
+       return processGetLines(lines);
     }
 
     public List<String> parseLINKResponse(String body) {
@@ -21,7 +21,7 @@ public class KEGGResponseParser {
         return processLinkBodyLines(lines);
     }
 
-    private Map<String, List<String>> processGetBodyLines(String[] lines ) {
+    private Map<String, List<String>> processGetLines(String[] lines ) {
         Map<String, List<String>> bodyMap = new TreeMap<>();
         String lastKey = "";
 
