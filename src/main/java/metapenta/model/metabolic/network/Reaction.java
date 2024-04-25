@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * Represents a reaction between metabolites
  * @author Jorge Duitama
  */
-public class Reaction implements ID{
+public class Reaction implements ID {
 	private int nid;
 	private String id;
 	private String name;

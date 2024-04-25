@@ -1,16 +1,18 @@
 package metapenta.services;
 
 import metapenta.commands.OrthogroupDTO;
+import metapenta.model.metabolic.network.GeneProduct;
+import metapenta.model.metabolic.network.Metabolite;
+import metapenta.model.metabolic.network.Reaction;
+import metapenta.model.metabolic.network.ReactionComponent;
+import metapenta.model.networks.MetabolicNetwork;
 import metapenta.tools.io.loaders.ClusterReactionsFileLoader;
 import metapenta.tools.io.utils.kegg.KEGGEntities;
 import metapenta.tools.io.utils.kegg.entitiescreator.listcreator.EntityList;
 import metapenta.tools.io.writers.ClusterReactionServiceWriter;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ClusterReactionsService {
     OrthogroupDTO orthogroups;
@@ -22,6 +24,14 @@ public class ClusterReactionsService {
 
     List<EntityList> genEnzymes = new ArrayList<>();
 
+    List<EntityList> enzymeReactions = new ArrayList<>();
+
+    List<Reaction> reactions = new ArrayList<>();
+
+    List<Metabolite> metabolites = new ArrayList<>();
+
+    List<GeneProduct> enzymes = new ArrayList<>();
+
 
     public ClusterReactionsService(String NGSEP_file, String prefix) throws FileNotFoundException {
         this.NGSEP_file = NGSEP_file;
@@ -29,40 +39,173 @@ public class ClusterReactionsService {
         this.writer = new ClusterReactionServiceWriter(prefix);
     }
 
-
-    private void getGenesEnzymes() {
-        Set<String> enzymes = orthogroups.getAllGenesIDs();
-        Map<String, EntityList> enzymeList = keggEntities.getEnzymesFromGeneIDs(enzymes);
-
-        setGenEnzymeListAndLog(List.copyOf(enzymeList.values()));
-    }
-
-    private void getEnzymeReactions() {
-
-    }
-
-
     public void generateNetwork() {
-        getGenesEnzymes();
+        fetchGenesEnzymes();
+        fetchEnzymeReactionsIDs();
+        fetchBaseReactionData();
 
+        fetchMetabolites();
+        enrichReactionWithMetabolitesInformation();
+
+        fetchEnzymes();
+        enrichReactionsWithEnzymes();
+
+        createAndNetwork();
     }
 
-    private void setGenEnzymeListAndLog(List<EntityList> enzymeReactionLists) {
+    private void fetchGenesEnzymes() {
+        Set<String> enzymes = orthogroups.getAllGenesIDs();
+        System.out.printf("Found %s enzymes, processing \n", enzymes.size());
+        Collection<EntityList> enzymeList = keggEntities.getEnzymesFromGeneIDs(enzymes);
+
+        setGenEnzymesAndWriteIt(List.copyOf(enzymeList));
+        writer.writeGeneProduct(new ArrayList<>(enzymeList));
+    }
+
+    private void setGenEnzymesAndWriteIt(List<EntityList> enzymeReactionLists) {
         this.genEnzymes = enzymeReactionLists;
         this.orthogroups.calculateEnzymeClusters(this.genEnzymes);
-        System.out.printf("Found %s reactions, processing%n", enzymeReactionLists.size());
+        System.out.printf("Found %s enzymes, processing \n", enzymeReactionLists.size());
 
-        writer.setAndWriteEnzymeReaction(enzymeReactionLists);
-        writer.setAndWriteClusterReactions(this.orthogroups);
+        writer.writeGenEnzymes(enzymeReactionLists);
+    }
+
+    private void fetchEnzymeReactionsIDs() {
+        Set<String> enzymesIDs = calculateAllEnzymesIDs();
+        Collection<EntityList> enzymeReactions = keggEntities.getReactionsFromEnzymes(enzymesIDs);
+
+        setEnzymeReactionsAndWriteIt(List.copyOf(enzymeReactions));
+    }
+
+    private Set<String> calculateAllEnzymesIDs() {
+        Set<String> enzymesIDs = new HashSet<>();
+        for(EntityList enzymeReactions: genEnzymes) {
+            enzymesIDs.addAll(enzymeReactions.getList());
+        }
+
+        return enzymesIDs;
+    }
+
+    private void setEnzymeReactionsAndWriteIt(List<EntityList> enzymeReactions) {
+        this.enzymeReactions = enzymeReactions;
+        System.out.println("Found " + enzymeReactions.size() + " reactions, processing \n");
+
+        writer.writeEnzymeReactions(enzymeReactions);
+    }
+
+    private void fetchBaseReactionData() {
+        Set<String> reactionsIDs = calculateAllReactionIDs();
+        Collection<Reaction> reaction = keggEntities.getReactionsFromIDs(reactionsIDs);
+
+        this.reactions = List.copyOf(reaction);
+
+        writer.writeReactions(new ArrayList(this.reactions));
+    }
+
+
+    private Set<String> calculateAllReactionIDs() {
+        Set<String> reactions = new HashSet<>();
+        for(EntityList enzymeReactions: enzymeReactions) {
+            reactions.addAll(enzymeReactions.getList());
+        }
+
+        return reactions;
+    }
+    private void fetchMetabolites() {
+        List<String> metabolitesIDs = calculateAllMetabolitesIDs();
+        System.out.printf("Found %s metabolitesIDs processing \n", metabolitesIDs.size());
+        Collection<Metabolite> metabolites = keggEntities.getMetabolitesFromIDs(metabolitesIDs);
+        this.metabolites = new ArrayList<>(metabolites);
+
+        writer.writeMetabolites(new ArrayList<>(this.metabolites));
+    }
+
+    private void enrichReactionWithMetabolitesInformation() {
+        for(Reaction reaction: reactions) {
+            List<ReactionComponent> reactants = reaction.getReactants();
+            enrichReactionComponentList(reactants);
+
+            List<ReactionComponent> products = reaction.getProducts();
+            enrichReactionComponentList(products);
+        }
+    }
+
+    private void enrichReactionComponentList( List<ReactionComponent> reactants){
+        for (ReactionComponent reactant: reactants) {
+            Optional<Metabolite> metabolite = this.metabolites.stream().filter(metabolite1 -> metabolite1.getId().equals(reactant.getMetaboliteID())).findFirst();
+            metabolite.ifPresent(reactant::setMetabolite);
+        }
+    }
+
+
+    private void enrichReactionsWithEnzymes(){
+        for (Reaction reaction: reactions){
+            List<GeneProduct> enrichedEnzymes = new ArrayList<>();
+            List<GeneProduct> enzymes = reaction.getEnzymes();
+            for(GeneProduct enzyme: enzymes){
+                Optional<GeneProduct> geneProduct = this.enzymes.stream().filter(enzyme1 -> enzyme1.ID().equals(enzyme.ID())).findFirst();
+                if (geneProduct.isPresent()){
+                    enrichedEnzymes.add(geneProduct.get());
+                }
+            }
+            reaction.setEnzymes(enrichedEnzymes);
+        }
+    }
+
+    private void createAndNetwork() {
+        MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
+        metabolicNetwork.addReactions(this.reactions);
+
+        writer.writeMetabolicNetwork(metabolicNetwork);
+    }
+
+    private List<String> calculateAllMetabolitesIDs() {
+        List<String> metabolitesIDs = new ArrayList<>();
+        for(Reaction reaction: reactions) {
+           List<ReactionComponent> reactants = reaction.getReactants();
+           for (ReactionComponent reactant: reactants) {
+               metabolitesIDs.add(reactant.getMetaboliteID());
+           }
+
+           List<ReactionComponent> products = reaction.getProducts();
+           for (ReactionComponent product: products) {
+               metabolitesIDs.add(product.getMetaboliteID());
+           }
+        }
+
+        return metabolitesIDs;
+    }
+
+
+    private void fetchEnzymes() {
+        Set<String> ids = calculateEnzymeIDs();
+        Collection<GeneProduct> geneProducts = keggEntities.getGeneProductsFromIDs(ids);
+
+        this.enzymes = new ArrayList<>(geneProducts);
 
     }
 
+    private Set<String> calculateEnzymeIDs() {
+        Set<String> ids = new HashSet();
+        for(Reaction reaction: reactions) {
+            List<GeneProduct> enzymes = reaction.getEnzymes();
+            for (GeneProduct enzyme: enzymes){
+                ids.add(enzyme.ID());
+            }
+        }
+
+        return ids;
+    }
 
     public static void main(String[] args) throws Exception {
         String prefix = "/home/jose/Documents/Valerie/Repositories/FLAG/MetaPeNTACore/out-examples/cluster-reactions/cluster_reaction";
         ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt", prefix);
 
+        Double start = System.currentTimeMillis() / 1000.0;
         service.generateNetwork();
+        Double end = System.currentTimeMillis() / 1000.0;
+        Double time = end - start;
+        System.out.printf("Time: %s", time);
     }
 
 }

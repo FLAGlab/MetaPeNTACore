@@ -11,14 +11,13 @@ import metapenta.tools.io.utils.kegg.entitiescreator.metabolite.MetaboliteKEGGAP
 import metapenta.tools.io.utils.kegg.entitiescreator.reaction.ReactionKEGGAPICreator;
 
 import java.util.Collection;
-import java.util.Map;
 
 public class KEGGEntities {
 
-    private CompletionStagesFactory<Reaction> reactionCompletionStagesFactory;
-    private CompletionStagesFactory<Metabolite> metaboliteCompletionStagesFactory;
+    private CompletionStagesFactory<Reaction> reactionFactory;
+    private CompletionStagesFactory<Metabolite> metabolitesFactory;
 
-    private CompletionStagesFactory<GeneProduct> geneProductCompletionStagesFactory;
+    private CompletionStagesFactory<GeneProduct> geneProductFactory;
     private CompletionStagesFactory<EntityList> enzymeIDsListCompletionStagesFactory;
 
     private CompletionStagesFactory<EntityList> reactionIDsFactory;
@@ -26,8 +25,6 @@ public class KEGGEntities {
     public static final String NAME = "NAME";
 
     public static final String COMPOUND_FORMULA = "FORMULA";
-
-    private KEGGResponseParser parser = new KEGGResponseParser();
 
     public KEGGEntities() {
         initReactionFactory();
@@ -51,7 +48,7 @@ public class KEGGEntities {
 
     private void initReactionFactory() {
         CompletionStateParams<Reaction> params = createReactionFactoryParams();
-        this.reactionCompletionStagesFactory = new CompletionStagesFactory<>(params);
+        this.reactionFactory = new CompletionStagesFactory<>(params);
     }
 
     private CompletionStateParams<Reaction> createReactionFactoryParams() {
@@ -63,7 +60,7 @@ public class KEGGEntities {
 
     private void initMetaboliteFactory() {
         CompletionStateParams<Metabolite> params = createMetaboliteFactoryParams();
-        this.metaboliteCompletionStagesFactory = new CompletionStagesFactory<>(params);
+        this.metabolitesFactory = new CompletionStagesFactory<>(params);
     }
 
     private CompletionStateParams<Metabolite> createMetaboliteFactoryParams() {
@@ -76,7 +73,7 @@ public class KEGGEntities {
 
     private void initGeneProductFactory() {
         CompletionStateParams<GeneProduct> params = createGeneProductFactoryParams();
-        this.geneProductCompletionStagesFactory = new CompletionStagesFactory<>(params);
+        this.geneProductFactory = new CompletionStagesFactory<>(params);
     }
 
     private CompletionStateParams<GeneProduct> createGeneProductFactoryParams() {
@@ -98,15 +95,33 @@ public class KEGGEntities {
         return params;
     }
 
-    public Map<String, EntityList> getEnzymesFromGeneIDs(Collection<String> enzymeIDs) {
+    public Collection <EntityList> getEnzymesFromGeneIDs(Collection<String> enzymeIDs) {
        enzymeIDsListCompletionStagesFactory.setIds(enzymeIDs);
 
        return enzymeIDsListCompletionStagesFactory.createEntities();
     }
 
-    public Map<String, EntityList> getReactionsFromGeneIDs(Collection<String> geneIDs) {
+    public Collection<EntityList> getReactionsFromEnzymes(Collection<String> geneIDs) {
         reactionIDsFactory.setIds(geneIDs);
 
         return reactionIDsFactory.createEntities();
+    }
+
+    public Collection<Reaction> getReactionsFromIDs(Collection<String> reactionIDs) {
+        this.reactionFactory.setIds(reactionIDs);
+
+        return this.reactionFactory.createEntities();
+    }
+
+    public Collection<Metabolite> getMetabolitesFromIDs(Collection<String> metabolitesIDs) {
+        this.metabolitesFactory.setIds(metabolitesIDs);
+
+        return this.metabolitesFactory.createEntities();
+    }
+
+    public Collection<GeneProduct> getGeneProductsFromIDs(Collection<String> geneProductIDs) {
+        this.geneProductFactory.setIds(geneProductIDs);
+
+        return this.geneProductFactory.createEntities();
     }
 }

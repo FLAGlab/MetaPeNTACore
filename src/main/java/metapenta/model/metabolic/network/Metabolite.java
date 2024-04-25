@@ -88,5 +88,12 @@ public class Metabolite implements ID {
 		String out="{"+"\"id\": "+"\""+id+"\", \"name\":"+"\""+name+"\"}";
 		return out;
 	}
-	
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
 }

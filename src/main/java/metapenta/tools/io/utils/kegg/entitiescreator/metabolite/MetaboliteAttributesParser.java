@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class MetaboliteAttributesParser {
 
+    private static final String ENTRY = "ENTRY";
+
     private Map<String, List<String>> attributesMap;
     public MetaboliteAttributesParser(Map<String, List<String>> attributesMap) {
         this.attributesMap = attributesMap;
@@ -14,8 +16,8 @@ public class MetaboliteAttributesParser {
 
 
     public String ID() {
-        // TODO: Implement this method
-        return "";
+        List<String> properties = attributesMap.get(ENTRY);
+        return properties.get(0);
     }
     public String name() {
         String name = "";

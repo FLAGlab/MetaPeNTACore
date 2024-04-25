@@ -14,13 +14,11 @@ import java.util.Map;
 public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
 
     KEGGAPIHttp keggAPIHttp = new KEGGAPIHttp();
-    String ID;
 
     private KEGGResponseParser parser = new KEGGResponseParser();
 
     @Override
     public Metabolite create(String id) {
-        this.ID = id;
         String compoundLink = KEGGUrlUtils.getEntry(id);
         String compoundResponse = keggAPIHttp.get(compoundLink);
 
@@ -29,13 +27,10 @@ public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
         }
 
         Map<String, List<String>> attributesMap = parser.parseGET(compoundResponse);
+        Metabolite metabolite = createMetabolite(attributesMap);
+        metabolite.setId(id);
 
-        return createMetabolite(attributesMap);
-    }
-
-    @Override
-    public String ID() {
-        return null;
+        return metabolite;
     }
 
     public Metabolite createMetabolite(Map<String, List<String>> attributesMap) {

@@ -17,23 +17,23 @@ public class CompletionStagesFactory<T extends ID> {
         this.executor = Executors.newFixedThreadPool(3);
     }
 
-    public Map<String, T> createEntities() {
-        Map<String, T> result = createEntitiesCompletionStage().toCompletableFuture().join();
+    public Collection<T> createEntities() {
+        Collection<T> result = createEntitiesCompletionStage().toCompletableFuture().join();
         executor.shutdown();
 
         return result;
     }
 
-    private CompletionStage<Map<String, T>> createEntitiesCompletionStage() {
+    private CompletionStage<Collection<T>> createEntitiesCompletionStage() {
         List<CompletableFuture<T>> futures = createFutures(ids);
 
-        CompletableFuture<Map<String, T>> future = CompletableFuture.allOf(
-                        futures.toArray(new CompletableFuture[ids.size()]))
+        CompletableFuture<Collection<T>> future = CompletableFuture.allOf(
+                futures.toArray(new CompletableFuture[ids.size()]))
                 .thenApply(id -> {
-                    Map<String, T> allEntities = new HashMap<>();
+                    Collection<T> allEntities = new HashSet<>();
                     for (CompletableFuture<T> f : futures) {
                         T entity = f.join();
-                        allEntities.put(entity.ID(), entity);
+                        allEntities.add(entity);
                     }
                     return allEntities;
                 });
