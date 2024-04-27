@@ -6,7 +6,7 @@ import metapenta.tools.io.writers.NetworkBoundaryWriter;
 
 /**
  * args[0]: First metabolic network in XML format
- * args[1]: Second metabolic network in XML format
+ * args[1]: Output Path
  */
 public class NetworkBoundary {
     public static void main(String[] args) throws Exception {

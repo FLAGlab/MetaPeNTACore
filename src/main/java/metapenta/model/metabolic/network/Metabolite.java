@@ -23,9 +23,7 @@ public class Metabolite {
 		this.nid = nid;
 		this.compartmentId = compartmentId;
 	}
-	/**
-	 * @return String chemical formula of this metabolite 
-	 */
+
 	public ChemicalFormula getChemicalFormula() {
 		return chemicalFormula;
 	}
@@ -65,9 +63,11 @@ public class Metabolite {
 	public int getCharge() {
 		return charge;
 	}
+
 	public void setCharge(int charge) {
 		this.charge = charge;
 	}
+
 	@Override
 	public String toString() {		
 		String out="{"+"\"id\": "+"\""+id+"\", \"name\":"+"\""+name+"\"}";

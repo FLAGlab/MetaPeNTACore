@@ -136,6 +136,17 @@ public class MetabolicNetwork {
         return sinkPlaces;
     }
 
+    public List<Place<Metabolite>> getBoundaryMetabolites() {
+        List<Place<Metabolite>> boundaryMetabolites = new ArrayList<>();
+        for (String placeID: petriNetElements.getPlacesIDs()) {
+            if (getMetabolite(placeID).isBoundaryCondition()) {
+                boundaryMetabolites.add(petriNetElements.getPlace(placeID));
+            }
+        }
+
+        return boundaryMetabolites;
+    }
+
     public List<String> getReversibleReactionsIds(){
         List<String> reactionIds = new ArrayList<>();
         List<String> IDs = petriNetElements.getTransitionsIDs();
@@ -205,10 +216,4 @@ public class MetabolicNetwork {
     public Map<Reaction, Map<String, String>> reactionsUnbalancedReason(List<Reaction> reactionsUnbalanced){
         return metabolicNetworkElements.reactionsUnbalancedReason(reactionsUnbalanced);
     }
-
-	
-
-	
-
-	
 }

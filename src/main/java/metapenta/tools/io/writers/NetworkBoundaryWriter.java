@@ -41,7 +41,7 @@ public class NetworkBoundaryWriter implements Writer {
 
     private JSONArray getSourcesJsonArray() {
         JSONArray metabolites = new JSONArray();
-        for(Metabolite metabolite: networkBoundaryDTO.getSinks()){
+        for(Metabolite metabolite: networkBoundaryDTO.getSources()){
             metabolites.add(metabolite);
         }
 

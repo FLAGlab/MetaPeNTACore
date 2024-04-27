@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class MetabolicNetworkService implements IMetabolicNetworkService {
     private final MetabolicNetwork metabolicNetwork;
+
     public MetabolicNetworkService(String networkFile) throws Exception{
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(networkFile);
@@ -24,6 +25,7 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(is);
     }
+
     public ConnectedComponentsDTO connectedComponents() {
         ConnectedComponentsService connectedComponentsService = new ConnectedComponentsService(this.metabolicNetwork);
 
@@ -31,7 +33,7 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
     }
 
     public NetworkBoundaryDTO findNetworkBoundary() {
-        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.getSinks(), metabolicNetwork.getSources());
+        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.getBoundaryMetabolites());
 
         return networkBoundaryService.getNetworkBoundary();
     }
