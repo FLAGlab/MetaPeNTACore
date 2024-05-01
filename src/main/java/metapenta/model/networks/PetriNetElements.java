@@ -46,7 +46,7 @@ public class PetriNetElements {
     }
 
 
-    public void loadReactionToPetriNet(Reaction reaction) {
+    public void loadReactionToPetriNetwork(Reaction reaction) {
         Transition transition = this.createAndLoadTransitionToPetriNet(reaction);
 
         List<Edge> edgesIn = this.loadMetabolitesAndCreateEdgeList(reaction.getReactants());
@@ -56,8 +56,8 @@ public class PetriNetElements {
         List<Edge> edgesOut = this.loadMetabolitesAndCreateEdgeList(reaction.getProducts());
         transition.AddEdgesOut(edgesOut);
 
-        loadOutEdgesInPlacesOfTransition(transition);
-        loadInEdgesInPlacesOfTransition(transition);
+        loadOutEdgesInReactantPlaces(transition);
+        loadInEdgesInProductPlaces(transition);
     }
 
     private List<Edge> loadMetabolitesAndCreateEdgeList(List<ReactionComponent> reactionComponents){
@@ -94,7 +94,7 @@ public class PetriNetElements {
         return transition;
     }
 
-    private void loadOutEdgesInPlacesOfTransition(Transition transition) {
+    private void loadOutEdgesInReactantPlaces(Transition transition) {
         List<Edge<Place>> edges = transition.getEdgesIn();
         for (Edge<Place> edge: edges) {
             Place place = edge.getTarget();
@@ -104,7 +104,7 @@ public class PetriNetElements {
         }
     }
 
-    private void loadInEdgesInPlacesOfTransition(Transition transition) {
+    private void loadInEdgesInProductPlaces(Transition transition) {
         List<Edge<Place>> edges = transition.getEdgesOut();
         for (Edge<Place> edge: edges) {
             Place place = edge.getTarget();

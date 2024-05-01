@@ -16,10 +16,11 @@ public class NetworkBoundaryWriter implements Writer {
     private static final String SOURCES_JSON_KEY = "Sources";
     private NetworkBoundaryDTO networkBoundaryDTO;
 
-    private String outPath;
-    public NetworkBoundaryWriter(NetworkBoundaryDTO networkBoundaryDTO, String outPath){
+    private String outputFile;
+
+    public NetworkBoundaryWriter(NetworkBoundaryDTO networkBoundaryDTO, String outputFile){
         this.networkBoundaryDTO = networkBoundaryDTO;
-        this.outPath = outPath;
+        this.outputFile = outputFile;
     }
 
     private JSONObject getJsonBoundaryObject() {
@@ -41,7 +42,7 @@ public class NetworkBoundaryWriter implements Writer {
 
     private JSONArray getSourcesJsonArray() {
         JSONArray metabolites = new JSONArray();
-        for(Metabolite metabolite: networkBoundaryDTO.getSinks()){
+        for(Metabolite metabolite: networkBoundaryDTO.getSources()){
             metabolites.add(metabolite);
         }
 
@@ -51,6 +52,6 @@ public class NetworkBoundaryWriter implements Writer {
     public void write() throws IOException {
         JSONObject jsonObject = getJsonBoundaryObject();
 
-        Files.write(Paths.get(outPath), jsonObject.toJSONString().getBytes());
+        Files.write(Paths.get(outputFile), jsonObject.toJSONString().getBytes());
     }
 }
