@@ -21,6 +21,7 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(networkFile);
     }
+
     public MetabolicNetworkService(InputStream is) throws Exception{
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(is);

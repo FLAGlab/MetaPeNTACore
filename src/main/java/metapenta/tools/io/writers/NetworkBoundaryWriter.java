@@ -17,9 +17,10 @@ public class NetworkBoundaryWriter implements Writer {
     private NetworkBoundaryDTO networkBoundaryDTO;
 
     private String outputFile;
-    public NetworkBoundaryWriter(NetworkBoundaryDTO networkBoundaryDTO, String outPath){
+
+    public NetworkBoundaryWriter(NetworkBoundaryDTO networkBoundaryDTO, String outputFile){
         this.networkBoundaryDTO = networkBoundaryDTO;
-        this.outputFile = outPath;
+        this.outputFile = outputFile;
     }
 
     private JSONObject getJsonBoundaryObject() {
