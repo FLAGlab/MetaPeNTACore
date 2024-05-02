@@ -18,7 +18,7 @@ public class NetworkBoundaryDTO {
         return sinks;
     }
 
-    public void setSources(List<Metabolite> sources) {
-        this.sources = sources;
+    public List<Metabolite> getSources() {
+        return sources;
     }
 }

@@ -10,7 +10,6 @@ import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 public class MetabolicNetwork {
     private MetabolicNetworkElements metabolicNetworkElements;
@@ -126,8 +125,10 @@ public class MetabolicNetwork {
     public List<Place<Metabolite>> getSinks() {
         List<Place<Metabolite>> sinkPlaces = new ArrayList<>();
         List<String> placesIDs = petriNetElements.getPlacesIDs();
+
         for(String placeID: placesIDs) {
             Place<Metabolite> place = petriNetElements.getPlace(placeID);
+
             if (place.isSink()){
                 sinkPlaces.add(place);
             }
@@ -189,7 +190,7 @@ public class MetabolicNetwork {
     }
     public void addReaction(Reaction reaction){
         metabolicNetworkElements.addReaction(reaction);
-        petriNetElements.loadReactionToPetriNet(reaction);
+        petriNetElements.loadReactionToPetriNetwork(reaction);
     }
     public List<Reaction> getReactionsUnbalanced(){
         return metabolicNetworkElements.getReactionsUnbalanced();
