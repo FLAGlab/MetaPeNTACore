@@ -4,11 +4,11 @@ import metapenta.model.metabolic.network.Metabolite;
 
 import java.util.List;
 
-public class GapsDTO {
+public class FindGapsDTO {
     private List<Metabolite> rootNoProduction;
     private List<Metabolite> rootNoConsumption;
 
-    public GapsDTO(List<Metabolite> rootNoProduction, List<Metabolite> rootNoConsumption){
+    public FindGapsDTO(List<Metabolite> rootNoProduction, List<Metabolite> rootNoConsumption){
         this.rootNoProduction = rootNoProduction;
         this.rootNoConsumption = rootNoConsumption;
     }
