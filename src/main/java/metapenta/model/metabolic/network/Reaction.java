@@ -186,16 +186,9 @@ public class Reaction {
 
 	}
 
-
-
-
 	public Map<String, Integer> getDifference() {
-
-
         Map<String, Integer> sumlistElemReactants = getSumReactants();
-
         Map<String, Integer> sumlistElemProducts = getSumProducts();
-
         Map<String, Integer> difference = new HashMap<>();
 
         for (String key : sumlistElemReactants.keySet()) {
@@ -223,7 +216,6 @@ public class Reaction {
     }
 
 	public Map<String, String> casesNoBalanced() {
-
 		String reason = "";
 		String sumreactions = "";
 		Map<String, String> reasonSum = new HashMap<>();
@@ -285,6 +277,7 @@ public class Reaction {
 		return reasonSum;
 
 	}
+
 	public double[][] linarSystem(){
 		double[][] ecuaciones = new double[getSumReactants().size()][getSumReactants().size()];
 
@@ -372,28 +365,15 @@ public class Reaction {
 	}
 
 	public Map<Boolean, String> balanceReaction() {
-
 		List<Map<String, Integer>> listElemReactants = getListElements(reactants);
-
 		List<Map<String, Integer>> listElemProducts = getListElements(products);
-
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
-
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
-
 		Map<String, Integer> diference = getDifference();
-
 		List<Reaction> reactionsBalanced = new ArrayList<>();
-
-		//boolean changedToBalanced = false;
-
-		int mcm = 0;
-
 		Map<Boolean, String> result = new HashMap<>();
 
-
-
-
+		int mcm = 0;
 
 		for(Map<String, Integer> elementReactants: listElemReactants) {
 			if(elementReactants == null) {
@@ -401,6 +381,7 @@ public class Reaction {
 				result.put(false, "");
 			}
 		}
+
 		for(Map<String, Integer> elementProducts: listElemProducts) {
 			if(elementProducts == null) {
 				setBalanced(false);
@@ -411,16 +392,13 @@ public class Reaction {
 		if(sumlistElemReactants.size() != sumlistElemProducts.size()) {
 			setBalanced(false);
 			result.put(false, "");
-		}
-		else if (reactants.size() == 1 && products.size()==1) {
+		} else if (reactants.size() == 1 && products.size()==1) {
 			if(reactants.get(0).getStoichiometry() == 1.0 && products.get(0).getStoichiometry() == 1.0) {
 				ReactionComponent reactant = reactants.get(0);
 				ReactionComponent product = products.get(0);
 
 				Map<String, Integer> formulaReactant = reactant.getFormulaReactionComponent();
 				Map<String, Integer> formulaProduct = product.getFormulaReactionComponent();
-
-
 
 				if (formulaReactant.keySet().equals(formulaProduct.keySet())) {
 					int contIgual = 0;
@@ -468,8 +446,6 @@ public class Reaction {
 						}
 
 					}
-
-
 
 				}
 			}
