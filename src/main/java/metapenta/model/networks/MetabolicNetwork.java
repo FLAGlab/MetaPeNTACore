@@ -28,6 +28,7 @@ public class MetabolicNetwork {
     public void addCompartment(Compartment compartment) {
 		metabolicNetworkElements.addCompartment(compartment);
 	}
+
     public List<Compartment> getCompartmentsAsList() {
 		return metabolicNetworkElements.getCompartmentsAsList();
 	}
@@ -39,9 +40,11 @@ public class MetabolicNetwork {
     public void addParameter(String id, String value) {
 		metabolicNetworkElements.addParameter(id, value);
 	}
+
     public String getValueParameter(String parameterId) {
     	return metabolicNetworkElements.getValueParameter(parameterId);
     }
+
     public Map<String, String> getParameters() {
 		return metabolicNetworkElements.getParameters();
 	}
@@ -49,6 +52,7 @@ public class MetabolicNetwork {
     public GeneProduct getGeneProduct(String id) throws GeneProductDoesNotExitsException {
         return metabolicNetworkElements.getGeneProduct(id);
     }
+
     public List<GeneProduct> getGeneProductsAsList() {
 		return metabolicNetworkElements.getGeneProductsAsList();
 	}
@@ -109,32 +113,16 @@ public class MetabolicNetwork {
         return petriNetElements.getTransitionsIDs();
     }
 
-    public List<Place<Metabolite>> getSources() {
-        List<Place<Metabolite>> sourcePlaces = new ArrayList<>();
-        List<String> placesIDs = petriNetElements.getPlacesIDs();
-        for(String placeID: placesIDs) {
-            Place<Metabolite> place = petriNetElements.getPlace(placeID);
-            if (place.isSource()){
-                sourcePlaces.add(place);
+    public List<Reaction> getExchangeReactions() {
+        List<Reaction> exchangeReactions = new ArrayList<>();
+
+        for(Reaction reaction : metabolicNetworkElements.getReactionsAsList()) {
+            if (reaction.getProducts().isEmpty() || reaction.getReactants().isEmpty()) {
+                exchangeReactions.add(reaction);
             }
         }
 
-        return sourcePlaces;
-    }
-
-    public List<Place<Metabolite>> getSinks() {
-        List<Place<Metabolite>> sinkPlaces = new ArrayList<>();
-        List<String> placesIDs = petriNetElements.getPlacesIDs();
-
-        for(String placeID: placesIDs) {
-            Place<Metabolite> place = petriNetElements.getPlace(placeID);
-
-            if (place.isSink()){
-                sinkPlaces.add(place);
-            }
-        }
-
-        return sinkPlaces;
+        return exchangeReactions;
     }
 
     public List<String> getReversibleReactionsIds(){
@@ -188,10 +176,12 @@ public class MetabolicNetwork {
             addReaction(reaction);
         }
     }
+
     public void addReaction(Reaction reaction){
         metabolicNetworkElements.addReaction(reaction);
         petriNetElements.loadReactionToPetriNetwork(reaction);
     }
+
     public List<Reaction> getReactionsUnbalanced(){
         return metabolicNetworkElements.getReactionsUnbalanced();
     }
@@ -203,13 +193,9 @@ public class MetabolicNetwork {
     public List<Metabolite> getMetabolitesAsList() {
         return metabolicNetworkElements.getMetabolitesAsList();
     }
+
     public Map<Reaction, Map<String, String>> reactionsUnbalancedReason(List<Reaction> reactionsUnbalanced){
         return metabolicNetworkElements.reactionsUnbalancedReason(reactionsUnbalanced);
     }
 
-	
-
-	
-
-	
 }
