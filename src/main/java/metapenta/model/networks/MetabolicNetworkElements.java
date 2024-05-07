@@ -32,9 +32,11 @@ public class MetabolicNetworkElements {
 	public List<Compartment> getCompartmentsAsList() {
 		return new ArrayList<>(compartments.values());
 	}
+
 	public void addParameter(String id, String value) {
 		parameters.put(id, value);
 	}
+
 	public Map<String, String> getParameters() {
 		return parameters;
 	}
@@ -42,7 +44,6 @@ public class MetabolicNetworkElements {
 	public void addMetabolite(Metabolite metabolite) {
 		metabolites.put(metabolite.getId(), metabolite);
 	}
-
 
 	public void addReactions(List<Reaction> reactions) {
 		for(Reaction reaction: reactions) {
@@ -71,10 +72,10 @@ public class MetabolicNetworkElements {
 	public String getValueParameter(String parameterId) {
 		return parameters.get(parameterId);
 	}
+
 	public Metabolite getMetabolite (String id) {
 		return metabolites.get(id);
 	}
-
 
 	public Reaction getReaction(String id) {
 		return reactions.get(id);
@@ -167,8 +168,6 @@ public class MetabolicNetworkElements {
 		return reactionIds;
 	}
 
-
-
 	public List<Metabolite> getMetabolitesAsList() {
 		return new ArrayList<>(metabolites.values());
 	}
@@ -176,7 +175,6 @@ public class MetabolicNetworkElements {
 	public List<Reaction> getReactionsAsList () {
 		return new ArrayList<>(reactions.values());
 	}
-
 
 	public List<Metabolite> getMetabolitesByCompartment(String compartment){
 		return metabolitesByCompartment.get(compartment);
@@ -193,6 +191,7 @@ public class MetabolicNetworkElements {
 	public Map<String, List<Metabolite>> getReactionsByCompartments() {
 		return metabolitesByCompartment;
 	}
+
 	public List<Reaction> getReactionsMetabolitesWithoutFormula() {
 		Set<String> metaboliteIds = new HashSet<>();
 		for(Metabolite m:metabolites.values()) {

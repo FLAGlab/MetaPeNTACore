@@ -78,4 +78,9 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
 
         return metabolicNetworksService.interception(this.metabolicNetwork, targetMetabolicNetwork);
     }
+
+    public FindGapsDTO findGaps() {
+        FindGapsService findGapsService = new FindGapsService(metabolicNetwork.getRootNoProductionGaps(), metabolicNetwork.getRootNoConsumptionGaps());
+        return findGapsService.getRootGaps();
+    }
 }
