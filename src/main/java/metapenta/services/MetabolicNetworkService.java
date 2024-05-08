@@ -34,7 +34,7 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
     }
 
     public NetworkBoundaryDTO findNetworkBoundary() {
-        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.getSinks(), metabolicNetwork.getSources());
+        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.getExchangeReactions());
 
         return networkBoundaryService.getNetworkBoundary();
     }

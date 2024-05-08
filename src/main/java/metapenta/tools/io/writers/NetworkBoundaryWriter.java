@@ -1,7 +1,7 @@
 package metapenta.tools.io.writers;
 
-import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.dto.NetworkBoundaryDTO;
+import metapenta.model.metabolic.network.Reaction;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -11,11 +11,8 @@ import java.nio.file.Paths;
 
 public class NetworkBoundaryWriter implements Writer {
 
-    private static final String SINKS_JSON_KEY = "Sinks";
-
-    private static final String SOURCES_JSON_KEY = "Sources";
+    private static final String EXCHANGE_REACTION = "ExchangeReactions";
     private NetworkBoundaryDTO networkBoundaryDTO;
-
     private String outputFile;
 
     public NetworkBoundaryWriter(NetworkBoundaryDTO networkBoundaryDTO, String outputFile){
@@ -25,29 +22,20 @@ public class NetworkBoundaryWriter implements Writer {
 
     private JSONObject getJsonBoundaryObject() {
         JSONObject networkBoundary = new JSONObject();
-        networkBoundary.put(SINKS_JSON_KEY, getSinksJsonArray());
-        networkBoundary.put(SOURCES_JSON_KEY, getSourcesJsonArray());
+        networkBoundary.put(EXCHANGE_REACTION, getExchangeReactions());
 
         return networkBoundary;
     }
 
-    private JSONArray getSinksJsonArray() {
-        JSONArray metabolites = new JSONArray();
-        for(Metabolite metabolite: networkBoundaryDTO.getSinks()){
-            metabolites.add(metabolite);
+    private JSONArray getExchangeReactions() {
+        JSONArray exchangeReactions = new JSONArray();
+        for(Reaction reaction: networkBoundaryDTO.getExchangeReactions()){
+            exchangeReactions.add(reaction);
         }
 
-        return metabolites;
+        return exchangeReactions;
     }
 
-    private JSONArray getSourcesJsonArray() {
-        JSONArray metabolites = new JSONArray();
-        for(Metabolite metabolite: networkBoundaryDTO.getSources()){
-            metabolites.add(metabolite);
-        }
-
-        return metabolites;
-    }
 
     public void write() throws IOException {
         JSONObject jsonObject = getJsonBoundaryObject();
