@@ -18,6 +18,18 @@ public class MetabolicNetwork {
         this.petriNetElements = new PetriNetElements();
     }
 
+    public boolean existsMetabolite(String id) {
+            return metabolicNetworkElements.existsMetabolite(id);
+    }
+
+    public boolean existsGeneProduct(String id) {
+        return metabolicNetworkElements.existsGeneProduct(id);
+    }
+
+    public boolean existsReaction(String id) {
+        return metabolicNetworkElements.existsMetabolite(id);
+    }
+
     public void addGeneProduct(GeneProduct product){
         metabolicNetworkElements.addGeneProduct(product);
     }
@@ -128,7 +140,7 @@ public class MetabolicNetwork {
         for(String ID: IDs) {
             Reaction reaction = petriNetElements.getTransition(ID).getObject();
             if(reaction.isReversible()){
-                reactionIds.add(reaction.getId());
+                reactionIds.add(reaction.ID());
             }
         }
 
@@ -142,7 +154,7 @@ public class MetabolicNetwork {
         for(String ID: IDs) {
             Reaction reaction = petriNetElements.getTransition(ID).getObject();
             if(!reaction.isReversible()){
-                reactionIds.add(reaction.getId());
+                reactionIds.add(reaction.ID());
             }
         }
 

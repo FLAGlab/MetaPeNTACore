@@ -4,7 +4,7 @@ package metapenta.model.metabolic.network;
  * Represents a gene product (usually an enzyme) that participates in one reaction
  * @author Jorge Duitama
  */
-public class GeneProduct implements Comparable<GeneProduct>{
+public class GeneProduct implements Comparable<GeneProduct>, ID{
 	private String id;
 	private String name;
 	private String label;
@@ -23,7 +23,7 @@ public class GeneProduct implements Comparable<GeneProduct>{
 	/**
 	 * @return String product id
 	 */
-	public String getId() {
+	public String ID() {
 		return id;
 	}
 	/**
@@ -45,8 +45,11 @@ public class GeneProduct implements Comparable<GeneProduct>{
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getSboTerm() {
 		return sboTerm;
 	}

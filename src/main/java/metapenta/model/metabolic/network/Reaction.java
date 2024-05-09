@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * Represents a reaction between metabolites
  * @author Jorge Duitama
  */
-public class Reaction {
+public class Reaction implements ID {
 	private int nid;
 	private String id;
 	private String name;
@@ -23,6 +23,11 @@ public class Reaction {
 	private List<GeneProduct> enzymes;
 	private Map<String, Integer> stoichiometryDifference;
 	private boolean balanced = false;
+
+	public Reaction(){}
+	public Reaction(String id){
+		this.id = id;
+	}
 	/**
 	 * Creates a new reaction with the given information
 	 * @param id of the reaction
@@ -39,6 +44,55 @@ public class Reaction {
 		this.nid = nid;
 		updateBalanced();
 	}
+
+	public Reaction(String id, String name, List<ReactionComponent> reactants, List<ReactionComponent> products) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.reactants = reactants;
+		this.products = products;
+		updateBalanced();
+	}
+
+	public Reaction(
+			String id,
+			String name,
+			List<ReactionComponent> reactants,
+			List<ReactionComponent> products,
+			List<GeneProduct> enzymes,
+			boolean reversible,
+			double lowerBoundFlux,
+			double upperBoundFlux
+			) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.reactants = reactants;
+		this.products = products;
+		this.enzymes = enzymes;
+		this.reversible = reversible;
+		this.lowerBoundFlux = lowerBoundFlux;
+		this.upperBoundFlux = upperBoundFlux;
+
+		updateBalanced();
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProducts(List<ReactionComponent> products) {
+		this.products = products;
+	}
+
+	public void setReactants(List<ReactionComponent> reactants) {
+		this.reactants = reactants;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	/**
 	 * @return true if the reaction is reversible, false otherwise
 	 */
@@ -52,6 +106,11 @@ public class Reaction {
 	public void setReversible(boolean reversible) {
 		this.reversible = reversible;
 	}
+
+	public String ID() {
+		return id;
+	}
+
 	/**
 	 * @return id of the reaction
 	 */
@@ -179,7 +238,6 @@ public class Reaction {
 
 	private void updateBalanced() {
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
-
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
 
 		balanced = sumlistElemReactants.equals(sumlistElemProducts);
@@ -219,16 +277,10 @@ public class Reaction {
 		String reason = "";
 		String sumreactions = "";
 		Map<String, String> reasonSum = new HashMap<>();
-
 		List<Map<String, Integer>> listElemReactants = getListElements(reactants);
-
 		List<Map<String, Integer>> listElemProducts = getListElements(products);
-
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
-
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
-
-
 
 		//sumreactions = "Sum of stoichiometric coefficients(reactants): ";
         for (Map.Entry<String, Integer> entry : sumlistElemReactants.entrySet()) {
@@ -268,11 +320,7 @@ public class Reaction {
 
 		}
 
-
-
         reasonSum.put(reason, sumreactions);
-
-
 
 		return reasonSum;
 
@@ -311,7 +359,6 @@ public class Reaction {
 							Integer coeff = elems.get(element);
 							lineaElem[i] = -coeff;
 						}
-
 					}
 				}
 
@@ -320,14 +367,7 @@ public class Reaction {
 			for (int i = 0; i < lineaElem.length; i++) {
 				ecuaciones[e][i] =lineaElem[i];
 			}
-
-
-
-
 		}
-
-
-
 		return ecuaciones;
 
 	}
@@ -351,17 +391,12 @@ public class Reaction {
 			for (int i = 0; i < getSumReactants().size(); i++) {
 				solution_coeff[i] =solution.getEntry(i);
 			}
-	    }
-
-
-
-		} catch (Exception e) {
+	    } } catch (Exception e) {
 	        // Manejar otras excepciones si es necesario
 	        e.printStackTrace();
 	    }
 
 		return solution_coeff;
-
 	}
 
 	public Map<Boolean, String> balanceReaction() {
@@ -515,9 +550,6 @@ public class Reaction {
 
 		}
 		else if((reactants.size()+ products.size()) <= sumlistElemReactants.size()) {
-
-			System.out.println(getId());
-
 			double[][] ecuaciones = linarSystem();
 			for (double[] filaEcuacion : ecuaciones) {
 	            for (double valor : filaEcuacion) {
@@ -581,8 +613,6 @@ public class Reaction {
         }
 
 		return result;
-
-
 	}
 
 	public static int changeDoubleIntResult(double[] numeros) {
@@ -652,5 +682,15 @@ public class Reaction {
 		return new Reaction(id, name, reactants, products, nid);
 	}
 
+	public Set<String> getAllComponentsIDs() {
+		Set<String> componentsIDs = new HashSet<>();
+		for(ReactionComponent reactant: reactants) {
+			componentsIDs.add(reactant.getMetabolite().ID());
+		}
+		for(ReactionComponent product: products) {
+			componentsIDs.add(product.getMetabolite().ID());
+		}
+		return componentsIDs;
+	}
 
 }

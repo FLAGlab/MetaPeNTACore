@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 
 import metapenta.model.networks.MetabolicNetwork;
 import metapenta.tools.io.writers.MetabolicNetworkXMLOutput;
-import metapenta.model.networks.MetabolicNetworkElements;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.tools.io.loaders.MetabolicNetworkXMLLoader;
 
@@ -37,7 +36,7 @@ public class BalanceReactions {
 			for (Entry<Reaction, Map<String, String>> entry : reactionsUnbalancedReason.entrySet()) {
 	            //System.out.println(entry.getKey() + ": " + entry.getValue());
 				Reaction r = entry.getKey();
-				out.print(r.getId() + "\t "+ r.getName() + "\t");
+				out.print(r.ID() + "\t "+ r.getName() + "\t");
 				Map<String, String> reason = entry.getValue();
 				for (Entry<String, String> reasonEntry : reason.entrySet()) {
 			        String reasonUnbalanced = reasonEntry.getKey();

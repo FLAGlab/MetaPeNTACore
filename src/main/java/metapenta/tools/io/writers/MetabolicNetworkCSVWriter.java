@@ -2,7 +2,6 @@ package metapenta.tools.io.writers;
 
 import com.opencsv.CSVWriter;
 import metapenta.model.networks.MetabolicNetwork;
-import metapenta.model.networks.MetabolicNetworkElements;
 import metapenta.model.metabolic.network.Reaction;
 import metapenta.model.metabolic.network.ReactionComponent;
 
@@ -10,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class MetabolicNetworkCSVWriter implements Writer {
 
@@ -63,7 +61,7 @@ public class MetabolicNetworkCSVWriter implements Writer {
     private void writeReactionReactants(Reaction reaction){
         List<ReactionComponent> reactants = reaction.getReactants();
         for (ReactionComponent reactionComponent: reactants) {
-            writeMetaboliteToReaction(reactionComponent.getMetabolite().getId(), reaction.getId());
+            writeMetaboliteToReaction(reactionComponent.getMetabolite().ID(), reaction.ID());
         }
     }
 
@@ -75,7 +73,7 @@ public class MetabolicNetworkCSVWriter implements Writer {
     private void writeReactionProducts(Reaction reaction) {
         List<ReactionComponent> products = reaction.getProducts();
         for (ReactionComponent reactionComponent: products) {
-            writeReactionToMetabolite(reaction.getId(), reactionComponent.getMetabolite().getId());
+            writeReactionToMetabolite(reaction.ID(), reactionComponent.getMetabolite().ID());
         }
     }
 

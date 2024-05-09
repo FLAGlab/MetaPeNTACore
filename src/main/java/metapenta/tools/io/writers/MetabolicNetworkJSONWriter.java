@@ -15,10 +15,6 @@ public class MetabolicNetworkJSONWriter implements Writer {
     private MetabolicNetwork metabolicNetwork;
     private String fileName;
 
-    private final String REACTIONS = "reactions";
-
-    private final String METABOLITES = "metabolites";
-
     public MetabolicNetworkJSONWriter(MetabolicNetwork metabolicNetwork, String fileName){
         this.fileName = fileName;
         this.metabolicNetwork = metabolicNetwork;
@@ -26,13 +22,7 @@ public class MetabolicNetworkJSONWriter implements Writer {
 
     @Override
     public void write() throws IOException {
-        JSONObject reactionsObject = new JSONObject();
-
-        JSONArray reactions = MetabolicNetworkJSONUtils.getReactionsJsonArray(metabolicNetwork.getReactionsAsList());
-        reactionsObject.put(REACTIONS, reactions);
-
-        JSONArray metabolites = MetabolicNetworkJSONUtils.getMetabolitesJsonArray(metabolicNetwork.getMetabolitesAsList());
-        reactionsObject.put(METABOLITES, metabolites);
+        JSONObject reactionsObject = MetabolicNetworkJSONUtils.getMetabolicNetworkAsJSON(this.metabolicNetwork);
 
         Files.write(Paths.get(this.fileName), reactionsObject.toJSONString().getBytes());
     }

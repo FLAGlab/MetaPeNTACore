@@ -6,7 +6,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -38,7 +37,7 @@ public class ConnectedComponentsWriter implements Writer {
             JSONArray metabolitesJson = createMetaboliteJsonArray(group);
             System.out.println("Next component Size: "+group.size());
             if(group.size()<10) {
-            	for(Metabolite m:group) System.out.println("Next metabolite: "+m.getId()+" "+m.getName()+" "+m.getChemicalFormula().getChemicalFormula());
+            	for(Metabolite m:group) System.out.println("Next metabolite: "+m.ID()+" "+m.getName()+" "+m.getChemicalFormula().getChemicalFormula());
             }
             connectedComponentsJson.put(key, metabolitesJson);
         }

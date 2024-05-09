@@ -3,11 +3,6 @@ package metapenta.model.metabolic.network;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * This represents the data related to a metabolite within a reaction
- * @author Jorge Duitama
- *
- */
 public class ReactionComponent {
 	private Metabolite metabolite;
 	private double stoichiometry;
@@ -62,18 +57,22 @@ public class ReactionComponent {
 		
 		this.formulaReactionComponent = new_elements;
 	}
-	
+
+	public void setMetabolite(Metabolite metabolite) {
+		this.metabolite = metabolite;
+	}
+
+	public String getMetaboliteID() {
+		return metabolite.ID();
+	}
 	@Override
 	public String toString() {
 		String JsonReactionComponent="{";
-		JsonReactionComponent+="\"metaboliteId\":"+"\""+metabolite.getId()+"\", ";
+		JsonReactionComponent+="\"metaboliteId\":"+"\""+metabolite.ID()+"\", ";
 		JsonReactionComponent+="\"metaboliteName\":"+"\""+metabolite.getName()+"\", ";
 		JsonReactionComponent+="\"stoichiometry\":"+"\""+stoichiometry+"\" ";
-//		JsonReactionComponent+="\"detailFormula\":"+"\""+detailFormula+"\" ";
-//		JsonReactionComponent+="\"formulaReactionComponent\":"+"\""+formulaReactionComponent+"\" ";
 		JsonReactionComponent+="}";
 		return JsonReactionComponent;
 	}
-	
-	
+
 }

@@ -19,10 +19,18 @@ public class MetabolicNetworkElements {
 	private Map<String, GeneProduct> geneProducts = new TreeMap<>();
 	private Map<String, Metabolite> metabolites = new TreeMap<>();
 	private Map<String, Reaction> reactions = new TreeMap<>();
-	
+
+	public boolean existsMetabolite(String metaboliteID){
+		return metabolites.containsKey(metaboliteID);
+	}
+
+	public boolean existsGeneProduct(String geneProductID){
+		return geneProducts.containsKey(geneProductID);
+	}
+
 
 	public void addGeneProduct(GeneProduct product) {
-		geneProducts.put(product.getId(), product);
+		geneProducts.put(product.ID(), product);
 	}
 
 	public void addCompartment(Compartment compartment) {
@@ -42,7 +50,7 @@ public class MetabolicNetworkElements {
 	}
 	
 	public void addMetabolite(Metabolite metabolite) {
-		metabolites.put(metabolite.getId(), metabolite);
+		metabolites.put(metabolite.ID(), metabolite);
 	}
 
 	public void addReactions(List<Reaction> reactions) {
@@ -52,7 +60,7 @@ public class MetabolicNetworkElements {
 	}
 
 	public void addReaction(Reaction reaction) {
-		reactions.put(reaction.getId(), reaction);
+		reactions.put(reaction.ID(), reaction);
 		addReactionsMetaboliteIfAbsent(reaction);
 	}
 
@@ -65,7 +73,7 @@ public class MetabolicNetworkElements {
 		for (ReactionComponent reactant: reactants){
 			Metabolite metabolite = reactant.getMetabolite();
 
-			metabolites.putIfAbsent(metabolite.getId(), metabolite);
+			metabolites.putIfAbsent(metabolite.ID(), metabolite);
 		}
 	}
 
@@ -183,7 +191,7 @@ public class MetabolicNetworkElements {
 	private void calculateReactionsByCompartments(){
 		List<Metabolite> metabolites = getMetabolitesAsList();
 		for(Metabolite metabolite: metabolites) {
-			List<Metabolite> compartmentMetabolites = metabolitesByCompartment.computeIfAbsent(metabolite.getId(), k -> new ArrayList<>());
+			List<Metabolite> compartmentMetabolites = metabolitesByCompartment.computeIfAbsent(metabolite.ID(), k -> new ArrayList<>());
 			compartmentMetabolites.add(metabolite);
 		}
 	}
@@ -195,10 +203,10 @@ public class MetabolicNetworkElements {
 	public List<Reaction> getReactionsMetabolitesWithoutFormula() {
 		Set<String> metaboliteIds = new HashSet<>();
 		for(Metabolite m:metabolites.values()) {
-			if("_2__45__Hydroxy__45__carboxylates__91__c__93__".equals(m.getId())) System.out.println("Formula: "+m.getChemicalFormula());
+			if("_2__45__Hydroxy__45__carboxylates__91__c__93__".equals(m.ID())) System.out.println("Formula: "+m.getChemicalFormula());
 			if(m.getChemicalFormula()==null) {
-				metaboliteIds.add(m.getId());
-				System.out.println("Next metabolite without formula: "+m.getId());
+				metaboliteIds.add(m.ID());
+				System.out.println("Next metabolite without formula: "+m.ID());
 			}
 		}
 		System.out.println("Total metabolites without formula: "+metaboliteIds.size());
@@ -212,7 +220,7 @@ public class MetabolicNetworkElements {
 			allMetabolites.addAll(r.getReactants());
 			allMetabolites.addAll(r.getProducts());
 			for(ReactionComponent comp:allMetabolites) {
-				if(metaboliteIds.contains(comp.getMetabolite().getId())) {
+				if(metaboliteIds.contains(comp.getMetabolite().ID())) {
 					answer.add(r);
 					break;
 				}

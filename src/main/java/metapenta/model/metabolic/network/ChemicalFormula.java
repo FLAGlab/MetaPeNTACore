@@ -79,7 +79,12 @@ public class ChemicalFormula {
 				}
 
 				i = terminaElemen;
-				stoichiometry =Integer.parseInt(stoichiom.toString());
+
+				try {
+					stoichiometry = Integer.parseInt(stoichiom.toString());
+				} catch (NumberFormatException e1) {
+					System.out.println("Error parsing stoichiometry for element: " + element);
+				}
 				elements.put(element.toString(), stoichiometry);
 			}
 		}

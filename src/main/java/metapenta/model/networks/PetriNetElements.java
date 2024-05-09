@@ -65,7 +65,7 @@ public class PetriNetElements {
         for (ReactionComponent reactionComponent : reactionComponents) {
             Metabolite metabolite = reactionComponent.getMetabolite();
 
-            Place<Metabolite> place = getPlace(metabolite.getId());
+            Place<Metabolite> place = getPlace(metabolite.ID());
             if (place == null){
                 place = createAndAddPlaceToNet(metabolite);
             }
@@ -78,17 +78,17 @@ public class PetriNetElements {
     }
 
     private Place createAndAddPlaceToNet(Metabolite metabolite){
-        Place<Metabolite> place = new Place<>(metabolite.getId(), metabolite.getName(), metabolite);
-        addPlace(metabolite.getId(), place);
+        Place<Metabolite> place = new Place<>(metabolite.ID(), metabolite.getName(), metabolite);
+        addPlace(metabolite.ID(), place);
 
         return place;
     }
     private Transition createAndLoadTransitionToPetriNet(Reaction reaction){
-        Transition transition = getTransition(reaction.getId());
+        Transition transition = getTransition(reaction.ID());
 
         if ( transition == null ){
-            transition = new Transition(reaction.getId(), reaction.getName(), reaction);
-            addTransition(reaction.getId(), transition);
+            transition = new Transition(reaction.ID(), reaction.getName(), reaction);
+            addTransition(reaction.ID(), transition);
         }
 
         return transition;

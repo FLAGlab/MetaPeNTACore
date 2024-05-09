@@ -20,7 +20,7 @@ public class InterceptMetabolicNetworksService {
         List<Reaction> commonReactions = new ArrayList<>();
         List<Reaction> reactions = originMetabolicNetwork.getReactionsAsList();
         for (Reaction reaction : reactions) {
-        	Reaction targetReaction = targetMetabolicNetwork.getReaction(reaction.getId());
+        	Reaction targetReaction = targetMetabolicNetwork.getReaction(reaction.ID());
             if( targetReaction != null ) {
                 commonReactions.add(reaction);
                 compareCommonReactions(reaction,targetReaction);
@@ -28,15 +28,15 @@ public class InterceptMetabolicNetworksService {
         }
         List<Reaction> reactionsT = targetMetabolicNetwork.getReactionsAsList();
         for (Reaction reaction : reactionsT) {
-        	if(originMetabolicNetwork.getReaction(reaction.getId())==null) {
-        		System.out.println("Target reaction: "+reaction.getId()+" not found in origin");
+        	if(originMetabolicNetwork.getReaction(reaction.ID())==null) {
+        		System.out.println("Target reaction: "+reaction.ID()+" not found in origin");
         	}
         }
         return reactions;
     }
 
 	private void compareCommonReactions(Reaction reaction1, Reaction reaction2) {
-		String id = reaction1.getId();
+		String id = reaction1.ID();
 		if(!reaction1.getName().equals(reaction2.getName())) {
 			System.out.println("Reaction "+id+" Names differ. N1: "+reaction1.getName()+" N2: "+reaction2.getName());
 		}

@@ -24,7 +24,7 @@ public class FindMetabolitesWithoutFormula {
 	}
 
 	public static void printReactions(List<Reaction> reactions,  PrintStream  out) {
-		for(Reaction r: reactions) out.println(r.getId());
+		for(Reaction r: reactions) out.println(r.ID());
 		
 	}
 

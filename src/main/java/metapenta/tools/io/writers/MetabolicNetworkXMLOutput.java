@@ -116,9 +116,9 @@ public class MetabolicNetworkXMLOutput {
 
 	    for (Metabolite metabolite : network.getMetabolitesAsList()) {
 	        Element metaboliteElement = doc.createElement(XMLAttributes.ELEMENT_METABOLITE);
-	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, metabolite.getId());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, metabolite.ID());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, metabolite.getName());
-	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, metabolite.getId());
+	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, metabolite.ID());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_COMPARTMENT, metabolite.getCompartmentId());
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "false");
 	        metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_HASONLYSUBSTANCEUNITS, ""+metabolite.isHasOnlySubstanceUnits());
@@ -139,7 +139,7 @@ public class MetabolicNetworkXMLOutput {
 
 	    for (Reaction reaction : network.getReactionsAsList()) {
 	        Element reactionElement = doc.createElement(XMLAttributes.ELEMENT_REACTION);
-	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, reaction.getId());
+	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_ID, reaction.ID());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_NAME, reaction.getName());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE, ""+reaction.isReversible());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FAST, "false");
@@ -174,7 +174,7 @@ public class MetabolicNetworkXMLOutput {
 
 	    for (GeneProduct enzyme : enzymes) {
 	        Element enzymeRefElement = doc.createElement(XMLAttributes.ELEMENT_FBC_GENEPRODUCTREF);
-	        enzymeRefElement.setAttribute(XMLAttributes.ELEMENT_FBC_GENEPRODUCT, enzyme.getId());
+	        enzymeRefElement.setAttribute(XMLAttributes.ELEMENT_FBC_GENEPRODUCT, enzyme.ID());
 	        if(orElement!=null) orElement.appendChild(enzymeRefElement);
 	        else listEnzymesElement.appendChild(enzymeRefElement);
 	    }
@@ -186,7 +186,7 @@ public class MetabolicNetworkXMLOutput {
 
 	    for (ReactionComponent component : components) {
 	        Element componentElement = doc.createElement(XMLAttributes.ELEMENT_METABREF);
-	        componentElement.setAttribute(XMLAttributes.ELEMENT_METABOLITE, component.getMetabolite().getId());
+	        componentElement.setAttribute(XMLAttributes.ELEMENT_METABOLITE, component.getMetabolite().ID());
 	        componentElement.setAttribute(XMLAttributes.ATTRIBUTE_STOICHIOMETRY, Double.toString(component.getStoichiometry()));
 	        componentElement.setAttribute(XMLAttributes.ATTRIBUTE_CONSTANT, "true");
 	        listComponentsElement.appendChild(componentElement);
@@ -200,19 +200,14 @@ public class MetabolicNetworkXMLOutput {
 
 	    for (GeneProduct product : network.getGeneProductsAsList()) {
 	        Element geneProductElement = doc.createElement(XMLAttributes.ELEMENT_FBC_GENEPRODUCT);
-	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_ID, product.getId());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_ID, product.ID());
 	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_NAME, product.getName());
 	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_LABEL, product.getLabel());
 	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_SBOTERM, product.getSboTerm());
-	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, product.getId());
+	        geneProductElement.setAttribute(XMLAttributes.ATTRIBUTE_METAID, product.ID());
 	        
 	        listGeneProductsElement.appendChild(geneProductElement);
 	    }
 		return listGeneProductsElement;
 	}
-
-
-	
-	
-
 }
