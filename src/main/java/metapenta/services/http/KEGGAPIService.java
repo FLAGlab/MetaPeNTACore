@@ -9,9 +9,4 @@ public class KEGGAPIService {
     private MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
     private KEGGResponseParser parser = new KEGGResponseParser();
 
-
-
-
-
-
 }

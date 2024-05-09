@@ -1,9 +1,5 @@
 package metapenta.model.metabolic.network;
 
-/**
- * Represents a metabolite that participates in chemical reactions
- * @author Jorge Duitama
- */
 public class Metabolite implements ID {
 
 	private int nid;
@@ -33,7 +29,6 @@ public class Metabolite implements ID {
 		this.nid = nid;
 		this.compartmentId = compartmentId;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;

@@ -32,7 +32,6 @@ public class ClusterReactionsService {
 
     List<GeneProduct> enzymes = new ArrayList<>();
 
-
     public ClusterReactionsService(String NGSEP_file, String prefix) throws FileNotFoundException {
         this.NGSEP_file = NGSEP_file;
         this.orthogroups = clusterReactionsFileLoader.load(NGSEP_file);
@@ -136,7 +135,6 @@ public class ClusterReactionsService {
             metabolite.ifPresent(reactant::setMetabolite);
         }
     }
-
 
     private void enrichReactionsWithEnzymes(){
         for (Reaction reaction: reactions){

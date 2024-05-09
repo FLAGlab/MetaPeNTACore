@@ -89,7 +89,6 @@ public class ClusterReactionServiceWriter {
         }
     }
 
-
     private void write(JSONAware object, String path) {
         try {
             Files.write(Paths.get(path), object.toJSONString().getBytes());
@@ -103,6 +102,4 @@ public class ClusterReactionServiceWriter {
             }
         }
     }
-
-
 }

@@ -3,11 +3,6 @@ package metapenta.model.metabolic.network;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * This represents the data related to a metabolite within a reaction
- * @author Jorge Duitama
- *
- */
 public class ReactionComponent {
 	private Metabolite metabolite;
 	private double stoichiometry;

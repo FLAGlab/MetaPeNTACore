@@ -24,6 +24,10 @@ public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
         String compoundLink = KEGGUrlUtils.getEntry(id);
         String compoundResponse = keggAPIHttp.get(compoundLink);
 
+        return createMetaboliteFromResponse(compoundResponse, id);
+    }
+
+    private Metabolite createMetaboliteFromResponse(String compoundResponse, String id) {
         if (compoundResponse.isEmpty()) {
             return  new Metabolite(id);
         }
@@ -35,7 +39,7 @@ public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
         return metabolite;
     }
 
-    public Metabolite createMetabolite(Map<String, List<String>> attributesMap) {
+    private Metabolite createMetabolite(Map<String, List<String>> attributesMap) {
         MetaboliteAttributesParser metaboliteParser = new MetaboliteAttributesParser(attributesMap);
         ChemicalFormula chemicalFormula = new ChemicalFormula(metaboliteParser.chemicalFormula());
 
@@ -43,5 +47,4 @@ public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
 
         return metabolite;
     }
-
 }
