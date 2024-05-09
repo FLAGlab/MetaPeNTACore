@@ -122,32 +122,16 @@ public class MetabolicNetwork {
         return petriNetElements.getTransitionsIDs();
     }
 
-    public List<Place<Metabolite>> getSources() {
-        List<Place<Metabolite>> sourcePlaces = new ArrayList<>();
-        List<String> placesIDs = petriNetElements.getPlacesIDs();
-        for(String placeID: placesIDs) {
-            Place<Metabolite> place = petriNetElements.getPlace(placeID);
-            if (place.isSource()){
-                sourcePlaces.add(place);
+    public List<Reaction> getExchangeReactions() {
+        List<Reaction> exchangeReactions = new ArrayList<>();
+
+        for(Reaction reaction : metabolicNetworkElements.getReactionsAsList()) {
+            if (reaction.getProducts().isEmpty() || reaction.getReactants().isEmpty()) {
+                exchangeReactions.add(reaction);
             }
         }
 
-        return sourcePlaces;
-    }
-
-    public List<Place<Metabolite>> getSinks() {
-        List<Place<Metabolite>> sinkPlaces = new ArrayList<>();
-        List<String> placesIDs = petriNetElements.getPlacesIDs();
-
-        for(String placeID: placesIDs) {
-            Place<Metabolite> place = petriNetElements.getPlace(placeID);
-
-            if (place.isSink()){
-                sinkPlaces.add(place);
-            }
-        }
-
-        return sinkPlaces;
+        return exchangeReactions;
     }
 
     public List<String> getReversibleReactionsIds(){
