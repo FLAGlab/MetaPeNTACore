@@ -20,7 +20,7 @@ public class MetaboliteAttributesParser {
         return properties.get(0);
     }
     public String name() {
-        String name = "";
+        String name = ID();
         List<String> properties = attributesMap.get(KEGGEntities.NAME);
         if (properties != null) {
             name = properties.get(0);

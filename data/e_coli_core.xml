@@ -89,7 +89,7 @@ xmlns:fbc="http://www.sbml.org/sbml/level3/version1/fbc/version2" xmlns:groups="
                   <rdf:li rdf:resource="http://identifiers.org/uniprot/P77580" />
                 </rdf:Bag>
               </bqbiol:is>
-              <bqbiol:isEncodedBy>\
+              <bqbiol:isEncodedBy>
                 <rdf:Bag>
                   <rdf:li rdf:resource="http://identifiers.org/asap/ABE-0001207" />
                   <rdf:li rdf:resource="http://identifiers.org/ecogene/EG13625" />
