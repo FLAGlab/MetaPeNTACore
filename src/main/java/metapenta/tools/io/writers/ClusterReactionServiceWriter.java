@@ -29,7 +29,7 @@ public class ClusterReactionServiceWriter {
 
     private static final String ENZYMES = "_enzymes.txt";
 
-    private static final String METABOLIC_NETWORK = "_metabolic_newtwork";
+    private static final String METABOLIC_NETWORK = "_metabolic_newtwork.xml";
 
     public ClusterReactionServiceWriter(String prefix) {
         this.prefix = prefix;

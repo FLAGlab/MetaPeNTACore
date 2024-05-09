@@ -30,6 +30,8 @@ public class ReactionAttributesParser {
     private void createProductsAndReactants(){
         String equation = removeParentheses(attributesMap.get(REACTION_EQUATION).get(0));
 
+        System.out.println("Reaction equation: " + equation);
+
         String[] equationComponents = equation.split("<=>");
         String reactants = equationComponents[0].trim();
         String products = equationComponents[1].trim();

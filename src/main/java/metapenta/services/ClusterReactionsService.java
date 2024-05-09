@@ -50,7 +50,7 @@ public class ClusterReactionsService {
         fetchEnzymes();
         enrichReactionsWithEnzymes();
 
-        createAndNetwork();
+        createAndWriteNetwork();
     }
 
     private void fetchGenesEnzymes() {
@@ -152,7 +152,7 @@ public class ClusterReactionsService {
         }
     }
 
-    private void createAndNetwork() {
+    private void createAndWriteNetwork() {
         MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
         metabolicNetwork.addReactions(this.reactions);
 
@@ -199,7 +199,7 @@ public class ClusterReactionsService {
 
     public static void main(String[] args) throws Exception {
         String prefix = "/home/jose/Documents/Valerie/Repositories/FLAG/MetaPeNTACore/out-examples/cluster-reactions/cluster_reaction";
-        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations_reduced.txt", prefix);
+        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations.txt", prefix);
 
         Double start = System.currentTimeMillis() / 1000.0;
         service.generateNetwork();

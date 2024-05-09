@@ -82,11 +82,6 @@ public class MetabolicNetworkXMLLoader {
 		
 		return answer;
 	}
-	
-	
-	
-
-	
 
 	private Element getElementByID(Element modelElem, String nodeName) {
 		NodeList offspring = modelElem.getChildNodes(); 

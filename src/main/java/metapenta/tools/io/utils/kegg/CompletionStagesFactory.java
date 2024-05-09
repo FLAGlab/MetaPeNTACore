@@ -14,7 +14,7 @@ public class CompletionStagesFactory<T extends ID> {
     public CompletionStagesFactory(CompletionStateParams<T> completionStateParams) {
         this.creator = completionStateParams.getCreator();
         this.ids = completionStateParams.getIds();
-        this.executor = Executors.newFixedThreadPool(3);
+        this.executor = Executors.newFixedThreadPool(1);
     }
 
     public Collection<T> createEntities() {

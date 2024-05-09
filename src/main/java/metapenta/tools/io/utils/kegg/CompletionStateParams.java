@@ -16,7 +16,6 @@ public class CompletionStateParams<T> {
         return ids;
     }
 
-
     public void setCreator(EntityCreator<T> creator) {
         this.creator = creator;
     }
