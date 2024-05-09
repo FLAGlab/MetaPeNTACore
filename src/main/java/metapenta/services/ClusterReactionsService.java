@@ -196,16 +196,4 @@ public class ClusterReactionsService {
 
         return ids;
     }
-
-    public static void main(String[] args) throws Exception {
-        String prefix = "/home/jose/Documents/Valerie/Repositories/FLAG/MetaPeNTACore/out-examples/cluster-reactions/cluster_reaction";
-        ClusterReactionsService service = new ClusterReactionsService("data/NGSEP_Cluster_notations.txt", prefix);
-
-        Double start = System.currentTimeMillis() / 1000.0;
-        service.generateNetwork();
-        Double end = System.currentTimeMillis() / 1000.0;
-        Double time = end - start;
-        System.out.printf("Time: %s", time);
-    }
-
 }

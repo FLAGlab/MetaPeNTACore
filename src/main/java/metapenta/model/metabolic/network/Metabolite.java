@@ -19,10 +19,11 @@ public class Metabolite implements ID {
 		this.id = id;
 	}
 
-	public Metabolite(String id, String name, ChemicalFormula chemicalFormula) {
+	public Metabolite(String id, String name, ChemicalFormula chemicalFormula, String compartmentId) {
 		this.id = id;
 		this.name = name;
 		this.chemicalFormula = chemicalFormula;
+		this.compartmentId = compartmentId;
 	}
 
 	public Metabolite(String id, String name, String compartmentId, int nid) {

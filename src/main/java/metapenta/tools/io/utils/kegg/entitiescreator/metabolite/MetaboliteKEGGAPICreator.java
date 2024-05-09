@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
 
+    private static final String DEFAULT_COMPARTMENT = "c";
+
     KEGGAPIHttp keggAPIHttp = new KEGGAPIHttp();
 
     private KEGGResponseParser parser = new KEGGResponseParser();
@@ -37,10 +39,9 @@ public class MetaboliteKEGGAPICreator implements EntityCreator<Metabolite> {
         MetaboliteAttributesParser metaboliteParser = new MetaboliteAttributesParser(attributesMap);
         ChemicalFormula chemicalFormula = new ChemicalFormula(metaboliteParser.chemicalFormula());
 
-        Metabolite metabolite = new Metabolite(metaboliteParser.ID(), metaboliteParser.name(), chemicalFormula);
+        Metabolite metabolite = new Metabolite(metaboliteParser.ID(), metaboliteParser.name(), chemicalFormula, DEFAULT_COMPARTMENT);
 
         return metabolite;
     }
-
 
 }
