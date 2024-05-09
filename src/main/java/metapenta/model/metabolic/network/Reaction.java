@@ -20,7 +20,8 @@ public class Reaction implements ID {
 	private String upperBoundFluxParameterId;
 	private double lowerBoundFlux = -1000;
 	private double upperBoundFlux = 1000;
-	private List<GeneProduct> enzymes = new ArrayList<>();
+	private List<GeneProduct> enzymes;
+	private Map<String, Integer> stoichiometryDifference;
 	private boolean balanced = false;
 
 	public Reaction(){}
@@ -105,10 +106,15 @@ public class Reaction implements ID {
 	public void setReversible(boolean reversible) {
 		this.reversible = reversible;
 	}
+
+	public String ID() {
+		return id;
+	}
+
 	/**
 	 * @return id of the reaction
 	 */
-	public String ID() {
+	public String getId() {
 		return id;
 	}
 	/**
@@ -240,9 +246,7 @@ public class Reaction implements ID {
 
 	public Map<String, Integer> getDifference() {
         Map<String, Integer> sumlistElemReactants = getSumReactants();
-
         Map<String, Integer> sumlistElemProducts = getSumProducts();
-
         Map<String, Integer> difference = new HashMap<>();
 
         for (String key : sumlistElemReactants.keySet()) {
@@ -270,7 +274,6 @@ public class Reaction implements ID {
     }
 
 	public Map<String, String> casesNoBalanced() {
-
 		String reason = "";
 		String sumreactions = "";
 		Map<String, String> reasonSum = new HashMap<>();
@@ -322,6 +325,7 @@ public class Reaction implements ID {
 		return reasonSum;
 
 	}
+
 	public double[][] linarSystem(){
 		double[][] ecuaciones = new double[getSumReactants().size()][getSumReactants().size()];
 
@@ -396,25 +400,23 @@ public class Reaction implements ID {
 	}
 
 	public Map<Boolean, String> balanceReaction() {
-
 		List<Map<String, Integer>> listElemReactants = getListElements(reactants);
 		List<Map<String, Integer>> listElemProducts = getListElements(products);
 		Map<String, Integer> sumlistElemReactants = getSumReactants();
 		Map<String, Integer> sumlistElemProducts = getSumProducts();
 		Map<String, Integer> diference = getDifference();
 		List<Reaction> reactionsBalanced = new ArrayList<>();
-
-		//boolean changedToBalanced = false;
+		Map<Boolean, String> result = new HashMap<>();
 
 		int mcm = 0;
 
-		Map<Boolean, String> result = new HashMap<>();
 		for(Map<String, Integer> elementReactants: listElemReactants) {
 			if(elementReactants == null) {
 				setBalanced(false);
 				result.put(false, "");
 			}
 		}
+
 		for(Map<String, Integer> elementProducts: listElemProducts) {
 			if(elementProducts == null) {
 				setBalanced(false);
@@ -425,16 +427,13 @@ public class Reaction implements ID {
 		if(sumlistElemReactants.size() != sumlistElemProducts.size()) {
 			setBalanced(false);
 			result.put(false, "");
-		}
-		else if (reactants.size() == 1 && products.size()==1) {
+		} else if (reactants.size() == 1 && products.size()==1) {
 			if(reactants.get(0).getStoichiometry() == 1.0 && products.get(0).getStoichiometry() == 1.0) {
 				ReactionComponent reactant = reactants.get(0);
 				ReactionComponent product = products.get(0);
 
 				Map<String, Integer> formulaReactant = reactant.getFormulaReactionComponent();
 				Map<String, Integer> formulaProduct = product.getFormulaReactionComponent();
-
-
 
 				if (formulaReactant.keySet().equals(formulaProduct.keySet())) {
 					int contIgual = 0;
@@ -482,6 +481,7 @@ public class Reaction implements ID {
 						}
 
 					}
+
 				}
 			}
 		}
@@ -550,9 +550,6 @@ public class Reaction implements ID {
 
 		}
 		else if((reactants.size()+ products.size()) <= sumlistElemReactants.size()) {
-
-			System.out.println(ID());
-
 			double[][] ecuaciones = linarSystem();
 			for (double[] filaEcuacion : ecuaciones) {
 	            for (double valor : filaEcuacion) {

@@ -21,66 +21,65 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-/**
- * Loads a metabolic network froman XML file
- * @author Jorge Duitama
- */
+
 public class MetabolicNetworkXMLLoader {
 	private int metaboliteNumber = 0;
 	private int reactionNumber = 0;
 
 	public MetabolicNetwork loadNetwork(String filename) throws Exception {
-		InputStream is = new FileInputStream(filename);
+		InputStream inputStream = new FileInputStream(filename);
 
-		return loadNetwork(is);
+		return loadNetwork(inputStream);
 	}
 
-	public MetabolicNetwork loadNetwork (InputStream is) throws Exception {
-		MetabolicNetwork mn = null;
+	public MetabolicNetwork loadNetwork (InputStream inputStream) throws Exception {
+		MetabolicNetwork metabolicNetwork = null;
 
 		DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = documentBuilder.parse(new InputSource(is));
+		Document doc = documentBuilder.parse(new InputSource(inputStream));
 
 		Element rootElement = doc.getDocumentElement();
 		NodeList offspring = rootElement.getChildNodes(); 
 
 		for(int i=0;i<offspring.getLength();i++){  
 			Node node = offspring.item(i);
-			if (node instanceof Element){ 
-				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_MODEL.equals(elem.getNodeName())) {
-					mn = loadModel(elem);
+			if (node instanceof Element){
+				Element element = (Element)node;
+
+				if(XMLAttributes.ELEMENT_MODEL.equals(element.getNodeName())) {
+					metabolicNetwork = loadModel(element);
 				}
 			}
 		}
-		if(mn != null) {
-			return mn;
+
+		if(metabolicNetwork != null) {
+			return metabolicNetwork;
 		}
 
-		is.close();
+		inputStream.close();
 
 		throw new IOException("Malformed XML file. The element "+XMLAttributes.ELEMENT_MODEL+" could not be found");
 	}
 	
-	private MetabolicNetwork loadModel(Element modelElem) throws Exception {
-		MetabolicNetwork answer = new MetabolicNetwork();
+	private MetabolicNetwork loadModel(Element modelElement) throws Exception {
+		MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
 		
-		Element compartments = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTCOMPARTMENTS);
-		loadCompartments (compartments, answer);
+		Element compartments = getElementByID(modelElement, XMLAttributes.ELEMENT_LISTCOMPARTMENTS);
+		loadCompartments(compartments, metabolicNetwork);
 		
-		Element products = getElementByID(modelElem, XMLAttributes.ELEMENT_FBC_LISTGENEPRODUCTS);
-		loadGeneProducts (products, answer);
+		Element products = getElementByID(modelElement, XMLAttributes.ELEMENT_FBC_LISTGENEPRODUCTS);
+		loadGeneProducts(products, metabolicNetwork);
 		
-		Element metabolites = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTMETABOLITES);
-		loadMetabolites (metabolites, answer);
+		Element metabolites = getElementByID(modelElement, XMLAttributes.ELEMENT_LISTMETABOLITES);
+		loadMetabolites(metabolites, metabolicNetwork);
 		
-		Element parameters = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTPARAMETERS);
-		loadParameters (parameters, answer);
+		Element parameters = getElementByID(modelElement, XMLAttributes.ELEMENT_LISTPARAMETERS);
+		loadParameters(parameters, metabolicNetwork);
 		
-		Element reactions = getElementByID(modelElem, XMLAttributes.ELEMENT_LISTREACTIONS);
-		loadReactions (reactions, answer);
+		Element reactions = getElementByID(modelElement, XMLAttributes.ELEMENT_LISTREACTIONS);
+		loadReactions(reactions, metabolicNetwork);
 		
-		return answer;
+		return metabolicNetwork;
 	}
 
 	private Element getElementByID(Element modelElem, String nodeName) {
@@ -115,6 +114,7 @@ public class MetabolicNetworkXMLLoader {
 			}
 		}	
 	}
+
 	private void loadParameters(Element listElem, MetabolicNetwork network) throws IOException {
 		NodeList offspring = listElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){  
@@ -132,8 +132,7 @@ public class MetabolicNetworkXMLLoader {
 		}
 		
 	}
-	
-	
+
 	private void loadGeneProducts(Element listElem, MetabolicNetwork network) throws IOException {
 		NodeList offspring = listElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){  
@@ -200,72 +199,89 @@ public class MetabolicNetworkXMLLoader {
 		
 	}
 
-	private void loadReactions(Element listElem, MetabolicNetwork network) throws Exception {
-		NodeList offspring = listElem.getChildNodes();
-		for(int i=0;i<offspring.getLength();i++){  
-			Node node = offspring.item(i);			
-			if (node instanceof Element){				
-				Element elem = (Element)node;
-				if(XMLAttributes.ELEMENT_REACTION.equals(elem.getNodeName())) {
-					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_ID);
-					if(id==null || id.length()==0) throw new IOException("Every reaction should have an id");
-					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_NAME);
+	private void loadReactions(Element reactions, MetabolicNetwork network) throws Exception {
+		NodeList offspring = reactions.getChildNodes();
 
-					if(name==null || name.length()==0) throw new IOException("Invalid name for reaction with id "+id);
-					String reversibleStr = elem.getAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE);
-					List<GeneProduct> enzymes = new ArrayList<GeneProduct>();
-					List<ReactionComponent> reactants = new ArrayList<ReactionComponent>();
-					List<ReactionComponent> products = new ArrayList<ReactionComponent>();
-					String lbCode = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND);
-					String ubCode = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND);
-					
-					NodeList offspring2 = elem.getChildNodes(); 
-					for(int j=0;j<offspring2.getLength();j++) {
-						Node node2 = offspring2.item(j);
-						if (node2 instanceof Element){ 
-							Element elem2 = (Element) node2;
-							//TODO: Load annotations
-							if(XMLAttributes.ELEMENT_FBC_GENEASSOC.equals(elem2.getNodeName())) {
-								enzymes = loadEnzymes(id, elem2, network);
-							}
-							if(XMLAttributes.ELEMENT_LISTREACTANTS.equals(elem2.getNodeName())) {
-								reactants = loadReactionComponents(id, elem2, network);
-							}
-							if(XMLAttributes.ELEMENT_LISTMETABPRODUCTS.equals(elem2.getNodeName())) {
-								products = loadReactionComponents(id, elem2, network);
-							}
-						}
-					}
-					if(reactants.isEmpty()) {
-						System.err.println("WARN. No reactants found for reaction "+id);
-						//continue;
-					}
-					if(products.size()==0) {						
-						System.err.println("WARN. No products found for reaction "+id);
-						//continue;
-					}
-					
-					Reaction r = new Reaction(id, name, reactants, products, reactionNumber);
+		for(int i=0;i<offspring.getLength();i++){
+			Node node = offspring.item(i);
+
+			if (node instanceof Element){
+				Element reactionElement = (Element)node;
+
+				if(XMLAttributes.ELEMENT_REACTION.equals(reactionElement.getNodeName())) {
+					String id = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_ID);
+					if(id==null || id.length()==0) throw new IOException("Every reactionElement must have an id");
+
+					String name = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_NAME);
+					if(name==null || name.length()==0) throw new IOException("Invalid name for reactionElement with id "+id);
+
+					String reversible = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE);
+					String lowerBound = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND);
+					String upperBound = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND);
+
 					this.reactionNumber++;
-					if("true".equals(reversibleStr)) r.setReversible(true);
-					r.setEnzymes(enzymes);
-					if(lbCode!=null && lbCode.trim().length()>0) {
-						String valueS = network.getValueParameter(lbCode);
-						if(valueS ==null) throw new IOException("Lower bound parameter id not found for reaction: "+r.ID());
-						r.setLowerBoundFluxParameterId(lbCode);
-						r.setLowerBoundFlux(Double.parseDouble(valueS));
-					}
-					if(ubCode!=null && ubCode.trim().length()>0) {
-						String valueS = network.getValueParameter(ubCode);
-						if(valueS ==null) throw new IOException("Upper bound parameter id not found for reaction: "+r.ID());
-						r.setUpperBoundFluxParameterId(ubCode);
-						r.setUpperBoundFlux(Double.parseDouble(valueS));					
-					}
-					network.addReaction(r);
+					Reaction reaction = loadReaction(reactionElement, network, id, name);
+
+					reaction.setReversible(reversible.equals(("true")));
+					setBoundsInReaction(reaction, lowerBound, upperBound, network);
+
+					network.addReaction(reaction);
 				}
 			}
 		}
-		
+	}
+
+	private Reaction loadReaction (Element reactionElement, MetabolicNetwork network, String id, String name) throws Exception {
+		List<GeneProduct> enzymes = new ArrayList<GeneProduct>();
+		List<ReactionComponent> reactants = new ArrayList<ReactionComponent>();
+		List<ReactionComponent> products = new ArrayList<ReactionComponent>();
+
+		NodeList offspring = reactionElement.getChildNodes();
+
+		for(int j=0; j<offspring.getLength(); j++) {
+			Node node = offspring.item(j);
+			if (node instanceof Element){
+				Element element = (Element) node;
+
+				if(XMLAttributes.ELEMENT_FBC_GENEASSOC.equals(element.getNodeName())) {
+					enzymes = loadEnzymes(id, element, network);
+				}
+				if(XMLAttributes.ELEMENT_LISTREACTANTS.equals(element.getNodeName())) {
+					reactants = loadReactionComponents(id, element, network);
+				}
+				if(XMLAttributes.ELEMENT_LISTMETABPRODUCTS.equals(element.getNodeName())) {
+					products = loadReactionComponents(id, element, network);
+				}
+			}
+		}
+
+		if(reactants.isEmpty()) {
+			System.err.println("WARN. No reactants found for reactionElement " + id);
+		}
+		if(products.isEmpty()) {
+			System.err.println("WARN. No products found for reactionElement " + id);
+		}
+
+		Reaction reaction = new Reaction(id, name, reactants, products, reactionNumber);
+		reaction.setEnzymes(enzymes);
+
+		return reaction;
+	}
+
+	private void setBoundsInReaction(Reaction reaction, String lowerBound, String upperBound, MetabolicNetwork network) throws Exception {
+		if(lowerBound!=null && !lowerBound.trim().isEmpty()) {
+			String lowerBoundValue = network.getValueParameter(lowerBound);
+			if(lowerBoundValue ==null) throw new IOException("Lower bound parameter id not found for reactionElement: "+reaction.getId());
+			reaction.setLowerBoundFluxParameterId(lowerBound);
+			reaction.setLowerBoundFlux(Double.parseDouble(lowerBoundValue));
+		}
+
+		if(upperBound!=null && !upperBound.trim().isEmpty()) {
+			String valueS = network.getValueParameter(upperBound);
+			if(valueS ==null) throw new IOException("Upper bound parameter id not found for reactionElement: "+reaction.getId());
+			reaction.setUpperBoundFluxParameterId(upperBound);
+			reaction.setUpperBoundFlux(Double.parseDouble(valueS));
+		}
 	}
 
 	private List<GeneProduct> loadEnzymes(String reactionId, Element listElem, MetabolicNetwork network) throws Exception {

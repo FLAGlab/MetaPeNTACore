@@ -2,10 +2,7 @@ package metapenta.model.networks;
 
 import metapenta.model.errors.GeneProductDoesNotExitsException;
 import metapenta.model.errors.MetaboliteDoesNotExistsException;
-import metapenta.model.metabolic.network.Compartment;
-import metapenta.model.metabolic.network.GeneProduct;
-import metapenta.model.metabolic.network.Metabolite;
-import metapenta.model.metabolic.network.Reaction;
+import metapenta.model.metabolic.network.*;
 import metapenta.model.petrinet.Place;
 import metapenta.model.petrinet.Transition;
 
@@ -40,6 +37,7 @@ public class MetabolicNetwork {
     public void addCompartment(Compartment compartment) {
 		metabolicNetworkElements.addCompartment(compartment);
 	}
+
     public List<Compartment> getCompartmentsAsList() {
 		return metabolicNetworkElements.getCompartmentsAsList();
 	}
@@ -51,9 +49,11 @@ public class MetabolicNetwork {
     public void addParameter(String id, String value) {
 		metabolicNetworkElements.addParameter(id, value);
 	}
+
     public String getValueParameter(String parameterId) {
     	return metabolicNetworkElements.getValueParameter(parameterId);
     }
+
     public Map<String, String> getParameters() {
 		return metabolicNetworkElements.getParameters();
 	}
@@ -61,6 +61,7 @@ public class MetabolicNetwork {
     public GeneProduct getGeneProduct(String id) throws GeneProductDoesNotExitsException {
         return metabolicNetworkElements.getGeneProduct(id);
     }
+
     public List<GeneProduct> getGeneProductsAsList() {
 		return metabolicNetworkElements.getGeneProductsAsList();
 	}
@@ -83,7 +84,7 @@ public class MetabolicNetwork {
         return petriNetElements.getTransitions();
     }
 
-    public Transition getTransition(String id){
+    public Transition<Reaction> getTransition(String id){
         return petriNetElements.getTransition(id);
     }
 
@@ -137,9 +138,11 @@ public class MetabolicNetwork {
     public List<Place<Metabolite>> getSinks() {
         List<Place<Metabolite>> sinkPlaces = new ArrayList<>();
         List<String> placesIDs = petriNetElements.getPlacesIDs();
+
         for(String placeID: placesIDs) {
             Place<Metabolite> place = petriNetElements.getPlace(placeID);
-            if (place.isSource()){
+
+            if (place.isSink()){
                 sinkPlaces.add(place);
             }
         }
@@ -198,10 +201,12 @@ public class MetabolicNetwork {
             addReaction(reaction);
         }
     }
+
     public void addReaction(Reaction reaction){
         metabolicNetworkElements.addReaction(reaction);
-        petriNetElements.loadReactionToPetriNet(reaction);
+        petriNetElements.loadReactionToPetriNetwork(reaction);
     }
+
     public List<Reaction> getReactionsUnbalanced(){
         return metabolicNetworkElements.getReactionsUnbalanced();
     }
@@ -213,13 +218,44 @@ public class MetabolicNetwork {
     public List<Metabolite> getMetabolitesAsList() {
         return metabolicNetworkElements.getMetabolitesAsList();
     }
+
     public Map<Reaction, Map<String, String>> reactionsUnbalancedReason(List<Reaction> reactionsUnbalanced){
         return metabolicNetworkElements.reactionsUnbalancedReason(reactionsUnbalanced);
     }
 
-	
+    public List<Metabolite> getRootNoProductionGaps() {
+        HashSet<Metabolite> rootNoProductionGaps = new HashSet<>(metabolicNetworkElements.getMetabolitesAsList());
 
-	
+        for (Reaction reaction : metabolicNetworkElements.getReactionsAsList()) {
+            for (ReactionComponent metabolite : reaction.getProducts()) {
+                rootNoProductionGaps.remove(metabolite.getMetabolite());
+            }
 
-	
+            if (reaction.isReversible()) {
+                for (ReactionComponent metabolite : reaction.getReactants()) {
+                    rootNoProductionGaps.remove(metabolite.getMetabolite());
+                }
+            }
+        }
+
+        return new ArrayList<>(rootNoProductionGaps);
+    }
+
+    public List<Metabolite> getRootNoConsumptionGaps() {
+        HashSet<Metabolite> rootNoProductionGaps = new HashSet<>(metabolicNetworkElements.getMetabolitesAsList());
+
+        for (Reaction reaction : metabolicNetworkElements.getReactionsAsList()) {
+            for (ReactionComponent metabolite : reaction.getReactants()) {
+                rootNoProductionGaps.remove(metabolite.getMetabolite());
+            }
+
+            if (reaction.isReversible()) {
+                for (ReactionComponent metabolite : reaction.getProducts()) {
+                    rootNoProductionGaps.remove(metabolite.getMetabolite());
+                }
+            }
+        }
+
+        return new ArrayList<>(rootNoProductionGaps);
+    }
 }

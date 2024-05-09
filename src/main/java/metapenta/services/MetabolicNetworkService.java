@@ -16,14 +16,17 @@ import java.util.Map;
 
 public class MetabolicNetworkService implements IMetabolicNetworkService {
     private final MetabolicNetwork metabolicNetwork;
+
     public MetabolicNetworkService(String networkFile) throws Exception{
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(networkFile);
     }
+
     public MetabolicNetworkService(InputStream is) throws Exception{
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(is);
     }
+
     public ConnectedComponentsDTO connectedComponents() {
         ConnectedComponentsService connectedComponentsService = new ConnectedComponentsService(this.metabolicNetwork);
 
@@ -31,7 +34,7 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
     }
 
     public NetworkBoundaryDTO findNetworkBoundary() {
-        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.getSinks(), metabolicNetwork.getSources());
+        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.getExchangeReactions());
 
         return networkBoundaryService.getNetworkBoundary();
     }
@@ -74,5 +77,10 @@ public class MetabolicNetworkService implements IMetabolicNetworkService {
         InterceptMetabolicNetworksService metabolicNetworksService = new InterceptMetabolicNetworksService();
 
         return metabolicNetworksService.interception(this.metabolicNetwork, targetMetabolicNetwork);
+    }
+
+    public FindGapsDTO findGaps() {
+        FindGapsService findGapsService = new FindGapsService(metabolicNetwork.getRootNoProductionGaps(), metabolicNetwork.getRootNoConsumptionGaps());
+        return findGapsService.getRootGaps();
     }
 }

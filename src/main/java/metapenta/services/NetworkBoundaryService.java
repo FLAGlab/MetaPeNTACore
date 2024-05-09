@@ -1,43 +1,23 @@
 package metapenta.services;
 
-import metapenta.model.metabolic.network.Metabolite;
 import metapenta.model.dto.NetworkBoundaryDTO;
-import metapenta.model.petrinet.Place;
+import metapenta.model.metabolic.network.Reaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkBoundaryService {
-    private List<Place<Metabolite>> sinks;
+    private final List<Reaction> exchangeReactions;
 
-    private List<Place<Metabolite>> sources;
 
-    public NetworkBoundaryService(List<Place<Metabolite>> sinks, List<Place<Metabolite>> sources){
-        this.sinks = sinks;
-        this.sources = sources;
+    public NetworkBoundaryService(List<Reaction> exchangeReactions){
+        this.exchangeReactions = exchangeReactions;
     }
 
     public NetworkBoundaryDTO getNetworkBoundary() {
-        return new NetworkBoundaryDTO(getMetabolitesSinks(), getMetabolitesSources());
+        return new NetworkBoundaryDTO(getExchangeReactions());
     }
 
-    private List<Metabolite> getMetabolitesSinks(){
-        List<Metabolite> sinksMetabolites = new ArrayList<>();
-
-        for(Place<Metabolite> place: sinks) {
-            sinksMetabolites.add(place.getObject());
-        }
-
-        return sinksMetabolites;
-    }
-
-    private List<Metabolite> getMetabolitesSources(){
-        List<Metabolite> sourcesMetabolites = new ArrayList<>();
-
-        for(Place<Metabolite> place: sources) {
-            sourcesMetabolites.add(place.getObject());
-        }
-
-        return sourcesMetabolites;
+    private List<Reaction> getExchangeReactions() {
+        return exchangeReactions;
     }
 }
