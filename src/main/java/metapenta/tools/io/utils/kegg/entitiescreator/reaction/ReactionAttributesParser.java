@@ -62,7 +62,7 @@ public class ReactionAttributesParser {
     }
 
     public String reactionName() {
-        String reactionName = "";
+        String reactionName = reactionID();
         if (attributesMap.get(NAME) != null) {
             reactionName = cleanMetaboliteName(attributesMap.get(NAME).get(0));
         }
