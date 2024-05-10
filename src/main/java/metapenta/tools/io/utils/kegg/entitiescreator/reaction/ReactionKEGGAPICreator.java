@@ -11,6 +11,9 @@ import java.util.Map;
 
 public class ReactionKEGGAPICreator implements EntityCreator {
     KEGGAPIHttp keggAPIHttp = new KEGGAPIHttp();
+
+    public final static String COBRA_DEFAULT_UPPER_BOUND = "cobra_default_up";
+    public final static String COBRA_DEFAULT_LOWER_BOUND = "cobra_default_lb";
     private final KEGGResponseParser parser = new KEGGResponseParser();
 
     private String ID;
@@ -51,8 +54,8 @@ public class ReactionKEGGAPICreator implements EntityCreator {
                 parser.products(),
                 parser.getEnzymes(),
                 true,
-                -10000.0,
-                10000.0
+                COBRA_DEFAULT_LOWER_BOUND,
+                COBRA_DEFAULT_UPPER_BOUND
         );
 
         return reaction;

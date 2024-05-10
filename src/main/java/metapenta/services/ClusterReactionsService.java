@@ -14,6 +14,9 @@ import metapenta.tools.io.writers.ClusterReactionServiceWriter;
 import java.io.*;
 import java.util.*;
 
+import static metapenta.tools.io.utils.kegg.entitiescreator.reaction.ReactionKEGGAPICreator.COBRA_DEFAULT_LOWER_BOUND;
+import static metapenta.tools.io.utils.kegg.entitiescreator.reaction.ReactionKEGGAPICreator.COBRA_DEFAULT_UPPER_BOUND;
+
 public class ClusterReactionsService {
     OrthogroupDTO orthogroups;
     ClusterReactionsFileLoader clusterReactionsFileLoader = new ClusterReactionsFileLoader();
@@ -153,6 +156,9 @@ public class ClusterReactionsService {
     private void createAndWriteNetwork() {
         MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
         metabolicNetwork.addReactions(this.reactions);
+
+        metabolicNetwork.addParameter(COBRA_DEFAULT_LOWER_BOUND, "-1000");
+        metabolicNetwork.addParameter(COBRA_DEFAULT_UPPER_BOUND, "1000");
 
         writer.writeMetabolicNetwork(metabolicNetwork);
     }
