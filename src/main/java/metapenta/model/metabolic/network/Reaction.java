@@ -61,18 +61,22 @@ public class Reaction implements ID {
 			List<ReactionComponent> products,
 			List<GeneProduct> enzymes,
 			boolean reversible,
-			double lowerBoundFlux,
-			double upperBoundFlux
+			String lowerBoundFluxParameterID,
+			String upperBoundFluxParameterID
 			) {
 		super();
+
 		this.id = id;
 		this.name = name;
+		this.reversible = reversible;
+
 		this.reactants = reactants;
 		this.products = products;
+
 		this.enzymes = enzymes;
-		this.reversible = reversible;
-		this.lowerBoundFlux = lowerBoundFlux;
-		this.upperBoundFlux = upperBoundFlux;
+
+		this.lowerBoundFluxParameterId = lowerBoundFluxParameterID;
+		this.upperBoundFluxParameterId = upperBoundFluxParameterID;
 
 		updateBalanced();
 	}

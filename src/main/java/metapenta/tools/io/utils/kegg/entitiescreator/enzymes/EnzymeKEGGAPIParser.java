@@ -11,11 +11,6 @@ public class EnzymeKEGGAPIParser {
         this.attributesMap = attributesMap;
     }
 
-    public String id() {
-        // TODO Implement me!
-        return "";
-    }
-
     public String name() {
         String name = "";
         List<String> properties = attributesMap.get(NAME);

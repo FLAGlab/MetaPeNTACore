@@ -33,7 +33,7 @@ public class EnzymeKEGGAPICreator implements EntityCreator<GeneProduct> {
     private GeneProduct createEnzymeFromMap(Map<String, List<String>> attributesMap){
         EnzymeKEGGAPIParser parser = new EnzymeKEGGAPIParser(attributesMap);
 
-        return new GeneProduct(parser.id(), parser.name());
+        return new GeneProduct(this.ID, parser.name());
     }
 
     private boolean shouldEnrichEnzyme(String id) {

@@ -189,6 +189,14 @@ public class MetabolicNetwork {
     public void addReaction(Reaction reaction){
         metabolicNetworkElements.addReaction(reaction);
         petriNetElements.loadReactionToPetriNetwork(reaction);
+
+        addReactionEnzymes(reaction.getEnzymes());
+    }
+
+    private void addReactionEnzymes(List<GeneProduct> enzymes) {
+        for (GeneProduct enzyme: enzymes){
+            metabolicNetworkElements.addGeneProduct(enzyme);
+        }
     }
 
     public List<Reaction> getReactionsUnbalanced(){
