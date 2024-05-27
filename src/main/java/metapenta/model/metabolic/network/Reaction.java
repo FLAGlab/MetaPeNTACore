@@ -21,8 +21,8 @@ public class Reaction implements ID {
 	private double lowerBoundFlux = -1000;
 	private double upperBoundFlux = 1000;
 	private List<GeneProduct> enzymes;
-	private Map<String, Integer> stoichiometryDifference;
 	private boolean balanced = false;
+	private List<String> links;
 
 	public Reaction(){}
 	public Reaction(String id){
@@ -197,7 +197,12 @@ public class Reaction implements ID {
 	private void setBalanced(boolean balanced) {
 		this.balanced = balanced;
 	}
-
+	public List<String> getLinks() {
+		return links;
+	}
+	public void setLinks(List<String> links) {
+		this.links = links;
+	}
 	public void addProduct(ReactionComponent product) {
 		products.add(product);
 	}

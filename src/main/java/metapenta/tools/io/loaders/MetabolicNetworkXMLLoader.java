@@ -27,9 +27,10 @@ public class MetabolicNetworkXMLLoader {
 	private int reactionNumber = 0;
 
 	public MetabolicNetwork loadNetwork(String filename) throws Exception {
-		InputStream inputStream = new FileInputStream(filename);
-
-		return loadNetwork(inputStream);
+		System.out.println("Loading network from file: "+filename);
+		try (InputStream inputStream = new FileInputStream(filename);) {
+			return loadNetwork(inputStream);
+		}	
 	}
 
 	public MetabolicNetwork loadNetwork (InputStream inputStream) throws Exception {
@@ -55,8 +56,6 @@ public class MetabolicNetworkXMLLoader {
 		if(metabolicNetwork != null) {
 			return metabolicNetwork;
 		}
-
-		inputStream.close();
 
 		throw new IOException("Malformed XML file. The element "+XMLAttributes.ELEMENT_MODEL+" could not be found");
 	}
@@ -183,14 +182,18 @@ public class MetabolicNetworkXMLLoader {
 					
 					String chargeS = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_CHARGE);
 					
+					
+					
 					Metabolite metabolite = new Metabolite(id, name, compartment, metaboliteNumber);
 					if(unitsS!=null && "true".equals(unitsS)) metabolite.setHasOnlySubstanceUnits(true);
 					if(boundaryS!=null && "true".equals(boundaryS)) metabolite.setBoundaryCondition(true);
 					if(chargeS!=null && chargeS.trim().length()>0) metabolite.setCharge(Integer.parseInt(chargeS.trim()));
 					if(formula!=null && formula.trim().length()>0) metabolite.setChemicalFormula(formula.trim());
-					//TODO: Load attributes
+					List<String> links = loadAnnotations(elem);
+					if(links!=null) metabolite.setLinks(links);
+					else System.out.println("No links for metabolite: "+id);
 					metaboliteNumber ++;
-					//if("_2__45__Hydroxy__45__carboxylates__91__c__93__".equals(id)) System.out.println("Loaded Formula: "+formula);
+					if("_2__45__Hydroxy__45__carboxylates__91__c__93__".equals(id)) System.out.println("Loaded Formula: "+formula);
 					
 					network.addMetabolite(metabolite);
 				}
@@ -235,7 +238,7 @@ public class MetabolicNetworkXMLLoader {
 		List<GeneProduct> enzymes = new ArrayList<GeneProduct>();
 		List<ReactionComponent> reactants = new ArrayList<ReactionComponent>();
 		List<ReactionComponent> products = new ArrayList<ReactionComponent>();
-
+		List<String> links = null;
 		NodeList offspring = reactionElement.getChildNodes();
 
 		for(int j=0; j<offspring.getLength(); j++) {
@@ -252,6 +255,9 @@ public class MetabolicNetworkXMLLoader {
 				if(XMLAttributes.ELEMENT_LISTMETABPRODUCTS.equals(element.getNodeName())) {
 					products = loadReactionComponents(id, element, network);
 				}
+				if(XMLAttributes.ELEMENT_ANNOTATION.equals(element.getNodeName())) {
+					links = loadAnnotations(element);
+				}
 			}
 		}
 
@@ -264,9 +270,12 @@ public class MetabolicNetworkXMLLoader {
 
 		Reaction reaction = new Reaction(id, name, reactants, products, reactionNumber);
 		reaction.setEnzymes(enzymes);
+		if(links!=null) reaction.setLinks(links);
 
 		return reaction;
 	}
+
+	
 
 	private void setBoundsInReaction(Reaction reaction, String lowerBound, String upperBound, MetabolicNetwork network) throws Exception {
 		if(lowerBound!=null && !lowerBound.trim().isEmpty()) {
@@ -330,6 +339,38 @@ public class MetabolicNetworkXMLLoader {
 					ReactionComponent component = new ReactionComponent(m, stoichiometry);
 					answer.add(component);
 				}
+			}
+		}
+		return answer;
+	}
+	private List<String> loadAnnotations(Element rootElem) {
+		List<String> answer = new ArrayList<>();
+		NodeList offspring = rootElem.getChildNodes(); 
+		for(int i=0;i<offspring.getLength();i++){
+			Node node = offspring.item(i);
+			if (node instanceof Element){
+				Element element = (Element) node;
+				//Recursion to avoid more nesting or extra methods
+				if(XMLAttributes.ELEMENT_ANNOTATION.equals(element.getNodeName())) {
+					answer.addAll(loadAnnotations(element));
+				}
+				if(XMLAttributes.ELEMENT_RDF_ROOT.equals(element.getNodeName())) {
+					answer.addAll(loadAnnotations(element));
+				}
+				else if(XMLAttributes.ELEMENT_RDF_DESCRIPTION.equals(element.getNodeName())) {
+					answer.addAll(loadAnnotations(element));
+				}
+				else if(XMLAttributes.ELEMENT_BQBIOL_IS.equals(element.getNodeName())) {
+					answer.addAll(loadAnnotations(element));
+				}
+				else if(XMLAttributes.ELEMENT_RDF_BAG.equals(element.getNodeName())) {
+					answer.addAll(loadAnnotations(element));
+				}
+				else if(XMLAttributes.ELEMENT_RDF_LI.equals(element.getNodeName())) {
+					String link = element.getAttribute(XMLAttributes.ATTRIBUTE_RDF_RESOURCE);
+					if(link!=null) answer.add(link);
+				}
+				
 			}
 		}
 		return answer;

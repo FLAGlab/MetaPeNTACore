@@ -129,11 +129,43 @@ public class MetabolicNetworkXMLOutput {
 	        if(formula!=null) {
 	        	metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_FORMULA, formula.getChemicalFormula());
 	        }
+	        List<String> links = metabolite.getLinks();
+	        if(links!=null) metaboliteElement.appendChild(buildAnnotationElement(metabolite.getId(),links, doc));
 	        listMetabolitesElement.appendChild(metaboliteElement);
 	    }
 
 	    return listMetabolitesElement;
 	}
+	private Element buildAnnotationElement(String id, List<String> links, Document doc) {
+		Element annElement = doc.createElement(XMLAttributes.ELEMENT_ANNOTATION);
+		annElement.setAttribute("xmlns:sbml", "http://www.sbml.org/sbml/level3/version1/core");
+		Element rdfRootElement = doc.createElement(XMLAttributes.ELEMENT_RDF_ROOT);
+		rdfRootElement.setAttribute("xmlns:rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+		rdfRootElement.setAttribute("xmlns:dcterms", "http://purl.org/dc/terms/");
+		rdfRootElement.setAttribute("xmlns:vCard", "http://www.w3.org/2001/vcard-rdf/3.0#");
+		rdfRootElement.setAttribute("xmlns:vCard4", "http://www.w3.org/2006/vcard/ns#");
+		rdfRootElement.setAttribute("xmlns:bqbiol", "http://biomodels.net/biology-qualifiers/");
+		rdfRootElement.setAttribute("xmlns:bqmodel", "http://biomodels.net/model-qualifiers/");
+		
+		annElement.appendChild(rdfRootElement);
+		Element rdfDescElement = doc.createElement(XMLAttributes.ELEMENT_RDF_DESCRIPTION);
+		rdfDescElement.setAttribute("rdf:about", "#"+id);
+		rdfRootElement.appendChild(rdfDescElement);
+		Element bqBiolElement = doc.createElement(XMLAttributes.ELEMENT_BQBIOL_IS);
+		rdfDescElement.appendChild(bqBiolElement);
+		Element rdfBagElement = doc.createElement(XMLAttributes.ELEMENT_RDF_BAG);
+		bqBiolElement.appendChild(rdfBagElement);
+		for(String link:links) {
+			Element rdfLIElement = doc.createElement(XMLAttributes.ELEMENT_RDF_LI);
+			rdfLIElement.setAttribute("rdf:resource", link);
+			rdfBagElement.appendChild(rdfLIElement);
+		}
+		
+		
+		
+		return annElement;
+	}
+
 	private Element saveReactions(MetabolicNetwork network, Document doc) {
 	    Element listReactionsElement = doc.createElement(XMLAttributes.ELEMENT_LISTREACTIONS);
 
@@ -157,6 +189,8 @@ public class MetabolicNetworkXMLOutput {
 	        	Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
 		        reactionElement.appendChild(listEnzymesElement);
 	        }
+	        List<String> links = reaction.getLinks();
+	        if(links!=null) reactionElement.appendChild(buildAnnotationElement(reaction.getId(),links, doc));
 	        listReactionsElement.appendChild(reactionElement);
 	    }
 

@@ -46,6 +46,14 @@ public class XMLAttributes {
     
     public static final String ELEMENT_FBC_GENEPRODUCTREF = "fbc:geneProductRef";
 	public static final String ATTRIBUTE_FAST = "fast";
+	
+	public static final String ELEMENT_ANNOTATION = "annotation";
+	public static final String ELEMENT_RDF_ROOT = "rdf:RDF";
+	public static final String ELEMENT_RDF_DESCRIPTION = "rdf:Description";
+	public static final String ELEMENT_BQBIOL_IS = "bqbiol:is";
+	public static final String ELEMENT_RDF_BAG = "rdf:Bag";
+	public static final String ELEMENT_RDF_LI = "rdf:li";
+	public static final String ATTRIBUTE_RDF_RESOURCE = "rdf:resource";
     
 
 }

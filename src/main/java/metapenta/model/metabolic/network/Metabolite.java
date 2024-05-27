@@ -1,5 +1,7 @@
 package metapenta.model.metabolic.network;
 
+import java.util.List;
+
 public class Metabolite implements ID {
 
 	private int nid;
@@ -10,6 +12,7 @@ public class Metabolite implements ID {
 	private boolean hasOnlySubstanceUnits = false;
 	private boolean boundaryCondition = false;
 	private int charge = 0;
+	private List<String> links;
 
 	public Metabolite(String id) {
 		this.id = id;
@@ -79,6 +82,16 @@ public class Metabolite implements ID {
 	public void setCharge(int charge) {
 		this.charge = charge;
 	}
+	
+	
+	public List<String> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<String> links) {
+		this.links = links;
+	}
+
 	@Override
 	public String toString() {		
 		String out="{"+"\"id\": "+"\""+id+"\", \"name\":"+"\""+name+"\"}";
