@@ -189,11 +189,11 @@ public class MetabolicNetworkXMLLoader {
 					if(boundaryS!=null && "true".equals(boundaryS)) metabolite.setBoundaryCondition(true);
 					if(chargeS!=null && chargeS.trim().length()>0) metabolite.setCharge(Integer.parseInt(chargeS.trim()));
 					if(formula!=null && formula.trim().length()>0) metabolite.setChemicalFormula(formula.trim());
-					List<String> links = loadAnnotations(elem);
-					if(links!=null) metabolite.setLinks(links);
-					else System.out.println("No links for metabolite: "+id);
+					List<String> links = loadAnnotations(id, elem);
+					if(links!=null && links.size()>0) metabolite.setLinks(links);
+					//else System.out.println("No links for metabolite: "+id);
 					metaboliteNumber ++;
-					if("_2__45__Hydroxy__45__carboxylates__91__c__93__".equals(id)) System.out.println("Loaded Formula: "+formula);
+					//if("CPD__45__19812__91__c__93__".equals(id)) System.out.println("Loaded links: "+links);
 					
 					network.addMetabolite(metabolite);
 				}
@@ -256,7 +256,7 @@ public class MetabolicNetworkXMLLoader {
 					products = loadReactionComponents(id, element, network);
 				}
 				if(XMLAttributes.ELEMENT_ANNOTATION.equals(element.getNodeName())) {
-					links = loadAnnotations(element);
+					links = loadAnnotations(id, element);
 				}
 			}
 		}
@@ -270,7 +270,7 @@ public class MetabolicNetworkXMLLoader {
 
 		Reaction reaction = new Reaction(id, name, reactants, products, reactionNumber);
 		reaction.setEnzymes(enzymes);
-		if(links!=null) reaction.setLinks(links);
+		if(links!=null && links.size()>0) reaction.setLinks(links);
 
 		return reaction;
 	}
@@ -343,31 +343,33 @@ public class MetabolicNetworkXMLLoader {
 		}
 		return answer;
 	}
-	private List<String> loadAnnotations(Element rootElem) {
+	private List<String> loadAnnotations(String elementId, Element rootElem) {
 		List<String> answer = new ArrayList<>();
 		NodeList offspring = rootElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){
 			Node node = offspring.item(i);
 			if (node instanceof Element){
 				Element element = (Element) node;
+				//if("CPD__45__19812__91__c__93__".equals(elementId)) System.out.println("Parent node: "+rootElem.getNodeName()+" Next node: "+element.getNodeName());
 				//Recursion to avoid more nesting or extra methods
 				if(XMLAttributes.ELEMENT_ANNOTATION.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(element));
+					answer.addAll(loadAnnotations(elementId, element));
 				}
 				if(XMLAttributes.ELEMENT_RDF_ROOT.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(element));
+					answer.addAll(loadAnnotations(elementId, element));
 				}
 				else if(XMLAttributes.ELEMENT_RDF_DESCRIPTION.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(element));
+					answer.addAll(loadAnnotations(elementId, element));
 				}
 				else if(XMLAttributes.ELEMENT_BQBIOL_IS.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(element));
+					answer.addAll(loadAnnotations(elementId, element));
 				}
 				else if(XMLAttributes.ELEMENT_RDF_BAG.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(element));
+					answer.addAll(loadAnnotations(elementId, element));
 				}
 				else if(XMLAttributes.ELEMENT_RDF_LI.equals(element.getNodeName())) {
 					String link = element.getAttribute(XMLAttributes.ATTRIBUTE_RDF_RESOURCE);
+					//if("CPD__45__19812__91__c__93__".equals(elementId)) System.out.println("Loaded attribute link: "+link);
 					if(link!=null) answer.add(link);
 				}
 				
