@@ -130,13 +130,13 @@ public class MetabolicNetworkXMLOutput {
 	        	metaboliteElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_FORMULA, formula.getChemicalFormula());
 	        }
 	        List<String> links = metabolite.getLinks();
-	        if(links!=null) metaboliteElement.appendChild(buildAnnotationElement(metabolite.getId(),links, doc));
+	        if(links!=null || metabolite.getSboTerm()!=null) metaboliteElement.appendChild(buildAnnotationElement(metabolite.getId(),links, metabolite.getSboTerm(), doc));
 	        listMetabolitesElement.appendChild(metaboliteElement);
 	    }
 
 	    return listMetabolitesElement;
 	}
-	private Element buildAnnotationElement(String id, List<String> links, Document doc) {
+	private Element buildAnnotationElement(String id, List<String> links, String sboTerm, Document doc) {
 		Element annElement = doc.createElement(XMLAttributes.ELEMENT_ANNOTATION);
 		annElement.setAttribute("xmlns:sbml", "http://www.sbml.org/sbml/level3/version1/core");
 		Element rdfRootElement = doc.createElement(XMLAttributes.ELEMENT_RDF_ROOT);
@@ -151,18 +151,27 @@ public class MetabolicNetworkXMLOutput {
 		Element rdfDescElement = doc.createElement(XMLAttributes.ELEMENT_RDF_DESCRIPTION);
 		rdfDescElement.setAttribute("rdf:about", "#"+id);
 		rdfRootElement.appendChild(rdfDescElement);
-		Element bqBiolElement = doc.createElement(XMLAttributes.ELEMENT_BQBIOL_IS);
-		rdfDescElement.appendChild(bqBiolElement);
-		Element rdfBagElement = doc.createElement(XMLAttributes.ELEMENT_RDF_BAG);
-		bqBiolElement.appendChild(rdfBagElement);
-		for(String link:links) {
-			Element rdfLIElement = doc.createElement(XMLAttributes.ELEMENT_RDF_LI);
-			rdfLIElement.setAttribute("rdf:resource", link);
-			rdfBagElement.appendChild(rdfLIElement);
+		if(links!=null) {
+			Element bqBiolElement = doc.createElement(XMLAttributes.ELEMENT_BQBIOL_IS);
+			rdfDescElement.appendChild(bqBiolElement);
+			Element rdfBagElement = doc.createElement(XMLAttributes.ELEMENT_RDF_BAG);
+			bqBiolElement.appendChild(rdfBagElement);
+			for(String link:links) {
+				Element rdfLIElement = doc.createElement(XMLAttributes.ELEMENT_RDF_LI);
+				rdfLIElement.setAttribute("rdf:resource", link);
+				rdfBagElement.appendChild(rdfLIElement);
+			}
 		}
 		
-		
-		
+		if(sboTerm!=null) {
+			Element bqBiolElement = doc.createElement(XMLAttributes.ELEMENT_BQBIOL_HAS_PROPERTY);
+			rdfDescElement.appendChild(bqBiolElement);
+			Element rdfBagElement = doc.createElement(XMLAttributes.ELEMENT_RDF_BAG);
+			bqBiolElement.appendChild(rdfBagElement);
+			Element rdfLIElement = doc.createElement(XMLAttributes.ELEMENT_RDF_LI);
+			rdfLIElement.setAttribute("rdf:resource", "http://identifiers.org/sbo/"+sboTerm);
+			rdfBagElement.appendChild(rdfLIElement);
+		}
 		return annElement;
 	}
 
@@ -177,6 +186,9 @@ public class MetabolicNetworkXMLOutput {
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FAST, "false");
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND, ""+reaction.getLowerBoundFluxParameterId());
 	        reactionElement.setAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND, ""+reaction.getUpperBoundFluxParameterId());
+	        List<String> links = reaction.getLinks();
+	        if(links!=null || reaction.getSboTerm()!=null) reactionElement.appendChild(buildAnnotationElement(reaction.getId(),links, reaction.getSboTerm(), doc));
+	        listReactionsElement.appendChild(reactionElement);
 	        if(reaction.getReactants().size()>0) {
 	        	Element listReactanstElement = saveReactionComponents(XMLAttributes.ELEMENT_LISTREACTANTS, reaction.getReactants(), doc);
 		        reactionElement.appendChild(listReactanstElement);
@@ -189,9 +201,7 @@ public class MetabolicNetworkXMLOutput {
 	        	Element listEnzymesElement = saveEnzymeRefs(XMLAttributes.ELEMENT_FBC_GENEASSOC, reaction.getEnzymes(), doc);
 		        reactionElement.appendChild(listEnzymesElement);
 	        }
-	        List<String> links = reaction.getLinks();
-	        if(links!=null) reactionElement.appendChild(buildAnnotationElement(reaction.getId(),links, doc));
-	        listReactionsElement.appendChild(reactionElement);
+	        
 	    }
 
 	    return listReactionsElement;

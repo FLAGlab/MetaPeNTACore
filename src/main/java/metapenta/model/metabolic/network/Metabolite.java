@@ -7,6 +7,7 @@ public class Metabolite implements ID {
 	private int nid;
 	private String id;
 	private String name;
+	private String sboTerm;
 	private String compartmentId;
 	private ChemicalFormula chemicalFormula;
 	private boolean hasOnlySubstanceUnits = false;
@@ -55,6 +56,14 @@ public class Metabolite implements ID {
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getSboTerm() {
+		return sboTerm;
+	}
+
+	public void setSboTerm(String sboTerm) {
+		this.sboTerm = sboTerm;
 	}
 
 	public String getCompartmentId() {

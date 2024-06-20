@@ -189,8 +189,11 @@ public class MetabolicNetworkXMLLoader {
 					if(boundaryS!=null && "true".equals(boundaryS)) metabolite.setBoundaryCondition(true);
 					if(chargeS!=null && chargeS.trim().length()>0) metabolite.setCharge(Integer.parseInt(chargeS.trim()));
 					if(formula!=null && formula.trim().length()>0) metabolite.setChemicalFormula(formula.trim());
-					List<String> links = loadAnnotations(id, elem);
+					List<String> links = loadAnnotations(id, elem, XMLAttributes.ELEMENT_BQBIOL_IS);
 					if(links!=null && links.size()>0) metabolite.setLinks(links);
+					links = loadAnnotations(id, elem, XMLAttributes.ELEMENT_BQBIOL_HAS_PROPERTY);
+					String sboTerm = calculateSBOTerm(links);
+					if(sboTerm!=null) metabolite.setSboTerm(sboTerm);
 					//else System.out.println("No links for metabolite: "+id);
 					metaboliteNumber ++;
 					//if("CPD__45__19812__91__c__93__".equals(id)) System.out.println("Loaded links: "+links);
@@ -238,7 +241,8 @@ public class MetabolicNetworkXMLLoader {
 		List<GeneProduct> enzymes = new ArrayList<GeneProduct>();
 		List<ReactionComponent> reactants = new ArrayList<ReactionComponent>();
 		List<ReactionComponent> products = new ArrayList<ReactionComponent>();
-		List<String> links = null;
+		List<String> linksIs = null;
+		List<String> linksHasProperty = null;
 		NodeList offspring = reactionElement.getChildNodes();
 
 		for(int j=0; j<offspring.getLength(); j++) {
@@ -256,7 +260,8 @@ public class MetabolicNetworkXMLLoader {
 					products = loadReactionComponents(id, element, network);
 				}
 				if(XMLAttributes.ELEMENT_ANNOTATION.equals(element.getNodeName())) {
-					links = loadAnnotations(id, element);
+					linksIs = loadAnnotations(id, element, XMLAttributes.ELEMENT_BQBIOL_IS);
+					linksHasProperty = loadAnnotations(id, element, XMLAttributes.ELEMENT_BQBIOL_HAS_PROPERTY);
 				}
 			}
 		}
@@ -270,12 +275,24 @@ public class MetabolicNetworkXMLLoader {
 
 		Reaction reaction = new Reaction(id, name, reactants, products, reactionNumber);
 		reaction.setEnzymes(enzymes);
-		if(links!=null && links.size()>0) reaction.setLinks(links);
+		if(linksIs!=null && linksIs.size()>0) reaction.setLinks(linksIs);
+		String sboTerm = calculateSBOTerm(linksHasProperty);
+		if(sboTerm!=null) reaction.setSboTerm(sboTerm);
 
 		return reaction;
 	}
 
 	
+
+	private String calculateSBOTerm(List<String> linksHasProperty) {
+		if(linksHasProperty==null) return null;
+		for(String link:linksHasProperty) {
+			//TODO: Include controlled terms
+			if(!link.startsWith("http://identifiers.org/sbo/SBO:")) continue;
+			return link.substring(27);
+		}
+		return null;
+	}
 
 	private void setBoundsInReaction(Reaction reaction, String lowerBound, String upperBound, MetabolicNetwork network) throws Exception {
 		if(lowerBound!=null && !lowerBound.trim().isEmpty()) {
@@ -343,7 +360,7 @@ public class MetabolicNetworkXMLLoader {
 		}
 		return answer;
 	}
-	private List<String> loadAnnotations(String elementId, Element rootElem) {
+	private List<String> loadAnnotations(String elementId, Element rootElem, String linkType) {
 		List<String> answer = new ArrayList<>();
 		NodeList offspring = rootElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){
@@ -353,19 +370,19 @@ public class MetabolicNetworkXMLLoader {
 				//if("CPD__45__19812__91__c__93__".equals(elementId)) System.out.println("Parent node: "+rootElem.getNodeName()+" Next node: "+element.getNodeName());
 				//Recursion to avoid more nesting or extra methods
 				if(XMLAttributes.ELEMENT_ANNOTATION.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(elementId, element));
+					answer.addAll(loadAnnotations(elementId, element, linkType));
 				}
 				if(XMLAttributes.ELEMENT_RDF_ROOT.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(elementId, element));
+					answer.addAll(loadAnnotations(elementId, element, linkType));
 				}
 				else if(XMLAttributes.ELEMENT_RDF_DESCRIPTION.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(elementId, element));
+					answer.addAll(loadAnnotations(elementId, element, linkType));
 				}
-				else if(XMLAttributes.ELEMENT_BQBIOL_IS.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(elementId, element));
+				else if(linkType.equals(element.getNodeName())) {
+					answer.addAll(loadAnnotations(elementId, element, linkType));
 				}
 				else if(XMLAttributes.ELEMENT_RDF_BAG.equals(element.getNodeName())) {
-					answer.addAll(loadAnnotations(elementId, element));
+					answer.addAll(loadAnnotations(elementId, element, linkType));
 				}
 				else if(XMLAttributes.ELEMENT_RDF_LI.equals(element.getNodeName())) {
 					String link = element.getAttribute(XMLAttributes.ATTRIBUTE_RDF_RESOURCE);

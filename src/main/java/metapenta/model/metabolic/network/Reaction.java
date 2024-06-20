@@ -13,6 +13,7 @@ public class Reaction implements ID {
 	private int nid;
 	private String id;
 	private String name;
+	private String sboTerm;
 	private List<ReactionComponent> reactants;
 	private List<ReactionComponent> products;
 	private boolean reversible = false;
@@ -83,6 +84,14 @@ public class Reaction implements ID {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getSboTerm() {
+		return sboTerm;
+	}
+
+	public void setSboTerm(String sboTerm) {
+		this.sboTerm = sboTerm;
 	}
 
 	public void setProducts(List<ReactionComponent> products) {
