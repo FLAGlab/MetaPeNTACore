@@ -7,6 +7,7 @@ import metapenta.model.ReactionComponent;
 import metapenta.services.dto.MetaboliteReactionsDTO;
 import metapenta.io.jsonWriters.MetaboliteReactionsWriter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +37,13 @@ public class MetaboliteReactionsService {
 	public void setMetabolite(Metabolite metabolite) {
 		this.metabolite = metabolite;
 	}
-	public void setMetabolite(String value) {
+	public void setMetabolite(String value) throws IOException {
 		this.metabolite = metabolicNetwork.getMetabolite(value);
+		if(metabolite==null) throw new IOException("A metabolite with id: "+value+" was not found in the network");
 	}
 
 	public MetaboliteReactionsDTO getMetaboliteReactions() {
+		if(metabolite==null) throw new RuntimeException("The metabolite must be initialized");
         List<Reaction> isSubstrate = getReactionsByCriteria(IS_SUBSTRATE);
         List<Reaction> isProduct = getReactionsByCriteria(IS_PRODUCT);
         return new MetaboliteReactionsDTO(isSubstrate, isProduct);
@@ -48,6 +51,7 @@ public class MetaboliteReactionsService {
 
     private List<Reaction> getReactionsByCriteria(String criteria){
         List<Reaction> reactions = metabolicNetwork.getReactionsAsList();
+        List<Reaction> answer = new ArrayList<Reaction>();
         
         for(Reaction r:reactions) {
         	List<ReactionComponent> metabolites = new ArrayList<ReactionComponent>();
@@ -59,12 +63,12 @@ public class MetaboliteReactionsService {
         	}
         	for(ReactionComponent c:metabolites) {
         		if(c.getMetaboliteId().equals(metabolite.getId())) {
-        			reactions.add(r);
+        			answer.add(r);
         			break;
         		}
         	}
         }
-        return reactions;
+        return answer;
     }
     /**
 	 * The main method of class

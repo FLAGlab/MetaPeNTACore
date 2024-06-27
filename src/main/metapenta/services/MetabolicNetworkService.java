@@ -1,12 +1,12 @@
 package metapenta.services;
 
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 import metapenta.io.MetabolicNetworkXMLLoader;
 import metapenta.model.MetabolicNetwork;
-import metapenta.model.Metabolite;
 import metapenta.services.dto.ConnectedComponentsDTO;
 import metapenta.services.dto.FindGapsDTO;
 import metapenta.services.dto.GeneProductReactionsDTO;
@@ -43,11 +43,10 @@ public class MetabolicNetworkService {
         return networkBoundaryService.getNetworkBoundary();
     }
 
-    public MetaboliteReactionsDTO getMetaboliteReactions (String metaboliteId) {
-        Metabolite metabolite = metabolicNetwork.getMetabolite(metaboliteId);
+    public MetaboliteReactionsDTO getMetaboliteReactions (String metaboliteId) throws IOException {
         MetaboliteReactionsService service = new MetaboliteReactionsService();
         service.setMetabolicNetwork(metabolicNetwork);
-        service.setMetabolite(metabolite);
+        service.setMetabolite(metaboliteId);
 
         return service.getMetaboliteReactions();
     }
@@ -68,10 +67,11 @@ public class MetabolicNetworkService {
         return service.getAllPaths();
     }
 
-    public GeneProductReactionsDTO getGeneProductReactions(String geneID) {
+    public GeneProductReactionsDTO getGeneProductReactions(String geneID) throws IOException {
         GeneProductReactionsService geneProductReactionsService = new GeneProductReactionsService();
         geneProductReactionsService.setMetabolicNetwork(metabolicNetwork);
-        return geneProductReactionsService.getGeneProductReactions(geneID);
+        geneProductReactionsService.setGeneProduct(geneID);
+        return geneProductReactionsService.getGeneProductReactions();
     }
 
     public MetabolicNetwork intersect(MetabolicNetwork targetMetabolicNetwork) {
