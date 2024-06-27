@@ -1,0 +1,105 @@
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  1.000e+00  ratio =  1.000e+00
+Problem data seem to be well scaled
+The current solver interface glpk doesn't support setting the optimality tolerance.
+============================= test session starts ==============================
+platform linux -- Python 3.11.4, pytest-7.2.1, pluggy-1.0.0+repack
+rootdir: /usr/local/lib/python3.11/dist-packages/memote/suite/tests
+plugins: typeguard-4.2.1, anyio-3.6.2
+collected 146 items / 1 skipped
+
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py . [  0%]
+.FFF.FF.FF..FFFFF.FFFFFFFFFFFFFFF..FF..F...F.F..F.F.F..F..FFF...         [ 44%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_basic.py . [ 45%]
+.....F.F..........F.FF                                                   [ 60%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_biomass.py . [ 60%]
+F..FF.F.F                                                                [ 67%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_consistency.py . [ 67%]
+...ssss..ss.ssss.....F.F.FF.                                             [ 86%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_essentiality.py s [ 87%]
+                                                                         [ 87%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_growth.py s [ 88%]
+                                                                         [ 88%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_matrix.py . [ 89%]
+...                                                                      [ 91%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_sbml.py . [ 91%]
+.                                                                        [ 92%]
+../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_sbo.py . [ 93%]
+F.....Fss.                                                               [100%]
+
+=============================== warnings summary ===============================
+../../../../../usr/lib/python3/dist-packages/_pytest/config/__init__.py:1171
+  /usr/lib/python3/dist-packages/_pytest/config/__init__.py:1171: PytestAssertRewriteWarning: Module already imported so cannot be rewritten: typeguard
+    self._mark_plugins_for_rewrite(hook)
+
+../../../../../usr/lib/python3/dist-packages/_pytest/cacheprovider.py:433
+  /usr/lib/python3/dist-packages/_pytest/cacheprovider.py:433: PytestCacheWarning: could not create cache path /usr/local/lib/python3.11/dist-packages/memote/suite/tests/.pytest_cache/v/cache/nodeids
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../../../../../usr/lib/python3/dist-packages/_pytest/cacheprovider.py:387
+  /usr/lib/python3/dist-packages/_pytest/cacheprovider.py:387: PytestCacheWarning: could not create cache path /usr/local/lib/python3.11/dist-packages/memote/suite/tests/.pytest_cache/v/cache/lastfailed
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+../../../../../usr/lib/python3/dist-packages/_pytest/stepwise.py:56
+  /usr/lib/python3/dist-packages/_pytest/stepwise.py:56: PytestCacheWarning: could not create cache path /usr/local/lib/python3.11/dist-packages/memote/suite/tests/.pytest_cache/v/cache/stepwise
+    session.config.cache.set(STEPWISE_CACHE_DIR, [])
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_presence
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[pubchem.compound]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[kegg.compound]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[inchikey]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[inchi]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[hmdb]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[reactome]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_overview[biocyc]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[rhea]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[kegg.reaction]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[seed.reaction]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[metanetx.reaction]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[reactome]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[ec-code]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[brenda]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_overview[biocyc]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[refseq]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[uniprot]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[ecogene]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[kegg.genes]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[ncbigi]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[ncbigene]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[ncbiprotein]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[ccds]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[hprd]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_overview[asap]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_wrong_ids[pubchem.compound]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_wrong_ids[inchikey]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_wrong_ids[inchi]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_metabolite_annotation_wrong_ids[reactome]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_wrong_ids[rhea]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_wrong_ids[seed.reaction]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_wrong_ids[reactome]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_reaction_annotation_wrong_ids[brenda]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_wrong_ids[refseq]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_wrong_ids[kegg.genes]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_wrong_ids[ncbiprotein]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_wrong_ids[ccds]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_annotation.py::test_gene_product_annotation_wrong_ids[hprd]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_basic.py::test_gene_protein_reaction_rule_presence
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_basic.py::test_metabolic_coverage
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_basic.py::test_find_reactions_with_partially_identical_annotations
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_basic.py::test_find_reactions_with_identical_genes
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_basic.py::test_find_medium_metabolites
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_biomass.py::test_biomass_consistency[BIOMASS_Ecoli_core_w_GAM]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_biomass.py::test_biomass_precursors_default_production[BIOMASS_Ecoli_core_w_GAM]
+Writing snapshot report to 'e_coli_core_memote.html'.
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_biomass.py::test_biomass_precursors_open_production[BIOMASS_Ecoli_core_w_GAM]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_biomass.py::test_fast_growth_default[BIOMASS_Ecoli_core_w_GAM]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_biomass.py::test_essential_precursors_not_in_biomass[BIOMASS_Ecoli_core_w_GAM]
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_consistency.py::test_find_stoichiometrically_balanced_cycles
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_consistency.py::test_find_deadends
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_consistency.py::test_find_metabolites_not_produced_with_open_bounds
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_consistency.py::test_find_metabolites_not_consumed_with_open_bounds
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_sbo.py::test_reaction_sbo_presence
+FAILED ../../../../../usr/local/lib/python3.11/dist-packages/memote/suite/tests/test_sbo.py::test_exchange_specific_sbo_presence
+============ 55 failed, 77 passed, 15 skipped, 4 warnings in 1.28s =============
