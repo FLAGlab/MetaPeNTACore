@@ -226,7 +226,7 @@ public class Reaction {
 			Map<String, Integer> elements = component.getScaledElementsMap();
 			if(elements==null) return null;
 			for(Map.Entry<String, Integer> entry:elements.entrySet()) {
-				totals.compute(entry.getKey(), (k,v)-> (k==null)?entry.getValue():v+entry.getValue());
+				totals.compute(entry.getKey(), (k,v)-> (v==null)?entry.getValue():v+entry.getValue());
 			}
 		}
 		return totals;

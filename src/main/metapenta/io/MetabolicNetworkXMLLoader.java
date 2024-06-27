@@ -363,7 +363,11 @@ public class MetabolicNetworkXMLLoader {
 					try {
 						stoichiometry = Integer.parseInt(stchmStr);
 					} catch (NumberFormatException e) {
-						throw new IOException("Invalid stoichiometry "+stchmStr+" for metabolite "+metabId+" in reaction "+reactionId,e);
+						try {
+							stoichiometry = (int)Math.round(Double.parseDouble(stchmStr));
+						} catch (NumberFormatException e1) {
+							throw new IOException("Invalid stoichiometry "+stchmStr+" for metabolite "+metabId+" in reaction "+reactionId,e);
+						}	
 					}
 					ReactionComponent component = new ReactionComponent(m, stoichiometry);
 					answer.add(component);
