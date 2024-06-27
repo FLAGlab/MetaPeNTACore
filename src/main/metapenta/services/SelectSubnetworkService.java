@@ -15,7 +15,6 @@ import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
 import metapenta.model.MetabolicNetwork;
-import metapenta.io.MetabolicNetworkXMLLoader;
 import metapenta.io.MetabolicNetworkXMLWriter;
 
 public class SelectSubnetworkService {
@@ -51,8 +50,7 @@ public class SelectSubnetworkService {
 		
 	}
 	public static void main(String[] args) throws Exception {
-		MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
-        MetabolicNetwork network = networkLoader.loadNetwork(args[0]);
+        MetabolicNetwork network = MetabolicNetwork.load(args[0]);
         SelectSubnetworkService instance = new SelectSubnetworkService(network);
         Set<String> reactionIds = loadIds(args[1]);
         MetabolicNetwork subnetwork = instance.buildSubnetwork(reactionIds);

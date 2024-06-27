@@ -1,7 +1,7 @@
 package metapenta.io.jsonWriters;
 
 import metapenta.model.MetabolicNetwork;
-import metapenta.io.MetabolicNetworkJSONUtils;
+
 import org.json.simple.JSONObject;
 
 import java.io.IOException;

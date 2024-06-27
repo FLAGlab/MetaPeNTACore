@@ -1,11 +1,11 @@
-package metapenta.dto;
+package metapenta.services.dto;
 
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
-import metapenta.petrinet.PetriNetElements;
-import metapenta.petrinet.Place;
-import metapenta.petrinet.Transition;
-import metapenta.services.ShortestPathByTransitionNumberService;
+import metapenta.model.MetabolicNetworkPetriNet;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.Transition;
+import metapenta.services.ShortestPathService;
 
 import java.util.HashMap;
 
@@ -17,11 +17,11 @@ public class ShortestPathsDTO {
 
     private int[] distances;
 
-    private PetriNetElements petriNet;
+    private MetabolicNetworkPetriNet petriNet;
 
     private HashMap<String, String[]> paths = new HashMap<>();
 
-    public ShortestPathsDTO(int[] distances, Transition[] lastTransitions, Place[] lastPlaces, PetriNetElements petriNet) {
+    public ShortestPathsDTO(int[] distances, Transition[] lastTransitions, Place[] lastPlaces, MetabolicNetworkPetriNet petriNet) {
         this.distances = distances;
         this.lastTransitions = lastTransitions;
         this.lastPlaces = lastPlaces;
@@ -32,7 +32,7 @@ public class ShortestPathsDTO {
 
     private void calculatePaths() {
         for (int i = 0; i < distances.length; i++){
-            if (distances[i] != ShortestPathByTransitionNumberService.INFINITE) {
+            if (distances[i] != ShortestPathService.INFINITE) {
                 String[] path = calculatePath(i);
                 //paths.put(petriNet.getPlaceByNid(i).getID(), path);
             }

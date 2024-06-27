@@ -1,4 +1,4 @@
-package metapenta.commands;
+package metapenta.services.dto;
 
 import metapenta.kegg.EntityList;
 

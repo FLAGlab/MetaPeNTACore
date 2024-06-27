@@ -1,5 +1,6 @@
 package metapenta.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+
+import metapenta.io.MetabolicNetworkXMLLoader;
 
 public class MetabolicNetwork {
 	private Logger log = Logger.getAnonymousLogger();
@@ -18,6 +21,7 @@ public class MetabolicNetwork {
 	private Map<String, List<Metabolite>> metabolitesByCompartment = new HashMap<>();
 	private Map<String, Reaction> reactions = new TreeMap<>();
 
+	
 	public void addParameter (String id, String value) {
 		parameters.put(id, value);
 	}
@@ -216,5 +220,9 @@ public class MetabolicNetwork {
         }
 
         return new ArrayList<>(rootNoProductionGaps.values());
+    }
+    public static MetabolicNetwork load(String filename) throws IOException {
+    	MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
+    	return loader.loadNetwork(filename);
     }
 }

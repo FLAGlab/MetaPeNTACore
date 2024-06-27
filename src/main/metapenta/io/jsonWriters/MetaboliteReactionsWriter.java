@@ -1,7 +1,8 @@
 package metapenta.io.jsonWriters;
 
 import metapenta.model.Reaction;
-import metapenta.dto.MetaboliteReactionsDTO;
+import metapenta.services.dto.MetaboliteReactionsDTO;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

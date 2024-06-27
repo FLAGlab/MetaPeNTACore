@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import metapenta.dto.PathsDTO;
+import metapenta.io.jsonWriters.FindAllPathsWriter;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
+import metapenta.model.MetabolicNetworkPetriNet;
 import metapenta.model.Reaction;
-import metapenta.petrinet.PetriNetElements;
-import metapenta.petrinet.Place;
-import metapenta.petrinet.Transition;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.Transition;
+import metapenta.services.dto.PathsDTO;
 
 public class AllPathsService {
+	
+	
     private int[] transitionVisited;
     private Place<Metabolite> currentSourcePlace;
 
@@ -22,17 +24,28 @@ public class AllPathsService {
 
     private PathsDTO paths = new PathsDTO();
 
-    private PetriNetElements metabolicPetriNet;
+    private MetabolicNetworkPetriNet metabolicPetriNet;
 
     private HashMap<String, Collection<Collection<Transition<Reaction>>>> memoizedRoutes = new HashMap<>();
 
-    private Place target;
+    private Place<Metabolite> target;
     private List<String> initPlaces;
+    
+    public void setMetabolicNetwork(MetabolicNetwork metabolicNetwork) {
+    	metabolicPetriNet = new MetabolicNetworkPetriNet(metabolicNetwork);	
+	}
+    public void setInitialMetaboliteIds(String initMetabolites) {
+        String[] initialMetabolites = initMetabolites.split(",");
 
-    public AllPathsService(PetriNetElements metabolicPetriNet, FindAllPathsParams params) {
-        this.metabolicPetriNet = metabolicPetriNet;
-        this.initPlaces = params.getInitMetaboliteIds();
-        this.target = metabolicPetriNet.getPlace(params.getTarget());
+        for (int i = 0; i < initialMetabolites.length; i++) {
+            initPlaces.add(initialMetabolites[i]);
+        }
+    }
+    public void setInitialMetaboliteIds(List<String> metaboliteIds) {
+		initPlaces = metaboliteIds;
+	}
+    public void setTargetId(String id) {
+    	target = metabolicPetriNet.getPlace(id);
     }
 
     public PathsDTO getAllPaths() {
@@ -130,4 +143,23 @@ public class AllPathsService {
     private void markTransitionAsVisited(Transition<Reaction> transition){
         transitionVisited[transition.getObject().getNid()]++;
     }
+    /**
+     * args[0]: XML model
+     * args[1]: Init metabolites separated by comma
+     * args[2]: Target metabolite
+     * args[3] Output file
+     */
+    public static void main(String[] args) throws Exception {
+    	AllPathsService instance = new AllPathsService();
+        instance.setMetabolicNetwork(MetabolicNetwork.load(args[0]));
+        instance.setInitialMetaboliteIds(args[1]);
+        instance.setTargetId(args[2]);
+        PathsDTO paths = instance.getAllPaths();
+
+        FindAllPathsWriter findAllPathsWriter = new FindAllPathsWriter(args[3], paths);
+        findAllPathsWriter.write();
+    }
+	
+
+	
 }

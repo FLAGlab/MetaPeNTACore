@@ -1,6 +1,8 @@
-package metapenta.io.jsonWriters;
+package metapenta.io;
 
 import com.opencsv.CSVWriter;
+
+import metapenta.io.jsonWriters.Writer;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
@@ -80,6 +82,16 @@ public class MetabolicNetworkCSVWriter implements Writer {
     private void writeReactionToMetabolite(String reaction, String metabolite) {
         String[] reactionToMetaboliteLine = {reaction, metabolite, REACTION_TO_METABOLITE};
         lines.add(reactionToMetaboliteLine);
+    }
+    /**
+     * args[0]: Metabolic network in XML format
+     * args[1]: Output file
+     */
+    public static void main(String[] args) throws Exception {
+        MetabolicNetwork network = MetabolicNetwork.load(args[0]);
+
+        MetabolicNetworkCSVWriter metabolicWriter = new MetabolicNetworkCSVWriter(network, args[1]);
+        metabolicWriter.write();
     }
 
 }

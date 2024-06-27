@@ -1,23 +1,27 @@
 package metapenta.services;
 
-import metapenta.dto.NetworkBoundaryDTO;
-import metapenta.model.Reaction;
-
-import java.util.List;
+import metapenta.io.jsonWriters.NetworkBoundaryWriter;
+import metapenta.model.MetabolicNetwork;
+import metapenta.services.dto.NetworkBoundaryDTO;
 
 public class NetworkBoundaryService {
-    private final List<Reaction> exchangeReactions;
-
-
-    public NetworkBoundaryService(List<Reaction> exchangeReactions){
-        this.exchangeReactions = exchangeReactions;
+	private MetabolicNetwork network;
+	public void setMetabolicNetwork(MetabolicNetwork network){
+    	this.network = network;
     }
-
     public NetworkBoundaryDTO getNetworkBoundary() {
-        return new NetworkBoundaryDTO(getExchangeReactions());
+        return new NetworkBoundaryDTO(network.inferExchangeReactions());
     }
-
-    private List<Reaction> getExchangeReactions() {
-        return exchangeReactions;
+    
+    /**
+     * args[0]: First metabolic network in XML format
+     * args[1]: Output file path
+     */
+    public static void main(String[] args) throws Exception {
+        NetworkBoundaryService instance = new NetworkBoundaryService();
+        instance.setMetabolicNetwork(MetabolicNetwork.load(args[0]));
+        NetworkBoundaryDTO networkBoundary = instance.getNetworkBoundary();
+        NetworkBoundaryWriter boundaryWriter = new NetworkBoundaryWriter(networkBoundary, args[1]);
+        boundaryWriter.write();
     }
 }

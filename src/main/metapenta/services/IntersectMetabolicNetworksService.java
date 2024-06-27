@@ -5,13 +5,15 @@ import metapenta.model.Reaction;
 import java.util.ArrayList;
 import java.util.List;
 
+import metapenta.io.MetabolicNetworkXMLLoader;
+import metapenta.io.jsonWriters.MetabolicNetworkJSONWriter;
 import metapenta.model.MetabolicNetwork;
 
 
-public class InterceptMetabolicNetworksService {
+public class IntersectMetabolicNetworksService {
 
-    public MetabolicNetwork interception(MetabolicNetwork originMetabolicNetwork, MetabolicNetwork targetMetabolicNetwork){
-        List<Reaction> reactions = interceptionReactions(originMetabolicNetwork, targetMetabolicNetwork);
+    public MetabolicNetwork intersect(MetabolicNetwork originMetabolicNetwork, MetabolicNetwork targetMetabolicNetwork){
+        List<Reaction> reactions = intersectReactions(originMetabolicNetwork, targetMetabolicNetwork);
 
         MetabolicNetwork newMetabolicNetwork = new MetabolicNetwork();
         newMetabolicNetwork.addReactions(reactions);
@@ -19,7 +21,7 @@ public class InterceptMetabolicNetworksService {
         return newMetabolicNetwork;
     }
 
-    private List<Reaction> interceptionReactions(MetabolicNetwork originMetabolicNetwork, MetabolicNetwork targetMetabolicNetwork){
+    private List<Reaction> intersectReactions(MetabolicNetwork originMetabolicNetwork, MetabolicNetwork targetMetabolicNetwork){
         List<Reaction> commonReactions = new ArrayList<>();
         List<Reaction> reactions = originMetabolicNetwork.getReactionsAsList();
         for (Reaction reaction : reactions) {
@@ -57,4 +59,15 @@ public class InterceptMetabolicNetworksService {
 		}
 		
 	}
+	public static void main(String[] args) throws Exception {
+
+        IntersectMetabolicNetworksService instance = new IntersectMetabolicNetworksService();
+        MetabolicNetwork network1 = MetabolicNetwork.load(args[0]);
+        MetabolicNetwork network2 = MetabolicNetwork.load(args[1]);
+
+        MetabolicNetwork resultNetwork = instance.intersect(network1, network2);
+
+        MetabolicNetworkJSONWriter metabolicNetworkWriter = new MetabolicNetworkJSONWriter(resultNetwork, args[2]);
+        metabolicNetworkWriter.write();
+    }
 }

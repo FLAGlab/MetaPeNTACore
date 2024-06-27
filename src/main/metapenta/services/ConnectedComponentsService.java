@@ -5,13 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import metapenta.dto.ConnectedComponentsDTO;
+import metapenta.io.MetabolicNetworkXMLLoader;
+import metapenta.io.jsonWriters.ConnectedComponentsWriter;
+import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
+import metapenta.model.MetabolicNetworkPetriNet;
 import metapenta.model.Reaction;
-import metapenta.petrinet.Edge;
-import metapenta.petrinet.PetriNetElements;
-import metapenta.petrinet.Place;
-import metapenta.petrinet.Transition;
+import metapenta.model.petrinet.Edge;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.Transition;
+import metapenta.services.dto.ConnectedComponentsDTO;
 
 public class ConnectedComponentsService {
     private static final String DOWN_CRITERIA = "DOWN";
@@ -27,7 +30,8 @@ public class ConnectedComponentsService {
     private int connectedComponentCurrentId = 0;
 
 
-    public ConnectedComponentsService(PetriNetElements petriNet){
+    public void setMetabolicNetwork(MetabolicNetwork network){
+    	MetabolicNetworkPetriNet petriNet = new MetabolicNetworkPetriNet(network);
         this.transitions = petriNet.getTransitions();
         this.transitionsVisited = new int[transitions.size()];
     }
@@ -100,4 +104,14 @@ public class ConnectedComponentsService {
             assignGroupIdToPlace(place);
         }
     }
+    /**
+     * args[0]: Metabolic network in XML format
+     * args[1]: Output file
+     */
+    public static void main(String[] args) throws Exception {
+    	ConnectedComponentsService instance = new ConnectedComponentsService();
+    	instance.setMetabolicNetwork(MetabolicNetwork.load(args[0]));
+		ConnectedComponentsWriter connectedComponentsWriter = new ConnectedComponentsWriter(instance.getConnectedComponents(), args[1]);
+		connectedComponentsWriter.write();
+	}
 }

@@ -1,8 +1,9 @@
 package metapenta.io.jsonWriters;
 
-import metapenta.dto.ShortestPathsDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import metapenta.services.dto.ShortestPathsDTO;
 
 import java.io.IOException;
 import java.nio.file.Files;

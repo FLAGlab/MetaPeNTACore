@@ -1,4 +1,4 @@
-package metapenta.petrinet;
+package metapenta.model.petrinet;
 
 public final class PlaceComparable<O> extends Place<O> implements Comparable<PlaceComparable<O>> {
     private int priority;

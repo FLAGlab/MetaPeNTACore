@@ -4,7 +4,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
-import metapenta.io.MetabolicNetworkJSONUtils;
 import metapenta.io.MetabolicNetworkXMLWriter;
 import metapenta.kegg.EntityList;
 import metapenta.model.MetabolicNetwork;

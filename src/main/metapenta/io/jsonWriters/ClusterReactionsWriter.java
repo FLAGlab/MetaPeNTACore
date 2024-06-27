@@ -1,8 +1,7 @@
 package metapenta.io.jsonWriters;
 
-import metapenta.dto.ClusterReactionsDTO;
-import metapenta.io.MetabolicNetworkJSONUtils;
 import metapenta.io.MetabolicNetworkXMLWriter;
+import metapenta.services.dto.ClusterReactionsDTO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

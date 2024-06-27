@@ -1,21 +1,28 @@
-package metapenta.petrinet;
+package metapenta.model;
 
-import metapenta.model.MetabolicNetwork;
-import metapenta.model.Metabolite;
-import metapenta.model.Reaction;
-import metapenta.model.ReactionComponent;
+import metapenta.model.petrinet.Edge;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.Transition;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class PetriNetElements {
+public class MetabolicNetworkPetriNet {
     private final Map<String, Place<Metabolite>> places = new TreeMap<>();
     private final Map<String, Transition<Reaction>> transitions = new TreeMap<>();
 
-    public PetriNetElements(MetabolicNetwork metabolicNetwork) {
+    public MetabolicNetworkPetriNet(MetabolicNetwork metabolicNetwork) {
 		// TODO Auto-generated constructor stub
+    	List<Metabolite> metabolites = metabolicNetwork.getMetabolitesAsList();
+    	for(Metabolite m:metabolites) {
+    		addPlace(new Place<Metabolite>(m.getId(),m.getName(),m));
+    	}
+    	List<Reaction> reactions = metabolicNetwork.getReactionsAsList();
+    	for(Reaction r:reactions) {
+    		addTransition(new Transition<Reaction>(r.getId(), r.getName(), r));
+    	}
 	}
 	public Map<String, Transition<Reaction>> getTransitions() {
         return transitions;
@@ -26,12 +33,12 @@ public class PetriNetElements {
     public Map<String, Place<Metabolite>> getPlaces() {
         return places;
     }
-    public void addTransition(String id, Transition<Reaction> transition){
-        this.transitions.put(id, transition);
+    public void addTransition(Transition<Reaction> transition){
+        this.transitions.put(transition.getID(), transition);
     }
 
-    public void addPlace(String id, Place<Metabolite> place){
-        places.put(id, place);
+    public void addPlace(Place<Metabolite> place){
+        places.put(place.getID(), place);
     }
 
     public Place<Metabolite> getPlace(String id){
@@ -80,7 +87,7 @@ public class PetriNetElements {
 
     private Place createAndAddPlaceToNet(Metabolite metabolite){
         Place<Metabolite> place = new Place<>(metabolite.getId(), metabolite.getName(), metabolite);
-        addPlace(metabolite.getId(), place);
+        addPlace(place);
 
         return place;
     }
@@ -89,7 +96,7 @@ public class PetriNetElements {
 
         if ( transition == null ){
             transition = new Transition(reaction.getId(), reaction.getName(), reaction);
-            addTransition(reaction.getId(), transition);
+            addTransition(transition);
         }
 
         return transition;

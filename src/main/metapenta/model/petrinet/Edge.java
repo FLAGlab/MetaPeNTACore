@@ -1,4 +1,4 @@
-package metapenta.petrinet;
+package metapenta.model.petrinet;
 
 public class Edge<Target>{
     private Target target;

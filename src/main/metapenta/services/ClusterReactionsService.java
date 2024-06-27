@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import metapenta.commands.OrthogroupDTO;
 import metapenta.io.ClusterReactionsFileLoader;
 import metapenta.io.jsonWriters.ClusterReactionServiceWriter;
 import metapenta.kegg.EntityList;
@@ -19,6 +18,7 @@ import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
+import metapenta.services.dto.OrthogroupDTO;
 
 public class ClusterReactionsService {
     OrthogroupDTO orthogroups;
@@ -202,5 +202,13 @@ public class ClusterReactionsService {
         }
 
         return ids;
+    }
+    /**
+     * args[0]: NGSEP File
+     * args[2]: Output prefix
+     */
+    public static void main(String[] args) throws Exception {
+        ClusterReactionsService instance = new ClusterReactionsService(args[0], args[1]);
+        instance.generateNetwork();
     }
 }

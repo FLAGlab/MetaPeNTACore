@@ -1,9 +1,9 @@
 package metapenta.io.jsonWriters;
 
-import metapenta.dto.GeneProductReactionsDTO;
-import metapenta.io.MetabolicNetworkJSONUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import metapenta.services.dto.GeneProductReactionsDTO;
 
 import java.io.IOException;
 import java.nio.file.Files;

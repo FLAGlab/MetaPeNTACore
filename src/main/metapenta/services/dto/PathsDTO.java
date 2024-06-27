@@ -1,8 +1,8 @@
-package metapenta.dto;
+package metapenta.services.dto;
 
 import metapenta.model.Reaction;
-import metapenta.petrinet.Place;
-import metapenta.petrinet.Transition;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.Transition;
 
 import java.util.ArrayList;
 import java.util.List;

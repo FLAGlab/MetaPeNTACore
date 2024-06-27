@@ -3,90 +3,86 @@ package metapenta.services;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
-import metapenta.dto.ConnectedComponentsDTO;
-import metapenta.dto.FindGapsDTO;
-import metapenta.dto.GeneProductReactionsDTO;
-import metapenta.dto.MetaboliteReactionsDTO;
-import metapenta.dto.NetworkBoundaryDTO;
-import metapenta.dto.PathsDTO;
-import metapenta.dto.ShortestPathsDTO;
 import metapenta.io.MetabolicNetworkXMLLoader;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
-import metapenta.petrinet.PetriNetElements;
-import metapenta.petrinet.Place;
+import metapenta.services.dto.ConnectedComponentsDTO;
+import metapenta.services.dto.FindGapsDTO;
+import metapenta.services.dto.GeneProductReactionsDTO;
+import metapenta.services.dto.MetaboliteReactionsDTO;
+import metapenta.services.dto.NetworkBoundaryDTO;
+import metapenta.services.dto.PathsDTO;
+import metapenta.services.dto.ShortestPathsDTO;
 
 public class MetabolicNetworkService {
     private final MetabolicNetwork metabolicNetwork;
 
-    public MetabolicNetworkService(String networkFile) throws Exception{
-        MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
-        metabolicNetwork = networkLoader.loadNetwork(networkFile);
+    public MetabolicNetworkService (String networkFile) throws Exception{
+        metabolicNetwork = MetabolicNetwork.load(networkFile);
     }
 
-    public MetabolicNetworkService(InputStream is) throws Exception{
+    public MetabolicNetworkService (InputStream is) throws Exception{
         MetabolicNetworkXMLLoader networkLoader = new MetabolicNetworkXMLLoader();
         metabolicNetwork = networkLoader.loadNetwork(is);
     }
-
-    public ConnectedComponentsDTO connectedComponents() {
-    	PetriNetElements petriNet = new PetriNetElements(metabolicNetwork);
-        ConnectedComponentsService connectedComponentsService = new ConnectedComponentsService(petriNet);
-
-        return connectedComponentsService.getConnectedComponents();
-    }
-
-    public NetworkBoundaryDTO findNetworkBoundary() {
-        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService(metabolicNetwork.inferExchangeReactions());
-
-        return networkBoundaryService.getNetworkBoundary();
-    }
-
-    public MetaboliteReactionsDTO getMetaboliteReactions(String metaboliteId) {
-        Metabolite metabolite = metabolicNetwork.getMetabolite(metaboliteId);
-        MetaboliteReactionsService service = new MetaboliteReactionsService(metabolicNetwork, metabolite);
-
-        return service.getMetaboliteReactions();
-    }
-
+    
     public MetabolicNetwork getNetwork() {
         return this.metabolicNetwork;
     }
 
-    public Map<String, List<Metabolite>> getMetabolitesByCompartment(String compartment) {
-        return metabolicNetwork.getMetabolitesByCompartments();
+    public ConnectedComponentsDTO getConnectedComponents () {
+        ConnectedComponentsService connectedComponentsService = new ConnectedComponentsService();
+        connectedComponentsService.setMetabolicNetwork(metabolicNetwork);
+        return connectedComponentsService.getConnectedComponents();
     }
 
-    public ShortestPathsDTO getShortestPaths(String metaboliteId) {
-    	PetriNetElements petriNet = new PetriNetElements(metabolicNetwork);
-        Place<Metabolite> origin = petriNet.getPlace(metaboliteId);
-        ShortestPathByTransitionNumberService service = new ShortestPathByTransitionNumberService(petriNet, origin);
+    public NetworkBoundaryDTO findNetworkBoundary () {
+        NetworkBoundaryService networkBoundaryService = new NetworkBoundaryService();
+        networkBoundaryService.setMetabolicNetwork(metabolicNetwork);
+        return networkBoundaryService.getNetworkBoundary();
+    }
 
+    public MetaboliteReactionsDTO getMetaboliteReactions (String metaboliteId) {
+        Metabolite metabolite = metabolicNetwork.getMetabolite(metaboliteId);
+        MetaboliteReactionsService service = new MetaboliteReactionsService();
+        service.setMetabolicNetwork(metabolicNetwork);
+        service.setMetabolite(metabolite);
+
+        return service.getMetaboliteReactions();
+    }
+
+    
+    public ShortestPathsDTO getShortestPaths(String metaboliteId) {
+        ShortestPathService service = new ShortestPathService();
+        service.setMetabolicNetwork(metabolicNetwork);
+        service.setMetaboliteId(metaboliteId);
         return service.getShortestPath();
     }
 
-    public PathsDTO getAllPaths(FindAllPathsParams params) {
-    	PetriNetElements petriNet = new PetriNetElements(metabolicNetwork);
-        AllPathsService service = new AllPathsService(petriNet, params);
+    public PathsDTO getAllPaths(List<String> metaboliteIds, String targetId) {
+        AllPathsService service = new AllPathsService();
+        service.setMetabolicNetwork(metabolicNetwork);
+        service.setInitialMetaboliteIds(metaboliteIds);
+        service.setTargetId(targetId);
         return service.getAllPaths();
     }
 
     public GeneProductReactionsDTO getGeneProductReactions(String geneID) {
-        GeneProductReactionsService geneProductReactionsService = new GeneProductReactionsService(metabolicNetwork);
-
+        GeneProductReactionsService geneProductReactionsService = new GeneProductReactionsService();
+        geneProductReactionsService.setMetabolicNetwork(metabolicNetwork);
         return geneProductReactionsService.getGeneProductReactions(geneID);
     }
 
-    public MetabolicNetwork intercept(MetabolicNetwork targetMetabolicNetwork) {
-        InterceptMetabolicNetworksService metabolicNetworksService = new InterceptMetabolicNetworksService();
+    public MetabolicNetwork intersect(MetabolicNetwork targetMetabolicNetwork) {
+        IntersectMetabolicNetworksService metabolicNetworksService = new IntersectMetabolicNetworksService();
 
-        return metabolicNetworksService.interception(this.metabolicNetwork, targetMetabolicNetwork);
+        return metabolicNetworksService.intersect(this.metabolicNetwork, targetMetabolicNetwork);
     }
 
     public FindGapsDTO findGaps() {
-        FindGapsService findGapsService = new FindGapsService(metabolicNetwork.getRootNoProductionGaps(), metabolicNetwork.getRootNoConsumptionGaps());
+        FindGapsService findGapsService = new FindGapsService();
+        findGapsService.setMetabolicNetwork(metabolicNetwork);
         return findGapsService.getRootGaps();
     }
 }

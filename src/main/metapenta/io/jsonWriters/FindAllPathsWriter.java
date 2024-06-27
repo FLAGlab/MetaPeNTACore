@@ -1,9 +1,9 @@
 package metapenta.io.jsonWriters;
 
 import metapenta.model.Reaction;
-import metapenta.dto.PathsDTO;
-import metapenta.petrinet.Transition;
-import metapenta.io.MetabolicNetworkJSONUtils;
+import metapenta.model.petrinet.Transition;
+import metapenta.services.dto.PathsDTO;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

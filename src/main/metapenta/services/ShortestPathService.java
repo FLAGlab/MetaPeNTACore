@@ -1,24 +1,26 @@
 package metapenta.services;
 
+import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
-import metapenta.petrinet.PlaceComparable;
+import metapenta.model.MetabolicNetworkPetriNet;
 import metapenta.model.Reaction;
+import metapenta.model.petrinet.Place;
+import metapenta.model.petrinet.PlaceComparable;
+import metapenta.model.petrinet.Transition;
+import metapenta.services.dto.ShortestPathsDTO;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import metapenta.dto.ShortestPathsDTO;
-import metapenta.petrinet.PetriNetElements;
-import metapenta.petrinet.Place;
-import metapenta.petrinet.Transition;
+import metapenta.io.jsonWriters.ShortestPathWriter;
 
 
-public class ShortestPathByTransitionNumberService {
+public class ShortestPathService {
     public static final int INFINITE = 100000;
 
-    private PetriNetElements metabolicPetriNet;
+    private MetabolicNetworkPetriNet metabolicPetriNet;
 
     private Place<Metabolite> origin;
 
@@ -26,18 +28,20 @@ public class ShortestPathByTransitionNumberService {
 
     private int[] distances;
 
-    private Transition[] lastTransitions;
-    private Place[] lastPlaces;
+    private Transition<Reaction>[] lastTransitions;
+    private Place<Metabolite>[] lastPlaces;
 
 
     private Set<String> settled = new HashSet<>();
 
-
-    public ShortestPathByTransitionNumberService(PetriNetElements metabolicPetriNet, Place origin){
-        this.metabolicPetriNet = metabolicPetriNet;
-        this.origin = origin;
+    public void setMetabolicNetwork(MetabolicNetwork metabolicNetwork) {
+    	metabolicPetriNet = new MetabolicNetworkPetriNet(metabolicNetwork);
+        
         lastTransitions = new Transition[metabolicPetriNet.getPlaces().size()];
         lastPlaces = new Place[metabolicPetriNet.getPlaces().size()];
+	}
+    public void setMetaboliteId(String metaboliteId) {
+    	origin = metabolicPetriNet.getPlace(metaboliteId);
     }
 
 
@@ -102,4 +106,19 @@ public class ShortestPathByTransitionNumberService {
         lastTransitions[index] = transition;
         lastPlaces[index] = place;
     }
+    /**
+     * The main method of class
+     * args[0] the path of the XML file
+     * args[1] initial metabolite to calculate shortest paths
+     * args[2] Output file
+     */
+    public static void main(String[] args) throws Exception {
+        ShortestPathService instance = new ShortestPathService();
+        instance.setMetabolicNetwork(MetabolicNetwork.load(args[0]));
+        instance.setMetaboliteId(args[1]);
+        ShortestPathsDTO paths = instance.getShortestPath();
+        ShortestPathWriter shortestPathWriter = new ShortestPathWriter(paths, args[2]);
+        shortestPathWriter.write();
+    }
+    
 }

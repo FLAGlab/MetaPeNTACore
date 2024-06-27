@@ -1,4 +1,4 @@
-package metapenta.commands;
+package metapenta.services;
 
 import java.io.PrintStream;
 import java.util.List;
@@ -11,7 +11,7 @@ import metapenta.model.MetabolicNetwork;
 import metapenta.model.Reaction;
 
 
-public class BalanceReactions {
+public class BalanceReactionsService {
 	private String networkFile;
 	private String outPrefix;
 	/**
@@ -19,7 +19,7 @@ public class BalanceReactions {
 	 * args[1]: Output
 	 */
 	public static void main(String[] args) throws Exception{
-		BalanceReactions instance = new BalanceReactions();
+		BalanceReactionsService instance = new BalanceReactionsService();
 		instance.networkFile = args[0];
 		instance.outPrefix = args[1];
 		instance.run();

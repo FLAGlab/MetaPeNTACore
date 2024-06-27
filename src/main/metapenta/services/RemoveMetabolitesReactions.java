@@ -1,10 +1,8 @@
-package metapenta.commands;
+package metapenta.services;
 
 import java.util.Set;
 
 import metapenta.model.MetabolicNetwork;
-import metapenta.services.MetabolicNetworkService;
-import metapenta.services.SelectSubnetworkService;
 import metapenta.io.MetabolicNetworkXMLWriter;
 
 public class RemoveMetabolitesReactions {

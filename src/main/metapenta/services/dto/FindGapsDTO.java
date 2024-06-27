@@ -1,4 +1,4 @@
-package metapenta.dto;
+package metapenta.services.dto;
 
 import metapenta.model.Metabolite;
 

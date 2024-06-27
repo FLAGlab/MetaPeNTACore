@@ -1,17 +1,21 @@
-package metapenta.io.jsonWriters;
+package metapenta.services;
 
+import metapenta.io.StringUtils;
+import metapenta.io.jsonWriters.Writer;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
-import metapenta.io.StringUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class DescribeNetworkWriter implements Writer {
+public class DescribeNetworkService implements Writer {
 
     private static final String COMPARTMENT_FILE_SUFFIX = "_metabolites.txt";
     private MetabolicNetwork network;
@@ -50,7 +54,7 @@ public class DescribeNetworkWriter implements Writer {
 
     private String filesPrefix;
 
-    public DescribeNetworkWriter(MetabolicNetwork network, String prefix){
+    public DescribeNetworkService(MetabolicNetwork network, String prefix){
         this.network = network;
         initFilePrefixes(prefix);
     }
@@ -280,6 +284,13 @@ public class DescribeNetworkWriter implements Writer {
     public void WriteInLowBound(String s){
         loBoundsFileBuilder.append(s);
     }
-
+    /**
+	 * args[0]: Metabolic network file
+	 * args[1]: Output file prefixes
+	 */
+    public static void main(String[] args) throws Exception {
+        DescribeNetworkService networkWriter = new DescribeNetworkService(MetabolicNetwork.load(args[0]), args[1]);
+        networkWriter.write();
+    }
 
 }

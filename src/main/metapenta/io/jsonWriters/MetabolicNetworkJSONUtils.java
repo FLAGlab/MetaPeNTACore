@@ -1,4 +1,4 @@
-package metapenta.io;
+package metapenta.io.jsonWriters;
 
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;

@@ -1,6 +1,14 @@
 package metapenta.services;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.optim.*;
@@ -8,30 +16,23 @@ import org.apache.commons.math3.optim.linear.*;
 import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.apache.commons.math3.optim.nonlinear.scalar.MultivariateOptimizer;
 
-import metapenta.model.MetabolicNetwork;
-import metapenta.model.Metabolite;
+import metapenta.model.MetabolicNetworkPetriNet;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
-import metapenta.petrinet.Edge;
-import metapenta.petrinet.PetriNetElements;
-import metapenta.petrinet.Place;
-import metapenta.petrinet.Transition;
-
-import java.util.*;
 
 public class FluxBalanceAnalysisService {
     private RealMatrix stequiometryMatrix;
     private Map<String, Integer> rowsMetabolites = new HashMap<>();
     private Map<String, Integer> columnReactions = new HashMap<>();
-    private ArrayList<double[]> reactionsBounds = new ArrayList();
-    private PetriNetElements petriNet;
+    private ArrayList<double[]> reactionsBounds = new ArrayList<>();
+    private MetabolicNetworkPetriNet petriNet;
 
     private int growthReactionIndex;
     private static final double LOWER_LIMIT_NO_REVERSIBLE_RXN = 0;
     private static final double UPPER_LIMIT_RXN = 1000;
     private static final double LOWER_LIMIT_REVERSIBLE_RXN = -1000;
 
-    FluxBalanceAnalysisService(PetriNetElements petriNet, String growthReactionID) {
+    FluxBalanceAnalysisService(MetabolicNetworkPetriNet petriNet, String growthReactionID) {
         int actualColum = 0;
         Set<String> reactionsKeySet = petriNet.getTransitions().keySet();
         for (String reaction : reactionsKeySet) {

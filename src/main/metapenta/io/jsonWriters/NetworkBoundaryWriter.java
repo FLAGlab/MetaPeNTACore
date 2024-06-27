@@ -1,7 +1,8 @@
 package metapenta.io.jsonWriters;
 
-import metapenta.dto.NetworkBoundaryDTO;
 import metapenta.model.Reaction;
+import metapenta.services.dto.NetworkBoundaryDTO;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

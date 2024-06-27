@@ -1,4 +1,4 @@
-package metapenta.petrinet;
+package metapenta.model.petrinet;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import metapenta.model.Compartment;
 import metapenta.model.GeneProduct;
@@ -21,23 +22,29 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 
 public class MetabolicNetworkXMLLoader {
 	private int reactionNumber = 0;
 
-	public MetabolicNetwork loadNetwork(String filename) throws Exception {
+	public MetabolicNetwork loadNetwork(String filename) throws IOException {
 		System.out.println("Loading network from file: "+filename);
 		try (InputStream inputStream = new FileInputStream(filename);) {
 			return loadNetwork(inputStream);
 		}	
 	}
 
-	public MetabolicNetwork loadNetwork (InputStream inputStream) throws Exception {
+	public MetabolicNetwork loadNetwork (InputStream inputStream) throws IOException {
 		MetabolicNetwork metabolicNetwork = null;
 
-		DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = documentBuilder.parse(new InputSource(inputStream));
+		Document doc;
+		try {
+			DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			doc = documentBuilder.parse(new InputSource(inputStream));
+		} catch (ParserConfigurationException | SAXException e) {
+			throw new IOException("Error parsing XML file", e);
+		}
 
 		Element rootElement = doc.getDocumentElement();
 		NodeList offspring = rootElement.getChildNodes(); 
@@ -60,7 +67,7 @@ public class MetabolicNetworkXMLLoader {
 		throw new IOException("Malformed XML file. The element "+XMLAttributes.ELEMENT_MODEL+" could not be found");
 	}
 	
-	private MetabolicNetwork loadModel(Element modelElement) throws Exception {
+	private MetabolicNetwork loadModel(Element modelElement) throws IOException {
 		MetabolicNetwork metabolicNetwork = new MetabolicNetwork();
 		
 		Element compartments = getElementByID(modelElement, XMLAttributes.ELEMENT_LISTCOMPARTMENTS);
@@ -210,7 +217,7 @@ public class MetabolicNetworkXMLLoader {
 		
 	}
 
-	private void loadReactions(Element reactions, MetabolicNetwork network) throws Exception {
+	private void loadReactions(Element reactions, MetabolicNetwork network) throws IOException {
 		NodeList offspring = reactions.getChildNodes();
 
 		for(int i=0;i<offspring.getLength();i++){
@@ -242,7 +249,7 @@ public class MetabolicNetworkXMLLoader {
 		}
 	}
 
-	private Reaction loadReaction (Element reactionElement, MetabolicNetwork network, String id, String name) throws Exception {
+	private Reaction loadReaction (Element reactionElement, MetabolicNetwork network, String id, String name) throws IOException {
 		List<GeneProduct> enzymes = new ArrayList<GeneProduct>();
 		List<ReactionComponent> reactants = new ArrayList<ReactionComponent>();
 		List<ReactionComponent> products = new ArrayList<ReactionComponent>();
@@ -299,7 +306,7 @@ public class MetabolicNetworkXMLLoader {
 		return null;
 	}
 
-	private void setBoundsInReaction(Reaction reaction, String lowerBound, String upperBound, MetabolicNetwork network) throws Exception {
+	private void setBoundsInReaction(Reaction reaction, String lowerBound, String upperBound, MetabolicNetwork network) throws IOException {
 		if(lowerBound!=null && !lowerBound.trim().isEmpty()) {
 			String lowerBoundValue = network.getValueParameter(lowerBound);
 			if(lowerBoundValue ==null) throw new IOException("Lower bound parameter id not found for reactionElement: "+reaction.getId());
@@ -315,7 +322,7 @@ public class MetabolicNetworkXMLLoader {
 		}
 	}
 
-	private List<GeneProduct> loadEnzymes(String reactionId, Element listElem, MetabolicNetwork network) throws Exception {
+	private List<GeneProduct> loadEnzymes(String reactionId, Element listElem, MetabolicNetwork network) throws IOException {
 		List<GeneProduct> answer = new ArrayList<GeneProduct>();
 		NodeList offspring = listElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){  
@@ -337,7 +344,7 @@ public class MetabolicNetworkXMLLoader {
 		return answer;
 	}
 
-	private List<ReactionComponent> loadReactionComponents(String reactionId, Element listElem, MetabolicNetwork network) throws Exception {
+	private List<ReactionComponent> loadReactionComponents(String reactionId, Element listElem, MetabolicNetwork network) throws IOException {
 		List<ReactionComponent> answer = new ArrayList<ReactionComponent>();
 		NodeList offspring = listElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){  

@@ -1,11 +1,10 @@
-package metapenta.commands;
+package metapenta.services;
 
 import java.io.PrintStream;
 import java.util.List;
 
 import metapenta.model.Reaction;
 import metapenta.model.MetabolicNetwork;
-import metapenta.services.MetabolicNetworkService;
 
 public class FindMetabolitesWithoutFormula {
 

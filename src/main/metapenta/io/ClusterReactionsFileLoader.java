@@ -1,12 +1,12 @@
 package metapenta.io;
 
-import metapenta.commands.OrthogroupDTO;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import metapenta.services.dto.OrthogroupDTO;
 
 public class ClusterReactionsFileLoader {
 
