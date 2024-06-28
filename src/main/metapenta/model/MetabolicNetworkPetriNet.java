@@ -14,14 +14,24 @@ public class MetabolicNetworkPetriNet {
     private final Map<String, Transition<Reaction>> transitions = new TreeMap<>();
 
     public MetabolicNetworkPetriNet(MetabolicNetwork metabolicNetwork) {
-		// TODO Auto-generated constructor stub
+    	int nId = 0;
     	List<Metabolite> metabolites = metabolicNetwork.getMetabolitesAsList();
     	for(Metabolite m:metabolites) {
-    		addPlace(new Place<Metabolite>(m.getId(),m.getName(),m));
+    		addPlace(new Place<Metabolite>(nId, m.getId(),m.getName(),m));
+    		nId++;
     	}
+    	nId = 0;
     	List<Reaction> reactions = metabolicNetwork.getReactionsAsList();
     	for(Reaction r:reactions) {
-    		addTransition(new Transition<Reaction>(r.getId(), r.getName(), r));
+    		Transition<Reaction> transition = new Transition<Reaction>(nId, r.getId(), r.getName(), r);
+    		this.transitions.put(transition.getID(), transition);
+            List<Edge<Place<?>>> edgesIn = createEdgeList(transition.getObject().getReactants());
+            transition.addEdgesIn(edgesIn);
+            List<Edge<Place<?>>> edgesOut = createEdgeList(transition.getObject().getProducts());
+            transition.addEdgesOut(edgesOut);
+
+            loadOutEdgesInReactantPlaces(transition);
+            loadInEdgesInProductPlaces(transition);
     	}
 	}
 	public Map<String, Transition<Reaction>> getTransitions() {
@@ -32,9 +42,6 @@ public class MetabolicNetworkPetriNet {
     }
     public Map<String, Place<Metabolite>> getPlaces() {
         return places;
-    }
-    public void addTransition(Transition<Reaction> transition){
-        this.transitions.put(transition.getID(), transition);
     }
 
     public void addPlace(Place<Metabolite> place){
@@ -54,70 +61,45 @@ public class MetabolicNetworkPetriNet {
     }
 
 
-    public void loadReactionToPetriNetwork(Reaction reaction) {
-        Transition transition = this.createAndLoadTransitionToPetriNet(reaction);
+    public void loadEdges(Transition<Reaction> transition ) {
 
-        List<Edge> edgesIn = this.loadMetabolitesAndCreateEdgeList(reaction.getReactants());
-        transition.AddEdgesIn(edgesIn);
-
-
-        List<Edge> edgesOut = this.loadMetabolitesAndCreateEdgeList(reaction.getProducts());
-        transition.AddEdgesOut(edgesOut);
-
-        loadOutEdgesInReactantPlaces(transition);
-        loadInEdgesInProductPlaces(transition);
+        
     }
 
-    private List<Edge> loadMetabolitesAndCreateEdgeList(List<ReactionComponent> reactionComponents){
-        List<Edge> edges = new ArrayList<>();
+    private List<Edge<Place<?>>> createEdgeList(List<ReactionComponent> reactionComponents){
+        List<Edge<Place<?>>> edges = new ArrayList<>();
         for (ReactionComponent reactionComponent : reactionComponents) {
             Metabolite metabolite = reactionComponent.getMetabolite();
 
             Place<Metabolite> place = getPlace(metabolite.getId());
             if (place == null){
-                place = createAndAddPlaceToNet(metabolite);
+                throw new RuntimeException("Place not found for metabolite: "+metabolite.getId());
             }
 
-            Edge<Place> edge = new Edge(place, reactionComponent.getStoichiometry());
+            Edge<Place<?>> edge = new Edge<>(place, reactionComponent.getStoichiometry());
             edges.add(edge);
         }
-
         return edges;
     }
 
-    private Place createAndAddPlaceToNet(Metabolite metabolite){
-        Place<Metabolite> place = new Place<>(metabolite.getId(), metabolite.getName(), metabolite);
-        addPlace(place);
+    
 
-        return place;
-    }
-    private Transition createAndLoadTransitionToPetriNet(Reaction reaction){
-        Transition transition = getTransition(reaction.getId());
+    private void loadOutEdgesInReactantPlaces(Transition<Reaction> transition) {
+        List<Edge<Place<?>>> edges = transition.getEdgesIn();
+        for (Edge<Place<?>> edge: edges) {
+            Place<?> place = edge.getTarget();
 
-        if ( transition == null ){
-            transition = new Transition(reaction.getId(), reaction.getName(), reaction);
-            addTransition(transition);
-        }
-
-        return transition;
-    }
-
-    private void loadOutEdgesInReactantPlaces(Transition transition) {
-        List<Edge<Place>> edges = transition.getEdgesIn();
-        for (Edge<Place> edge: edges) {
-            Place place = edge.getTarget();
-
-            Edge placeEdge = new Edge<>(transition, edge.getWeight());
+            Edge<Transition<?>> placeEdge = new Edge<>(transition, edge.getWeight());
             place.addEdgeOut(placeEdge);
         }
     }
 
-    private void loadInEdgesInProductPlaces(Transition transition) {
-        List<Edge<Place>> edges = transition.getEdgesOut();
-        for (Edge<Place> edge: edges) {
-            Place place = edge.getTarget();
+    private void loadInEdgesInProductPlaces(Transition<Reaction> transition) {
+        List<Edge<Place<?>>> edges = transition.getEdgesOut();
+        for (Edge<Place<?>> edge: edges) {
+            Place<?> place = edge.getTarget();
 
-            Edge placeEdge = new Edge<>(transition, edge.getWeight());
+            Edge<Transition<?>> placeEdge = new Edge<>(transition, edge.getWeight());
             place.addEdgeIn(placeEdge);
         }
     }

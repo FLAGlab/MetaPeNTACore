@@ -1,7 +1,6 @@
 package metapenta.services;
 
 import metapenta.io.StringUtils;
-import metapenta.io.jsonWriters.Writer;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class DescribeNetworkService implements Writer {
+public class DescribeNetworkService {
 
     private static final String COMPARTMENT_FILE_SUFFIX = "_metabolites.txt";
     private MetabolicNetwork network;
@@ -71,7 +70,6 @@ public class DescribeNetworkService implements Writer {
 
     }
 
-    @Override
     public void write() throws IOException {
         prepareFiles();
         writeFiles();

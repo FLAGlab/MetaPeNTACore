@@ -26,7 +26,6 @@ import org.xml.sax.SAXException;
 
 
 public class MetabolicNetworkXMLLoader {
-	private int reactionNumber = 0;
 
 	public MetabolicNetwork loadNetwork(String filename) throws IOException {
 		System.out.println("Loading network from file: "+filename);
@@ -237,7 +236,6 @@ public class MetabolicNetworkXMLLoader {
 					String lowerBound = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND);
 					String upperBound = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_FBC_UPPERBOUND);
 
-					this.reactionNumber++;
 					Reaction reaction = loadReaction(reactionElement, network, id, name);
 
 					reaction.setReversible(reversible.equals(("true")));
@@ -285,7 +283,7 @@ public class MetabolicNetworkXMLLoader {
 			System.err.println("WARN. No products found for reactionElement " + id);
 		}
 
-		Reaction reaction = new Reaction(id, name, reactants, products, reactionNumber);
+		Reaction reaction = new Reaction(id, name, reactants, products);
 		reaction.setEnzymes(enzymes);
 		if(linksIs!=null && linksIs.size()>0) reaction.setLinks(linksIs);
 		String sboTerm = calculateSBOTerm(linksHasProperty);

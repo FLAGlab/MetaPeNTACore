@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import metapenta.io.MetabolicNetworkXMLLoader;
 import metapenta.io.jsonWriters.ConnectedComponentsWriter;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
@@ -45,7 +44,7 @@ public class ConnectedComponentsService {
     private void calculateConnectedComponents() {
         for(String transitionId: transitions.keySet()) {
             Transition<Reaction> transition = transitions.get(transitionId);
-            if(transitionsVisited[transition.getObject().getNid()] == 0) {
+            if(transitionsVisited[transition.getnId()] == 0) {
                 visitTransition(transition);
                 connectedComponentCurrentId++;
             }
@@ -60,7 +59,7 @@ public class ConnectedComponentsService {
     }
 
     private void markTransitionAsVisitedAndAssignGroupId(Transition<Reaction> transition){
-        transitionsVisited[transition.getObject().getNid()] = 1;
+        transitionsVisited[transition.getnId()] = 1;
 
         List<Reaction> reactionList = connectedComponentsTransitions.computeIfAbsent(connectedComponentCurrentId, k -> new ArrayList<>());
 
@@ -77,12 +76,12 @@ public class ConnectedComponentsService {
     }
 
     private boolean transitionsHasNotBeenVisited(Transition<Reaction> transition) {
-        return transitionsVisited[transition.getObject().getNid()] == 0;
+        return transitionsVisited[transition.getnId()] == 0;
     }
 
     private List<Transition<Reaction>> getTransitionsByCriteria(Transition<Reaction> transition, String criteria) {
         List<Transition<Reaction>> transitions = new ArrayList<>();
-        List<Place> places = transition.getPlacesByCriteria(criteria);
+        List<Place<?>> places = transition.getPlacesByCriteria(criteria);
 
         for (Place place: places) {
             transitions.addAll(place.getTransitionsByCriteria(criteria));

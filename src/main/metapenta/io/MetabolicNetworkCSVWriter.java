@@ -2,7 +2,6 @@ package metapenta.io;
 
 import com.opencsv.CSVWriter;
 
-import metapenta.io.jsonWriters.Writer;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MetabolicNetworkCSVWriter implements Writer {
+public class MetabolicNetworkCSVWriter {
 
     private MetabolicNetwork metabolicNetwork;
 
@@ -28,8 +27,6 @@ public class MetabolicNetworkCSVWriter implements Writer {
         this.fileName = fileName;
     }
 
-
-    @Override
     public void write() throws IOException {
         addHeader();
         prepareRelationLines();
@@ -43,9 +40,9 @@ public class MetabolicNetworkCSVWriter implements Writer {
 
     private void writeCSVFile() throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
-        CSVWriter csvWriter = new CSVWriter(fileWriter);
-
-        csvWriter.writeAll(lines);
+        try (CSVWriter csvWriter = new CSVWriter(fileWriter)) {
+			csvWriter.writeAll(lines);
+		}
     }
 
     private void prepareRelationLines() {

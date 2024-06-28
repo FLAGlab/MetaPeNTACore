@@ -3,8 +3,6 @@ package metapenta.model;
 import java.util.List;
 
 public class Metabolite {
-
-	private int nid;
 	private String id;
 	private String name;
 	private String sboTerm;
@@ -59,9 +57,6 @@ public class Metabolite {
 	
 	public void setCompartmentId(String compartmentId) {
 		this.compartmentId = compartmentId;
-	}
-	public int getNid() {
-		return nid;
 	}
 	
 	public boolean isHasOnlySubstanceUnits() {

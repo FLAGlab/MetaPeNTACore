@@ -112,7 +112,7 @@ public class AllPathsService {
         }
     }
 
-    private void visitTransitions(List<Transition> transitions) {
+    private void visitTransitions(List<Transition<?>> transitions) {
         for (Transition transition: transitions) {
             visitTransition(transition);
         }
@@ -128,7 +128,7 @@ public class AllPathsService {
         markTransitionAsVisited(transition);
         currentPath.add(transition);
 
-        List<Place> downPlaces = transition.getPlacesByCriteria(Transition.DOWN_CRITERIA);
+        List<Place<?>> downPlaces = transition.getPlacesByCriteria(Transition.DOWN_CRITERIA);
         for (Place nextPlace: downPlaces) {
                 visitPlace(nextPlace);
         }
@@ -137,11 +137,11 @@ public class AllPathsService {
     }
 
     private boolean transitionWasVisited(Transition<Reaction> transition){
-        return transitionVisited[transition.getObject().getNid()] == 1;
+        return transitionVisited[transition.getnId()] == 1;
     }
 
     private void markTransitionAsVisited(Transition<Reaction> transition){
-        transitionVisited[transition.getObject().getNid()]++;
+        transitionVisited[transition.getnId()]++;
     }
     /**
      * args[0]: XML model

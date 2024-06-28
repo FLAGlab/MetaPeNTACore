@@ -1,6 +1,5 @@
 package metapenta.services.dto;
 
-import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.MetabolicNetworkPetriNet;
 import metapenta.model.petrinet.Place;
@@ -47,7 +46,7 @@ public class ShortestPathsDTO {
 
             Place<Metabolite> previousPlace = lastPlaces[index];
 
-            index = previousPlace.getObject().getNid();
+            index = previousPlace.getnId();
         }
 
         return path;

@@ -74,11 +74,11 @@ public class ShortestPathService {
             distances[i] = INFINITE;
         }
 
-        distances[origin.getObject().getNid()] = 0;
+        distances[origin.getnId()] = 0;
     }
 
     private void visitNeighboursPlaces(PlaceComparable<Metabolite> currentPlace) {
-         List<Transition> transitions = currentPlace.getTransitionsByCriteria(Place.DOWN_CRITERIA);
+         List<Transition<?>> transitions = currentPlace.getTransitionsByCriteria(Place.DOWN_CRITERIA);
 
          for(Transition transition: transitions) {
              List<Place<Metabolite>> downEdges = transition.getPlacesByCriteria(Transition.DOWN_CRITERIA);
@@ -92,10 +92,10 @@ public class ShortestPathService {
     }
 
     private void checkDistanceAndAddToQueue(PlaceComparable<Metabolite> currentPlace, Place<Metabolite> neighbourPlace, Transition<Reaction> currentTransition) {
-        int newDistance = distances[currentPlace.getObject().getNid()] + 1;
+        int newDistance = distances[currentPlace.getnId()] + 1;
 
-        if (newDistance < distances[neighbourPlace.getObject().getNid()]){
-            updatePath(neighbourPlace.getObject().getNid(), newDistance, currentPlace, currentTransition);
+        if (newDistance < distances[neighbourPlace.getnId()]){
+            updatePath(neighbourPlace.getnId(), newDistance, currentPlace, currentTransition);
 
             queue.add(new PlaceComparable(neighbourPlace, newDistance));
         }
