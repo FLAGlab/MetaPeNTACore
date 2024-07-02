@@ -42,48 +42,41 @@ public class ChemicalFormula {
 	 */
 	private Map<String, Integer> decode() throws IncorrectFormulaException {
 		Map<String, Integer> elements = new HashMap<>();
-		
-		for (int i = 0; i < chemicalFormula.length(); i++) {
+		int n = chemicalFormula.length();
+		for (int i = 0; i < n; i++) {
 			char e = chemicalFormula.charAt(i);
-			
-			StringBuilder element = new StringBuilder();
-			StringBuilder stoichiom = new StringBuilder();
-			Integer stoichiometry = 0;
-			int terminaElemen = 0;
-			//TODO: Load formulas with wildcards
-			if (Character.isLetter(e)){
+			if (Character.isLetter(e) && Character.isUpperCase(e)){
+				StringBuilder element = new StringBuilder();
+				StringBuilder stoichiom = new StringBuilder();
+				Integer stoichiometry = 0;
 				element.append(e);
-				terminaElemen = i;
 				int j = i+1;
-				if(j < chemicalFormula.length() && Character.isLowerCase(chemicalFormula.charAt(j))) {
-					element.append(chemicalFormula.charAt(j));
-					terminaElemen = j;
+				for(;j<n;j++) {
+					char e2 = chemicalFormula.charAt(j);
+					if(!Character.isLetter(e2) || !Character.isLowerCase(e2)) break;
+					element.append(e2);
 				}
-				int num = terminaElemen+ 1;
-				if(num < chemicalFormula.length() && Character.isDigit(chemicalFormula.charAt(num))) {
-					stoichiom.append(chemicalFormula.charAt(num));
-					Integer sig = num +1;
-					if (sig < chemicalFormula.length() && Character.isDigit(chemicalFormula.charAt(sig))) {
-						stoichiom.append(chemicalFormula.charAt(sig));
-						Integer sig2 = sig +1;
-						if (sig2 < chemicalFormula.length() && Character.isDigit(chemicalFormula.charAt(sig2))) {
-							stoichiom.append(chemicalFormula.charAt(sig2));
-						}
-					}	
-	            }
-				if( num == chemicalFormula.length() || Character.isUpperCase(chemicalFormula.charAt(num))) {
+				boolean stFound = false;
+				for(;j<n;j++) {
+					char e2 = chemicalFormula.charAt(j);
+					if(!Character.isDigit(e2)) break;
+					stoichiom.append(e2);
+					stFound = true;
+				}
+				if( !stFound) {
 					stoichiom.append('1');
 				}
-
-				i = terminaElemen;
-
+				
 				try {
 					stoichiometry = Integer.parseInt(stoichiom.toString());
 				} catch (NumberFormatException e1) {
 					throw new IncorrectFormulaException("Error parsing stoichiometry for element: " + element + " in formula "+chemicalFormula, e1);
 				}
-				elements.put(element.toString(), stoichiometry);
-			}
+				String elementStr = element.toString();
+				i=j-1;
+				//If an element appears twice, there is probably a wildcard
+				if(elements.get(elementStr)==null) elements.put(elementStr, stoichiometry);
+			} else System.out.println("Ignoring character "+e+" in chemical formula: "+chemicalFormula);
 		}
 		
 		return elements;

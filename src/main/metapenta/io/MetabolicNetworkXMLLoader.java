@@ -230,7 +230,7 @@ public class MetabolicNetworkXMLLoader {
 					if(id==null || id.length()==0) throw new IOException("Every reactionElement must have an id");
 
 					String name = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_NAME);
-					if(name==null || name.length()==0) throw new IOException("Invalid name for reactionElement with id "+id);
+					if(name==null || name.length()==0) name = id;
 
 					String reversible = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_REVERSIBLE);
 					String lowerBound = reactionElement.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LOWERBOUND);
