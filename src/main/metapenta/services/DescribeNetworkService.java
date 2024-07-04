@@ -1,6 +1,7 @@
 package metapenta.services;
 
 import metapenta.io.StringUtils;
+import metapenta.model.GeneProduct;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
@@ -135,8 +136,6 @@ public class DescribeNetworkService {
     private void writeMetabolite(String metabolite){
         stringUtils
                 .setString(metabolite)
-                .addSingleQuotes()
-                .addEmptySpace()
                 .addBreakLine();
 
         metabolitesBuilder.append(stringUtils.GetString());
@@ -167,17 +166,24 @@ public class DescribeNetworkService {
 
 
     private void writeReaction(String reactionID){
-        stringUtils
-                .setString(reactionID)
-                .addSingleQuotes()
-                .addBreakLine();
+    	List<GeneProduct> geneProducts = network.getGeneProductsReaction(reactionID);
+    	StringBuilder builder1 = new StringBuilder();
+    	StringBuilder builder2 = new StringBuilder();
+    	if(geneProducts!=null) {
+    		for(GeneProduct product:geneProducts) {
+    			if(builder1.length()>0) builder1.append(",");
+    			builder1.append(product.getId());
+    			if(builder2.length()>0) builder2.append(",");
+    			builder2.append(product.getName());
+    		}
+    	}
+        String answer = reactionID+"\t"+builder1.toString()+"\t"+builder2.toString()+"\n";
 
-        reactionsBuilder.append(stringUtils.GetString());
+        reactionsBuilder.append(answer);
     }
 
     private void writeInSMatrix(String metaboliteID, double stoichiometry){
         stringUtils.setString(metaboliteID)
-                .addSingleQuotes()
                 .addEmptySpace()
                 .addDouble(stoichiometry)
                 .addBreakLine();
@@ -192,7 +198,6 @@ public class DescribeNetworkService {
     private void WriteInReversibleReactions(String reactionID){
         stringUtils
                 .setString(reactionID)
-                .addSingleQuotes()
                 .addBreakLine();
 
         reversibleRxnBuilder.append(stringUtils.GetString());
@@ -201,7 +206,6 @@ public class DescribeNetworkService {
     private void writeIrreversibleReaction(String reactionID){
         stringUtils
                 .setString(reactionID)
-                .addSingleQuotes()
                 .addBreakLine();
 
         irreversibleRxnBuilder.append(stringUtils.GetString());
@@ -210,7 +214,6 @@ public class DescribeNetworkService {
     private void writeBoundsForReversibleReaction(String reactionName){
         stringUtils.
                 setString(reactionName).
-                addSingleQuotes().
                 addEmptySpace().
                 addInt(-1000).
                 addBreakLine();
@@ -220,7 +223,6 @@ public class DescribeNetworkService {
         stringUtils.
                 setString(reactionName);
         stringUtils.
-                addSingleQuotes().
                 addEmptySpace().
                 addInt(1000).
                 addBreakLine();
@@ -232,7 +234,6 @@ public class DescribeNetworkService {
         StringUtils stringUtils = new StringUtils();
         stringUtils.
                 setString(reactionId).
-                addSingleQuotes().
                 addEmptySpace().
                 addInt(0).
                 addBreakLine();
@@ -240,7 +241,6 @@ public class DescribeNetworkService {
 
         stringUtils.
                 setString(reactionId).
-                addSingleQuotes().
                 addEmptySpace().
                 addInt(1000).
                 addBreakLine();
@@ -273,7 +273,6 @@ public class DescribeNetworkService {
     private void writeMetaboliteInCompartmentBuilder(String metaboliteID, StringBuilder compartmentFile){
         stringUtils
                 .setString(metaboliteID)
-                .addSingleQuotes()
                 .addBreakLine();
 
         compartmentFile.append(stringUtils.GetString());

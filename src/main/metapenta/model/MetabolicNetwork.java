@@ -221,6 +221,11 @@ public class MetabolicNetwork {
 
         return new ArrayList<>(rootNoProductionGaps.values());
     }
+    public List<GeneProduct> getGeneProductsReaction(String reactionID) {
+		Reaction r = reactions.get(reactionID);
+		if(r==null) return null;
+		return r.getEnzymes();
+	}
     public static MetabolicNetwork load(String filename) throws IOException {
     	MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
     	return loader.loadNetwork(filename);
