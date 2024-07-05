@@ -3,7 +3,7 @@ Biomass
 SINK
 
 #Nutrients
-EX-ADGLU1P-TEST
+EX-SUC-TEST
 #EX-SORBITOL6P-TEST
 #EX_Light__91__c__93__
 EX_CARBON__45__DIOXIDE__91__c__93__
@@ -13,6 +13,8 @@ EX_PROTON__91__c__93__
 EX_AMMONIUM__91__c__93__
 EX_Pi__91__c__93__
 EX_OXYGEN__45__MOLECULE__91__c__93__
+#EX_SULFATE__91__c__93__
+EX_SULFITE_TEMP
 #EX_BORIC_ACID__91__c__93__
 #EX_POTASSIUM_ION__91__c__93__
 #EX_SODIUM_ION__91__c__93__
@@ -25,23 +27,30 @@ EX_OXYGEN__45__MOLECULE__91__c__93__
 #EX_ZINC_ION__91__c__93__
 #EX_NICKEL_ION__91__c__93__
 #EX_NITRATE__91__c__93__
-#EX_SULFATE__91__c__93__
-#Sides
+
+#Energy
 EX_ATP__91__c__93__
+EX_ADP__91__c__93__
 EX_AMP__91__c__93__
+EX_UTP__91__c__93__
+EX_UDP__91__c__93__
+EX_UMP__91__c__93__
 EX_PLASTOQUINONE__91__c__93__
 EX_Plastoquinols__91__c__93__
-#EX_Oxidized__45__ferredoxins__91__c__93__
-#EX_Reduced__45__ferredoxins__91__c__93__
-EX_ADP__91__c__93__
+EX_Oxidized__45__ferredoxins__91__c__93__
+EX_Reduced__45__ferredoxins__91__c__93__
 EX_NAD__91__c__93__
 EX_NADH__91__c__93__
 EX_NADP__91__c__93__
 EX_NADPH__91__c__93__
 #EX_CO__45__A__91__c__93__
+
 #Basic
 INORGPYROPHOSPHAT__45__RXN
 APYRASE__45__RXN
+#Ammonia to Ammonium. Missing KEGG id
+RXN__45__11811
+
 #RXN0__45__5224	Co2 to bicarbonate. Not in Kegg. No enzyme
 
 #Glycolysis basic
@@ -99,7 +108,6 @@ PEPCARBOX__45__RXN
 ALANINE__45__AMINOTRANSFERASE__45__RXN
 ASPAMINOTRANS__45__RXN
 
-
 #Krebs basic
 #PYRUVATE-SYNTHASE-MANUAL	No enzymes in P vulgaris
 PEPCARBOXYKIN__45__RXN
@@ -122,27 +130,52 @@ R00621
 R03316
 RXN0__45__1147
 
-
-
 #StarchSucroseMet
-#PGLUCISOM__45__RXN
-#TREHALA__45__RXN
-#GLUC1PURIDYLTRANS__45__RXN
-#GLUCOKIN__45__RXN
-#RXN66__45__526
-#FRUCTOKINASE__45__RXN
-#SUCROSE__45__PHOSPHATE__45__SYNTHASE__45__RXN
-#SUCROSE__45__PHOSPHATASE__45__RXN
-#GLUC1PADENYLTRANS__45__RXN
-#RXN__45__10770
-#TREHALOSEPHOSPHA__45__RXN
-#RXN__45__9603
-#RXN__45__9613
+GLUCOKIN__45__RXN
+R08639
+
+GLUC1PURIDYLTRANS__45__RXN
+SUCROSE__45__PHOSPHATE__45__SYNTHASE__45__RXN
+SUCROSE__45__PHOSPHATASE__45__RXN
+R00801
+R00760
+PGLUCISOM__45__RXN
+
+GLUCOSE__45__1__45__PHOSPHAT__45__RXN
+PHOSPHOGLUCMUT__45__RXN
+
+R02737
+TREHALOSEPHOSPHA__45__RXN
+TREHALA__45__RXN
+
+GLUC1PADENYLTRANS__45__RXN
+RXN__45__10770
+R00292
+R02421
+R02110
+R11261
+R11262
+R05196
+R00028
+R00287
+
+R00806
+R02111
+RXN66__45__526
+RXN__45__9613
+#RXN__45__9603	Requires NDP__45__alpha__45__D__45__glucoses__91__c__93__, produces Nucleoside__45__Diphosphates__91__c__93__
+
+
 #FructoseMannoseMet
 
 #Pentose phosphate
-#PRPPSYN__45__RXN	Present in purines metabolism
-#RIBOKIN__45__RXN	Involved D-ribose. Unclear reversibility
+GLU6PDEHYDROG__45__RXN__45__GLC__45__6__45__P__47__NADP__47____47__D__45__6__45__P__45__GLUCONO__45__DELTA__45__LACTONE__47__NADPH__47__PROTON__46__55__46__
+_6PGLUCONOLACT__45__RXN
+RXN__45__9952
+PRPPSYN__45__RXN
+R01051
+R01057
+#RXN__45__17337	Generates C01151	alpha-D-ribose 1,5-bisphosphate
 
 #Glycerate
 GLYCERATE__45__DEHYDROGENASE__45__RXN
@@ -275,12 +308,32 @@ HOMOGENTISATE__45__12__45__DIOXYGENASE__45__RXN
 R03181
 FUMARYLACETOACETASE__45__RXN
 
+#Sulfide metabolism
+#SULFATE__45__ADENYLYLTRANS__45__RXN
+#_1__46__8__46__4__46__9__45__RXN	AP -> sulfite. Requires gluthathionine
+SULFITE__45__REDUCTASE__45__FERREDOXIN__45__RXN
+
+#SULFITE__45__OXIDASE__45__RXN	Sulfite -> sulfate
+
+#Cys, Met
+R07274
+#SERINE__45__O__45__ACETTRAN__45__RXN
+#ACSERLY__45__RXN	Blocked by now
+
+
+R00782
+
+
+#R01286
+#DCYSDESULF__45__RXN	Disconnected
+
+
 #Butanoate metabolism
 ACETOACETATE__45__DECARBOXYLASE__45__RXN
 
 #Purines metabolism
 ATPASE__45__RXN
-PRPPSYN__45__RXN
+#PRPPSYN__45__RXN	Present in pentoses
 
 
 
