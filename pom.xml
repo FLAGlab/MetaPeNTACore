@@ -41,7 +41,7 @@
         </dependency>
     </dependencies>
     <build>
-        <sourceDirectory>src/main/metapenta/model</sourceDirectory>
+        <sourceDirectory>src/main/metapenta</sourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
