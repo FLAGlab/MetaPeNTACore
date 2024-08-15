@@ -40,7 +40,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <build>
+        <sourceDirectory>src/main/metapenta/model</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
     <distributionManagement>
         <repository>
             <id>github</id>
