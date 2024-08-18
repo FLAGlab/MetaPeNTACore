@@ -37,12 +37,17 @@ EX_ATP__91__c__93__
 #EX_UTP__91__c__93__
 #EX_UDP__91__c__93__
 #EX_UMP__91__c__93__
+
+#Sides
 EX_PLASTOQUINONE__91__c__93__
 EX_Plastoquinols__91__c__93__
 EX_Oxidized__45__ferredoxins__91__c__93__
 EX_Reduced__45__ferredoxins__91__c__93__
 EX_Red__45__Thioredoxin__91__c__93__
 EX_Ox__45__Thioredoxin__91__c__93__
+EX_HemoproteinRed__91__c__93__
+EX_HemoproteinOx__91__c__93__
+
 
 #Basic
 INORGPYROPHOSPHAT__45__RXN
@@ -58,12 +63,43 @@ RXN__45__11811
 
 
 #Cyanides
-#RXN__45__9636
-#RXN__45__9638
-#RXN__45__9639
-#R10030
-#R10036
+##Lotaustralin
+RXN__45__9636
+RXN__45__9638
+RXN__45__9639
+_1__46__14__46__13__46__117__45__RXN
+RXN__45__9640
+RXN__45__9641
+RXN__45__9642
+RXN__45__9643
 
+##Linamarin
+RXN__45__5063
+RXN__45__5064
+RXN__45__5065
+RXN__45__5066
+RXN__45__5081
+RXN__45__5082
+LINAMARIN__45__SYNTHASE__45__RXN
+
+##HCN. Pending enzymes for R09578
+R09578
+RXN__45__12065
+_4__46__99__46__1__46__7__45__RXN
+RXN__45__18098
+MANDELONITRILE__45__LYASE__45__RXN
+
+
+L__45__3__45__CYANOALANINE__45__SYNTHASE__45__RXN
+_3__46__5__46__5__46__4__45__RXN
+
+#_3__46__5__46__5__46__1__45__RXN__45__HCN__47__WATER__47____47__FORMATE__47__AMMONIUM__46__28__46__
+
+
+##Benzhaldehide metab
+BENZALDEHYDE__45__DEHYDROGENASE__45__NADP__43____45__RXN
+BENZALDEHYDE__45__DEHYDROGENASE__45__NAD__43____45__RXN
+RXN__45__8088
 
 
 #Glycolysis basic
@@ -187,8 +223,16 @@ RXN66__45__526
 RXN__45__9613
 #RXN__45__9603	Requires NDP__45__alpha__45__D__45__glucoses__91__c__93__, produces Nucleoside__45__Diphosphates__91__c__93__
 
-
 #FructoseMannoseMet
+MANNPISOM__45__RXN
+PHOSMANMUT__45__RXN
+MANNOSE__45__6__45__PHOSPHATE__45__6__45__REDUCTASE__45__RXN
+MANNITOL__45__1__45__PHOSPHATASE__45__RXN
+#_1__46__1__46__1__46__255__45__RXN	Generates CPD__45__15373__91__c__93__
+_2__46__7__46__7__46__13__45__RXN
+GDPMANDEHYDRA__45__RXN
+_1__46__1__46__1__46__271__45__RXN
+
 
 #Pentose phosphate
 GLU6PDEHYDROG__45__RXN__45__GLC__45__6__45__P__47__NADP__47____47__D__45__6__45__P__45__GLUCONO__45__DELTA__45__LACTONE__47__NADPH__47__PROTON__46__55__46__
