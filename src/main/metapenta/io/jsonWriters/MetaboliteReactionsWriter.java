@@ -59,12 +59,10 @@ public class MetaboliteReactionsWriter implements Writer {
 
     private List<Reaction> getReactionsByCriteria(String criteria) {
         switch (criteria){
-            case IS_PRODUCT -> {
+            case IS_PRODUCT :
                 return metaboliteReactions.getReactionsIsProduct();
-            }
-            case IS_SUBSTRATE -> {
+            case IS_SUBSTRATE :
                 return metaboliteReactions.getReactionsIsSubstrate();
-            }
         }
 
         return new ArrayList();
