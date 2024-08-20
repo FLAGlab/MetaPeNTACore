@@ -1,6 +1,6 @@
 #Biomass
 Biomass
-SINK
+#SINK
 
 #Nutrients
 EX-SUC-TEST
@@ -41,8 +41,8 @@ EX_IRON_ION__91__c__93__
 #Sides
 EX_PLASTOQUINONE__91__c__93__
 EX_Plastoquinols__91__c__93__
-EX_Oxidized__45__ferredoxins__91__c__93__
 EX_Reduced__45__ferredoxins__91__c__93__
+EX_Oxidized__45__ferredoxins__91__c__93__
 EX_Red__45__Thioredoxin__91__c__93__
 EX_Ox__45__Thioredoxin__91__c__93__
 EX_HemoproteinRed__91__c__93__
