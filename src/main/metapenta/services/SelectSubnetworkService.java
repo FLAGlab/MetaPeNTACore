@@ -63,7 +63,7 @@ public class SelectSubnetworkService {
 		try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
 			String line = reader.readLine();
 			while (line!=null) {
-				ids.add(line);
+				if(line.length()>0 && line.charAt(0)!='#') ids.add(line);
 				line = reader.readLine();
 			}
 		}
