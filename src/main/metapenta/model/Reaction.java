@@ -19,6 +19,10 @@ import org.apache.commons.math3.linear.RealVector;
  * @author Jorge Duitama
  */
 public class Reaction {
+	
+	public static final String LINK_KEGGID ="http://identifiers.org/kegg.reaction/";
+	public static final String LINK_ECCODE ="http://identifiers.org/ec-code/";
+	
 	private String id;
 	private String name;
 	private String sboTerm;
@@ -130,6 +134,9 @@ public class Reaction {
 	public void setEnzymes(List<GeneProduct> enzymes) {
 		this.enzymes = enzymes;
 	}
+	public void removeAllEnzymes() {
+		enzymes.clear();	
+	}
 	/**
 	 * @return Lower bound of the flux in this reaction
 	 */
@@ -185,6 +192,21 @@ public class Reaction {
 		products.add(product);
 		updateBalanced();
 	}
+	public String getKeggId() {
+		return getIdFromLinks(LINK_KEGGID);
+	}
+	public String getEcCode() {
+		return getIdFromLinks(LINK_ECCODE);
+	}
+	private String getIdFromLinks(String prefix) {
+		String answer = "ND";
+		if(links==null) return answer;
+		for (String link:links) {
+			if(link.startsWith(prefix)) return link.substring(prefix.length());
+		}
+		return answer;
+	}
+	
 	/**
 	 * Method that makes a String with the information about the reactants
 	 * of the Reaction
@@ -612,5 +634,6 @@ public class Reaction {
 		}
 		return componentsIDs;
 	}
+	
 
 }

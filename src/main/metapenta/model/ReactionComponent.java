@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ReactionComponent {
 	private Metabolite metabolite;
-	private int stoichiometry;
+	private double stoichiometry;
 	//Map of elements and abundances scaled by stoichiometry
 	private Map<String, Integer> scaledElementsMap;
 	
@@ -33,7 +33,7 @@ public class ReactionComponent {
 	 * 
 	 * @return steichiometry coefficient of the metabolite within the reaction
 	 */
-	public int getStoichiometry() {
+	public double getStoichiometry() {
 		return stoichiometry;
 	}
 	

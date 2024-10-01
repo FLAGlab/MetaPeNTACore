@@ -23,7 +23,7 @@ public class KeggPathwayReportService {
 		reactionsByKeggId = new HashMap<>();
 		List<Reaction> reactions = network.getReactionsAsList();
 		for(Reaction r:reactions) {
-			String keggId = calculateIdFromLinks(r, "http://identifiers.org/kegg.reaction/");
+			String keggId = r.getKeggId();
 			if(keggId!=null) reactionsByKeggId.put(keggId, r);
 		}
 	}
@@ -36,7 +36,7 @@ public class KeggPathwayReportService {
 		for(Map.Entry<String,Set<String>> entry:reactionEnzymes.entrySet()) {
 			Reaction r = reactionsByKeggId.get(entry.getKey());
 			if(r!=null) {
-				String ecNumber = calculateIdFromLinks(r, "http://identifiers.org/ec-code/");
+				String ecNumber = r.getEcCode();
 				//TODO: Validate consistency of gene products
 				out.println(entry.getKey()+"\t"+r.getId()+"\t"+ecNumber+"\t"+parseGeneProducts(r)+"\tPRESENT");
 			} else {
@@ -46,7 +46,7 @@ public class KeggPathwayReportService {
 		for(String keggId:orphanReactionIds) {
 			Reaction r = reactionsByKeggId.get(keggId);
 			if(r!=null) {
-				String ecNumber = calculateIdFromLinks(r, "http://identifiers.org/ec-code/");
+				String ecNumber = r.getEcCode();
 				out.println(keggId+"\t"+r.getId()+"\t"+ecNumber+"\t"+parseGeneProducts(r)+"\tPRESENT");
 			} else {
 				out.println(keggId+"\tND\tND\tND\tNotPresent");
@@ -55,15 +55,7 @@ public class KeggPathwayReportService {
 	}
 	
 	
-	private String calculateIdFromLinks(Reaction r, String prefix) {
-		String answer = "ND"; 
-		List<String> links = r.getLinks();
-		if(links==null) return answer;
-		for (String link:links) {
-			if(link.startsWith(prefix)) return link.substring(prefix.length());
-		}
-		return answer;
-	}
+	
 	private String parseGeneProducts(Reaction r) {
 		Set<String> geneIds = new HashSet<>();
 		for(GeneProduct g:r.getEnzymes()) {

@@ -19,7 +19,7 @@ import metapenta.io.MetabolicNetworkXMLWriter;
 
 public class SelectSubnetworkService {
 
-	MetabolicNetwork network;
+	private MetabolicNetwork network;
 	public SelectSubnetworkService(MetabolicNetwork network) {
 		this.network = network;
 	}

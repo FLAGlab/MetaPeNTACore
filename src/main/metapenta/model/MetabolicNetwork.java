@@ -14,7 +14,7 @@ import metapenta.io.MetabolicNetworkXMLLoader;
 
 public class MetabolicNetwork {
 	private Logger log = Logger.getAnonymousLogger();
-	private Map<String, GeneProduct> geneProducts = new TreeMap<>();
+	private Map<String, GeneProduct> enzymes = new TreeMap<>();
 	private Map<String,String> parameters = new HashMap<>();
 	private Map<String, Compartment> compartments = new TreeMap<>();
 	private Map<String, Metabolite> metabolites = new TreeMap<>();
@@ -33,19 +33,25 @@ public class MetabolicNetwork {
 	}
 	public void addGeneProduct (GeneProduct product) {
 		String id = product.getId();
-		GeneProduct existing = geneProducts.get(id);
+		GeneProduct existing = enzymes.get(id);
 		if(existing!=null) {
 			if(existing!=product) log.warning("Trying to add different gene products with the same id "+id+ " existing: "+existing+" new: "+product);
-		} else geneProducts.put(product.getId(), product);
+		} else enzymes.put(product.getId(), product);
 	}
 	public GeneProduct getGeneProduct (String id) {
-		return geneProducts.get(id);
+		return enzymes.get(id);
 	}
 	public boolean existsGeneProduct (String id) {
-		return geneProducts.containsKey(id);
+		return enzymes.containsKey(id);
 	}
 	public List<GeneProduct> getGeneProductsAsList() {
-		return new ArrayList<>(geneProducts.values());
+		return new ArrayList<>(enzymes.values());
+	}
+	public void removeAllGeneProducts() {
+		for(Reaction r:reactions.values()) {
+			r.removeAllEnzymes();
+		}
+		enzymes.clear();
 	}
 	public void addCompartment (Compartment compartment) {
 		compartments.put(compartment.getId(), compartment);
