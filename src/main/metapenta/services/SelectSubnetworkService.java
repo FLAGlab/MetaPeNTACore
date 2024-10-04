@@ -31,6 +31,9 @@ public class SelectSubnetworkService {
 		for(String id:reactionIds) {
 			Reaction r = network.getReaction(id);
 			if(r==null) {
+				r = network.findReactionByKeggId(id);
+			}
+			if(r==null) {
 				System.err.println("Reaction id "+id+" not found in network");
 				continue;
 			}

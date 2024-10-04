@@ -148,13 +148,15 @@ public class MetabolicNetworkXMLLoader {
 					String id = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_ID);
 					if(id==null || id.length()==0) throw new IOException("Every gene product should have an id");
 					String name = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_NAME);
-					if(name==null || name.length()==0) name = id;
 					String label = elem.getAttribute(XMLAttributes.ATTRIBUTE_FBC_LABEL);
 					String sboTerm = elem.getAttribute(XMLAttributes.ATTRIBUTE_SBOTERM);
 					String metaId = elem.getAttribute(XMLAttributes.ATTRIBUTE_METAID);
 					if(!id.equals(metaId)) System.err.println("Meta id: "+metaId+" different than id of gene product: "+id);
 					
-					
+					if(name==null || name.length()==0) {
+						if(label!=null && label.length()>0) name = label;
+						else name = id;
+					}
 					GeneProduct product = new GeneProduct(id, name);
 					if(label!=null && label.trim().length()>0) product.setLabel(label.trim());
 					if(sboTerm!=null && sboTerm.trim().length()>0) product.setSboTerm(sboTerm.trim());

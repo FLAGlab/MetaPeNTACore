@@ -119,6 +119,12 @@ public class MetabolicNetwork {
 	public void removeReaction(String id) {
 		reactions.remove(id);
 	}
+	public Reaction findReactionByKeggId(String id) {
+		for(Reaction r:reactions.values()) {
+			if(r.getKeggId().equals(id)) return r;
+		}
+		return null;
+	}
 	/**
 	 * Returns a list with reactions having metabolites without formula
 	 * @return List<Reaction> Reactions involved in metabolites without formula

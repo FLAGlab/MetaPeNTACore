@@ -144,7 +144,7 @@ public class DescribeNetworkService {
     private void prepareReactionsFile(){
     	List<Reaction> reactions = network.getReactionsAsList();
     	for(Reaction r: reactions) {
-            writeReaction(r.getId());
+            writeReaction(r);
         }
     }
 
@@ -165,8 +165,8 @@ public class DescribeNetworkService {
     }
 
 
-    private void writeReaction(String reactionID){
-    	List<GeneProduct> geneProducts = network.getGeneProductsReaction(reactionID);
+    private void writeReaction(Reaction r){
+    	List<GeneProduct> geneProducts = r.getEnzymes();
     	StringBuilder builder1 = new StringBuilder();
     	StringBuilder builder2 = new StringBuilder();
     	if(geneProducts!=null) {
@@ -177,7 +177,13 @@ public class DescribeNetworkService {
     			builder2.append(product.getName());
     		}
     	}
-        String answer = reactionID+"\t"+builder1.toString()+"\t"+builder2.toString()+"\n";
+    	String enzymeIds="NONE";
+    	String enzymeNames="NONE";
+    	if(builder1.length()>0) {
+    		enzymeIds = builder1.toString();
+    		enzymeNames = builder2.toString();
+    	}
+        String answer = r.getId()+"\t"+r.getKeggId()+"\t"+enzymeIds+"\t"+enzymeNames+"\n";
 
         reactionsBuilder.append(answer);
     }
