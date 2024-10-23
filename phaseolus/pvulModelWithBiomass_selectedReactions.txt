@@ -60,6 +60,23 @@ RXN__45__11811
 
 #RXN0__45__5224	Co2 to bicarbonate. Not in Kegg. No enzyme
 
+
+#Galactose metabolism
+R10619
+GALACTOKIN__45__RXN
+GALACTURIDYLYLTRANS__45__RXN
+UDPGLUCEPIM__45__RXN
+_2__46__4__46__1__46__123__45__RXN
+_2__46__4__46__1__46__82__45__RXN
+RXN__45__11502
+_2__46__4__46__1__46__67__45__RXN
+RXN__45__11501
+R03635
+R05549
+R01101
+R02410
+#RXN__45__8286	Generates verbascose. Not in Kegg
+
 #Glycolysis basic
 PEPSYNTH__45__RXN
 PEPDEPHOS__45__RXN
