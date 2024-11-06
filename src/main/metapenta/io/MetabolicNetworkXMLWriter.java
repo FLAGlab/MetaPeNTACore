@@ -22,6 +22,8 @@ import metapenta.model.GeneProduct;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
+import metapenta.model.ReactionGroup;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -79,10 +81,32 @@ public class MetabolicNetworkXMLWriter {
 	    modelElement.appendChild(saveParameters(network, doc));
 	    modelElement.appendChild(saveReactions(network, doc));
 	    modelElement.appendChild(saveGeneProducts(network, doc));
+	    if(network.getReactionGroups().size()>0) modelElement.appendChild(saveReactionGroups(network, doc));
 
 	    return modelElement;
 	}
 	
+	private Node saveReactionGroups(MetabolicNetwork network, Document doc) {
+		Element listReactionGroupsElement = doc.createElement(XMLAttributes.ELEMENT_GROUPS_LISTGROUPS);
+
+	    for (ReactionGroup group : network.getReactionGroups().values()) {
+	        Element groupElement = doc.createElement(XMLAttributes.ELEMENT_GROUPS_GROUP);
+	        groupElement.setAttribute(XMLAttributes.ATTRIBUTE_GROUPS_ID, group.getId());
+	        groupElement.setAttribute(XMLAttributes.ATTRIBUTE_GROUPS_NAME, group.getName());
+	        groupElement.setAttribute(XMLAttributes.ATTRIBUTE_GROUPS_KIND, group.getKind());
+	        groupElement.setAttribute(XMLAttributes.ATTRIBUTE_SBOTERM, group.getSboTerm());
+	        Element groupLMElement = doc.createElement(XMLAttributes.ELEMENT_GROUPS_LISTMEMBERS);
+	        groupElement.appendChild(groupLMElement);
+	        for(Reaction r:group.getReactions()) {
+	        	Element groupMemberElement = doc.createElement(XMLAttributes.ELEMENT_GROUPS_MEMBER);
+	        	groupMemberElement.setAttribute(XMLAttributes.ATTRIBUTE_GROUPS_IDREF, r.getId());
+	        	groupLMElement.appendChild(groupMemberElement);
+	        }
+	        listReactionGroupsElement.appendChild(groupElement);
+	    }
+		return listReactionGroupsElement;
+	}
+
 	private Node saveCompartments(MetabolicNetwork network, Document doc) {
 		Element listCompartmentsElement = doc.createElement(XMLAttributes.ELEMENT_LISTCOMPARTMENTS);
 

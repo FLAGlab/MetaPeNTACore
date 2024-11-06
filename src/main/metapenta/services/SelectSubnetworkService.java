@@ -14,6 +14,7 @@ import metapenta.model.GeneProduct;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
+import metapenta.model.ReactionGroup;
 import metapenta.model.MetabolicNetwork;
 import metapenta.io.MetabolicNetworkXMLWriter;
 
@@ -49,6 +50,22 @@ public class SelectSubnetworkService {
 			}	
 		}
 		for(Reaction r: reactions) answer.addReaction(r);
+		Set<String> outReactionIds = answer.getReactionIds();
+		for(ReactionGroup group:network.getReactionGroups().values()) {
+			Set<String> c = new HashSet<>(group.getReactionIds());
+			c.retainAll(outReactionIds);
+			if(c.size()>0) {
+				ReactionGroup outGroup = new ReactionGroup(group.getId());
+				outGroup.setName(group.getName());
+				outGroup.setKind(group.getKind());
+				outGroup.setSboTerm(group.getSboTerm());
+				for(String rid:c) {
+					Reaction r = answer.getReaction(rid);
+					outGroup.addReaction(r);
+				}
+				answer.addReactionGroup(outGroup);
+			}
+		}
 		return answer;
 		
 	}

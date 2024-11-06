@@ -20,7 +20,7 @@ public class MetabolicNetwork {
 	private Map<String, Metabolite> metabolites = new TreeMap<>();
 	private Map<String, List<Metabolite>> metabolitesByCompartment = new HashMap<>();
 	private Map<String, Reaction> reactions = new TreeMap<>();
-
+	private Map<String, ReactionGroup> reactionGroups = new TreeMap<>();
 	
 	public void addParameter (String id, String value) {
 		parameters.put(id, value);
@@ -110,6 +110,9 @@ public class MetabolicNetwork {
 	public List<Reaction> getReactionsAsList () {
 		return new ArrayList<>(reactions.values());
 	}
+	public Set<String> getReactionIds() {
+		return reactions.keySet();
+	}
     public boolean existsReaction (String id) {
 		return reactions.containsKey(id);
 	}
@@ -118,6 +121,9 @@ public class MetabolicNetwork {
 	}
 	public void removeReaction(String id) {
 		reactions.remove(id);
+		for(ReactionGroup group:reactionGroups.values()) {
+			group.removeReaction(id);
+		}
 	}
 	public Reaction findReactionByKeggId(String id) {
 		for(Reaction r:reactions.values()) {
@@ -125,6 +131,15 @@ public class MetabolicNetwork {
 		}
 		return null;
 	}
+	public void addReactionGroup(ReactionGroup g) {
+		reactionGroups.put(g.getId(), g);
+	}
+	
+	public Map<String, ReactionGroup> getReactionGroups() {
+		return reactionGroups;
+	}
+	
+	
 	/**
 	 * Returns a list with reactions having metabolites without formula
 	 * @return List<Reaction> Reactions involved in metabolites without formula
@@ -242,4 +257,5 @@ public class MetabolicNetwork {
     	MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
     	return loader.loadNetwork(filename);
     }
+	
 }

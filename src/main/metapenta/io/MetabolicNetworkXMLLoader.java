@@ -16,6 +16,7 @@ import metapenta.model.IncorrectFormulaException;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
+import metapenta.model.ReactionGroup;
 import metapenta.model.MetabolicNetwork;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -84,8 +85,12 @@ public class MetabolicNetworkXMLLoader {
 		Element reactions = getElementByID(modelElement, XMLAttributes.ELEMENT_LISTREACTIONS);
 		loadReactions(reactions, metabolicNetwork);
 		
+		Element reactionGroups = getElementByID(modelElement, XMLAttributes.ELEMENT_GROUPS_LISTGROUPS);
+		if(reactionGroups!=null) loadReactionGroups(reactionGroups, metabolicNetwork);
+		
 		return metabolicNetwork;
 	}
+
 
 	private Element getElementByID(Element modelElem, String nodeName) {
 		NodeList offspring = modelElem.getChildNodes(); 
@@ -409,5 +414,57 @@ public class MetabolicNetworkXMLLoader {
 			}
 		}
 		return answer;
+	}
+	private void loadReactionGroups(Element rootElem, MetabolicNetwork metabolicNetwork) {
+		System.out.println("Loading groups");
+		NodeList offspring = rootElem.getChildNodes(); 
+		for(int i=0;i<offspring.getLength();i++){
+			Node node = offspring.item(i);
+			if (node instanceof Element){
+				Element element = (Element) node;
+				//System.out.println("Next element "+element.getNodeName());
+				if(XMLAttributes.ELEMENT_GROUPS_GROUP.equals(element.getNodeName())) {
+					String id = element.getAttribute(XMLAttributes.ATTRIBUTE_GROUPS_ID);
+					String name = element.getAttribute(XMLAttributes.ATTRIBUTE_GROUPS_NAME);
+					String kind = element.getAttribute(XMLAttributes.ATTRIBUTE_GROUPS_KIND);
+					String sboTerm = element.getAttribute(XMLAttributes.ATTRIBUTE_SBOTERM);
+					ReactionGroup group = new ReactionGroup(id);
+					if(name!=null) group.setName(name);
+					if(kind!=null) group.setKind(kind);
+					if(sboTerm!=null) group.setSboTerm(sboTerm);
+					NodeList offspring2 = element.getChildNodes();
+					for(int j=0;j<offspring2.getLength();j++){
+						Node node2 = offspring2.item(j);
+						if (node2 instanceof Element){
+							Element element2 = (Element) node2;
+							//System.out.println("Next group id "+id+" element "+element2.getNodeName());
+							if(XMLAttributes.ELEMENT_GROUPS_LISTMEMBERS.equals(element2.getNodeName())) {
+								loadReactionGroupMembers(element2.getChildNodes(),group,metabolicNetwork);
+								metabolicNetwork.addReactionGroup(group);
+								System.out.println("Loaded group "+group.getId());
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void loadReactionGroupMembers(NodeList memberNodes, ReactionGroup group, MetabolicNetwork metabolicNetwork) {
+		for(int i=0;i<memberNodes.getLength();i++){
+			Node node = memberNodes.item(i);
+			if (node instanceof Element){
+				Element element = (Element) node;
+				if(XMLAttributes.ELEMENT_GROUPS_MEMBER.equals(element.getNodeName())) {
+					String id = element.getAttribute(XMLAttributes.ATTRIBUTE_GROUPS_IDREF);
+					Reaction r = metabolicNetwork.getReaction(id);
+					if(r==null) {
+						System.err.println("WARN. Reaction id "+id+" referred in group "+group.getId()+" not found in network");
+						continue;
+					}
+					group.addReaction(r);
+				}
+			}
+		}	
 	}
 }

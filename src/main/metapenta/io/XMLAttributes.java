@@ -8,6 +8,7 @@ public class XMLAttributes {
     public static final String ATTRIBUTE_METAID = "metaid";
     public static final String ATTRIBUTE_COMPARTMENT = "compartment";
     public static final String ATTRIBUTE_CONSTANT = "constant";
+    public static final String ATTRIBUTE_SBOTERM = "sboTerm";
 	
     public static final String ELEMENT_ROOT = "sbml";
     public static final String ELEMENT_NOTES = "notes";
@@ -18,13 +19,14 @@ public class XMLAttributes {
     public static final String ELEMENT_LISTPARAMETERS = "listOfParameters";
     public static final String ELEMENT_LISTREACTIONS = "listOfReactions";
     public static final String ELEMENT_FBC_LISTGENEPRODUCTS = "fbc:listOfGeneProducts";
-    
+    public static final String ELEMENT_GROUPS_LISTGROUPS = "groups:listOfGroups";
+    public static final String ELEMENT_GROUPS_LISTMEMBERS = "groups:listOfMembers";
     
     public static final String ELEMENT_FBC_GENEPRODUCT = "fbc:geneProduct";
     public static final String ATTRIBUTE_FBC_ID = "fbc:id";
     public static final String ATTRIBUTE_FBC_NAME = "fbc:name";
     public static final String ATTRIBUTE_FBC_LABEL = "fbc:label";
-    public static final String ATTRIBUTE_SBOTERM = "sboTerm";
+    
     
     public static final String ELEMENT_METABOLITE = "species";
     public static final String ATTRIBUTE_HASONLYSUBSTANCEUNITS = "hasOnlySubstanceUnits";
@@ -43,6 +45,13 @@ public class XMLAttributes {
     public static final String ELEMENT_LISTREACTANTS = "listOfReactants";
     public static final String ELEMENT_LISTMETABPRODUCTS = "listOfProducts";
     public static final String ELEMENT_METABREF = "speciesReference";
+    
+    public static final String ELEMENT_GROUPS_GROUP = "groups:group";
+    public static final String ATTRIBUTE_GROUPS_ID = "groups:id";
+    public static final String ATTRIBUTE_GROUPS_NAME = "groups:name";
+    public static final String ATTRIBUTE_GROUPS_KIND = "groups:kind";
+    public static final String ELEMENT_GROUPS_MEMBER = "groups:member";
+    public static final String ATTRIBUTE_GROUPS_IDREF = "groups:idRef";
     
     public static final String ELEMENT_FBC_GENEPRODUCTREF = "fbc:geneProductRef";
 	public static final String ATTRIBUTE_FAST = "fast";
