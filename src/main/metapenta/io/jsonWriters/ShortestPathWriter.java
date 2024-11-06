@@ -8,10 +8,11 @@ import metapenta.services.dto.ShortestPathsDTO;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class ShortestPathWriter implements Writer {
 
-    private JSONObject pathsObject = new JSONObject();
+    
     private ShortestPathsDTO shortestPathsDTO;
 
     private String filename;
@@ -24,26 +25,18 @@ public class ShortestPathWriter implements Writer {
 
     @Override
     public void write() throws IOException {
-        addPathsToJsonObject();
+    	JSONObject pathsObject = new JSONObject();
+    	JSONArray pathJsonArray = pathJsonArray(shortestPathsDTO.getPath());
+
+        pathsObject.put("PATH", pathJsonArray);
         Files.write(Paths.get(this.filename), pathsObject.toJSONString().getBytes());
     }
 
-
-    private void addPathsToJsonObject(){
-        for(String placeID: shortestPathsDTO.getPaths().keySet()){
-            JSONArray pathsJsonArray = pathJsonArray(shortestPathsDTO.getPaths().get(placeID));
-
-            pathsObject.put(placeID, pathsJsonArray);
-        }
-    }
-
-    private JSONArray pathJsonArray(String[] path) {
+    private JSONArray pathJsonArray(List<String> path) {
         JSONArray pathArray = new JSONArray();
-
         for(String reactionId: path) {
             pathArray.add(reactionId);
         }
-
         return pathArray;
     }
 }

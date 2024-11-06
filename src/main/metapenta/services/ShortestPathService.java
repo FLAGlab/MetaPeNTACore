@@ -9,6 +9,8 @@ import metapenta.model.petrinet.PlaceComparable;
 import metapenta.model.petrinet.Transition;
 import metapenta.services.dto.ShortestPathsDTO;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -20,91 +22,79 @@ import metapenta.io.jsonWriters.ShortestPathWriter;
 public class ShortestPathService {
     public static final int INFINITE = 100000;
 
-    private MetabolicNetworkPetriNet metabolicPetriNet;
-
-    private Place<Metabolite> origin;
-
-    private PriorityQueue<PlaceComparable> queue = new PriorityQueue<>();
-
-    private int[] distances;
-
-    private Transition<Reaction>[] lastTransitions;
-    private Place<Metabolite>[] lastPlaces;
-
-
-    private Set<String> settled = new HashSet<>();
+    private MetabolicNetwork metabolicNetwork;
 
     public void setMetabolicNetwork(MetabolicNetwork metabolicNetwork) {
-    	metabolicPetriNet = new MetabolicNetworkPetriNet(metabolicNetwork);
-        
-        lastTransitions = new Transition[metabolicPetriNet.getPlaces().size()];
-        lastPlaces = new Place[metabolicPetriNet.getPlaces().size()];
+    	this.metabolicNetwork = metabolicNetwork;
 	}
-    public void setMetaboliteId(String metaboliteId) {
-    	origin = metabolicPetriNet.getPlace(metaboliteId);
+
+    public ShortestPathsDTO getShortestPath(String originId, String destinationId) {
+    	List<String> path = this.calculateShortestPath(originId, destinationId);
+
+        return new ShortestPathsDTO(metabolicNetwork, originId, destinationId, path);
     }
 
-
-    public ShortestPathsDTO getShortestPath() {
-        this.calculateShortestPath();
-
-        return new ShortestPathsDTO(distances, lastTransitions, lastPlaces, metabolicPetriNet);
-    }
-
-    private void calculateShortestPath() {
-        initElements();
+    private List<String> calculateShortestPath(String originId, String destinationId) {
+    	MetabolicNetworkPetriNet metabolicPetriNet = new MetabolicNetworkPetriNet(metabolicNetwork);
+    	int n = metabolicPetriNet.getPlaces().size();
+    	int[]distances = new int[n];
+    	Transition<Reaction>[] lastTransitions = new Transition[n];
+        Place<Metabolite>[] lastPlaces = new Place[n];
+        for (int i = 0; i < distances.length; i++) {
+            distances[i] = INFINITE;
+        }
+        Place<Metabolite> origin = metabolicPetriNet.getPlace(originId);
+        
+        if(origin == null) {
+        	System.err.println("ERROR: Source metabolite "+originId+" not found");
+        	return new ArrayList<>();
+        }
+        Place<Metabolite> dest = metabolicPetriNet.getPlace(destinationId);
+        if(dest == null) {
+        	System.err.println("ERROR: Destination metabolite "+destinationId+" not found");
+        	return new ArrayList<>();
+        }
+        distances[origin.getnId()] = 0;
+        PriorityQueue<PlaceComparable> queue = new PriorityQueue<>();
+        Set<String> settled = new HashSet<>();
+        queue.add(new PlaceComparable(origin, 0));
 
         while (!queue.isEmpty()) {
             PlaceComparable<Metabolite> current = queue.poll();
             settled.add(current.getID());
+            List<Transition<?>> transitions = current.getTransitionsByCriteria(Place.DOWN_CRITERIA);
 
-            visitNeighboursPlaces(current);
+            for(Transition transition: transitions) {
+                List<Place<Metabolite>> downEdges = transition.getPlacesByCriteria(Transition.DOWN_CRITERIA);
+
+                for(Place<Metabolite> neighbourPlace : downEdges) {
+                    if (!settled.contains(neighbourPlace.getID())){
+                    	int newDistance = distances[current.getnId()] + 1;
+
+                        if (newDistance < distances[neighbourPlace.getnId()]){
+                            int nid = neighbourPlace.getnId();
+                            distances[nid] = newDistance;
+                            lastTransitions[nid] = transition;
+                            lastPlaces[nid] = current;
+                            queue.add(new PlaceComparable(neighbourPlace, newDistance));
+                        }
+                    }
+                }
+            }
         }
-
+        return calculatePath(origin.getnId(), dest.getnId(), lastTransitions, lastPlaces);
     }
-
-    private void initElements() {
-        initDistances();
-        queue.add(new PlaceComparable(origin, 0));
-    }
-
-    private void initDistances() {
-        distances = new int[metabolicPetriNet.getPlaces().size()];
-        for (int i = 0; i < distances.length; i++) {
-            distances[i] = INFINITE;
+    private List<String> calculatePath(int originId, int destId, Transition<Reaction>[] lastTransitions, Place<Metabolite>[] lastPlaces) {
+    	List<String> path = new ArrayList<>();
+    	int nextId = destId;
+    	if(lastTransitions[nextId]==null) return path;
+        while(nextId!=originId) {
+            path.add(lastTransitions[nextId].getID());
+            Place<Metabolite> previousPlace = lastPlaces[nextId];
+            nextId = previousPlace.getnId();
         }
-
-        distances[origin.getnId()] = 0;
-    }
-
-    private void visitNeighboursPlaces(PlaceComparable<Metabolite> currentPlace) {
-         List<Transition<?>> transitions = currentPlace.getTransitionsByCriteria(Place.DOWN_CRITERIA);
-
-         for(Transition transition: transitions) {
-             List<Place<Metabolite>> downEdges = transition.getPlacesByCriteria(Transition.DOWN_CRITERIA);
-
-             for(Place<Metabolite> neighbourPlace : downEdges) {
-                 if (!settled.contains(neighbourPlace.getID())){
-                     checkDistanceAndAddToQueue(currentPlace, neighbourPlace, transition);
-                 }
-             }
-         }
-    }
-
-    private void checkDistanceAndAddToQueue(PlaceComparable<Metabolite> currentPlace, Place<Metabolite> neighbourPlace, Transition<Reaction> currentTransition) {
-        int newDistance = distances[currentPlace.getnId()] + 1;
-
-        if (newDistance < distances[neighbourPlace.getnId()]){
-            updatePath(neighbourPlace.getnId(), newDistance, currentPlace, currentTransition);
-
-            queue.add(new PlaceComparable(neighbourPlace, newDistance));
-        }
-    }
-
-    private void updatePath(int index, int distance, Place place, Transition transition){
-        distances[index] = distance;
-        lastTransitions[index] = transition;
-        lastPlaces[index] = place;
+        Collections.reverse(path);
+        return path;
     }
     /**
      * The main method of class
@@ -115,9 +105,8 @@ public class ShortestPathService {
     public static void main(String[] args) throws Exception {
         ShortestPathService instance = new ShortestPathService();
         instance.setMetabolicNetwork(MetabolicNetwork.load(args[0]));
-        instance.setMetaboliteId(args[1]);
-        ShortestPathsDTO paths = instance.getShortestPath();
-        ShortestPathWriter shortestPathWriter = new ShortestPathWriter(paths, args[2]);
+        ShortestPathsDTO paths = instance.getShortestPath(args[1],args[2]);
+        ShortestPathWriter shortestPathWriter = new ShortestPathWriter(paths, args[3]);
         shortestPathWriter.write();
     }
     

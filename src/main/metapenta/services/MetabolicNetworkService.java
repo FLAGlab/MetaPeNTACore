@@ -52,11 +52,10 @@ public class MetabolicNetworkService {
     }
 
     
-    public ShortestPathsDTO getShortestPaths(String metaboliteId) {
+    public ShortestPathsDTO getShortestPath(String originId,String destinationId) {
         ShortestPathService service = new ShortestPathService();
         service.setMetabolicNetwork(metabolicNetwork);
-        service.setMetaboliteId(metaboliteId);
-        return service.getShortestPath();
+        return service.getShortestPath(originId, destinationId);
     }
 
     public PathsDTO getAllPaths(List<String> metaboliteIds, String targetId) {

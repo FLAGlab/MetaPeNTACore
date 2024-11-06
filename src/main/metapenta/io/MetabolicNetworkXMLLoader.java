@@ -416,7 +416,7 @@ public class MetabolicNetworkXMLLoader {
 		return answer;
 	}
 	private void loadReactionGroups(Element rootElem, MetabolicNetwork metabolicNetwork) {
-		System.out.println("Loading groups");
+		//System.out.println("Loading groups");
 		NodeList offspring = rootElem.getChildNodes(); 
 		for(int i=0;i<offspring.getLength();i++){
 			Node node = offspring.item(i);
@@ -441,7 +441,7 @@ public class MetabolicNetworkXMLLoader {
 							if(XMLAttributes.ELEMENT_GROUPS_LISTMEMBERS.equals(element2.getNodeName())) {
 								loadReactionGroupMembers(element2.getChildNodes(),group,metabolicNetwork);
 								metabolicNetwork.addReactionGroup(group);
-								System.out.println("Loaded group "+group.getId());
+								//System.out.println("Loaded group "+group.getId());
 							}
 						}
 					}
