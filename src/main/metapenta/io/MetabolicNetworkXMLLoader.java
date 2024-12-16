@@ -364,15 +364,11 @@ public class MetabolicNetworkXMLLoader {
 					
 					String stchmStr = elem.getAttribute(XMLAttributes.ATTRIBUTE_STOICHIOMETRY);
 					if(stchmStr==null || stchmStr.length()==0) throw new IOException("Absent stoichiometry for metabolite "+metabId+" in reaction "+reactionId);
-					int stoichiometry;
+					double stoichiometry;
 					try {
-						stoichiometry = Integer.parseInt(stchmStr);
+						stoichiometry = Double.parseDouble(stchmStr);
 					} catch (NumberFormatException e) {
-						try {
-							stoichiometry = (int)Math.round(Double.parseDouble(stchmStr));
-						} catch (NumberFormatException e1) {
-							throw new IOException("Invalid stoichiometry "+stchmStr+" for metabolite "+metabId+" in reaction "+reactionId,e);
-						}	
+						throw new IOException("Invalid stoichiometry "+stchmStr+" for metabolite "+metabId+" in reaction "+reactionId,e);
 					}
 					ReactionComponent component = new ReactionComponent(m, stoichiometry);
 					answer.add(component);

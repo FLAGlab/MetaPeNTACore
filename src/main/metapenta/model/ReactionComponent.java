@@ -14,7 +14,7 @@ public class ReactionComponent {
 	 * @param metabolite that participates in the reaction
 	 * @param stoichiometry coefficient of the metabolite in the reaction
 	 */
-	public ReactionComponent(Metabolite metabolite, int stoichiometry) {
+	public ReactionComponent(Metabolite metabolite, double stoichiometry) {
 		super();
 		this.metabolite = metabolite;
 		this.setStoichiometry(stoichiometry);
@@ -38,7 +38,7 @@ public class ReactionComponent {
 	}
 	
 	
-	public void setStoichiometry(int stoichiometry) {
+	public void setStoichiometry(double stoichiometry) {
 		this.stoichiometry = stoichiometry;
 		updateScaledElementsMap();
 	}
