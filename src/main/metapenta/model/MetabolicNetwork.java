@@ -191,7 +191,7 @@ public class MetabolicNetwork {
 	public List<Reaction> getIrreversibleReactions () {
 		List<Reaction> answer = new ArrayList<>();
 		for(Reaction reaction : reactions.values()) {
-			if(reaction.isReversible()) answer.add(reaction);
+			if(!reaction.isReversible()) answer.add(reaction);
 		}
 		return answer;
 	}

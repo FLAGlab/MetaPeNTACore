@@ -1,29 +1,39 @@
 package metapenta.services;
 
-import metapenta.io.StringUtils;
+import metapenta.model.ChemicalFormula;
 import metapenta.model.GeneProduct;
 import metapenta.model.MetabolicNetwork;
 import metapenta.model.Metabolite;
 import metapenta.model.Reaction;
 import metapenta.model.ReactionComponent;
+import metapenta.model.ReactionGroup;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class DescribeNetworkService {
 
-    private static final String COMPARTMENT_FILE_SUFFIX = "_metabolites.txt";
+    private static final String COMPARTMENT_FILE_SUFFIX = "metabolites.txt";
     private MetabolicNetwork network;
 
-    private StringBuilder metabolitesBuilder = new StringBuilder();
+    private ByteArrayOutputStream metabolitesOS = new ByteArrayOutputStream();
 
-    private StringBuilder reactionsBuilder = new StringBuilder();
-
+    private ByteArrayOutputStream reactionsOS = new ByteArrayOutputStream();
+    
+    private ByteArrayOutputStream reactionGroupsTableOS = new ByteArrayOutputStream();
+    
+    private ByteArrayOutputStream statisticsOS = new ByteArrayOutputStream();
+    
     private StringBuilder sMatrixBuilder = new StringBuilder();
 
     private StringBuilder reversibleRxnBuilder = new StringBuilder();
@@ -34,14 +44,18 @@ public class DescribeNetworkService {
 
     private StringBuilder loBoundsFileBuilder = new StringBuilder();
 
-    private StringUtils stringUtils =  new StringUtils();
-
     private Map<String, StringBuilder> compartmentsBuilders = new HashMap<>();
 
     private String metabolitesFileName;
 
     private String reactionsFile;
+    
+    private String reactionGroupsTableFile;
+    
+    private String statisticsFile;
 
+    private String filesPrefix;
+    
     private String sMatrixFile;
 
     private String reversibleRxnFile;
@@ -52,8 +66,6 @@ public class DescribeNetworkService {
 
     private String loBoundsFile;
 
-    private String filesPrefix;
-
     public DescribeNetworkService(MetabolicNetwork network, String prefix){
         this.network = network;
         initFilePrefixes(prefix);
@@ -62,12 +74,15 @@ public class DescribeNetworkService {
     private void initFilePrefixes(String prefix) {
         this.metabolitesFileName = prefix + "_compounds.txt";
         this.reactionsFile = prefix + "_reactions.txt";
+        this.reactionGroupsTableFile = prefix + "_reactionGroupsTable.txt";
+        this.statisticsFile = prefix + "_stats.txt";
+        this.filesPrefix = prefix;
+        
         this.sMatrixFile = prefix + "_s_matrix.txt";
         this.reversibleRxnFile = prefix + "_reversible_rxn.txt";
         this.upBoundFile = prefix + "_upperbounds_on_fluxes.txt";
         this.loBoundsFile = prefix + "_lowerbounds_on_fluxes.txt";
-        this.irreversibleRxnFile = prefix + "_irreversible_reactions";
-        this.filesPrefix = prefix;
+        this.irreversibleRxnFile = prefix + "_irreversible_reactions.txt";
 
     }
 
@@ -77,41 +92,142 @@ public class DescribeNetworkService {
     }
 
     private void prepareFiles() {
-        prepareCompartmentsFiles();
+        
         prepareMetabolitesFile();
         prepareReactionsFile();
-        prepareReversibleReactions();
-        prepareIrreversibleReactions();
-        writeSMatrix();
+        prepareReactionGroupsTable();
+        prepareStatistics();
+        
+        //prepareSMatrix();
+        //prepareCompartmentsFiles();
+        //prepareReversibleReactions();
+        //prepareIrreversibleReactions();
+        
     }
 
-    private void writeFiles() throws IOException {
-        Files.write(Paths.get(metabolitesFileName), metabolitesBuilder.toString().getBytes());
-        Files.write(Paths.get(reactionsFile), reactionsBuilder.toString().getBytes());
-        Files.write(Paths.get(sMatrixFile), sMatrixBuilder.toString().getBytes());
-        Files.write(Paths.get(reversibleRxnFile), reversibleRxnBuilder.toString().getBytes());
-        Files.write(Paths.get(irreversibleRxnFile), irreversibleRxnBuilder.toString().getBytes());
-        Files.write(Paths.get(upBoundFile), upBoundFileBuilder.toString().getBytes());
-        Files.write(Paths.get(loBoundsFile), loBoundsFileBuilder.toString().getBytes());
+	
 
-        writeCompartmentFiles();
+	private void writeFiles() throws IOException {
+        Files.write(Paths.get(metabolitesFileName), metabolitesOS.toByteArray());
+        Files.write(Paths.get(reactionsFile), reactionsOS.toByteArray());
+        Files.write(Paths.get(reactionGroupsTableFile), reactionGroupsTableOS.toByteArray());
+        Files.write(Paths.get(statisticsFile), statisticsOS.toByteArray());
+
+        //Files.write(Paths.get(sMatrixFile), sMatrixBuilder.toString().getBytes());
+        //Files.write(Paths.get(reversibleRxnFile), reversibleRxnBuilder.toString().getBytes());
+        //Files.write(Paths.get(irreversibleRxnFile), irreversibleRxnBuilder.toString().getBytes());
+        //Files.write(Paths.get(upBoundFile), upBoundFileBuilder.toString().getBytes());
+        //Files.write(Paths.get(loBoundsFile), loBoundsFileBuilder.toString().getBytes());
+        //writeCompartmentFiles();
+        
     }
 
+    
+
+    private void prepareMetabolitesFile(){
+    	PrintStream out = new PrintStream(metabolitesOS);
+        List<Metabolite> metabolites = network.getMetabolitesAsList();
+        for(Metabolite m:metabolites){
+        	out.print(m.getId()+"\t"+m.getName()+"\t"+m.getCompartmentId());
+        	ChemicalFormula f = m.getChemicalFormula();
+        	out.print("\t"+((f!=null)?m.getChemicalFormula():"None"));
+        	out.print("\t"+m.getCharge());
+        	out.println();
+        }
+    }
+
+    private void prepareReactionsFile(){
+    	PrintStream out = new PrintStream(reactionsOS);
+    	List<Reaction> reactions = network.getReactionsAsList();
+    	for(Reaction r: reactions) {
+    		List<GeneProduct> geneProducts = r.getEnzymes();
+        	StringBuilder builder1 = new StringBuilder();
+        	StringBuilder builder2 = new StringBuilder();
+        	if(geneProducts!=null) {
+        		for(GeneProduct product:geneProducts) {
+        			if(builder1.length()>0) builder1.append(",");
+        			builder1.append(product.getId());
+        			if(builder2.length()>0) builder2.append(",");
+        			builder2.append(product.getName());
+        		}
+        	}
+        	String enzymeIds="NONE";
+        	String enzymeNames="NONE";
+        	if(builder1.length()>0) {
+        		enzymeIds = builder1.toString();
+        		enzymeNames = builder2.toString();
+        	}
+            String answer = r.getId()+"\t"+r.getKeggId()+"\t"+enzymeIds+"\t"+enzymeNames+"\n";
+
+            out.append(answer);
+    	}
+    }
+   
+    
+    private void prepareReactionGroupsTable() {
+    	PrintStream out = new PrintStream(reactionGroupsTableOS);
+		Map<String, ReactionGroup> reactionGroupsMap = network.getReactionGroups();
+		List<ReactionGroup> reactionGroupsList = new ArrayList<>(reactionGroupsMap.values());
+		Collections.sort(reactionGroupsList,(g1,g2)->g1.getName().compareTo(g2.getName()));
+		for(ReactionGroup group:reactionGroupsList) {
+			out.print(group.getId()+"\t"+group.getName());
+			for(String rID:group.getReactionIds()) { 
+				out.print("\t"+rID);
+			}
+			out.println();
+		}	
+	}
+    
+    private void prepareStatistics() {
+    	PrintStream out = new PrintStream(statisticsOS);
+		out.println("Metabolites: "+network.getMetabolitesAsList().size());
+		List<Reaction> reactions = network.getReactionsAsList();
+		out.println("Reactions: "+ reactions.size());
+		out.println("Gene products: "+network.getGeneProductsAsList().size());
+		Map<String, ReactionGroup> reactionGroupsMap = network.getReactionGroups();
+		List<ReactionGroup> reactionGroupsList = new ArrayList<>(reactionGroupsMap.values());
+		out.println("Reaction groups: "+reactionGroupsList.size());
+		Collections.sort(reactionGroupsList,(g1,g2)->g1.getName().compareTo(g2.getName()));
+		out.println("ID\tName\tReactions\tGeneProducts\tGPR");
+		for(ReactionGroup group:reactionGroupsList) {
+			List<Reaction> reactionsGroup = group.getReactions();
+			int nR = reactionsGroup.size();
+			Set<String> geneProductIds = new HashSet<>();
+			int gpr = 0;
+			for(Reaction r:reactionsGroup) {
+				List<GeneProduct> enzymes = r.getEnzymes(); 
+				gpr+=enzymes.size();
+				for(GeneProduct gp:enzymes) {
+					geneProductIds.add(gp.getId());
+				}
+			}
+			out.println(group.getId()+"\t"+group.getName()+"\t"+nR+"\t"+geneProductIds.size()+"\t"+gpr);
+		}
+	}
+
+    private void prepareCompartmentsFiles() {
+        Map<String, List<Metabolite>> metabolitesByCompartments = network.getMetabolitesByCompartments();
+        Set<String> compartments = metabolitesByCompartments.keySet();
+
+        for(String compartment: compartments) {
+            List<Metabolite> metabolites = metabolitesByCompartments.get(compartment);
+            for(Metabolite metabolite: metabolites) {
+                StringBuilder compartmentBuilder = getCompartmentBuilder(compartment);
+                compartmentBuilder.append(metabolite.getId());
+            }
+        }
+    }
+    
     private void writeCompartmentFiles() throws IOException {
         Set<String> compartments = compartmentsBuilders.keySet();
 
         for(String compartment: compartments) {
             StringBuilder compartmentBuilder = compartmentsBuilders.get(compartment);
-            Files.write(Paths.get(getCompartmentFileName(compartment)), compartmentBuilder.toString().getBytes());
+            Files.write(Paths.get(filesPrefix + "_"+compartment + "_"+COMPARTMENT_FILE_SUFFIX), compartmentBuilder.toString().getBytes());
         }
     }
 
-    private String getCompartmentFileName(String compartment) {
-        return filesPrefix + compartment + COMPARTMENT_FILE_SUFFIX;
-    }
-
-
-    private void writeSMatrix() {
+    private void prepareSMatrix() {
     	List<Reaction> reactions = network.getReactionsAsList();
     	for(Reaction reaction: reactions) {
             writeReactionComponentList(reaction.getReactants(), 1);
@@ -122,171 +238,14 @@ public class DescribeNetworkService {
 
     private void writeReactionComponentList(List<ReactionComponent> reactionComponents, double stoichiometryMultiplier) {
         for (ReactionComponent product: reactionComponents){
-            writeInSMatrix(product.getMetaboliteId(), stoichiometryMultiplier * product.getStoichiometry());
-        }
-    }
-
-    private void prepareMetabolitesFile(){
-        List<Metabolite> metabolites = network.getMetabolitesAsList();
-        for(Metabolite m:metabolites){
-         writeMetabolite(m.getId());
-        }
-    }
-
-    private void writeMetabolite(String metabolite){
-        stringUtils
-                .setString(metabolite)
-                .addBreakLine();
-
-        metabolitesBuilder.append(stringUtils.GetString());
-    }
-
-    private void prepareReactionsFile(){
-    	List<Reaction> reactions = network.getReactionsAsList();
-    	for(Reaction r: reactions) {
-            writeReaction(r);
-        }
-    }
-
-    private void prepareReversibleReactions(){
-    	List<Reaction> reversibleReactions = network.getReversibleReactions();
-        for(Reaction r: reversibleReactions){
-            WriteInReversibleReactions(r.getId());
-            writeBoundsForReversibleReaction(r.getId());
-        }
-    }
-
-    private void prepareIrreversibleReactions(){
-        List<Reaction> irreversibleReactions = network.getIrreversibleReactions();
-        for(Reaction r: irreversibleReactions){
-            writeIrreversibleReaction(r.getId());
-            writeBoundsForIrreversibleReaction(r.getId());
-        }
-    }
-
-
-    private void writeReaction(Reaction r){
-    	List<GeneProduct> geneProducts = r.getEnzymes();
-    	StringBuilder builder1 = new StringBuilder();
-    	StringBuilder builder2 = new StringBuilder();
-    	if(geneProducts!=null) {
-    		for(GeneProduct product:geneProducts) {
-    			if(builder1.length()>0) builder1.append(",");
-    			builder1.append(product.getId());
-    			if(builder2.length()>0) builder2.append(",");
-    			builder2.append(product.getName());
-    		}
-    	}
-    	String enzymeIds="NONE";
-    	String enzymeNames="NONE";
-    	if(builder1.length()>0) {
-    		enzymeIds = builder1.toString();
-    		enzymeNames = builder2.toString();
-    	}
-        String answer = r.getId()+"\t"+r.getKeggId()+"\t"+enzymeIds+"\t"+enzymeNames+"\n";
-
-        reactionsBuilder.append(answer);
-    }
-
-    private void writeInSMatrix(String metaboliteID, double stoichiometry){
-        stringUtils.setString(metaboliteID)
-                .addEmptySpace()
-                .addDouble(stoichiometry)
-                .addBreakLine();
-
-        sMatrixBuilder.append(stringUtils.GetString());
-    }
-
-    private void WriteImUpBound(String s){
-        upBoundFileBuilder.append(s);
-    }
-
-    private void WriteInReversibleReactions(String reactionID){
-        stringUtils
-                .setString(reactionID)
-                .addBreakLine();
-
-        reversibleRxnBuilder.append(stringUtils.GetString());
-    }
-
-    private void writeIrreversibleReaction(String reactionID){
-        stringUtils
-                .setString(reactionID)
-                .addBreakLine();
-
-        irreversibleRxnBuilder.append(stringUtils.GetString());
-    }
-
-    private void writeBoundsForReversibleReaction(String reactionName){
-        stringUtils.
-                setString(reactionName).
-                addEmptySpace().
-                addInt(-1000).
-                addBreakLine();
-
-        WriteInLowBound(stringUtils.GetString());
-
-        stringUtils.
-                setString(reactionName);
-        stringUtils.
-                addEmptySpace().
-                addInt(1000).
-                addBreakLine();
-
-        WriteImUpBound(stringUtils.GetString());
-    }
-
-    private void writeBoundsForIrreversibleReaction(String reactionId){
-        StringUtils stringUtils = new StringUtils();
-        stringUtils.
-                setString(reactionId).
-                addEmptySpace().
-                addInt(0).
-                addBreakLine();
-        WriteInLowBound(stringUtils.GetString());
-
-        stringUtils.
-                setString(reactionId).
-                addEmptySpace().
-                addInt(1000).
-                addBreakLine();
-
-        WriteImUpBound(stringUtils.GetString());
-    }
-
-    private void prepareCompartmentsFiles() {
-        Map<String, List<Metabolite>> metabolitesByCompartments = network.getMetabolitesByCompartments();
-        Set<String> compartments = metabolitesByCompartments.keySet();
-
-        for(String compartment: compartments) {
-            List<Metabolite> metabolites = metabolitesByCompartments.get(compartment);
-
-            for(Metabolite metabolite: metabolites) {
-                StringBuilder compartmentBuilder = getCompartmentBuilder(compartment);
-
-                writeMetaboliteInCompartmentBuilder(metabolite.getId(), compartmentBuilder);
-            }
+        	sMatrixBuilder.append(product.getMetaboliteId()+" "+(stoichiometryMultiplier * product.getStoichiometry()));
         }
     }
 
     private StringBuilder getCompartmentBuilder(String compartment) {
-        StringBuilder compartmentBuilder = compartmentsBuilders.computeIfAbsent(compartment, k -> new StringBuilder());
-
-        return compartmentBuilder;
+        return compartmentsBuilders.computeIfAbsent(compartment, k -> new StringBuilder());
     }
 
-
-    private void writeMetaboliteInCompartmentBuilder(String metaboliteID, StringBuilder compartmentFile){
-        stringUtils
-                .setString(metaboliteID)
-                .addBreakLine();
-
-        compartmentFile.append(stringUtils.GetString());
-    }
-
-    public void WriteInLowBound(String s){
-        loBoundsFileBuilder.append(s);
-    }
     /**
 	 * args[0]: Metabolic network file
 	 * args[1]: Output file prefixes
