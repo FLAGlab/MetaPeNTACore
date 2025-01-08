@@ -137,6 +137,16 @@ public class Reaction {
 	public void removeAllEnzymes() {
 		enzymes.clear();	
 	}
+	public GeneProduct getEnzyme(String id) {
+		for(GeneProduct p:enzymes) {
+			if(id.equals(p.getId())) return p;
+		}
+		return null;
+	}
+	public void removeEnzyme(String id) {
+		GeneProduct enzyme = getEnzyme(id);
+		if(enzyme!=null) enzymes.remove(enzyme);
+	}
 	/**
 	 * @return Lower bound of the flux in this reaction
 	 */
@@ -176,6 +186,11 @@ public class Reaction {
 	public void setUpperBoundFluxParameterId(String upperBoundFluxParameterId) {
 		this.upperBoundFluxParameterId = upperBoundFluxParameterId;
 	}
+	public void setBounds(int lower, int upper) {
+		lowerBoundFlux = lower;
+		upperBoundFlux = upper;
+		
+	}
 	public boolean isBalanced() {
 		return balanced;
 	}
@@ -192,6 +207,7 @@ public class Reaction {
 		products.add(product);
 		updateBalanced();
 	}
+	
 	public String getKeggId() {
 		return getIdFromLinks(LINK_KEGGID);
 	}
@@ -634,6 +650,8 @@ public class Reaction {
 		}
 		return componentsIDs;
 	}
+	
+	
 	
 
 }

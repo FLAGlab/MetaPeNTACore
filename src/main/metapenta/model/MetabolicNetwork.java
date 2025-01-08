@@ -257,5 +257,21 @@ public class MetabolicNetwork {
     	MetabolicNetworkXMLLoader loader = new MetabolicNetworkXMLLoader();
     	return loader.loadNetwork(filename);
     }
+    public void removeGeneProduct(GeneProduct g) {
+    	List<Reaction> reactions = getReactions(g);
+    	for(Reaction r:reactions) {
+    		r.removeEnzyme(g.getId());
+    	}
+		enzymes.remove(g.getId());
+	}
+	public List<Reaction> getReactions(GeneProduct g) {
+		List<Reaction> answer = new ArrayList<>();
+		for(Reaction r:reactions.values()) {
+			if(r.getEnzyme(g.getId())!=null) {
+				answer.add(r);
+			}
+		}
+		return answer;
+	}
 	
 }
