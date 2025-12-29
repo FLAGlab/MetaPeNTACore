@@ -13,7 +13,7 @@ public class ChemicalFormula {
      /**
 	 * Creates a new chemicalFormula
 	 * @param chemical formula
-	 * @param map of elements and its corresponding stochiometry
+	 * @param map of elements and its corresponding stoichiometry
 	 */
 	public ChemicalFormula(String chemicalFormula) throws IncorrectFormulaException {
 		super();
